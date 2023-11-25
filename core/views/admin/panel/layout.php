@@ -1,14 +1,13 @@
-<!doctype html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <?= $head ?? '' ?>
-    <!-- Template -->
-</head>
-<body>
+<!--<!doctype html>-->
+<!--<html lang="fr">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport"-->
+<!--          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">-->
+<!--    <meta http-equiv="X-UA-Compatible" content="ie=edge">-->
+<!--    --><?php //= $head ?? '' ?>
+<!--</head>-->
+<!--<body>-->
 <?php view(Application::get()->toRoot('/core/views/components/toast/toast.template.php')) ?>
 <?php view(__DIR__ . '/debug.php') ?>
 <div class="bg-gray-100 font-sans leading-normal tracking-normal min-h-screen">
@@ -34,5 +33,5 @@
         <?= $footer ?? '' ?>
     </div>
 </div>
-</body>
-</html>
+<!--</body>-->
+<!--</html>-->

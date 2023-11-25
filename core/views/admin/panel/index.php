@@ -1,6 +1,6 @@
 <?php
 if (empty($section)) {
-    echo "404 Not Found !";
+    echo "Section : 404 Not Found !";
     exit;
 }
 

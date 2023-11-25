@@ -48,7 +48,7 @@ abstract class AdminController extends DOMController
 
     public function view($view, $data = []): void
     {
-        $data['toasts'] = $this->toasts;
+//        $data['toasts'] = $this->toasts;
         parent::view($view, $data);
     }
 }

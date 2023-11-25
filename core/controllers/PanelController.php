@@ -15,7 +15,7 @@ class PanelController extends AdminController
 
     public function initLayout()
     {
-        $this->setLayout('/admin/panel/layout');
+//        $this->setLayout('/admin/panel/layout');
     }
 
     public function initSidebar()
@@ -57,10 +57,16 @@ class PanelController extends AdminController
         $this->initSidebar();
 
         $this->title = 'DodoCMS - ' . __('admin.panel.dashboard');
-        $this->view('panel/index', [
-            'sidebar' => $this->sidebar,
+
+        $section = $this->fetch('panel/index', [
             'section' => $section,
-            'section_data' => $data]
+            'section_data' => $data,
+        ]);
+
+        $this->view('panel/layout', [
+                'sidebar' => $this->sidebar,
+                'content' => $section
+            ]
         );
     }
 
