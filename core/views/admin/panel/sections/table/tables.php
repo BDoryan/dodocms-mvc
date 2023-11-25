@@ -41,10 +41,10 @@ if (empty($tables)) {
                     ?>
                 </ul>
                 <div class="flex flex-row gap-3 pt-5">
-                    <a href="<?= Application::get()->toURL("/admin/collections/edit/" . $table->getName()) ?>"
+                    <a href="<?= Routes::route(Routes::ADMIN_TABLES_EDIT, ['table' => $table->getName()]) ?>"
                        class="px-3 py-1 rounded bg-green-600 text-white font-semibold uppercase"><i
                                 class="fa-solid fa-pen-to-square me-1"></i> <?= __("admin.panel.tables.table.manage") ?></a>
-                    <a href="<?= Application::get()->toURL("/admin/collections/crud/" . $table->getName()) ?>"
+                    <a href="<?= Routes::route(Routes::ADMIN_TABLES_EDIT, ['table' => $table->getName()]) ?>"
                        class="ms-auto px-3 py-1 rounded bg-blue-500 text-white font-semibold uppercase"><i
                                 class="fa-solid fa-eye me-1"></i><?= __("admin.panel.tables.table.view_content") ?></a>
                 </div>

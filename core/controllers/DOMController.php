@@ -9,12 +9,14 @@ abstract class DOMController extends Controller
     protected string $description = '';
     protected string $keywords = '';
     protected string $author = '';
-    protected string $head = '';
+    protected string $head_path = '';
+    protected string $header = '';
+    protected string $footer = '';
 
-    public function __construct(string $name, string $root, string $asset = '/', $head = '')
+    public function __construct(string $name, string $root, string $asset = '/', $head_path = '')
     {
         parent::__construct($name, $root, $asset, '/page/layout');
-        $this->head = $head;
+        $this->head_path = $head_path;
     }
 
     public abstract function index();
@@ -22,12 +24,15 @@ abstract class DOMController extends Controller
 
     public function view($view, $data = []): void
     {
-        $data['head'] = $this->fetch($this->head, [
+        $data['head'] = $this->fetch($this->head_path, [
             "title" => $this->title,
             "description" => $this->description,
             "keywords" => $this->keywords,
             "author" => $this->author
         ]);
+        $data['header'] = $this->header;
+        $data['footer'] = $this->footer;
+
         parent::view($view, $data);
     }
 }

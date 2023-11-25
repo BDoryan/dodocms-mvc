@@ -2,11 +2,15 @@
 if (Application::get()->isDebugMode()) {
     ?>
     <div x-data="{ showLogs: false }">
-        <div class="bg-gray-800 text-white py-2 px-6 sticky top-0 w-full z-30 bg-indigo-900 flex flex-row">
+        <div class="bg-gray-800 text-white py-2 px-6 sticky top-0 w-full z-30 bg-indigo-900 flex flex-row gap-2">
             <img class="w-auto max-h-[50px]" src="<?= Application::get()->toURL("/core/assets/imgs/logo.png") ?>">
             <div class="my-auto flex flex-col">
                 <h1 class="text-xl uppercase my-auto ms-3 font-bold"><?= __('admin.debug.title') ?></h1>
                 <span class="text-sm my-auto ms-3"><?= __('admin.debug.description') ?></span>
+            </div>
+            <div class="my-auto flex flex-col">
+                <h1 class="text-xl uppercase my-auto ms-3 font-bold"><?= __('admin.debug.version') ?></h1>
+                <span class="text-sm my-auto ms-3"><?= DodoCMS::VERSION ?></span>
             </div>
             <div class="ms-auto flex my-auto">
                 <?php

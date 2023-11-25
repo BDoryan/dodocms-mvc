@@ -83,7 +83,12 @@ abstract class Controller
 
     public function addContent($content): void
     {
-        $this->content .= $content;
+        $this->addHTML($content);
+    }
+
+    public function addHTML($html): void
+    {
+        $this->content .= $html;
     }
 
     public function getApplication(): Application

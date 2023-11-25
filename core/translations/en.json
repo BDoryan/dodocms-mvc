@@ -27,5 +27,6 @@
   "admin.panel.tables.table.new.title": "Create a new table",
   "admin.panel.tables.table.new.description": "Refine and customize your data effortlessly with our table editing tool, enabling you to shape and fine-tune your information with precision and efficiency.",
   "admin.panel.tables.table.edit.title": "Editing your table {table}",
-  "admin.panel.tables.table.edit.description": "Refine and customize your data effortlessly with our table editing tool, enabling you to shape and fine-tune your information with precision and efficiency."
+  "admin.panel.tables.table.edit.description": "Refine and customize your data effortlessly with our table editing tool, enabling you to shape and fine-tune your information with precision and efficiency.",
+  "admin.debug.version": "Version utilisée"
 }

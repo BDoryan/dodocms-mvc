@@ -57,7 +57,11 @@ class PanelController extends AdminController
         $this->initSidebar();
 
         $this->title = 'DodoCMS - ' . __('admin.panel.dashboard');
-        $this->view('panel/index', ['sidebar' => $this->sidebar, 'section' => $section, 'section_data' => $data]);
+        $this->view('panel/index', [
+            'sidebar' => $this->sidebar,
+            'section' => $section,
+            'section_data' => $data]
+        );
     }
 
     public function section(array $params, $data = [])
