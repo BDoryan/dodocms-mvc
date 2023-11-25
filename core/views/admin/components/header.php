@@ -1,7 +1,7 @@
 <?php
-if (!isset($title)) $title = "";
-if (!isset($description)) $description = "";
-if (!isset($content)) $content = "";
+if (empty($title)) $title = "no_title";
+if (empty($description)) $description = "no_description";
+if (empty($content)) $content = "";
 ?>
 <div class="flex">
     <div class="flex flex-col">
@@ -9,7 +9,7 @@ if (!isset($content)) $content = "";
         <p class='mb-3 text-lg italic'><?= $description ?></p>
     </div>
     <?php if (!empty($content)) { ?>
-    <div class="flex flex-col ml-auto">
+    <div class="my-auto whitespace-nowrap flex flex-col gap-2 ml-auto">
         <?= $content ?>
     </div>
     <?php } ?>

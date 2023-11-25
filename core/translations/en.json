@@ -6,6 +6,7 @@
   "admin.login.form.password": "Password",
   "admin.login.form.your_password": "Your password",
   "admin.login.form.submit": "Login",
+  "admin.panel.welcome": "Welcome, {username} !",
   "admin.logout": "Logout",
   "error.title": "Error",
   "error.stack_trace": "Stack trace :",
@@ -16,9 +17,15 @@
   "admin.panel.dashboard": "Dashboard",
   "admin.panel.dashboard.description": "Welcome to DodoCMS admin panel.",
   "admin.panel.table_management": "Table management",
-  "admin.panel.table_management.description": "Manage your tables.",
+  "admin.panel.table_management.description": "Designed for developers, this section is your go-to for creating a new table (entity), where you'll explore an array of collection management features, perfect for crafting and refining your tables with precision.",
   "admin.panel.dashboard.button.new_table": "Create a new table",
   "admin.debug.read_logs": "Read logs",
   "admin.debug.title": "Debug mode",
-  "admin.debug.description": "Debug mode is enabled. You can read logs here and use more tools."
+  "admin.debug.description": "Debug mode is enabled. You can read logs here and use more tools.",
+  "admin.panel.tables.table.manage": "Manage",
+  "admin.panel.tables.table.view_content": "View content",
+  "admin.panel.tables.table.new.title": "Create a new table",
+  "admin.panel.tables.table.new.description": "Refine and customize your data effortlessly with our table editing tool, enabling you to shape and fine-tune your information with precision and efficiency.",
+  "admin.panel.tables.table.edit.title": "Editing your table {table}",
+  "admin.panel.tables.table.edit.description": "Refine and customize your data effortlessly with our table editing tool, enabling you to shape and fine-tune your information with precision and efficiency."
 }

@@ -3,6 +3,8 @@
 Autoloader::require('core/classes/Session.php');
 Autoloader::require('core/classes/database/Database.php');
 Autoloader::require('core/classes/i18n/Internationalization.php');
+Autoloader::require("core/controllers/PanelController.php");
+Autoloader::require("core/controllers/PanelTableManagementController.php");
 
 class Application
 {
@@ -21,7 +23,7 @@ class Application
     private Router $router;
     private Internationalization $internationalization;
     private Configuration $configuration;
-    private Database $database;
+    private ?Database $database = null;
     private Logger $logger;
 
     public function __construct(string $root = '', string $url = '')
@@ -33,7 +35,7 @@ class Application
         $this->router = new Router($url);
 
         $this->setRoot($root);
-        $this->logger = new Logger($this->toRoot("/logs/"."log-".date("Y-m-d_H-m-s").".log"), $this->isDebugMode());
+        $this->logger = new Logger($this->toRoot("/logs/" . "log-" . date("Y-m-d") . ".log"), $this->isDebugMode());
 
         self::$application = $this;
     }
@@ -50,10 +52,18 @@ class Application
     private function loadAdminPanel()
     {
         $adminController = new PanelController();
+        $ptmController = new PanelTableManagementController();
+
         $this->router->get(Routes::ADMIN_PANEL, [$adminController, 'index']);
         $this->router->get(Routes::ADMIN_LOGIN, [$adminController, 'login']);
         $this->router->post(Routes::ADMIN_LOGIN, [$adminController, 'authentication']);
+        $this->router->get(Routes::ADMIN_PANEL . "/tables", [$ptmController, 'tables']);
+        $this->router->get(Routes::ADMIN_TABLES, [$ptmController, 'tables']);
+        $this->router->get(Routes::ADMIN_TABLES_NEW, [$ptmController, 'new']);
+        $this->router->get(Routes::ADMIN_TABLES_EDIT, [$ptmController, 'edit']);
         $this->router->get(Routes::ADMIN_PANEL . "/{section}", [$adminController, 'section']);
+
+        $this->logger->log("Routes initialized !");
     }
 
     private function loadSession()
@@ -63,12 +73,14 @@ class Application
         } else if (Session::getLanguage() == null) {
             Session::setLanguage(Internationalization::DEFAULT_LANGUAGE);
         }
+        $this->logger->log("Session loaded !");
     }
 
     private function loadDatabase()
     {
-        $database = Database::withConfiguration($this->getConfiguration());
-        $database->connection();
+        $this->database = Database::withConfiguration($this->getConfiguration());
+        $this->database->connection();
+        $this->logger->log("Connection to database success !");
     }
 
     private function init()
@@ -78,6 +90,7 @@ class Application
         if (isset($_GET["debug"])) {
             $this->setDebugMode(true);
         }
+        $this->logger->log("Application initialized !");
     }
 
     public function run()
@@ -98,16 +111,18 @@ class Application
 
             $this->logger->debug("dispatch();");
             if ($this->router->dispatch()) {
-
+                $this->logger->debug($this->router->getRequestURI() . " has been dispatched !");
             } else {
                 echo "404 Not Found !";
             }
-//            $this->database->closeConnection();
+            $this->database->closeConnection();
         } catch (Exception $e) {
-            echo "Application run exception !";
-            $this->error($e);
+            $this->logger->error('Application run error !');
+            $this->logger->printException($e);
+            $this->exception($e);
         } catch (Error $e) {
-            echo "Application run error !";
+            $this->logger->error('Application run error !');
+            $this->logger->printError($e);
             $this->error($e);
         }
     }
@@ -134,9 +149,36 @@ class Application
         view($this->root . Tools::toURI($path), $args);
     }
 
-    public function error(Error $e): void
+    public function error($e): void
     {
         if (!$this->needShowErrors()) return;
+
+        echo "<pre>";
+        echo $e->getMessage() . "\n";
+        echo $e->getFile() . ":" . $e->getLine() . "\n";
+        foreach ($e->getTrace() as $log) {
+            echo $log["file"] . ":" . $log["line"] . "\n";
+        }
+        echo "</pre>";
+        exit;
+
+        $content = $this->fetch('/core/views/error.php', ['e' => $e]);
+        $head = $this->fetch('/core/views/admin/head.php', ['title' => __('error.title')]);
+        $this->view('/core/views/page/layout.php', ['head' => $head, 'content' => $content]);
+    }
+
+    public function exception($e): void
+    {
+        if (!$this->needShowErrors()) return;
+
+        echo "<pre>";
+        echo $e->getMessage() . "\n";
+        echo $e->getFile() . ":" . $e->getLine() . "\n";
+        foreach ($e->getTrace() as $log) {
+            echo $log["file"] . ":" . $log["line"] . "\n";
+        }
+        echo "</pre>";
+        exit;
 
         $content = $this->fetch('/core/views/error.php', ['e' => $e]);
         $head = $this->fetch('/core/views/admin/head.php', ['title' => __('error.title')]);

@@ -18,7 +18,7 @@ if (Application::get()->isDebugMode()) {
                 ?>
             </div>
         </div>
-        <div id="logs" class="max-h-[50vh] overflow-y-auto top-0 bottom-0 left-0 right-0 bg-black text-white p-2 text-[16px]" style="font-family: monospace;" x-show="showLogs">
+        <div id="logs" class="whitespace-nowrap max-h-[30vh] overflow-scroll top-0 bottom-0 left-0 right-0 bg-black text-white p-2 text-[16px]" style="font-family: monospace;" x-show="showLogs">
             <?= Application::get()->getLogger()->logsToHTML() ?>
         </div>
     </div>

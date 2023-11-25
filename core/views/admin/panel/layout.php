@@ -6,6 +6,8 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <?= $head ?? '' ?>
+    <!-- Template -->
+    <?php view(Application::get()->toRoot('/core/views/components/toast/toast.template.php')) ?>
 </head>
 <body class="bg-gray-100 font-sans leading-normal tracking-normal">
 <?php view(__DIR__.'/debug.php') ?>
@@ -14,7 +16,7 @@
     <div class="flex-1 flex flex-col overflow-hidden">
         <header class="bg-gray-800 text-white shadow">
             <div class="flex items-center justify-between">
-                <span class="ps-4 text-lg font-semibold"><?= __("welcome_dashboard", ["%username%" => 'Session::getUser()->getUsername()']) ?></span>
+                <span class="ps-4 text-lg font-semibold"><?= __("admin.panel.welcome", ["username" => 'Developper']) ?></span>
                 <a href="<?= Application::get()->toURL("/admin/logout") ?>"
                    class="text-gray-600 focus:outline-none bg-red-600 hover:bg-red-700 text-white font-semibold uppercase p-4">
                     <i class="fa-solid fa-sign-out"></i> <?= __("admin.logout") ?>

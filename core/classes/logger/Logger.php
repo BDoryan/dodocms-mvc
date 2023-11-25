@@ -56,8 +56,27 @@ class Logger
         $this->log("[ERROR] $message");
     }
 
-    public function logsToHTML() {
-        if(empty($this->logs))
+    public function printError(Error $e): void
+    {
+        $this->error($e->getMessage());
+        $this->error(Tools::removeFirstSlash($e->getFile()) . ":" . $e->getLine());
+        foreach ($e->getTrace() as $log) {
+            $this->error(Tools::removeFirstSlash($e->getFile()) . ":" . $e->getLine());
+        }
+    }
+
+    public function printException(Exception $e): void
+    {
+        $this->log("[EXCEPTION] " . $e->getMessage());
+        $this->log("[EXCEPTION] " . Tools::removeFirstSlash($e->getFile()) . ":" . $e->getLine());
+        foreach ($e->getTrace() as $log) {
+            $this->log("[EXCEPTION] " . Tools::removeFirstSlash($e->getFile()) . ":" . $e->getLine());
+        }
+    }
+
+    public function logsToHTML()
+    {
+        if (empty($this->logs))
             return 'empty';
         return implode('<br>', $this->logs);
     }
@@ -69,6 +88,8 @@ class Logger
 
         if (isset($this->callback))
             $this->callback($message);
+
+        $message = htmlspecialchars($message);
 
         $this->logs[] = $message;
         file_put_contents($this->file, $message, FILE_APPEND);

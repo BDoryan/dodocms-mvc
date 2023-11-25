@@ -65,9 +65,9 @@ abstract class CMSObject
     /**
      * @throws Exception
      */
-    public function hydrate(array $datas): void
+    public function hydrate(array $data): void
     {
-        foreach ($datas as $key => $value) {
+        foreach ($data as $key => $value) {
             $methodName = 'set' . Tools::underscoreToCamelCase($key);
             if (method_exists($this, $methodName)) {
                 $this->$methodName($value);

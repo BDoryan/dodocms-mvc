@@ -1,6 +1,7 @@
 <?php
 
 Autoloader::require('core/controllers/DOMController.php');
+Autoloader::require('core/controllers/AdminController.php');
 
 class PanelController extends AdminController
 {
@@ -43,18 +44,25 @@ class PanelController extends AdminController
         $this->section(["section" => "dashboard"]);
     }
 
-    public function section(array $params)
+    public function viewSection($section, $data = [])
     {
         if (!$this->authenticated()) {
+            Application::get()->getLogger()->log("Unauthenticated user tried to access the admin panel");
             $this->redirect(Routes::ADMIN_LOGIN);
             return;
         }
+        Application::get()->getLogger()->debug("PanelController->initLayout()");
         $this->initLayout();
+        Application::get()->getLogger()->debug("PanelController->initSidebar()");
         $this->initSidebar();
 
-        $section = $params["section"];
-
         $this->title = 'DodoCMS - ' . __('admin.panel.dashboard');
-        $this->view('panel/index', ['sidebar' => $this->sidebar, 'section' => $section]);
+        $this->view('panel/index', ['sidebar' => $this->sidebar, 'section' => $section, 'section_data' => $data]);
+    }
+
+    public function section(array $params, $data = [])
+    {
+        $section = $params["section"];
+        $this->viewSection($section, $data);
     }
 }

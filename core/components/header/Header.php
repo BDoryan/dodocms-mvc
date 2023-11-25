@@ -5,7 +5,7 @@ class Header extends Component
 
     private string $title;
     private string $description;
-    private string $content;
+    private string $content = '';
 
     public function __construct()
     {

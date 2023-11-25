@@ -19,14 +19,14 @@ class Table extends CMSObject
         $this->attributes = $attributes;
     }
 
-    public function hydrate(array $datas): void
+    public function hydrate(array $data): void
     {
-        $this->name = $datas['name'];
+        $this->name = $data['name'];
         $this->attributes = [];
-        foreach ($datas['attributes'] as $attribute) {
-            $collection_attribute = new TableAttribute();
-            $collection_attribute->hydrate($attribute);
-            $this->attributes[] = $collection_attribute;
+        foreach ($data['attributes'] as $attribute) {
+            $table_attribute = new TableAttribute();
+            $table_attribute->hydrate($attribute);
+            $this->attributes[] = $table_attribute;
         }
     }
 
@@ -36,14 +36,6 @@ class Table extends CMSObject
             return new self::$models[$this->getName()];
         return null;
     }
-
-//    public function delete(int $id): bool
-//    {
-//        $database = Application::getDatabase();
-//        $element = $database->fetch($this->getName(), ["id" => $id]);
-//        if (!$element) return false;
-//        return $database->delete($this->getName(), ["id" => $id]);
-//    }
 
     public function destroy(): void
     {
@@ -120,9 +112,12 @@ class Table extends CMSObject
         return Application::getDatabase()->findAll($this->getName(), $columns, $conditions, $orderBy, $limit);
     }
 
+    /**
+     * @throws Exception
+     */
     public function fetch(): void
     {
-        $this->hydrate(self::getCollectionData($this->getName()));
+        $this->hydrate(self::getTableData($this->getName()));
     }
 
     /**
@@ -288,20 +283,20 @@ class Table extends CMSObject
     /**
      * @throws Exception
      */
-    public static function getCollectionData($collection_name): ?array
+    public static function getTableData($table_name): ?array
     {
-        $collection = self::getCollection($collection_name);
+        $collection = self::getTable($table_name);
         return $collection->toArray();
     }
 
-    public static function getCollection($collection_name): ?Table
+    public static function getTable($table_name): ?Table
     {
-        $database = Application::getDatabase();
-        if ($database->existTable($collection_name) === false) return null;
-        $describe = $database->describe($collection_name);
+        $database = Application::get()->getDatabase();
+        if ($database->existTable($table_name) === false) return null;
+        $describe = $database->describe($table_name);
         if (empty($describe)) return null;
 
-        $collection = new Table($collection_name, []);
+        $collection = new Table($table_name, []);
         foreach ($describe as $attribute) {
             $name = $attribute['Field'];
             $nullable = $attribute['Null'] === "YES";
@@ -312,7 +307,7 @@ class Table extends CMSObject
             $length = $column_datas['length'] ?? null;
             $association = "";
 
-            $hasAssociation = $database->fetch("SELECT REFERENCED_TABLE_NAME FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE TABLE_NAME = ? AND COLUMN_NAME = ? AND REFERENCED_TABLE_NAME IS NOT NULL", [$collection_name, $name]);
+            $hasAssociation = $database->fetch("SELECT REFERENCED_TABLE_NAME FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE TABLE_NAME = ? AND COLUMN_NAME = ? AND REFERENCED_TABLE_NAME IS NOT NULL", [$table_name, $name]);
             if ($hasAssociation) {
                 $association = $hasAssociation['REFERENCED_TABLE_NAME'];
             }
@@ -328,13 +323,13 @@ class Table extends CMSObject
         return $collection;
     }
 
-    public static function getCollections(): array
+    public static function getTables(): array
     {
-        $database = Application::getDatabase();
+        $database = Application::get()->getDatabase();
         $tables = $database->showTables();
         $collections = [];
         foreach ($tables as $table) {
-            $collections[] = self::getCollection($table);
+            $collections[] = self::getTable($table);
         }
         return $collections;
     }

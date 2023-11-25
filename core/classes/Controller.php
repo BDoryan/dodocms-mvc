@@ -7,7 +7,7 @@ abstract class Controller
     protected string $name;
     protected string $layout;
     protected string $assets;
-    protected string $content;
+    protected string $content = '';
 
     public abstract function index();
 
@@ -70,15 +70,20 @@ abstract class Controller
 
     public function view($view, array $data = []): void
     {
-        $content = $this->fetch($view, $data);
+        $this->content .= $this->fetch($view, $data);
         if(empty($this->layout)) {
-            echo $content;
+            echo $this->content;
             return;
         }
 
         $path = $this->root . Tools::toURI($this->layout) . '.php';
-        $data['content'] = $content;
+        $data['content'] = $this->content;
         view($path, $data);
+    }
+
+    public function addContent($content): void
+    {
+        $this->content .= $content;
     }
 
     public function getApplication(): Application
