@@ -1,0 +1,11 @@
+{
+  "installed": true,
+  "password_policy": "/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()-_=+{};:,<.>]).{8,}$/",
+  "mysql": {
+    "installed": true,
+    "hostname": "localhost",
+    "database": "dodocms",
+    "username": "root",
+    "password": "N!6JsMnki!NG"
+  }
+}

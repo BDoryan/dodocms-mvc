@@ -1,0 +1,9 @@
+{
+  "admin.login.form.title": "DodoCMS - Tableau de bord",
+  "admin.login.form.subtitle": "Veuillez vous connecter pour accéder au tableau de bord.",
+  "admin.login.form.username": "Nom d'utilisateur",
+  "admin.login.form.your_username": "Votre nom d'utilisateur",
+  "admin.login.form.password": "Mot de passe",
+  "admin.login.form.your_password": "Votre mot de passe",
+  "admin.login.form.submit": "S'identifier"
+}

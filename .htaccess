@@ -1,0 +1,15 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /dodocms-mvc
+
+    # Empêcher l'accès direct aux répertoires
+    # RewriteCond %{REQUEST_FILENAME} -d
+    # RewriteRule ^ - [F]
+
+    # Si la demande n'est pas pour un fichier existant
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [QSA,L]
+</IfModule>
+<IfModule mod_autoindex.c>
+    Options -Indexes
+</IfModule>

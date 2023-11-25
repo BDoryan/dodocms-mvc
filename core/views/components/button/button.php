@@ -1,0 +1,1 @@
+<button type="<?= $this->type ?>" id="<?= $this->id ?>" <?= $this->attributes() ?> class="<?= $this->class ?>"><?= $this->text ?></button>
