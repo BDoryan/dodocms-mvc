@@ -89,6 +89,9 @@ class Router
 
         $method = $_SERVER['REQUEST_METHOD'];
 
+//        echo $method;
+//        exit;
+
         if(!isset($this->routes[$method]))
             return false;
 

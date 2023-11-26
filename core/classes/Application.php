@@ -16,7 +16,7 @@ class Application
         return self::$application;
     }
 
-    private bool $debugMode = true;
+    private bool $debugMode = false;
     private bool $showErrors = true;
     private string $root;
     private string $url;
@@ -57,13 +57,27 @@ class Application
         $this->router->get(Routes::ADMIN_PANEL, [$adminController, 'index']);
         $this->router->get(Routes::ADMIN_LOGIN, [$adminController, 'login']);
         $this->router->post(Routes::ADMIN_LOGIN, [$adminController, 'authentication']);
-        $this->router->get(Routes::ADMIN_PANEL . "/tables", [$ptmController, 'tables']);
+
+        /**
+         * Table routes
+         */
         $this->router->get(Routes::ADMIN_TABLES, [$ptmController, 'tables']);
+        $this->router->get(Routes::ADMIN_TABLES_ATTRIBUTE, [$ptmController, 'attribute']);
+
         $this->router->get(Routes::ADMIN_TABLES_NEW, [$ptmController, 'new']);
+        $this->router->post(Routes::ADMIN_TABLES_NEW, [$ptmController, 'new']);
+
         $this->router->get(Routes::ADMIN_TABLES_EDIT, [$ptmController, 'edit']);
+        $this->router->post(Routes::ADMIN_TABLES_EDIT, [$ptmController, 'edit']);
+
+        $this->router->post(Routes::ADMIN_TABLES_DELETE, [$ptmController, 'delete']);
+
+        /**
+         * Section route
+         */
         $this->router->get(Routes::ADMIN_PANEL . "/{section}", [$adminController, 'section']);
 
-        $this->logger->log("Routes initialized !");
+        $this->logger->info("Routes initialized !");
     }
 
     private function loadSession()
@@ -73,28 +87,51 @@ class Application
         } else if (Session::getLanguage() == null) {
             Session::setLanguage(Internationalization::DEFAULT_LANGUAGE);
         }
-        $this->logger->log("Session loaded !");
+        $this->logger->info("Session loaded !");
     }
 
     private function loadDatabase()
     {
         $this->database = Database::withConfiguration($this->getConfiguration());
         $this->database->connection();
-        $this->logger->log("Connection to database success !");
+        $this->logger->info("Connection to database success !");
     }
 
     private function init()
     {
         $this->internationalization = new Internationalization(Session::getLanguage());
+        $this->logger->info("Application initialized !");
 
-        if (isset($_GET["debug"])) {
-            $this->setDebugMode(true);
-        }
-        $this->logger->log("Application initialized !");
+        set_error_handler([$this, "errorHandler"]);
+        set_exception_handler([$this, "exceptionHandler"]);
+        $this->logger->info("Error and exception handler has been initialized !");
+    }
+
+    public function errorHandler($errno, $errstr, $errfile, $errline): bool
+    {
+        view($this->toRoot("/core/views/error.php"), [
+            "errno" => $errno,
+            "errmessage" => $errstr,
+            "errfile" => $errfile,
+            "errline" => $errline
+        ]);
+
+        return true;
+    }
+
+    public function exceptionHandler($exception)
+    {
+        view($this->toRoot("/core/views/exception.php"), [
+            'exception' => $exception,
+        ]);
     }
 
     public function run()
     {
+        if (isset($_GET["debug"])) {
+            $this->setDebugMode(true);
+        }
+
         $this->logger->info("Starting application...");
         $this->logger->debug("Application->run();");
         try {
@@ -153,6 +190,7 @@ class Application
     {
         if (!$this->needShowErrors()) return;
 
+        echo "<h1>Error on run !</h1>";
         echo "<pre>";
         echo $e->getMessage() . "\n";
         echo $e->getFile() . ":" . $e->getLine() . "\n";
@@ -171,6 +209,7 @@ class Application
     {
         if (!$this->needShowErrors()) return;
 
+        echo "<h1>Error on run !</h1>";
         echo "<pre>";
         echo $e->getMessage() . "\n";
         echo $e->getFile() . ":" . $e->getLine() . "\n";
@@ -222,6 +261,8 @@ class Application
 
     public function setDebugMode(bool $debugMode): void
     {
+        if (isset($this->logger))
+            $this->logger->setDebug($debugMode);
         $this->debugMode = $debugMode;
     }
 

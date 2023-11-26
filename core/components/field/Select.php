@@ -2,7 +2,7 @@
 
 Autoloader::require('core/components/field/Field.php');
 
-class Dropdown extends Field
+class Select extends Field
 {
 
     private bool $undefinable = false;
@@ -21,31 +21,31 @@ class Dropdown extends Field
         $this->placeholder = $placeholder;
     }
 
-    public function selected(string $value): Dropdown
+    public function selected(string $value): Select
     {
         $this->value = $value;
         return $this;
     }
 
-    public function options(array $options): Dropdown
+    public function options(array $options): Select
     {
         $this->options = $options;
         return $this;
     }
 
-    public function undefinable(bool $undefinable): Dropdown
+    public function undefinable(bool $undefinable): Select
     {
         $this->undefinable = $undefinable;
         return $this;
     }
 
-    public function option(string $key, string $value): Dropdown
+    public function option(string $key, string $value): Select
     {
         $this->options[$key] = $value;
         return $this;
     }
 
-    public function placeholder(string $placeholder): Dropdown
+    public function placeholder(string $placeholder): Select
     {
         $this->placeholder = $placeholder;
         return $this;
@@ -55,11 +55,15 @@ class Dropdown extends Field
     {
         parent::render();
 
-        include "$this->template/dropdown.php";
+        include "$this->template/select.php";
     }
 
-    public static function create(): Dropdown
+    public static function create(): Select
     {
-        return new Dropdown();
+        return new Select();
+    }
+
+    public static function toCombine(array $options, callable $callback): array {
+        return array_combine($options, array_map($callback, $options));
     }
 }

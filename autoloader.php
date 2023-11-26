@@ -52,7 +52,7 @@ function __($key, $options = []): string
  */
 function fetch(string $path, array $data = []): string
 {
-    Application::get()->getLogger()->debug("fetch($path, ".(var_export($data, true)).")");
+    Application::get()->getLogger()->debug("fetch($path)");
     ob_start();
     view($path, $data);
     return ob_get_clean();
@@ -65,9 +65,9 @@ function fetch(string $path, array $data = []): string
  * @return void
  */
 function view(string $path, array $data = []){
+    Application::get()->getLogger()->debug("view($path)");
     if(!empty($data)){
         extract($data);
     }
-    Application::get()->getLogger()->debug("view($path, ".(var_export($data, true)).")");
     include $path;
 }

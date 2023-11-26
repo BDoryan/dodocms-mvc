@@ -40,7 +40,7 @@ class Table extends CMSObject
     public function destroy(): void
     {
         $sql = "DROP TABLE " . $this->getName() . ";";
-        Application::getDatabase()->execute($sql);
+        Application::get()->getDatabase()->execute($sql);
     }
 
     public function update(Table $collection): string
@@ -97,7 +97,7 @@ class Table extends CMSObject
             $requests = explode("\n", $sql);
             foreach ($requests as $request) {
                 if (!empty($request)) {
-                    Application::getDatabase()->execute($request);
+                    Application::get()->getDatabase()->execute($request);
                 }
             }
             $this->fetch();
@@ -109,7 +109,7 @@ class Table extends CMSObject
 
     public function findAll($columns = '*', $conditions = [], $orderBy = null, $limit = null): array
     {
-        return Application::getDatabase()->findAll($this->getName(), $columns, $conditions, $orderBy, $limit);
+        return Application::get()->getDatabase()->findAll($this->getName(), $columns, $conditions, $orderBy, $limit);
     }
 
     /**
@@ -118,6 +118,10 @@ class Table extends CMSObject
     public function fetch(): void
     {
         $this->hydrate(self::getTableData($this->getName()));
+    }
+
+    public function toJson() {
+        return json_encode($this->toArray());
     }
 
     /**
@@ -161,7 +165,7 @@ class Table extends CMSObject
 
         try {
             $requests = explode("\n", $sql);
-            Application::getDatabase()->execute($sql);
+            Application::get()->getDatabase()->execute($sql);
             return implode("<br>", $requests);
         } catch (Exception $e) {
             throw new SQLException($e->getMessage(), $e->getCode(), $sql);
@@ -323,14 +327,19 @@ class Table extends CMSObject
         return $collection;
     }
 
+    public static function listTablesName(): array {
+        $database = Application::get()->getDatabase();
+        return $database->showTables();;
+    }
+
     public static function getTables(): array
     {
         $database = Application::get()->getDatabase();
-        $tables = $database->showTables();
-        $collections = [];
-        foreach ($tables as $table) {
-            $collections[] = self::getTable($table);
+        $tables_ = $database->showTables();
+        $tables = [];
+        foreach ($tables_ as $table) {
+            $tables[] = self::getTable($table);
         }
-        return $collections;
+        return $tables;
     }
 }

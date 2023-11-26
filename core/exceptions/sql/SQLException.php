@@ -8,10 +8,10 @@ class SQLException extends Exception
     /**
      * @param string $sql
      */
-    public function __construct(string $message = "", int $code = 0, string $sql)
+    public function __construct(string $message = "", $code = '', string $sql)
     {
         $this->sql = $sql;
-        parent::__construct($message, $code);
+        parent::__construct($message, is_int($code) ? $code : 0);
     }
 
     /**

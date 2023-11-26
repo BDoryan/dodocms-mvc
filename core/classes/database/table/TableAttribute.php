@@ -1,9 +1,21 @@
 <?php
 
 Autoloader::require("/core/classes/object/CMSObject.php");
+Autoloader::require("/core/classes/database/table/Table.php");
 
 class TableAttribute extends CMSObject
 {
+
+    public const TYPES = [
+        "VARCHAR",
+        "INT",
+        "DATE",
+        "DATETIME",
+        "TEXT",
+        "BOOLEAN",
+        "FLOAT",
+        "DOUBLE",
+    ];
 
     protected string $name;
     protected bool $nullable;
@@ -47,12 +59,12 @@ class TableAttribute extends CMSObject
 
     public function isDefaultAttribute(): bool
     {
-        return Collection::isDefaultAttribute($this->name);
+        return Table::isDefaultAttribute($this->name);
     }
 
     public function isLanguageAttribute(): bool
     {
-        return Collection::isLanguageAttribute($this->name);
+        return Table::isLanguageAttribute($this->name);
     }
 
     public function getAssociation(): ?string

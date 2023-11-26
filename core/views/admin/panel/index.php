@@ -6,4 +6,14 @@ if (empty($section)) {
 
 if (empty($section_data)) $section_data = [];
 
+?>
+    <div class="alert-container mb-5">
+        <?php
+        array_map(function ($alert) {
+            echo $alert->render();
+        }, $alerts ?? []);
+        ?>
+    </div>
+<?php
 view(__DIR__ . '/sections/' . $section . '.php', $section_data);
+?>

@@ -1,6 +1,8 @@
 <?php
 
-class Toast extends Component
+Autoloader::require('core/components/Component.php');
+
+class Alert extends Component
 {
 
     const TYPE_INFO = "info";
@@ -19,61 +21,43 @@ class Toast extends Component
     protected string $title;
     protected string $message;
 
-    protected int $timeout = 5000;
-
     /**
      * @param string $title
      * @param string $message
      */
     public function __construct(string $title = '', string $message = '', string $type = self::TYPE_INFO)
     {
-        parent::__construct('core/views/components/toast');
+        parent::__construct('core/views/components/alert');
         $this->title = $title;
         $this->message = $message;
         $this->type = $type;
     }
 
-    public function getTitle(): string
-    {
-        return str_replace("'", "\\'", $this->title);
-    }
-
-    public function getMessage(): string
-    {
-        return str_replace("'", "\\'", $this->message);
-    }
-
-    public function title(string $title): Toast
+    public function title(string $title): Alert
     {
         $this->title = $title;
         return $this;
     }
 
-    public function message(string $message): Toast
+    public function message(string $message): Alert
     {
         $this->message = $message;
         return $this;
     }
 
-    public function type(string $type): Toast
+    public function type(string $type): Alert
     {
         $this->type = $type;
-        return $this;
-    }
-
-    public function timeout(int $timeout): Toast
-    {
-        $this->timeout = $timeout;
         return $this;
     }
 
     public function render()
     {
-        include "$this->template/toast.php";
+        include "$this->template/alert.php";
     }
 
-    public static function create(): Toast
+    public static function create(): Alert
     {
-        return new Toast();
+        return new Alert();
     }
 }

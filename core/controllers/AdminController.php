@@ -5,15 +5,45 @@ Autoloader::require('core/controllers/DOMController.php');
 abstract class AdminController extends DOMController
 {
 
-    private array $toasts = [];
-
     public function __construct()
     {
         parent::__construct('admin', $this->toRoot('/core/views'), 'core/assets/', 'head');
     }
 
-    public function addToast(Toast $toast) {
-        $this->toasts[] = $toast;
+    public function addToast(Toast $toast)
+    {
+        $_SESSION['toasts'][] = $toast;
+    }
+
+    public function addAlert(Alert $alert)
+    {
+        $_SESSION['alerts'][] = $alert;
+    }
+
+    /**
+     *
+     * Return the alerts and clear the session
+     *
+     * @return array
+     */
+    public function getAlerts(): array
+    {
+        $alerts = $_SESSION['alerts'] ?? [];
+        $_SESSION['alerts'] = [];
+        return $alerts;
+    }
+
+    /**
+     *
+     * Return the toasts and clear the session
+     *
+     * @return array
+     */
+    public function getToasts(): array
+    {
+        $toasts = $_SESSION['toasts'] ?? [];
+        $_SESSION['toasts'] = [];
+        return $toasts;
     }
 
     public function authenticated(): bool
@@ -48,7 +78,10 @@ abstract class AdminController extends DOMController
 
     public function view($view, $data = []): void
     {
-//        $data['toasts'] = $this->toasts;
+        $toasts = $this->getToasts();
+        Application::get()->getLogger()->debug("getToasts() = " . var_export($this->getToasts(), true));
+
+        $data['toasts'] = $toasts;
         parent::view($view, $data);
     }
 }

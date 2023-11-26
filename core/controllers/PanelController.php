@@ -13,11 +13,6 @@ class PanelController extends AdminController
         parent::__construct('admin', $this->toRoot('/core/views'), 'core/assets/', 'head');
     }
 
-    public function initLayout()
-    {
-//        $this->setLayout('/admin/panel/layout');
-    }
-
     public function initSidebar()
     {
         $this->sidebar = new Sidebar([
@@ -47,18 +42,20 @@ class PanelController extends AdminController
     public function viewSection($section, $data = [])
     {
         if (!$this->authenticated()) {
-            Application::get()->getLogger()->log("Unauthenticated user tried to access the admin panel");
+            Application::get()->getLogger()->info("Unauthenticated user tried to access the admin panel");
             $this->redirect(Routes::ADMIN_LOGIN);
             return;
         }
-        Application::get()->getLogger()->debug("PanelController->initLayout()");
-        $this->initLayout();
         Application::get()->getLogger()->debug("PanelController->initSidebar()");
         $this->initSidebar();
 
         $this->title = 'DodoCMS - ' . __('admin.panel.dashboard');
 
+        $alerts =  $this->getAlerts();
+        Application::get()->getLogger()->debug("AdminController->getAlerts() : " . (var_export($alerts, true)));
+
         $section = $this->fetch('panel/index', [
+            'alerts' => $alerts,
             'section' => $section,
             'section_data' => $data,
         ]);
