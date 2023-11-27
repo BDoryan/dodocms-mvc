@@ -73,5 +73,8 @@
   "admin.panel.tables.table.entries.create_entry.success": "Entry has been created.",
   "admin.panel.tables.table.entries.edit_entry.success": "Entry has been edited.",
   "admin.panel.tables.table.entries.edit_entry.error": "An error has occurred while editing the entry.",
-  "admin.panel.tables.table.entries.create_entry.error": "An error has occurred while creating the entry."
+  "admin.panel.tables.table.entries.create_entry.error": "An error has occurred while creating the entry.",
+  "admin.panel.tables.table.entries.delete_entry.success": "Entry has been deleted.",
+  "admin.panel.tables.table.entries.delete_entry.error": "An error has occurred while deleting the entry.",
+  "admin.panel.tables.table.entries.back": "Return to the entries list"
 }

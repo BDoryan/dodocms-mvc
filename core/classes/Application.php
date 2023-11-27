@@ -77,7 +77,7 @@ class Application
         $this->router->post(Routes::ADMIN_TABLE_NEW_ENTRY, [$ptmController, 'newEntry']);
         $this->router->get(Routes::ADMIN_TABLE_EDIT_ENTRY, [$ptmController, 'editEntry']);
         $this->router->post(Routes::ADMIN_TABLE_EDIT_ENTRY, [$ptmController, 'editEntry']);
-        $this->router->post(Routes::ADMIN_TABLE_DELETE_ENTRY, [$ptmController, 'deleteEntry']);
+        $this->router->get(Routes::ADMIN_TABLE_DELETE_ENTRY, [$ptmController, 'deleteEntry']);
 
         /**
          * Section route
