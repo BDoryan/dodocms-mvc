@@ -22,6 +22,7 @@ Autoloader::require('core/controllers', true);
 Autoloader::require('core/exceptions', true);
 Autoloader::require('core/routes', true);
 Autoloader::require('core/components', true);
+Autoloader::require('models', true);
 
 /**
  * Initialize session.

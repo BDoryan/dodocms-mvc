@@ -125,22 +125,106 @@ class TableManagementController extends PanelController
         ]);
     }
 
-    public function deleteEntry(array $params) {
-
+    public function deleteEntry(array $params)
+    {
+//        $data = [];
+//
+//        $table_name = $params['table'];
+//        $table = $this->getTable($table_name);
+//
+//        if (empty($table)) {
+//            $this->addToast(new Toast(__("admin.panel.toast.error"), __("admin.panel.tables.table.not_found", ["table" => $table_name]), Toast::TYPE_DANGER));
+//            header("Location: " . Routes::route(Routes::ADMIN_TABLES));
+//            exit;
+//        }
+//
+//        $model = $table->getModel();
+//        if(empty($model)) {
+//            $this->addToast(new Toast(__("admin.panel.toast.error"), __("admin.panel.tables.table.model_not_found", ["model" => $table_name]), Toast::TYPE_DANGER));
+//            header("Location: " . Routes::route(Routes::ADMIN_TABLES));
+//            exit;
+//        }
+//
+//        $data['table'] = $table;
+//        $data['table_name'] = $table_name;
+//        $data['model'] = new $model();
+//        $data['entry_id'] = $params['id'];
+//
+//        $this->setEntry($data);
     }
 
-    public function newEntry(array $params) {
-
+    public function newEntry(array $params)
+    {
+        $this->setEntry($params);
     }
 
-    public function editEntry(array $params){
-
+    public function editEntry(array $params)
+    {
+        $this->setEntry($params);
     }
 
     public function setEntry(array $params)
     {
-        $this->viewSection('table/entry/set', [
-        ]);
+        $data = [];
+
+        $table_name = $params['table'];
+        $table = $this->getTable($table_name);
+
+        if (empty($table)) {
+            $this->addToast(new Toast(__("admin.panel.toast.error"), __("admin.panel.tables.table.not_found", ["table" => $table_name]), Toast::TYPE_DANGER));
+            header("Location: " . Routes::route(Routes::ADMIN_TABLES));
+            exit;
+        }
+
+        $model = $table->getModel();
+        if (empty($model)) {
+            $this->addToast(new Toast(__("admin.panel.toast.error"), __("admin.panel.tables.table.model_not_found", ["model" => $table_name]), Toast::TYPE_DANGER));
+            header("Location: " . Routes::route(Routes::ADMIN_TABLES));
+            exit;
+        }
+        $model = new $model();
+        $entry_id = $params['id'] ?? null;
+
+//        $fileManager = new FileManager(Application::toRoot("files/uploads"));
+//
+//        $files = [];
+//        foreach ($_FILES as $key => $file) {
+//            $files[$key] = $fileManager->getFiles($key);
+//        }
+
+        try {
+            if (isset($entry_id)) {
+                if ($model->id($entry_id)->fetch() == null) {
+                    $this->addToast(new Toast(__("admin.panel.toast.error"), __("admin.panel.tables.table.entries.entry_not_found", ["table" => $table_name, "entry_id" => $entry_id]), Toast::TYPE_DANGER));
+                    header("Location: " . Routes::route(Routes::ADMIN_TABLES));
+                    exit;
+                }
+            }
+
+            $post_data = array_slice($_POST, 0);
+
+            if (!empty($post_data)) {
+                $model->hydrate($post_data);
+                if (isset($entry_id) ? $model->id($entry_id)->update() : $model->create()) {
+                    $this->addToast(new Toast(__("admin.panel.toast.success"), isset($entry_id) ? __("admin.panel.tables.table.entries.edit_entry.success") : __("admin.panel.tables.table.entries.create_entry.success"), Toast::TYPE_SUCCESS));
+                    if(!isset($entry_id)) {
+                        header('Location: ' . Routes::route(Routes::ADMIN_TABLES_TABLE_ENTRIES, ["table" => $table_name]));
+                        exit;
+                    }
+                } else {
+                    $this->addAlert(new Alert(__("admin.panel.toast.error"), isset($entry_id) ? __("admin.panel.tables.table.entries.edit_entry.error") : __("admin.panel.tables.table.entries.create_entry.error"), Toast::TYPE_DANGER));
+                }
+            }
+        } catch (Exception $e) {
+            $this->addAlert(new Alert(__("admin.panel.toast.error"), isset($entry_id) ? __("admin.panel.tables.table.entries.edit_entry.error") : __("admin.panel.tables.table.entries.create_entry.error"), Toast::TYPE_DANGER));
+        }
+
+
+        $data['table'] = $table;
+        $data['table_name'] = $table_name;
+        $data['model'] = $model;
+        $data['entry_id'] = $entry_id;
+        $this->viewSection('table/entry/set', $data);
     }
 
     public function set(array $data = []): void

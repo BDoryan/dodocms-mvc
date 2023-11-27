@@ -10,10 +10,10 @@ class Routes
     const ADMIN_TABLES_EDIT = "/admin/tables/edit/{table}";
     const ADMIN_TABLES_DELETE = "/admin/tables/delete/{table}";
     const ADMIN_TABLES_TABLE_ATTRIBUTE = "/admin/tables/attribute";
-    const ADMIN_TABLES_TABLE_ENTRIES = "/admin/tables/entries/{table}";
-    const ADMIN_TABLE_NEW_ENTRY = "/admin/tables/entries/{table}/new";
-    const ADMIN_TABLE_EDIT_ENTRY = "/admin/tables/entries/{table}/edit/{id}";
-    const ADMIN_TABLE_DELETE_ENTRY = "/admin/tables/entries/{table}/delete/{id}";
+    const ADMIN_TABLES_TABLE_ENTRIES = "/admin/tables/{table}/entries";
+    const ADMIN_TABLE_NEW_ENTRY = "/admin/tables/{table}/entries/new";
+    const ADMIN_TABLE_EDIT_ENTRY = "/admin/tables/{table}/entries/edit/{id}";
+    const ADMIN_TABLE_DELETE_ENTRY = "/admin/tables/{table}/entries/delete/{id}";
 
     public static function route(string $route, array $replaces = []): string
     {

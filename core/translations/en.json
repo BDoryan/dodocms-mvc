@@ -32,6 +32,7 @@
   "admin.panel.toast.error": "An error has occurred.",
   "admin.panel.toast.success": "Success !",
   "admin.panel.tables.table.not_found": "Table {table} is not found",
+  "admin.panel.tables.table.model_not_found": "Model {model} is not found",
   "admin.panel.tables.table.delete.success": "Table {table} has been deleted.",
   "admin.panel.tables.table.set.success.edit": "Table {table} has been edited.",
   "admin.panel.tables.table.set.error.invalid_json": "Invalid syntax for JSON.",
@@ -65,5 +66,12 @@
   "admin.panel.tables.table.entries.actions": "Actions",
   "admin.panel.tables.table.entries.actions.delete": "Delete",
   "admin.panel.tables.table.entries.actions.edit": "Edit",
-  "components.table.rows.empty": "No entries found."
+  "components.table.rows.empty": "No entries found.",
+  "admin.panel.tables.table.entries.new_entry.button": "Create a new entry",
+  "admin.panel.tables.table.entries.edit_entry.button": "Edit this entry",
+  "admin.panel.tables.table.entries.entry_not_found": "Entry id {entry_id} is not found in table {table}",
+  "admin.panel.tables.table.entries.create_entry.success": "Entry has been created.",
+  "admin.panel.tables.table.entries.edit_entry.success": "Entry has been edited.",
+  "admin.panel.tables.table.entries.edit_entry.error": "An error has occurred while editing the entry.",
+  "admin.panel.tables.table.entries.create_entry.error": "An error has occurred while creating the entry."
 }

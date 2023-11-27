@@ -1,6 +1,8 @@
 <?php
 
-abstract class CMSObject
+Autoloader::require("core/classes/object/CMSObjectHydration.php");
+
+abstract class CMSObject extends CMSObjectHydration
 {
 
     /**
@@ -60,20 +62,5 @@ abstract class CMSObject
             $array[$key] = $value;
         }
         return $array;
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function hydrate(array $data): void
-    {
-        foreach ($data as $key => $value) {
-            $methodName = 'set' . Tools::underscoreToCamelCase($key);
-            if (method_exists($this, $methodName)) {
-                $this->$methodName($value);
-            } else {
-                throw new Exception("Method $methodName does not exist");
-            }
-        }
     }
 }

@@ -12,6 +12,12 @@ class Button extends ButtonComponent
         parent::__construct($text);
     }
 
+    public function submittable(): Button
+    {
+        $this->type = 'submit';
+        return $this;
+    }
+
     public function type(string $type): Button
     {
         $this->type = $type;

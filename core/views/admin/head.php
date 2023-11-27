@@ -8,3 +8,11 @@
 <script type="module" src="<?= Application::get()->toURL("/core/assets/js/script.js") ?>"></script>
 <script src="<?= Application::get()->toURL("/core/assets/js/loader.js") ?>"></script>
 <script src="<?= Application::get()->toURL("/core/assets/js/classes/FormUtils.js") ?>"></script>
+<script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+<script defer>
+    $(document).ready(function() {
+        $('.ckeditor').each(function() {
+            CKEDITOR.replace($(this).attr('id'));
+        });
+    });
+</script>
