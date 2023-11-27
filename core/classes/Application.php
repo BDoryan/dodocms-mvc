@@ -4,7 +4,7 @@ Autoloader::require('core/classes/Session.php');
 Autoloader::require('core/classes/database/Database.php');
 Autoloader::require('core/classes/i18n/Internationalization.php');
 Autoloader::require("core/controllers/PanelController.php");
-Autoloader::require("core/controllers/PanelTableManagementController.php");
+Autoloader::require("core/controllers/TableManagementController.php");
 
 class Application
 {
@@ -52,7 +52,7 @@ class Application
     private function loadAdminPanel()
     {
         $adminController = new PanelController();
-        $ptmController = new PanelTableManagementController();
+        $ptmController = new TableManagementController();
 
         $this->router->get(Routes::ADMIN_PANEL, [$adminController, 'index']);
         $this->router->get(Routes::ADMIN_LOGIN, [$adminController, 'login']);
@@ -62,15 +62,22 @@ class Application
          * Table routes
          */
         $this->router->get(Routes::ADMIN_TABLES, [$ptmController, 'tables']);
-        $this->router->get(Routes::ADMIN_TABLES_ATTRIBUTE, [$ptmController, 'attribute']);
-
+        $this->router->get(Routes::ADMIN_TABLES_TABLE_ATTRIBUTE, [$ptmController, 'attribute']);
         $this->router->get(Routes::ADMIN_TABLES_NEW, [$ptmController, 'new']);
         $this->router->post(Routes::ADMIN_TABLES_NEW, [$ptmController, 'new']);
-
         $this->router->get(Routes::ADMIN_TABLES_EDIT, [$ptmController, 'edit']);
         $this->router->post(Routes::ADMIN_TABLES_EDIT, [$ptmController, 'edit']);
-
         $this->router->post(Routes::ADMIN_TABLES_DELETE, [$ptmController, 'delete']);
+
+        /**
+         * Entries routes
+         */
+        $this->router->get(Routes::ADMIN_TABLES_TABLE_ENTRIES, [$ptmController, 'entries']);
+        $this->router->get(Routes::ADMIN_TABLE_NEW_ENTRY, [$ptmController, 'newEntry']);
+        $this->router->post(Routes::ADMIN_TABLE_NEW_ENTRY, [$ptmController, 'newEntry']);
+        $this->router->get(Routes::ADMIN_TABLE_EDIT_ENTRY, [$ptmController, 'editEntry']);
+        $this->router->post(Routes::ADMIN_TABLE_EDIT_ENTRY, [$ptmController, 'editEntry']);
+        $this->router->post(Routes::ADMIN_TABLE_DELETE_ENTRY, [$ptmController, 'deleteEntry']);
 
         /**
          * Section route

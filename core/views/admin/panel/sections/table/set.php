@@ -116,7 +116,7 @@ Header::create()
     $(document).on("click", "#add-attribute", function (event) {
         const form = container.find("#attribute-form");
 
-        const url = '<?= Routes::route(Routes::ADMIN_TABLES_ATTRIBUTE) ?>';
+        const url = '<?= Routes::route(Routes::ADMIN_TABLES_TABLE_ATTRIBUTE) ?>';
         const clonedForm = $.ajax({
             url: url,
             method: "GET",

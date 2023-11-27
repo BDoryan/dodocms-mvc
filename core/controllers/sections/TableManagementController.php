@@ -4,7 +4,7 @@ Autoloader::require("core/controllers/PanelController.php");
 Autoloader::require("core/classes/database/table/Table.php");
 Autoloader::require("core/components/alert/Alert.php");
 
-class PanelTableManagementController extends PanelController
+class TableManagementController extends PanelController
 {
 
     public function __construct()
@@ -14,7 +14,7 @@ class PanelTableManagementController extends PanelController
 
     public function tables(array $params): void
     {
-        Application::get()->getLogger()->debug("PanelTableManagementController->tables(" . (var_export($params, true)) . ")");
+        Application::get()->getLogger()->debug("TableManagementController->tables(" . (var_export($params, true)) . ")");
         $tables = Table::getTables();
 
         $this->viewSection("table/tables", ["tables" => $tables]);
@@ -70,6 +70,77 @@ class PanelTableManagementController extends PanelController
             Application::get()->getRouter()->redirect(Routes::ADMIN_TABLES);
             exit;
         }
+        $this->addToast(new Toast(__("admin.panel.toast.error"), __("admin.panel.tables.table.not_found", ["table" => $table_name]), Toast::TYPE_DANGER));
+        header("Location: " . Routes::route(Routes::ADMIN_TABLES));
+        exit;
+    }
+
+    public function entries($params)
+    {
+        $table_name = $params['table'];
+
+        $table = Table::getTable($table_name);
+        if (empty($table)) {
+            $this->addToast(new Toast(__("admin.panel.toast.error"), __("admin.panel.tables.table.not_found", ["table" => $table_name]), Toast::TYPE_DANGER));
+            header("Location: " . Routes::route(Routes::ADMIN_TABLES));
+            exit;
+        }
+
+        $attributes = array_map(function ($attribute) {
+            return $attribute->getName();
+        }, $table->getAttributes());
+
+        $entries = $table->findAll();
+
+        $columns = [...$attributes, __("admin.panel.tables.table.entries.actions")];
+        $rows = [];
+        foreach ($entries as $entry) {
+            $row = array_values($entry);
+            $row = array_map(function ($value) {
+                return strip_tags($value);
+            }, $row);
+
+            $edit = ButtonHypertext::create()
+                ->text('<i class="fa-solid fa-pen-to-square"></i> ' . __("admin.panel.tables.table.entries.actions.edit"))
+                ->href(Routes::route(Routes::ADMIN_TABLE_EDIT_ENTRY, ["table" => $table_name, "id" => $entry['id']]))
+                ->addClass("text-sm")
+                ->blue()
+                ->html();
+
+            $delete = ButtonHypertext::create()
+                ->text('<i class="fa-solid fa-trash"></i> ' . __("admin.panel.tables.table.entries.actions.delete"))
+                ->addClass("text-sm")
+                ->red()
+                ->href(Routes::route(Routes::ADMIN_TABLE_DELETE_ENTRY, ["table" => $table_name, "id" => $entry['id']]))
+                ->html();
+
+            $row[] = '<div class="flex flex-row justify-center align-center gap-3">' . "$edit $delete" . '</div>';
+            $rows[] = $row;
+        }
+
+        $this->viewSection('table/entry/entries', [
+            'table_name' => $table_name,
+            'columns' => $columns,
+            'rows' => $rows
+        ]);
+    }
+
+    public function deleteEntry(array $params) {
+
+    }
+
+    public function newEntry(array $params) {
+
+    }
+
+    public function editEntry(array $params){
+
+    }
+
+    public function setEntry(array $params)
+    {
+        $this->viewSection('table/entry/set', [
+        ]);
     }
 
     public function set(array $data = []): void

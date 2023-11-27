@@ -66,10 +66,4 @@ class PanelController extends AdminController
             ]
         );
     }
-
-    public function section(array $params, $data = [])
-    {
-        $section = $params["section"];
-        $this->viewSection($section, $data);
-    }
 }

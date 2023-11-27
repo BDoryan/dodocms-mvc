@@ -58,5 +58,12 @@
   "admin.panel.tables.table.attribute.do_you_want_to_use_auto_increment": "Do you want to use auto-increment?",
   "admin.panel.tables.table.attribute.default_value": "Default value",
   "admin.panel.tables.table.attribute.select_a_table": "Select a table",
-  "admin.panel.tables.table.attribute.choose_an_association_to_another_table": "Choose an association to another table"
+  "admin.panel.tables.table.attribute.choose_an_association_to_another_table": "Choose an association to another table",
+  "admin.panel.tables.table.entries.title": "Entries of the table {table}",
+  "admin.panel.tables.table.entries.description": "Explore the creation, reading, updating, and deletion of entries within the {table} table. Effortlessly manage your table to suit your needs.",
+  "admin.panel.tables.table.entries.button.new_entry": "Create a new entry",
+  "admin.panel.tables.table.entries.actions": "Actions",
+  "admin.panel.tables.table.entries.actions.delete": "Delete",
+  "admin.panel.tables.table.entries.actions.edit": "Edit",
+  "components.table.rows.empty": "No entries found."
 }
