@@ -91,16 +91,15 @@ class PanelTableManagementController extends PanelController
                 } else {
                     try {
                         if (empty($table)) {
-
                             $data['sql'] = $post_table->create();
-                            $this->addAlert(new Alert(__("admin.panel.toast.success"), __("admin.panel.tables.table.set.success.created", ["table" => $post_table->getName()]), Toast::TYPE_SUCCESS));
-                            header('Location: '. Routes::route(Routes::ADMIN_TABLES_EDIT, ["table" => $post_table->getName()]));
-                            exit;
+                            $this->addToast(new Toast(__("admin.panel.toast.success"), __("admin.panel.tables.table.set.success.created", ["table" => $post_table->getName()]), Toast::TYPE_SUCCESS));
+//                            header('Location: '. Routes::route(Routes::ADMIN_TABLES_EDIT, ["table" => $post_table->getName()]));
+//                            exit;
                         } else {
                             $data['sql'] = $table->update($post_table);
-                            $this->addAlert(new Alert(__("admin.panel.toast.success"), __("admin.panel.tables.table.set.success.edit", ["table" => $post_table->getName()]), Toast::TYPE_SUCCESS));
-                            header('Location: '. Routes::route(Routes::ADMIN_TABLES_EDIT, ["table" => $post_table->getName()]));
-                            exit;
+                            $this->addToast(new Toast(__("admin.panel.toast.success"), __("admin.panel.tables.table.set.success.edit", ["table" => $post_table->getName()]), Toast::TYPE_SUCCESS));
+//                            header('Location: '. Routes::route(Routes::ADMIN_TABLES_EDIT, ["table" => $post_table->getName()]));
+//                            exit;
                         }
                     } catch (SQLException $e) {
                         Application::get()->getLogger()->printException($e);

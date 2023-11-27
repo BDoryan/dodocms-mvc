@@ -15,7 +15,7 @@ Header::create()
 ?>
 <?php
     if(!empty($sql)) {
-        view("/core/views/sql.php", ["sql" => $sql]);
+        view(Application::get()->toRoot("/core/views/sql.php"), ["sql" => $sql]);
     }
 ?>
 <div class="flex flex-row flex-wrap -mx-2">

@@ -7,6 +7,8 @@ if (empty($section)) {
 if (empty($section_data)) $section_data = [];
 
 ?>
+<?php
+if (!empty($alerts)) { ?>
     <div class="alert-container mb-5">
         <?php
         array_map(function ($alert) {
@@ -14,6 +16,7 @@ if (empty($section_data)) $section_data = [];
         }, $alerts ?? []);
         ?>
     </div>
+<?php } ?>
 <?php
 view(__DIR__ . '/sections/' . $section . '.php', $section_data);
 ?>

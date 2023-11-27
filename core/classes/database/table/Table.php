@@ -62,11 +62,13 @@ class Table extends CMSObject
         }
 
         foreach ($collection->attributes as $attribute) {
+            $length = !empty($attribute->getLength()) ? "(" . $attribute->getLength() . ")" : '';
+
             if (!$this->hasAttribute($attribute)) {
-                $sql .= "ALTER TABLE " . $this->getName() . " ADD COLUMN " . $attribute->getName() . " " . $attribute->getType() . "(" . $attribute->getLength() . ") " . ($attribute->isNullable() ? "NULL" : "NOT NULL") . " " . ($attribute->isAutoIncrement() ? "AUTO_INCREMENT" : "") . " " . (!empty($attribute->getDefaultValue()) ? "DEFAULT " . ($attribute->getDefaultValue() === "CURRENT_TIMESTAMP" ? $attribute->getDefaultValue() : "'" . $attribute->getDefaultValue() . "'") : "") . ";\n";
+                $sql .= "ALTER TABLE " . $this->getName() . " ADD COLUMN " . $attribute->getName() . " " . $attribute->getType() . " $length " . ($attribute->isNullable() ? "NULL" : "NOT NULL") . " " . ($attribute->isAutoIncrement() ? "AUTO_INCREMENT" : "") . " " . (!empty($attribute->getDefaultValue()) ? "DEFAULT " . ($attribute->getDefaultValue() === "CURRENT_TIMESTAMP" ? $attribute->getDefaultValue() : "'" . $attribute->getDefaultValue() . "'") : "") . ";\n";
 
                 if ($attribute->hasAssociation()) {
-                    $sql .= "ALTER TABLE " . $this->getName() . " ADD CONSTRAINT " . $attribute->getAssociation() . " FOREIGN KEY (" . $attribute->getName() . ") REFERENCES " . $attribute->getAssociation() . "(id);\n";
+                    $sql .= "ALTER TABLE " . $this->getName() . " ADD CONSTRAINT " . 'fk_'.$attribute->getAssociation() . " FOREIGN KEY (" . $attribute->getName() . ") REFERENCES " . $attribute->getAssociation() . "(id);\n";
                 }
             } else {
                 $existingAttribute = $this->getAttribute($attribute);
@@ -83,7 +85,7 @@ class Table extends CMSObject
                         if (!empty($existingAttribute->getAssociation())) {
                             $sql .= "ALTER TABLE " . $this->getName() . " DROP FOREIGN KEY " . $existingAttribute->getAssociation() . ";\n";
                         }
-                        $sql .= "ALTER TABLE " . $this->getName() . " ADD CONSTRAINT " . $attribute->getAssociation() . " FOREIGN KEY (" . $attribute->getName() . ") REFERENCES " . $attribute->getAssociation() . "(id);\n";
+                        $sql .= "ALTER TABLE " . $this->getName() . " ADD CONSTRAINT " . 'fk_'.$attribute->getAssociation() . " FOREIGN KEY (" . $attribute->getName() . ") REFERENCES " . $attribute->getAssociation() . "(id);\n";
                     }
                 }
             }
