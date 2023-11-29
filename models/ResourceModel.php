@@ -1,6 +1,6 @@
 <?php
 
-class MediaModel extends Model
+class ResourceModel extends Model
 {
 
     public const TABLE_NAME = "Medias";
@@ -36,7 +36,7 @@ class MediaModel extends Model
         $this->name = $name;
     }
 
-    public function getDefaultSrc()
+    public function getDefaultSrc(): string
     {
         return $this->src;
     }
@@ -46,7 +46,7 @@ class MediaModel extends Model
         return parent::delete();
     }
 
-    public function deleteAll()
+    public function deleteAll(): bool
     {
         return $this->deleteModel() && $this->deleteFile();
     }
@@ -58,6 +58,7 @@ class MediaModel extends Model
             return unlink($this->src);
         return true;
     }
+
 
     public function getSrc(): string
     {
@@ -130,4 +131,4 @@ class MediaModel extends Model
     }
 }
 
-Table::$models[MediaModel::TABLE_NAME] = MediaModel::class;
+Table::$models[ResourceModel::TABLE_NAME] = ResourceModel::class;

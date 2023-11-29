@@ -16,7 +16,7 @@ if (empty($model)) {
             <?php
             ButtonHypertext::create()
                 ->href(Routes::route(Routes::ADMIN_TABLES_TABLE_ENTRIES, ["table" => $table_name ?? '']))
-                ->text('<i class="fa-solid fa-circle-left"></i> '. __("admin.panel.tables.table.entries.back"))
+                ->text('<i class="me-1 fa-solid fa-circle-left"></i> '. __("admin.panel.tables.table.entries.back"))
                 ->addClass("w-full")
                 ->blue()
                 ->render();
@@ -24,7 +24,7 @@ if (empty($model)) {
             <?php
             Button::create()
                 ->submittable()
-                ->text(isset($entry_id) ? '<i class="fa-solid fa-pen-to-square"></i> ' . __('admin.panel.tables.table.entries.edit_entry.button') : '<i class="fa-solid fa-plus"></i> ' .__('admin.panel.tables.table.entries.new_entry.button'))
+                ->text(isset($entry_id) ? '<i class="me-1 fa-solid fa-pen-to-square"></i> ' . __('admin.panel.tables.table.entries.edit_entry.button') : '<i class="me-1 fa-solid fa-plus"></i> ' .__('admin.panel.tables.table.entries.new_entry.button'))
                 ->addClass("w-full")
                 ->green()
                 ->render();

@@ -10,19 +10,22 @@ class PanelController extends AdminController
 
     public function __construct()
     {
-        parent::__construct('admin', $this->toRoot('/core/views'), 'core/assets/', 'head');
+        parent::__construct();
     }
 
     public function initSidebar()
     {
         $this->sidebar = new Sidebar([
             new SidebarCategory(__("admin.panel.content_manager"), [
+                new SidebarSection("me-1 fa-solid fa-images", __('admin.panel.resources.title'), Routes::ADMIN_RESOURCES_MANAGER, [
+                    new SidebarSection("me-1 fa-solid fa-layer-group", __('admin.panel.dashboard.button.store_file'), Routes::ADMIN_TABLES_NEW),
+                ]),
             ]),
             new SidebarCategory(__("admin.panel.admin_center"), [
             ]),
             new SidebarCategory(__("admin.panel.developer_center"), [
-                new SidebarSection("fa-solid fa-layer-group", __('admin.panel.table_management'), Routes::ADMIN_TABLES, [
-                    new SidebarSection("fa-solid fa-layer-group", __('admin.panel.table_management.new'), Routes::ADMIN_TABLES_NEW),
+                new SidebarSection("me-1 fa-solid fa-layer-group", __('admin.panel.table_management'), Routes::ADMIN_TABLES, [
+                    new SidebarSection("me-1 fa-solid fa-layer-group", __('admin.panel.table_management.new'), Routes::ADMIN_TABLES_NEW),
                 ]),
             ])
         ]);
@@ -46,6 +49,7 @@ class PanelController extends AdminController
             $this->redirect(Routes::ADMIN_LOGIN);
             return;
         }
+
         Application::get()->getLogger()->debug("PanelController->initSidebar()");
         $this->initSidebar();
 
@@ -65,5 +69,11 @@ class PanelController extends AdminController
                 'content' => $section
             ]
         );
+    }
+
+    public function section(array $params, $data = [])
+    {
+        $section = $params["section"];
+        $this->viewSection($section, $data);
     }
 }

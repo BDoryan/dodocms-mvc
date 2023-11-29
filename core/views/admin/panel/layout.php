@@ -10,7 +10,7 @@
                     <span class="ps-4 text-lg font-semibold"><?= __("admin.panel.welcome", ["username" => 'Developper']) ?></span>
                     <a href="<?= Application::get()->toURL("/admin/logout") ?>"
                        class="text-gray-600 focus:outline-none bg-red-600 hover:bg-red-700 text-white font-semibold uppercase p-4">
-                        <i class="fa-solid fa-sign-out"></i> <?= __("admin.logout") ?>
+                        <i class="me-1 fa-solid fa-sign-out"></i> <?= __("admin.logout") ?>
                     </a>
                 </div>
             </header>

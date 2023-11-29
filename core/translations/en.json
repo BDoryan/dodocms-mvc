@@ -76,5 +76,21 @@
   "admin.panel.tables.table.entries.create_entry.error": "An error has occurred while creating the entry.",
   "admin.panel.tables.table.entries.delete_entry.success": "Entry has been deleted.",
   "admin.panel.tables.table.entries.delete_entry.error": "An error has occurred while deleting the entry.",
-  "admin.panel.tables.table.entries.back": "Return to the entries list"
+  "admin.panel.tables.table.entries.back": "Return to the entries list",
+  "admin.panel.resources.title": "Resource Manager",
+  "admin.panel.resources.description": "Explore the creation, reading, updating, and deletion of files within the storage. Effortlessly manage your files to suit your needs.",
+  "admin.panel.dashboard.button.upload_file": "Upload a file",
+  "admin.panel.dashboard.button.new_folder": "New folder",
+  "admin.panel.resources.upload.submit": "Upload files",
+  "admin.panel.resources.upload.close": "Close",
+  "admin.panel.resources.upload.click_to_upload": "Click to upload",
+  "admin.panel.resources.upload.drag_and_drop": "or drag and drop",
+  "admin.panel.resources.upload.uploading": "Uploading",
+  "admin.panel.resources.upload.title": "Upload a new resources",
+  "admin.panel.resources.upload.any_files": "Any files selected",
+  "admin.panel.resources.upload.files_count": "{count} files selected",
+  "admin.panel.resources.upload.upload_in_progress": "{count} files in progress",
+  "admin.panel.resources.upload.upload_finish": "Upload finished !",
+  "admin.panel.resources.edition.finish": "Finish",
+  "admin.panel.resources.edition.alternative_text": "Alternative text"
 }

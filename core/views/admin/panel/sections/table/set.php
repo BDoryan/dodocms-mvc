@@ -57,7 +57,7 @@ Header::create()
                         ->type("submit")
                         ->addClass("w-full")
                         ->blue()
-                        ->text('<i class="fa-solid fa-hammer me-1"></i> ' . __("admin.panel.tables.table.set.table.submit"))
+                        ->text('<i class="me-1 fa-solid fa-hammer me-1"></i> ' . __("admin.panel.tables.table.set.table.submit"))
                         ->render()
                     ?>
                 </div>
@@ -70,7 +70,7 @@ Header::create()
                 <p class="text-md"><?= __('admin.panel.tables.table.delete.warning.message') ?></p>
                 <button type="submit"
                         class="mt-5 w-full bg-red-700 hover:bg-red-800 text-white font-semibold py-2 px-4 rounded-md shadow-lg">
-                    <i class="fa-solid fa-trash me-1"></i>
+                    <i class="me-1 fa-solid fa-trash me-1"></i>
                     <?= __('admin.panel.tables.table.delete.submit') ?>
                 </button>
             </form>
@@ -85,7 +85,7 @@ Header::create()
             <input type="hidden" name="table_json" value="<?= $post_table_json ?? '{}' ?>">
             <button type="submit"
                     class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-md shadow-lg">
-                <i class="fa-solid fa-check me-1"></i>
+                <i class="me-1 fa-solid fa-check me-1"></i>
                 <?= !empty($table) ? __('admin.panel.tables.table.edit_confirm') : __('admin.panel.tables.table.create_confirm') ?>
             </button>
         </form>
@@ -105,7 +105,7 @@ Header::create()
         <div class="w-full flex flex-col items-center">
             <button type="button" id="add-attribute"
                     class="bg-green-600 hover:bg-green-700 text-white  h-10 w-10 text-xl rounded-full flex items-center justify-center text-white shadow-lg">
-                <i class="fa-solid fa-plus"></i>
+                <i class="me-1 fa-solid fa-plus"></i>
             </button>
         </div>
     </div>

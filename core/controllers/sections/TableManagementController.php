@@ -21,7 +21,7 @@ class TableManagementController extends PanelController
         $this->viewSection("table/tables", ["tables" => $tables]);
     }
 
-    private function getTable($table_name)
+    private function getTable($table_name): Table
     {
         $table = Table::getTable($table_name);
         if (!isset($table)) {
@@ -66,7 +66,7 @@ class TableManagementController extends PanelController
         $this->set($data);
     }
 
-    public function attribute()
+    public function attribute(): void
     {
         // With this method, we can use a view without the layout
         view(Application::get()->toRoot("/core/views/admin/panel/sections/table/attribute/attribute.php"));
@@ -109,19 +109,23 @@ class TableManagementController extends PanelController
         foreach ($entries as $entry) {
             $row = array_values($entry);
             $row = array_map(function ($value) {
-                return strip_tags($value);
+                $value = htmlspecialchars($value);
+                if (strlen($value) > 50) {
+                    $value = substr($value, 0, 50) . "...";
+                }
+                return $value;
             }, $row);
 
             $edit = ButtonHypertext::create()
-                ->text('<i class="fa-solid fa-pen-to-square"></i> ' . __("admin.panel.tables.table.entries.actions.edit"))
+                ->text('<i class="me-1 fa-solid fa-pen-to-square"></i> ' . __("admin.panel.tables.table.entries.actions.edit"))
                 ->href(Routes::route(Routes::ADMIN_TABLE_EDIT_ENTRY, ["table" => $table_name, "id" => $entry['id']]))
-                ->addClass("text-sm")
+                ->addClass("text-sm whitespace-nowrap")
                 ->blue()
                 ->html();
 
             $delete = ButtonHypertext::create()
-                ->text('<i class="fa-solid fa-trash"></i> ' . __("admin.panel.tables.table.entries.actions.delete"))
-                ->addClass("text-sm")
+                ->text('<i class="me-1 fa-solid fa-trash"></i> ' . __("admin.panel.tables.table.entries.actions.delete"))
+                ->addClass("text-sm whitespace-nowrap")
                 ->red()
                 ->href(Routes::route(Routes::ADMIN_TABLE_DELETE_ENTRY, ["table" => $table_name, "id" => $entry['id']]))
                 ->html();
@@ -137,7 +141,7 @@ class TableManagementController extends PanelController
         ]);
     }
 
-    public function deleteEntry(array $params)
+    public function deleteEntry(array $params): void
     {
         $table_name = $params['table'];
         $entry_id = $params['id'];
@@ -164,7 +168,7 @@ class TableManagementController extends PanelController
         header('Location: ' . Routes::route(Routes::ADMIN_TABLES_TABLE_ENTRIES, ["table" => $table_name]));
     }
 
-    public function newEntry(array $params)
+    public function newEntry(array $params): void
     {
         $this->setEntry($params);
     }

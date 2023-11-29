@@ -15,6 +15,8 @@ class Routes
     const ADMIN_TABLE_EDIT_ENTRY = "/admin/tables/{table}/entries/edit/{id}";
     const ADMIN_TABLE_DELETE_ENTRY = "/admin/tables/{table}/entries/delete/{id}";
 
+    const ADMIN_RESOURCES_MANAGER = "/admin/resources/";
+
     public static function route(string $route, array $replaces = []): string
     {
         foreach ($replaces as $key => $value) {

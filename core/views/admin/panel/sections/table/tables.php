@@ -6,7 +6,7 @@ Header::create()
     ->content(
         ButtonHypertext::create()
             ->green()
-            ->text('<i class="fa-solid fa-plus"></i> ' . __('admin.panel.dashboard.button.new_table'))
+            ->text('<i class="me-1 fa-solid fa-plus-circle"></i> ' . __('admin.panel.dashboard.button.new_table'))
             ->href(Routes::route(Routes::ADMIN_TABLES_NEW))
             ->html()
     )
@@ -43,10 +43,10 @@ if (empty($tables)) {
                 <div class="flex flex-row gap-3 pt-5">
                     <a href="<?= Routes::route(Routes::ADMIN_TABLES_EDIT, ['table' => $table->getName()]) ?>"
                        class="px-3 py-1 rounded bg-green-600 text-white font-semibold uppercase"><i
-                                class="fa-solid fa-pen-to-square me-1"></i> <?= __("admin.panel.tables.table.manage") ?></a>
+                                class="me-1 fa-solid fa-pen-to-square me-1"></i> <?= __("admin.panel.tables.table.manage") ?></a>
                     <a href="<?= Routes::route(Routes::ADMIN_TABLES_TABLE_ENTRIES, ['table' => $table->getName()]) ?>"
                        class="ms-auto px-3 py-1 rounded bg-blue-500 text-white font-semibold uppercase"><i
-                                class="fa-solid fa-eye me-1"></i><?= __("admin.panel.tables.table.view_content") ?></a>
+                                class="me-1 fa-solid fa-eye me-1"></i><?= __("admin.panel.tables.table.view_content") ?></a>
                 </div>
             </div>
         </div>

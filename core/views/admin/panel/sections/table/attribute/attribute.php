@@ -3,7 +3,7 @@
     <div class="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2">
         <button type="button" id="remove-attribute"
                 class="h-10 w-10 bg-red-700 hover:bg-red-800 hover:border hover:border-red-700 text-xl rounded-full flex items-center justify-center text-white">
-            <i class="fa-solid fa-trash"></i>
+            <i class="me-1 fa-solid fa-trash"></i>
         </button>
     </div>
     <div class="flex flex-wrap gap-y-3 -mx-2 w-full">

@@ -1,4 +1,4 @@
-<div class="border-gray-500 rounded-lg border-[1px]">
+<div class="border-gray-500 rounded-lg border-[1px] overflow-x-auto">
     <table class="w-full rounded-lg bg-gray-800 overflow-hidden">
         <thead class="rounded-md border-gray-500 border-b">
         <tr class="rounded-md border-gray-500 border-b">
@@ -12,7 +12,7 @@
             <?php foreach ($this->rows as $line => $row) { ?>
                 <tr class="bg-gray-<?= $line % 2 == 0 ? "900" : "800" ?> text-start py-5">
                     <?php foreach ($row as $col => $data) { ?>
-                        <td class="py-2 px-4 border-gray-500 <?= $line > 0 ? "border-t" : "" ?> <?= $col < (count($this->columns) - 1) ? "border-e" : "" ?>"><?php echo $data; ?></td>
+                        <td class="whitespace-nowrap py-2 px-4 border-gray-500 <?= $line > 0 ? "border-t" : "" ?> <?= $col < (count($this->columns) - 1) ? "border-e" : "" ?>"><?php echo $data; ?></td>
                     <?php } ?>
                 </tr>
             <?php } ?>

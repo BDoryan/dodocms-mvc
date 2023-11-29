@@ -53,6 +53,7 @@ class Application
     {
         $adminController = new PanelController();
         $ptmController = new TableManagementController();
+        $storageController = new ResourcesManagerController();
 
         $this->router->get(Routes::ADMIN_PANEL, [$adminController, 'index']);
         $this->router->get(Routes::ADMIN_LOGIN, [$adminController, 'login']);
@@ -78,6 +79,11 @@ class Application
         $this->router->get(Routes::ADMIN_TABLE_EDIT_ENTRY, [$ptmController, 'editEntry']);
         $this->router->post(Routes::ADMIN_TABLE_EDIT_ENTRY, [$ptmController, 'editEntry']);
         $this->router->get(Routes::ADMIN_TABLE_DELETE_ENTRY, [$ptmController, 'deleteEntry']);
+
+        /**
+         * Resources manager routes
+         */
+        $this->router->get(Routes::ADMIN_RESOURCES_MANAGER, [$storageController, 'index']);
 
         /**
          * Section route
@@ -301,6 +307,16 @@ class Application
     public function getLogger(): Logger
     {
         return $this->logger;
+    }
+
+    public function getRoot(): string
+    {
+        return $this->root;
+    }
+
+    public function getUrl(): string
+    {
+        return $this->url;
     }
 
     public function getConfiguration(): array

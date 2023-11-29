@@ -13,7 +13,7 @@ if (!empty($alerts)) { ?>
         <?php
         array_map(function ($alert) {
             echo $alert->render();
-        }, $alerts ?? []);
+        }, $alerts);
         ?>
     </div>
 <?php } ?>

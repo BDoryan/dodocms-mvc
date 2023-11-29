@@ -17,7 +17,7 @@ if (Application::get()->isDebugMode()) {
                 Button::create()
                     ->green(700)
                     ->attribute("@click", "showLogs = !showLogs")
-                    ->text('<i class="fa-solid fa-eye"></i> ' . __('admin.debug.read_logs'))
+                    ->text('<i class="me-1 fa-solid fa-eye"></i> ' . __('admin.debug.read_logs'))
                     ->render();
                 ?>
             </div>
