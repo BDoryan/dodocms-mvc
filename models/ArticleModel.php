@@ -179,6 +179,11 @@ class ArticleModel extends Model
 //        ];
         return $fields;
     }
+
+    public static function findAll(string $columns = '*', array $conditions = [], $orderBy = ''): ?array
+    {
+        return (new ArticleModel())->getAll($columns, $conditions, $orderBy);
+    }
 }
 
 Table::$models[ArticleModel::TABLE_NAME] = ArticleModel::class;

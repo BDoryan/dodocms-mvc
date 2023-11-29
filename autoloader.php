@@ -53,6 +53,9 @@ function __($key, $options = []): string
  */
 function fetch(string $path, array $data = []): string
 {
+    if(!Tools::endsWith($path, '.php'))
+        $path .= ".php";
+
     Application::get()->getLogger()->debug("fetch($path)");
     ob_start();
     view($path, $data);
@@ -66,6 +69,9 @@ function fetch(string $path, array $data = []): string
  * @return void
  */
 function view(string $path, array $data = []){
+    if(!Tools::endsWith($path, '.php'))
+        $path .= ".php";
+
     Application::get()->getLogger()->debug("view($path)");
     if(!empty($data)){
         extract($data);

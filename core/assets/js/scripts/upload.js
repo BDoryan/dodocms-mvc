@@ -1,17 +1,13 @@
 Application.get().addRunner(() => {
     const translations = DODOCMS_APPLICATION.getI18n();
-    console.log("getTranslation:")
-    console.log(translations.translate("admin.panel.resources.upload.any_files"));
 
     const CONTEXTS = {
         "any_files": translations.translate("admin.panel.resources.upload.any_files"),
         "files_count": translations.translate("admin.panel.resources.upload.files_count"),
         "upload_in_progress": translations.translate("admin.panel.resources.upload.upload_in_progress"),
         "finish": translations.translate("admin.panel.resources.upload.upload_finish"),
-        "route_api_upload": "/resources/upload"
+        "route_api_upload": DODOCMS_APPLICATION.toApi("/resources/upload")
     }
-
-    console.log(CONTEXTS);
 
     let selected_files = [];
 

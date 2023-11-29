@@ -13,18 +13,7 @@ class ResourcesManagerController extends PanelController
 
     public function index()
     {
-//        $resourceModel = new ResourceModel();
-//        $resources = $resourceModel->findAll();
-
-        $this->viewSection("resources/index", []);
-    }
-
-    public function files() {
-
-    }
-
-    public function uploadFile()
-    {
-//        $this->section(["section" => "upload"]);
+        $resources = ResourceModel::findAll("*", [], "createdAt DESC");
+        $this->viewSection("resources/index", ["resources" => $resources]);
     }
 }

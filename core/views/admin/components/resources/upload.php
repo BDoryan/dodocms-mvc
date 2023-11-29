@@ -5,11 +5,10 @@ if (!isset($var)) {
     return;
 }
 ?>
-<div x-show="<?= $var ?>" @click.away="<?= $var ?> = false" class="fixed inset-0 bg-black opacity-50 z-1"></div>
-
-<div id="file-upload" x-show="<?= $var ?>" class="fixed inset-0 flex items-center justify-center">
+<div x-cloak x-show="<?= $var ?>" @click.away="<?= $var ?> = false" class="modal-background fixed inset-0 bg-black opacity-50 z-50"></div>
+<div id="file-upload" x-cloak x-show="<?= $var ?>" class="modal fixed inset-0 flex items-center justify-center z-50">
     <!-- Modal content -->
-    <div @click.stop class="relative bg-white rounded-lg shadow dark:bg-gray-700 rounded-lg shadow-lg w-2/4 z-50" tabindex="-1" aria-hidden="true">
+    <div @click.stop class="relative bg-white rounded-lg shadow dark:bg-gray-700 rounded-lg shadow-lg w-2/4" tabindex="-1" aria-hidden="true">
         <!-- Modal header -->
         <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
             <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
@@ -64,4 +63,4 @@ if (!isset($var)) {
         </div>
     </div>
 </div>
-<?php view(Application::get()->toRoot('/core/views/admin/components/resources/resource_item.php')) ?>
+<?php view(Application::get()->toRoot('/core/views/admin/components/resources/resource.template.php')) ?>

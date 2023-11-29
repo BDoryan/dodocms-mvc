@@ -23,3 +23,10 @@
     view(Application::get()->toRoot("core/views/admin/components/resources/upload.php"), ["var" => $modal]);
     ?>
 </div>
+<div class="flex flex-row flex-wrap -m-2 mt-5" x-data="{ imageTarget: null }">
+    <?php foreach ($resources as $resource) { ?>
+        <div class="media-list-element p-2 w-4/12 z-10">
+            <?php view(Application::get()->toRoot("core/views/admin/components/resources/resource.php"), ["resource" => $resource]) ?>
+        </div>
+    <?php } ?>
+</div>

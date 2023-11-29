@@ -3,7 +3,7 @@
 class ResourceModel extends Model
 {
 
-    public const TABLE_NAME = "Medias";
+    public const TABLE_NAME = "Resources";
 
     protected string $name;
     protected string $src;
@@ -53,29 +53,35 @@ class ResourceModel extends Model
 
     public function deleteFile(): bool
     {
-
-        if (file_exists($this->src))
-            return unlink($this->src);
+        if (file_exists($this->getPath()))
+            return unlink($this->getPath());
         return true;
     }
 
+    public function getPath(): string {
+        return Application::get()->toRoot($this->src);
+    }
+
+    public function getURL(): string {
+        return Application::get()->toURL($this->src);
+    }
 
     public function getSrc(): string
     {
-        if (!file_exists($this->src))
-            return Application::toAsset("/admin/assets/imgs/applications/404.jpg");
+        if (!file_exists($this->getPath()))
+            return Application::get()->toURL("/core/assets/imgs/applications/404.jpg");
 
         $finfo = finfo_open(FILEINFO_MIME_TYPE);
-        $mime_type = finfo_file($finfo, $this->src);
+        $mime_type = finfo_file($finfo, $this->getPath());
         finfo_close($finfo);
         $extension = explode("/", $mime_type)[1];
 
 
         if (Tools::startsWith($mime_type, "image/")) {
-            $src = Application::toAsset($this->src);
+            $src = $this->getURL();
         } else {
             // Warning: here if extension image doesn't exist return a invalid image
-            $src = Application::toAsset("/admin/assets/imgs/applications/$extension.jpg");
+            $src = Application::get()->toURL("/core/assets/imgs/applications/$extension.jpg");
         }
 
         return $src;
@@ -129,6 +135,13 @@ class ResourceModel extends Model
         ];
         return $fields;
     }
+
+    public static function findAll(string $columns = '*', array $conditions = [], $orderBy = ''): ?array
+    {
+        return (new ResourceModel())->getAll($columns, $conditions, $orderBy);
+    }
+
+
 }
 
 Table::$models[ResourceModel::TABLE_NAME] = ResourceModel::class;

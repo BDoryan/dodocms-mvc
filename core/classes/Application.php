@@ -51,45 +51,7 @@ class Application
 
     private function loadAdminPanel()
     {
-        $adminController = new PanelController();
-        $ptmController = new TableManagementController();
-        $storageController = new ResourcesManagerController();
-
-        $this->router->get(Routes::ADMIN_PANEL, [$adminController, 'index']);
-        $this->router->get(Routes::ADMIN_LOGIN, [$adminController, 'login']);
-        $this->router->post(Routes::ADMIN_LOGIN, [$adminController, 'authentication']);
-
-        /**
-         * Table routes
-         */
-        $this->router->get(Routes::ADMIN_TABLES, [$ptmController, 'tables']);
-        $this->router->get(Routes::ADMIN_TABLES_TABLE_ATTRIBUTE, [$ptmController, 'attribute']);
-        $this->router->get(Routes::ADMIN_TABLES_NEW, [$ptmController, 'new']);
-        $this->router->post(Routes::ADMIN_TABLES_NEW, [$ptmController, 'new']);
-        $this->router->get(Routes::ADMIN_TABLES_EDIT, [$ptmController, 'edit']);
-        $this->router->post(Routes::ADMIN_TABLES_EDIT, [$ptmController, 'edit']);
-        $this->router->post(Routes::ADMIN_TABLES_DELETE, [$ptmController, 'delete']);
-
-        /**
-         * Entries routes
-         */
-        $this->router->get(Routes::ADMIN_TABLES_TABLE_ENTRIES, [$ptmController, 'entries']);
-        $this->router->get(Routes::ADMIN_TABLE_NEW_ENTRY, [$ptmController, 'newEntry']);
-        $this->router->post(Routes::ADMIN_TABLE_NEW_ENTRY, [$ptmController, 'newEntry']);
-        $this->router->get(Routes::ADMIN_TABLE_EDIT_ENTRY, [$ptmController, 'editEntry']);
-        $this->router->post(Routes::ADMIN_TABLE_EDIT_ENTRY, [$ptmController, 'editEntry']);
-        $this->router->get(Routes::ADMIN_TABLE_DELETE_ENTRY, [$ptmController, 'deleteEntry']);
-
-        /**
-         * Resources manager routes
-         */
-        $this->router->get(Routes::ADMIN_RESOURCES_MANAGER, [$storageController, 'index']);
-
-        /**
-         * Section route
-         */
-        $this->router->get(Routes::ADMIN_PANEL . "/{section}", [$adminController, 'section']);
-
+        Routes::loadRoutes($this, $this->router);
         $this->logger->info("Routes initialized !");
     }
 

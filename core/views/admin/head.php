@@ -20,7 +20,7 @@
 <script src="<?= Application::get()->toURL("/core/assets/js/classes/Internationalization.js") ?>"></script>
 <script src="<?= Application::get()->toURL("/core/assets/js/classes/Application.js") ?>"></script>
 <script>
-    DODOCMS_APPLICATION = new Application('<?= Application::get()->getUrl() ?>', '<?= Application::get()->getInternationalization()->getLanguage() ?>');
+    DODOCMS_APPLICATION = new Application('<?= Application::get()->getUrl() ?>', '<?= Application::get()->getInternationalization()->getLanguage() ?>', '<?= Application::get()->toURL("/admin/api/") ?>');
 </script>
 <script src="<?= Application::get()->toURL("/core/assets/js/scripts/select.js") ?>"></script>
 <script src="<?= Application::get()->toURL("/core/assets/js/scripts/upload.js") ?>"></script>

@@ -72,6 +72,11 @@ class ImageModel extends Model
         ];
         return $fields;
     }
+
+    public static function findAll(string $columns = '*', array $conditions = [], $orderBy = ''): ?array
+    {
+        return (new ImageModel())->getAll($columns, $conditions, $orderBy);
+    }
 }
 
 Table::$models[ImageModel::TABLE_NAME] = ImageModel::class;

@@ -25,6 +25,7 @@
                     <?php
                         Button::create()
                             ->text(__('admin.panel.resources.edition.finish'))
+                            ->addClass("mt-auto ms-auto text-sm")
                     ->blue()
                     ->render();
                     ?>

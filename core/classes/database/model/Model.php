@@ -179,4 +179,20 @@ abstract class Model extends CMSObjectHydration
         }
         return $fields;
     }
+
+    public function getAll(string $columns, array $conditions = [], $orderBy = ''): ?array {
+        $table = Table::getTable($this->table_name);
+        if(isset($table)) {
+            $entries = $table->findAll($columns, $conditions, $orderBy);
+            return array_map(function ($entry) {
+                $model = new $this();
+                $model->hydrate($entry);
+
+                return $model;
+            }, $entries);
+        }
+        return null;
+    }
+
+    public static abstract function findAll(string $columns, array $conditions = [], $orderBy = ''): ?array;
 }
