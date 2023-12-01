@@ -23,7 +23,7 @@
         <?= $footer ?? '' ?>
     </div>
 </div>
-<div class="toast-container fixed bottom-0 right-0 p-4 flex flex-col gap-3">
+<div class="toast-container fixed bottom-0 right-0 items-end p-4 flex flex-col gap-3 justify-end h-[50vh] overflow-hidden">
     <!-- Render all toast -->
 </div>
 <?php array_map(function ($toast) { $toast->render(); }, $toasts ?? []); ?>

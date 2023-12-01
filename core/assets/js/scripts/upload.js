@@ -1,3 +1,5 @@
+import Toast from "../components/toast/Toast.js";
+
 Application.get().addRunner(() => {
     const translations = DODOCMS_APPLICATION.getI18n();
 
@@ -19,12 +21,12 @@ Application.get().addRunner(() => {
 
     function disableStartButton() {
         start.prop("disabled", true);
-        start.addClass("opacity-50 cursor-not-allowed")
+        start.addClass("opacity-50 cursor-not-allowed hover:none")
     }
 
     function enableStartButton() {
         start.prop("disabled", false);
-        start.removeClass("opacity-50 cursor-not-allowed")
+        start.removeClass("opacity-50 cursor-not-allowed hover:none")
     }
 
     function hideDropzone() {
@@ -86,13 +88,10 @@ Application.get().addRunner(() => {
             const element = selected_files_copy[i].element;
             const formData = new FormData();
 
-            console.log(file, i)
-
             const alternativeText = $(files).find("input[name='alternativeText']").val();
 
             formData.append("file", file);
             formData.append("alternativeText", alternativeText);
-            console.log(formData);
 
             try {
                 const progression = element.find(".progression");
@@ -108,9 +107,9 @@ Application.get().addRunner(() => {
                 if (result.status === "success") {
                     // element.remove();
                     removeFile(file);
-                    $(document).trigger("media:file_uploaded", result.data);
+                    $(document).trigger("resource:file_uploaded", result);
                 } else {
-                    console.error("Erreur lors de l'envoie du fichier");
+                    $(document).trigger("resource:upload_failed", result);
                 }
             } catch (e) {
                 console.error(e)
@@ -121,9 +120,10 @@ Application.get().addRunner(() => {
         showDropzone();
         clearImages();
         state.text(CONTEXTS.finish);
-        toast("Bibliothèque de média", "Les médias sélectionnés ont bien été mis en ligne.", "success", 5000)
+        let toast = new Toast(translations.translate('admin.panel.resources.title'), translations.translate('admin.panel.resources.upload.upload_with_success'), "success", 10000);
+        toast.render();
 
-        $(document).trigger("media:uploaded");
+        $(document).trigger("resource:uploaded");
 
         uploading = false;
         enableStartButton()
@@ -175,7 +175,6 @@ Application.get().addRunner(() => {
 
     function closeEditionOpened() {
         $(files).children().each((index, element) => {
-            console.log(index, element)
             let target = $(element);
             if (isToggled(target)) {
                 hideEdition(target);
@@ -188,63 +187,19 @@ Application.get().addRunner(() => {
         if (!isToggled(target)) {
             showEdition(target);
             hideActionBar(target);
-            console.log("show edition")
         } else {
             hideEdition(target);
             showActionBar(target);
-            console.log("hide edition")
         }
     }
 
-    function hideEdition(target) {
-        let edition = target.find(".edition");
-
-        edition.addClass("hidden");
-    }
-
-    function showEdition(target) {
-        let edition = target.find(".edition");
-
-        edition.removeClass("hidden");
-    }
-
-    function showActionBar(target) {
-        let action_bar = target.find(".action-bar");
-
-        action_bar.removeClass("hidden");
-    }
-
-    function hideActionBar(target) {
-        let action_bar = target.find(".action-bar");
-
-        action_bar.addClass("hidden");
-    }
-
-    function isToggled(target) {
-        let edition = target.find(".edition");
-        return !edition.hasClass("hidden");
-    }
-
-    function closeEditionOpened() {
-        $(files).children().each((index, element) => {
-            console.log(index, element)
-            let target = $(element);
-            if (isToggled(target)) {
-                hideEdition(target);
-                showActionBar(target);
-            }
-        })
-    }
-
     function toggleEdition(target) {
         if (!isToggled(target)) {
             showEdition(target);
             hideActionBar(target);
-            console.log("show edition")
         } else {
             hideEdition(target);
             showActionBar(target);
-            console.log("hide edition")
         }
     }
 
@@ -273,7 +228,6 @@ Application.get().addRunner(() => {
 
             files.append(element);
             selected_files.push({element, file});
-            console.log(selected_files)
         }
         update();
     }
@@ -310,4 +264,86 @@ Application.get().addRunner(() => {
         });
     });
 
+    // function updateTextCounter() {
+    //     const resources = $(".resources-container");
+    //     const text = $(".resources-text-count");
+    //
+    //     const numberOfChildren = $('.resources-items').children().length;
+    //     text.text(translations.translate("admin.panel.resources.count", {'count': numberOfChildren}));
+    // }
+
+    function reloadResources() {
+        // get the current page url and load the id #resources
+        const url = new URL(window.location.href);
+        const resources = $(".resources-container");
+        resources.load(url.href + " .resources-container > *", () => {
+            // updateTextCounter();
+        });
+    }
+
+    $(document).on('resource:uploaded', () => {
+        reloadResources();
+    })
+
+    $(document).on('resource:upload_failed', (event, data) => {
+        console.log(data);
+        let toast = new Toast(translations.translate('error.message'), data.message, "danger", 15000);
+        toast.render();
+    })
+
+
+    $(document).on("click", ".resources-items .delete", (e) => {
+        e.preventDefault();
+
+        const delete_button = $(e.target);
+
+        const element_media_list = delete_button.closest(".resource-item");
+        const form = delete_button.closest("form");
+        let id = form.find("input[name='id']").val();
+
+        $.ajax({
+            url: DODOCMS_APPLICATION.toApi("/resources/delete") + '/' + id,
+            type: "DELETE",
+            success: function (data) {
+                if (data.status === "success") {
+                    // element_media_list.remove();
+                    let toast = new Toast(translations.translate('admin.panel.resources.title'), translations.translate('admin.panel.resources.deleted'), "success", 5000);
+                    toast.render();
+                    reloadResources();
+                    // updateTextCounter();
+                } else {
+                    let toast = new Toast(translations.translate('error.message'), data.message, "danger", 15000);
+                    toast.render();
+                }
+            }
+        });
+    });
+
+    $(document).on("click", ".resources-items .save", (e) => {
+        e.preventDefault();
+
+        const edit_button = $(e.target);
+
+        const form = edit_button.closest("form");
+
+        let id = form.find("input[name='id']").val();
+        let alternativeText = form.find("input[name='alternativeText']").val();
+
+        $.ajax({
+            url: DODOCMS_APPLICATION.toApi("/resources/edit") + '/' + id,
+            type: "PUT",
+            data: {
+                alternativeText
+            },
+            success: function (data) {
+                if (data.status === "success") {
+                    let toast = new Toast(translations.translate('admin.panel.resources.title'), translations.translate('admin.panel.resources.edited'), "success", 5000);
+                    toast.render();
+                } else {
+                    let toast = new Toast(translations.translate('error.message'), data.message, "danger", 15000);
+                    toast.render();
+                }
+            }
+        });
+    });
 })

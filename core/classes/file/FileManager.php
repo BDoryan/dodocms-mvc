@@ -1,5 +1,7 @@
 <?php
 
+Autoloader::require("core/exceptions/file/FileUnauthorizedException.php");
+
 class FileManager
 {
 
@@ -18,6 +20,9 @@ class FileManager
         $this->upload_directory = $upload_directory;
     }
 
+    /**
+     * @throws Exception
+     */
     public function uploadFile(array $file, string $destination = null): ?string
     {
         if (!isset($file)) return null;
@@ -39,7 +44,7 @@ class FileManager
         $mime_type = Tools::getMimeType($file["tmp_name"]);
 
         if (!in_array($mime_type, $this->allowed_mime_types))
-            return null;
+            throw new FileUnauthorizedException("File type not allowed");
 
         if (move_uploaded_file($file["tmp_name"], $destination))
             return $destination;

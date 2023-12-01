@@ -25,6 +25,8 @@ class Routes
     const ADMIN_RESOURCES_MANAGER = "/admin/resources/";
 
     const ADMIN_API_UPLOAD_RESOURCE = "/admin/api/resources/upload";
+    const ADMIN_API_EDIT_RESOURCE = "/admin/api/resources/edit/{id}";
+    const ADMIN_API_DELETE_RESOURCE = "/admin/api/resources/delete/{id}";
     const ADMIN_API = "/admin/api.*";
 
     public static function loadRoutes(Application $application, Router $router)
@@ -69,6 +71,8 @@ class Routes
          * Api routes
          */
         $router->post(self::ADMIN_API_UPLOAD_RESOURCE, [$apiResourcesController, "upload"]);
+        $router->put(self::ADMIN_API_EDIT_RESOURCE, [$apiResourcesController, "edit"]);
+        $router->delete(self::ADMIN_API_DELETE_RESOURCE, [$apiResourcesController, "delete"]);
         $router->get(self::ADMIN_API, [$defaultApiController, "notFound"]);
 
         /**

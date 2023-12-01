@@ -89,8 +89,13 @@
   "admin.panel.resources.upload.title": "Upload a new resources",
   "admin.panel.resources.upload.any_files": "Any files selected",
   "admin.panel.resources.upload.files_count": "{count} files selected",
+  "admin.panel.resources.upload.upload_with_success": "All resources has been uploaded with success !",
   "admin.panel.resources.upload.upload_in_progress": "{count} files in progress",
   "admin.panel.resources.upload.upload_finish": "Upload finished !",
   "admin.panel.resources.edition.finish": "Finish",
-  "admin.panel.resources.edition.alternative_text": "Alternative text"
+  "admin.panel.resources.edition.alternative_text": "Alternative text",
+  "admin.panel.resources.empty": "No resources found.",
+  "admin.panel.resources.deleted": "The resource selected has been deleted.",
+  "admin.panel.resources.edited": "The resource selected has been edited.",
+  "admin.panel.resources.count": "{count} resources founds."
 }

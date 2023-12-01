@@ -12,6 +12,11 @@ if (empty($model)) {
                 <?= $field["field"]->render() ?>
             </div>
         <?php endforeach; ?>
+<!--        <div class="w-full px-2">-->
+<!--            --><?php
+//                view(Application::get()->toRoot("/core/views/admin/components/resources/resources-view.php"))
+//            ?>
+<!--        </div>-->
         <div class="px-2 flex flex-row w-full gap-5 mt-3">
             <?php
             ButtonHypertext::create()

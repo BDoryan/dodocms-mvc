@@ -203,8 +203,6 @@ Header::create()
             });
         }
 
-        console.log(data);
-
         attributes.unshift({
             name: "id",
             type: "int",

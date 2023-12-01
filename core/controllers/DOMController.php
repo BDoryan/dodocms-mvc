@@ -21,7 +21,6 @@ abstract class DOMController extends Controller
 
     public abstract function index();
 
-
     public function view($view, $data = []): void
     {
         $data['head'] = $this->fetch($this->head_path, [

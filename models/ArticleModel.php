@@ -46,7 +46,7 @@ class ArticleModel extends Model
                 $image = intval($image);
                 if (Tools::containsItem($this->images, "getId", $image))
                     continue;
-                $media = new MediaModel();
+                $media = new ResourceModel();
                 $media->id($image)->fetch();
                 $this->addImage($image);
             }
@@ -86,11 +86,11 @@ class ArticleModel extends Model
         if (!parent::fetch()) return null;
 
         $database = Application::get()->getDatabase();
-        $results = $database->fetchAll("SELECT Medias.id, src, alternativeText FROM ArticlesHasImages, Medias WHERE ArticlesHasImages.image_id = Medias.id AND article_id = ?", [$this->id]);
+        $results = $database->fetchAll("SELECT Resources.id, src, alternativeText FROM ArticlesHasImages, Resources WHERE ArticlesHasImages.image_id = Resources.id AND article_id = ?", [$this->id]);
 
         if (is_bool($results)) return null;
         $this->images = array_map(function ($result) {
-            $image = new MediaModel();
+            $image = new ResourceModel();
             $image->hydrate($result);
             return $image;
         }, $results);
@@ -173,10 +173,10 @@ class ArticleModel extends Model
             "size" => "w-full",
             "field" => CKEditor::create()->name("content")->label("Contenu de l'article")->value($this->getContent() ?? "")->required(),
         ];
-//        $fields["images"] = [
-//            "size" => "w-full",
-//            "field" => MediaSelector::create()->name("images")->label("Liste des images")->medias($this->getImages() ?? [])->required(),
-//        ];
+        $fields["images"] = [
+            "size" => "w-full",
+            "field" => ResourceSelector::create()->name("images")->label("Liste des images")->resources($this->getImages() ?? [])->required(),
+        ];
         return $fields;
     }
 

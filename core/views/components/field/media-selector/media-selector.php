@@ -67,7 +67,6 @@ foreach ($this->medias as $media) {
     })
 
     $(document).on('media:file_uploaded', (event, data) => {
-        console.log(data);
         const media_id = data.id;
         const input = document.querySelector('input[name="<?= $this->name ?>"]');
         const value = input.value;

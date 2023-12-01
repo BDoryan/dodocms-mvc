@@ -19,7 +19,6 @@ class Internationalization {
                 url: path,
                 dataType: 'json',
             });
-            console.log(response)
             this.translations = response;
             return true;
         } catch (error) {

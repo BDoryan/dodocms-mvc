@@ -33,10 +33,10 @@ Session::start();
  * Translate with a key and replaces options
  *
  * @param $key
- * @param $options
+ * @param array $options
  * @return string
  */
-function __($key, $options = []): string
+function __($key, array $options = []): string
 {
     $application = Application::get();
     if(!isset($application)) return $key;
