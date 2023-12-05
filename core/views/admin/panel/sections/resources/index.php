@@ -1,5 +1,5 @@
-<?php $modal = "showUploadModal" ?>
-<div x-data="{ <?= $modal ?>: false }">
+<?php $modal = "uploadModal" ?>
+<div x-data="{ <?= $modal ?>: { show: false, multiple: false } }">
     <?php
     Header::create()
         ->template('/core/views/admin/components')
@@ -9,7 +9,7 @@
             '<div class="flex flex-row gap-3 ">' .
             Button::create()
                 ->blue()
-                ->attribute("@click", "showUploadModal = true")
+                ->attribute("@click", "uploadModal.show = true")
                 ->text('<i class="me-1 fa-solid fa-cloud-upload me-1"></i> ' . __('admin.panel.dashboard.button.upload_file'))
                 ->html() /*.
         ButtonHypertext::create()
@@ -23,7 +23,7 @@
     view(Application::get()->toRoot("core/views/admin/components/resources/upload.php"), ["var" => $modal]);
     ?>
 </div>
-<div class="resources-container py-5 bg-gray-600 p-4 rounded-xl border-[1px] border-gray-500 shadow-lg flex flex-col flex-wrap" x-data="{ imageTarget: null }">
+<div class="resources-container py-5 bg-gray-600 p-4 rounded-xl border-[1px] border-gray-500 shadow-lg flex flex-col flex-wrap" x-data="{ resourceTarget: null }">
     <?php if(empty($resources)) { ?>
         <span class="m-auto text-gray-300 text-2xl italic"><?= __('admin.panel.resources.empty') ?></span>
     <?php } else { ?>

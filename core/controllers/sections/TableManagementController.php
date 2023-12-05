@@ -207,8 +207,11 @@ class TableManagementController extends PanelController
             $post_data = array_slice($_POST, 0);
 
             if (!empty($post_data)) {
+                if(isset($entry_id))
+                    $model->id($entry_id);
+
                 $model->hydrate($post_data);
-                if (isset($entry_id) ? $model->id($entry_id)->update() : $model->create()) {
+                if (isset($entry_id) ? $model->update() : $model->create()) {
                     $this->addToast(new Toast(__("admin.panel.toast.success"), isset($entry_id) ? __("admin.panel.tables.table.entries.edit_entry.success") : __("admin.panel.tables.table.entries.create_entry.success"), Toast::TYPE_SUCCESS));
                     if (!isset($entry_id)) {
                         header('Location: ' . Routes::route(Routes::ADMIN_TABLES_TABLE_ENTRIES, ["table" => $table_name]));

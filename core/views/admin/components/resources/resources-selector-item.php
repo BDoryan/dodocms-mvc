@@ -1,4 +1,4 @@
-<form class="relative h-full" method="POST">
+<form class="relative h-full resource-item" method="POST">
     <div class="h-full rounded-lg border-gray-300 border-opacity-25" style="height: 200px;">
         <img class="rounded-lg h-full w-full"
              :class="{'blur-sm p-2': resourceTarget === '<?= $resource->getSrc() ?>'}"
@@ -36,8 +36,8 @@
             <i class="text-sm fa-solid fa-edit"></i>
         </button>
         <button type="button"
-                class="delete text-white bg-red-500 h-8 w-8 rounded-full hover:bg-red-600">
-            <i class="text-sm fa-solid fa-trash"></i>
+                class="remove text-white bg-red-500 h-8 w-8 rounded-full hover:bg-red-600">
+            <i class="text-sm fa-solid fa-minus"></i>
         </button>
     </div>
 </form>

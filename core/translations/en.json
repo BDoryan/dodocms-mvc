@@ -97,5 +97,7 @@
   "admin.panel.resources.empty": "No resources found.",
   "admin.panel.resources.deleted": "The resource selected has been deleted.",
   "admin.panel.resources.edited": "The resource selected has been edited.",
-  "admin.panel.resources.count": "{count} resources founds."
+  "admin.panel.resources.count": "{count} resources founds.",
+  "admin.panel.resources.add": "Add a resource",
+  "admin.panel.resources.new": "Upload a new resource"
 }

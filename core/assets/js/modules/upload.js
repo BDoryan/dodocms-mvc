@@ -8,7 +8,8 @@ Application.get().addRunner(() => {
         "files_count": translations.translate("admin.panel.resources.upload.files_count"),
         "upload_in_progress": translations.translate("admin.panel.resources.upload.upload_in_progress"),
         "finish": translations.translate("admin.panel.resources.upload.upload_finish"),
-        "route_api_upload": DODOCMS_APPLICATION.toApi("/resources/upload")
+        "route_api_upload": DODOCMS_APPLICATION.toApi("/resources/upload"),
+        "get_resource": DODOCMS_APPLICATION.toApi("/resources/html")
     }
 
     let selected_files = [];
@@ -109,6 +110,7 @@ Application.get().addRunner(() => {
                     removeFile(file);
                     $(document).trigger("resource:file_uploaded", result);
                 } else {
+                    removeFile(file);
                     $(document).trigger("resource:upload_failed", result);
                 }
             } catch (e) {
@@ -203,9 +205,13 @@ Application.get().addRunner(() => {
         }
     }
 
-    function addFile(target_files) {
-        for (let i = 0; i < target_files.length; i++) {
+    function addFile(target_files, multiple = false) {
+        if (!multiple) {
+            selected_files = [];
+            clearImages();
+        }
 
+        for (let i = 0; i < target_files.length; i++) {
             let file = target_files[i];
             const url = URL.createObjectURL(file);
 
@@ -260,7 +266,8 @@ Application.get().addRunner(() => {
         });
 
         input.on("change", function (e) {
-            addFile(e.target.files);
+            const multiple = $(this).attr("multiple") !== undefined;
+            addFile(e.target.files, multiple);
         });
     });
 
@@ -286,7 +293,6 @@ Application.get().addRunner(() => {
     })
 
     $(document).on('resource:upload_failed', (event, data) => {
-        console.log(data);
         let toast = new Toast(translations.translate('error.message'), data.message, "danger", 15000);
         toast.render();
     })
@@ -346,4 +352,97 @@ Application.get().addRunner(() => {
             }
         });
     });
+
+    // current field
+    let target_field = null;
+
+    window.openUploadModal = (multiple = true, target = "") => {
+        const elements = $('.modal-background, .modal-content');
+        elements.removeClass('hidden')
+
+        const input = $(elements).find('#dropzone-file');
+        input.prop('multiple', multiple);
+        target_field = target;
+    }
+
+    const closeUploadModal = () => {
+        target_field = null;
+        const elements = $('.modal-background, .modal-content');
+        elements.addClass('hidden')
+    }
+    window.closeUploadModal = closeUploadModal;
+
+    $(document).on("click", ".close-upload-modal", (e) => {
+        closeUploadModal();
+    })
+
+    const appendResource = (parent, id) => {
+        const url = CONTEXTS.get_resource + '/' + id;
+
+        $.ajax({
+            url,
+            type: "GET",
+            success: function (data) {
+                parent.append(data);
+                updateResource(parent);
+            }
+        });
+    }
+
+    const updateResource = (resources_items) => {
+        const empty = $(resources_items).closest('.resources-selector').find(".resource-selector-empty");
+        console.log(empty)
+
+        console.log(resources_items.children().length);
+
+        if(resources_items.children().length > 0) {
+            empty.addClass("hidden");
+        } else {
+            empty.removeClass("hidden");
+        }
+    }
+
+    $(document).on('resource:file_uploaded', (event, resource) => {
+        const input = $("input[name='" + target_field + "']");
+        if (input.length > 0) {
+            const current_value = input.val();
+            const newValue = current_value ? current_value + "," + resource.data.id : resource.data.id;
+            input.val(newValue);
+
+            const parent = input.parent().find(".resources-items");
+            appendResource(parent, resource.data.id);
+        }
+    })
+
+
+    $(document).on("click", ".resource-item .remove", function (e) {
+        e.preventDefault();
+
+        const resource = $(this).closest('.resource-item');
+        let id = resource.find("input[name='id']").val();
+
+        const input = resource.closest('.resources-selector').find("input.resources-selector-entries");
+
+        let ids = input.val().split(",");
+        ids = ids.filter(function (value, index, arr) {
+            return value !== id;
+        });
+        input.val(ids.join(","));
+        const parent = resource.parent();
+        resource.remove();
+        updateResource(parent);
+    });
+
+    $(document).ready(() => {
+        const inputs = $('input.resources-selector-entries');
+        inputs.map((key, input) => {
+            input = $(input);
+            const values = input.val().split(',');
+            const parent = input.parent().find(".resources-items");
+
+            values.map((id, key) => {
+                appendResource(parent, id);
+            });
+        })
+    })
 })

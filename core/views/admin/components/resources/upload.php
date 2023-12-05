@@ -5,18 +5,17 @@ if (!isset($var)) {
     return;
 }
 ?>
-<div x-cloak x-show="<?= $var ?>" @click.away="<?= $var ?> = false" class="modal-background fixed inset-0 bg-black opacity-50 z-50"></div>
-<div id="file-upload" x-cloak x-show="<?= $var ?>" class="modal fixed inset-0 flex items-center justify-center z-50">
+<div class="modal-background hidden fixed inset-0 bg-black opacity-50 z-50"></div>
+<div id="file-upload" class="modal-content hidden fixed inset-0 flex items-center justify-center z-50">
     <!-- Modal content -->
-    <div @click.stop class="relative bg-white rounded-lg shadow dark:bg-gray-700 rounded-lg shadow-lg w-2/4" tabindex="-1" aria-hidden="true">
+    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700 rounded-lg shadow-lg w-2/4" tabindex="-1" aria-hidden="true">
         <!-- Modal header -->
         <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
             <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
                 <i class="fa-solid fa-cloud-upload me-1"></i> <?= __('admin.panel.resources.upload.title') ?>
             </h3>
             <button type="button"
-                    @click="<?= $var ?> = false"
-                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
+                    class="close-upload-modal text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
                 <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                      viewBox="0 0 14 14">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -39,9 +38,9 @@ if (!isset($var)) {
                         </svg>
                         <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold"><?= __("admin.panel.resources.upload.click_to_upload") ?></span>
                             <?= __("admin.panel.resources.upload.drag_and_drop") ?></p>
-                        <p class="text-xs text-gray-500 dark:text-gray-400">PDF, JPEG, PNG, JPG or GIF</p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">PDF, JPEG, PNG or JPG</p>
                     </div>
-                    <input name="files[]" id="dropzone-file" type="file" multiple class="absolute w-full h-full opacity-0"/>
+                    <input name="files[]" id="dropzone-file" type="file" class="absolute w-full h-full opacity-0"/>
                 </label>
             </div>
             <div class="flex flex-row flex-wrap -m-1 pe-2" id="files"
@@ -50,14 +49,12 @@ if (!isset($var)) {
         </div>
         <!-- Modal footer -->
         <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-            <button @click="<?= $var ?> = false" type="button"
-                    class="me-auto text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+            <button type="button" class="close-upload-modal me-auto text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
                 <?= __("admin.panel.resources.upload.close") ?>
             </button>
             <div class="me-auto text-white opacity-75" id="state">
             </div>
-            <button id="start"
-                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            <button id="start" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                 <?= __("admin.panel.resources.upload.submit") ?>
             </button>
         </div>

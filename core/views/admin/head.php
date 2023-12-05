@@ -8,20 +8,15 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
-<script defer>
-    $(document).ready(function () {
-        $('.ckeditor').each(function () {
-            CKEDITOR.replace($(this).attr('id'));
-        });
-    });
-</script>
 
+<script defer src="<?= Application::get()->toURL("/core/assets/js/scripts/ckeditor.init.js") ?>"></script>
 <script src="<?= Application::get()->toURL("/core/assets/js/classes/FormUtils.js") ?>"></script>
 <script src="<?= Application::get()->toURL("/core/assets/js/classes/Internationalization.js") ?>"></script>
 <script src="<?= Application::get()->toURL("/core/assets/js/classes/Application.js") ?>"></script>
+
 <script>
     DODOCMS_APPLICATION = new Application('<?= Application::get()->getUrl() ?>', '<?= Application::get()->getInternationalization()->getLanguage() ?>', '<?= Application::get()->toURL("/admin/api/") ?>');
 </script>
-<script type="module" src="<?= Application::get()->toURL("/core/assets/js/scripts/select.js") ?>"></script>
-<script type="module" src="<?= Application::get()->toURL("/core/assets/js/scripts/upload.js") ?>"></script>
+<script type="module" src="<?= Application::get()->toURL("/core/assets/js/modules/select.js") ?>"></script>
+<script type="module" src="<?= Application::get()->toURL("/core/assets/js/modules/upload.js") ?>"></script>
 <script type="module" src="<?= Application::get()->toURL("/core/assets/js/init.js") ?>"></script>
