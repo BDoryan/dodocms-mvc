@@ -34,42 +34,41 @@ class ArticleModel extends Model
         $this->content = $content;
     }
 
-    public function hydrateImages($data)
+    public function hydrateImages($images)
     {
-        if (isset($data["images"])) {
-            foreach ($this->images as $image) {
-                if (in_array($image->getId(), explode(',', $data["images"])))
-                    continue;
-                $this->removeImage($image->getId());
-            }
-            foreach (explode(',', $data["images"]) as $image) {
-                if(empty($image))
-                    continue;
-                $image = intval($image);
-                if (Tools::containsItem($this->images, "getId", $image))
-                    continue;
-                $media = new ResourceModel();
-                $media->id($image)->fetch();
-                $this->addImage($image);
-            }
-            $this->fetch();
+        if(empty($images)) return;
+        $this->images = [];
+
+        $imagesList = explode(',', $images);
+        foreach ($imagesList as $image) {
+            if (empty($image))
+                continue;
+
+            $image = intval($image);
+            if (Tools::containsItems($this->images, "getId", $image))
+                continue;
+
+            $media = new ResourceModel();
+            $media->id($image)->fetch();
+            $this->images[] = $media;
         }
     }
 
     public function hydrate(array $data): void
     {
-
         $data = Validator::sanitize(["title", "subtitle", "content", "images"], $data);
-        if(isset($data["images"])){
-            if(Tools::startsWith($data["images"], ','))
+        if (isset($data["images"])) {
+            if (Tools::startsWith($data["images"], ','))
                 $data["images"] = substr($data["images"], 1);
         }
-        $this->hydrateImages($data);
-        unset($data["images"]);
 
-//        echo "<pre>";
-//        var_dump($this);
-//        exit;
+        if(isset($data["images"])) {
+            // Hydrate images
+            $this->hydrateImages($data['images']);
+
+            // Remove images from the data for the parent hydration
+            unset($data["images"]);
+        }
 
         parent::hydrate($data);
     }
@@ -78,63 +77,91 @@ class ArticleModel extends Model
     {
         if (!parent::create()) return false;
 
+        foreach ($this->images as $image) {
+            $this->associateImage($image->getId());
+        }
+
         return true;
     }
+
+    public function updateImages() {
+        $images = $this->selectImages();
+
+        foreach ($images as $image) {
+            if (Tools::containsItems($this->images, "getId", $image->getId()))
+                continue;
+            $this->dissociateImage($image->getId());
+        }
+        foreach ($this->images as $image) {
+            if(empty($image))
+                continue;
+            if (Tools::containsItems($images, "getId", $image->getId()))
+                continue;
+            $this->associateImage($image->getId());
+        }
+    }
+
+    public function delete(): bool
+    {
+        $this->dissociateImages();
+
+        return parent::delete();
+    }
+
 
     public function update(): bool
     {
         if (!parent::update()) return false;
 
+        $this->updateImages();
+
         return true;
     }
 
+    public function selectImages(): ?array
+    {
+        $database = Application::get()->getDatabase();
+        $results = $database->fetchAll("SELECT Resources.id, src, alternativeText FROM ArticlesHasImages, Resources WHERE ArticlesHasImages.image_id = Resources.id AND article_id = ?", [$this->id]);
+
+        if (is_bool($results)) return null;
+        return array_map(function ($result) {
+            $image = new ResourceModel();
+            $image->hydrate($result);
+            return $image;
+        }, $results);
+    }
+
+    public function fetchImages()
+    {
+        $this->images = $this->selectImages();
+    }
 
     public function fetch(): ?ArticleModel
     {
         if (!parent::fetch()) return null;
 
-        $database = Application::get()->getDatabase();
-        $results = $database->fetchAll("SELECT Resources.id, src, alternativeText FROM ArticlesHasImages, Resources WHERE ArticlesHasImages.image_id = Resources.id AND article_id = ?", [$this->id]);
-
-        if (is_bool($results)) return null;
-        $this->images = array_map(function ($result) {
-            $image = new ResourceModel();
-            $image->hydrate($result);
-            return $image;
-        }, $results);
-
-//        echo "<pre>";
-//        var_dump($this->images);
-//        exit;
+        $this->fetchImages();
 
         return $this;
     }
 
-    public function clearImages(): void
-    {
+    public function dissociateImages() {
         $database = Application::get()->getDatabase();
         $database->delete("ArticlesHasImages", ["article_id" => $this->id]);
-        $images = $this->getImages();
-        foreach ($images as $image) {
-            if (!$image->hasId())
-                continue;
-            $image->deleteAll();
-        }
     }
 
-    public function removeImage($id) {
+    public function dissociateImage($id)
+    {
         $database = Application::get()->getDatabase();
         $database->delete("ArticlesHasImages", ["article_id" => $this->id, "image_id" => $id]);
     }
 
-    public function addImage($id) {
+    public function associateImage($id)
+    {
         $database = Application::get()->getDatabase();
         $database->insert("ArticlesHasImages", ["article_id" => $this->getId(), "image_id" => $id]);
     }
 
-    /**
-     * @return array
-     */
     public function getImages(): array
     {
         return $this->images;

@@ -32,7 +32,7 @@ class ApiResourcesController extends ApiController
                 if (isset($src)) {
                     $src = str_replace(Application::get()->getRoot(), '', $src);
                     $resourceModel = new ResourceModel($file['name'], $src, $alternative_text);
-                    $resourceModel->create();
+                    $resourceModel->createAndFetch();
 
                     $this->success("resource.upload", $resourceModel->toArray());
                     return true;

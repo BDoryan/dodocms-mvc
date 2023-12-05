@@ -186,13 +186,6 @@ class TableManagementController extends PanelController
         $table = $this->getTable($table_name);
         $model = $this->getModel($table);
 
-//        $fileManager = new FileManager(Application::toRoot("files/uploads"));
-//
-//        $files = [];
-//        foreach ($_FILES as $key => $file) {
-//            $files[$key] = $fileManager->getFiles($key);
-//        }
-
         $entry_id = $params['id'] ?? null;
 
         try {

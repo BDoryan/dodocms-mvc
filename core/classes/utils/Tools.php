@@ -29,7 +29,7 @@ class Tools
         return null;
     }
 
-    public static function containsItem(array $items, string $method, $value): bool
+    public static function containsItems(array $items, string $method, $value): bool
     {
         foreach ($items as $item) {
             if ($item->$method() == $value)

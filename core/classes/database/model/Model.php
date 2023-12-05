@@ -32,12 +32,17 @@ abstract class Model extends CMSObjectHydration
         return $this;
     }
 
+    public function createAndFetch(): ?Model
+    {
+        $this->create();
+        return $this->fetch();
+    }
+
     public function create(): bool
     {
         $database = Application::get()->getDatabase();
         $database->insert($this->table_name, $this->getAttributes());
         $this->id = $database->lastInsertId();
-        $this->fetch();
         return true;
     }
 
@@ -180,9 +185,10 @@ abstract class Model extends CMSObjectHydration
         return $fields;
     }
 
-    public function getAll(string $columns, array $conditions = [], $orderBy = ''): ?array {
+    public function getAll(string $columns, array $conditions = [], $orderBy = ''): ?array
+    {
         $table = Table::getTable($this->table_name);
-        if(isset($table)) {
+        if (isset($table)) {
             $entries = $table->findAll($columns, $conditions, $orderBy);
             return array_map(function ($entry) {
                 $model = new $this();

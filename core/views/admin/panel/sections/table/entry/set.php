@@ -33,9 +33,3 @@ if (empty($model)) {
     </form>
     <?php view(Application::get()->toRoot("core/views/admin/components/resources/upload.php"), ["var" => 'uploadModal']); ?>
 </div>
-<script>
-    $(document).on('resource:file_uploaded', (event, data) => {
-        console.log("add file to list");
-        console.log(data);
-    })
-</script>
