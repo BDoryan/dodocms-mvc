@@ -83,6 +83,9 @@ Application.get().addRunner(() => {
         // copy array
         let selected_files_copy = Array.from(selected_files);
 
+        let failed = 0;
+        let success = 0;
+
         // start upload
         for (let i = 0; i < selected_files_copy.length; i++) {
             const file = selected_files_copy[i].file;
@@ -109,9 +112,11 @@ Application.get().addRunner(() => {
                     // element.remove();
                     removeFile(file);
                     $(document).trigger("resource:file_uploaded", result);
+                    success++;
                 } else {
                     removeFile(file);
                     $(document).trigger("resource:upload_failed", result);
+                    failed++;
                 }
             } catch (e) {
                 console.error(e)
@@ -122,8 +127,16 @@ Application.get().addRunner(() => {
         showDropzone();
         clearImages();
         state.text(CONTEXTS.finish);
-        let toast = new Toast(translations.translate('admin.panel.resources.title'), translations.translate('admin.panel.resources.upload.upload_with_success'), "success", 10000);
-        toast.render();
+
+        if (failed === 0 && success > 0) {
+            let toast = new Toast(translations.translate('admin.panel.resources.title'), translations.translate('admin.panel.resources.upload.upload_with_success'), "success", 10000);
+            toast.render();
+        }
+
+        if (failed > 0 && success === 0) {
+            let toast = new Toast(translations.translate('admin.panel.resources.title'), translations.translate('admin.panel.resources.upload.error.upload_of_some_files_failed', {'count': failed}), "success", 10000);
+            toast.render();
+        }
 
         $(document).trigger("resource:uploaded");
 
@@ -293,7 +306,8 @@ Application.get().addRunner(() => {
     })
 
     $(document).on('resource:upload_failed', (event, data) => {
-        let toast = new Toast(translations.translate('error.message'), data.message, "danger", 15000);
+        console.log(data);
+        let toast = new Toast(translations.translate('error.message'), translations.translate('admin.panel.resources.upload.error.' + data.message, {'file_name': data.data.file_name}), "danger", 15000);
         toast.render();
     })
 
@@ -303,7 +317,6 @@ Application.get().addRunner(() => {
 
         const delete_button = $(e.target);
 
-        const element_media_list = delete_button.closest(".resource-item");
         const form = delete_button.closest("form");
         let id = form.find("input[name='id']").val();
 
@@ -312,13 +325,11 @@ Application.get().addRunner(() => {
             type: "DELETE",
             success: function (data) {
                 if (data.status === "success") {
-                    // element_media_list.remove();
                     let toast = new Toast(translations.translate('admin.panel.resources.title'), translations.translate('admin.panel.resources.deleted'), "success", 5000);
                     toast.render();
                     reloadResources();
-                    // updateTextCounter();
                 } else {
-                    let toast = new Toast(translations.translate('error.message'), data.message, "danger", 15000);
+                    let toast = new Toast(translations.translate('error.message'), translations.translate('admin.panel.resources.delete.error.' + data.message, {'file_name': data.data.file_name}), "danger", 15000);
                     toast.render();
                 }
             }
@@ -395,7 +406,7 @@ Application.get().addRunner(() => {
 
         console.log(resources_items.children().length);
 
-        if(resources_items.children().length > 0) {
+        if (resources_items.children().length > 0) {
             empty.addClass("hidden");
         } else {
             empty.removeClass("hidden");

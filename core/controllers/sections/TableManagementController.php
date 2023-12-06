@@ -32,15 +32,15 @@ class TableManagementController extends PanelController
         return $table;
     }
 
-    private function getModel($table): Model
+    private function getModel(Table $table): Model
     {
-        $model = $table->getModel();
-        if (empty($model)) {
+        $model = Model::getModel($table);
+        if (!isset($model)) {
             $this->addToast(new Toast(__("admin.panel.toast.error"), __("admin.panel.tables.table.model_not_found", ["model" => $table->getName()]), Toast::TYPE_DANGER));
             header('Location: ' . Routes::route(Routes::ADMIN_TABLES_TABLE_ENTRIES, ["table" => $table->getName()]));
             exit;
         }
-        return new $model();
+        return $model;
     }
 
     public function new(array $params): void

@@ -56,9 +56,18 @@ abstract class Model extends CMSObjectHydration
         $this->updatedAt = date("Y-m-d H:i:s");
         $database = Application::get()->getDatabase();
 
-        $attributes = array_diff_key($this->getAttributes(), ["id" => "", "createdAt" => ""]);
+        $ignores =  ["id" => "", "createdAt" => ""];
+        $attributes = array_diff_key($this->getAttributes(), $ignores);
+
+        $attributes = array_diff_key($attributes, $this->filteredAttributes());
+
         $database->update($this->table_name, $attributes, ["id" => $this->id]);
         return true;
+    }
+
+    public function filteredAttributes(): array
+    {
+        return ["table_name" => ""];
     }
 
     public function delete(): bool
@@ -87,7 +96,8 @@ abstract class Model extends CMSObjectHydration
             }
         }
 
-        return array_merge(array_diff_key($parentVars, ["table_name" => ""]), $childVars);
+        $f = array_diff_key(array_merge($parentVars, $childVars), $this->filteredAttributes());
+        return $f;
     }
 
     public function id(?int $id): Model
@@ -185,6 +195,14 @@ abstract class Model extends CMSObjectHydration
         return $fields;
     }
 
+    /**
+     * @return string
+     */
+    public function getTableName(): string
+    {
+        return $this->table_name;
+    }
+
     public function getAll(string $columns, array $conditions = [], $orderBy = ''): ?array
     {
         $table = Table::getTable($this->table_name);
@@ -201,4 +219,13 @@ abstract class Model extends CMSObjectHydration
     }
 
     public static abstract function findAll(string $columns, array $conditions = [], $orderBy = ''): ?array;
+
+
+    public static function getModel(Table $table): ?Model
+    {
+        $model = $table->getModel();
+        if (empty($model))
+            return null;
+        return new $model();
+    }
 }

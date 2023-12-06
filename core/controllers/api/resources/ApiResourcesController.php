@@ -42,7 +42,7 @@ class ApiResourcesController extends ApiController
             }
         } catch (FileUnauthorizedException $e) {
             Application::get()->getLogger()->printException($e);
-            $this->error("resource_upload_unauthorized");
+            $this->error("resource_upload_unauthorized", ["file_name" => $e->getFileName()]);
             return;
         } catch (Exception $e) {
             Application::get()->getLogger()->printException($e);
@@ -115,6 +115,7 @@ class ApiResourcesController extends ApiController
             Application::get()->getLogger()->printException($e);
             if ($e->getCode() == 23000) {
                 $this->error("resource_cant_be_deleted_when_has_been_used");
+                return;
             }
             $this->error("sql_error[" . $e->getCode() . "]");
         }

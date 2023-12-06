@@ -14,21 +14,6 @@ class Tools
         return self::removeLastSlash($path);
     }
 
-    public static function getVarName($var)
-    {
-        echo "<pre>";
-        $backtrace = debug_backtrace();
-        var_dump($backtrace);
-        exit;
-        $caller = $backtrace[1];
-
-        foreach ($caller['args'] as $name => $value)
-            if ($value === $var)
-                return $caller['args'][$name];
-
-        return null;
-    }
-
     public static function containsItems(array $items, string $method, $value): bool
     {
         foreach ($items as $item) {

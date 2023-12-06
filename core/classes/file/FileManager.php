@@ -44,7 +44,7 @@ class FileManager
         $mime_type = Tools::getMimeType($file["tmp_name"]);
 
         if (!in_array($mime_type, $this->allowed_mime_types))
-            throw new FileUnauthorizedException("File type not allowed");
+            throw new FileUnauthorizedException("File type not allowed", $file["name"]);
 
         if (move_uploaded_file($file["tmp_name"], $destination))
             return $destination;
