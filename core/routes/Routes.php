@@ -78,6 +78,13 @@ class Routes
         $router->get(self::ADMIN_API, [$defaultApiController, "notFound"]);
 
         /**
+         * Test
+         */
+        $router->get('/test', function () {
+            new ModelGenerator("Client", ["name", "email", "phone_number", "address"]);
+        });
+
+        /**
          * Section route
          */
         $router->get(self::ADMIN_PANEL . "/{section}", [$adminController, 'section']);

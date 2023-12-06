@@ -11,12 +11,6 @@ class ArticleModel extends ModelAssociated
     protected string $subtitle;
     protected string $content;
 
-    /**
-     * Définir cette variable en 'private' permet de ne pas de faire une hydration de cette variable mais aussi de ne pas l'envoyer lors de l'update
-     * car celle-ci n'est pas un attribut en elle-même.
-     *
-     * @var array
-     */
     protected array $images = [];
 
     /**
@@ -47,9 +41,6 @@ class ArticleModel extends ModelAssociated
 
     public function getImages(): array
     {
-//        echo "<pre>";
-//        var_dump($this);
-//        exit;
         return $this->images;
     }
 

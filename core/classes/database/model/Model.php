@@ -2,6 +2,13 @@
 
 Autoloader::require("core/classes/object/CMSObjectHydration.php");
 
+/**
+ * For create a model class you need set all attributes of your table in the constructor with a default value
+ * 2 : create all getters and setters
+ * 3 : create a method getFields() for create a form
+ * 4 : create a method findAll() for get all rows of your table
+ * 5 : add your model in the array Table::$models
+ */
 abstract class Model extends CMSObjectHydration
 {
 
@@ -56,7 +63,7 @@ abstract class Model extends CMSObjectHydration
         $this->updatedAt = date("Y-m-d H:i:s");
         $database = Application::get()->getDatabase();
 
-        $ignores =  ["id" => "", "createdAt" => ""];
+        $ignores = ["id" => "", "createdAt" => ""];
         $attributes = array_diff_key($this->getAttributes(), $ignores);
 
         $attributes = array_diff_key($attributes, $this->filteredAttributes());
@@ -96,8 +103,7 @@ abstract class Model extends CMSObjectHydration
             }
         }
 
-        $f = array_diff_key(array_merge($parentVars, $childVars), $this->filteredAttributes());
-        return $f;
+        return array_diff_key(array_merge($parentVars, $childVars), $this->filteredAttributes());
     }
 
     public function id(?int $id): Model

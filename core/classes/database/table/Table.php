@@ -166,8 +166,15 @@ class Table extends CMSObject
         $sql = rtrim($sql, ",\n") . "\n);";
 
         try {
+            $attributes = array_map(function(TableAttribute $attribute) {
+                return $attribute->getName();
+            }, $this->attributes);
+
+            new ModelGenerator($this->name, $attributes);
+
             $requests = explode("\n", $sql);
             Application::get()->getDatabase()->execute($sql);
+
             return implode("<br>", $requests);
         } catch (Exception $e) {
             throw new SQLException($e->getMessage(), $e->getCode(), $sql);
