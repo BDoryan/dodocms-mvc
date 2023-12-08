@@ -5,7 +5,7 @@ class ModelGenerator
 
     public function __construct(string $tableName, array $attributes)
     {
-        $filtered =array_filter($attributes, function ($value) {
+        $filtered = array_filter($attributes, function ($value) {
             return $value !== 'id' && $value !== 'createdAt' && $value !== 'updatedAt' && $value != 'language';
         });
         $attributes = [...$filtered];
@@ -51,6 +51,9 @@ class ModelGenerator
                 $classContent .= "        return \$this->$value;\n";
                 $classContent .= "    }\n\n";
             }
+            $classContent .= "    public static function findAll(string ".'$columns'.", array ".'r $conditions'." = [], ".'$orderBy'." = ''): ?array \n{\n
+        return (new ".$className."())->find(".'$columns'.", ".'$conditions'.", ".'$orderBy'.");\n
+        }\n\n";
 
             $classContent .= "/** Warning: if you want create or edit entries you need to create the form with a override of getFields(); */\n\n";
 
