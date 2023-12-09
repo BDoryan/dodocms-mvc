@@ -7,7 +7,7 @@ class PageController extends DOMController
 
     public function __construct()
     {
-        parent::__construct('page', $this->toRoot('/views'), 'assets/', 'head', '/template');
+        parent::__construct('page', $this->toRoot('/themes/'.Application::get()->getTheme()."/views"), 'assets/', 'head', '/template');
     }
 
     public function index()

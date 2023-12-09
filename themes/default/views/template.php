@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <?= $head ?? '' ?>
 </head>
-<body>
+<body data-bs-theme="dark">
 <?= $content ?? '' ?>
 </body>
 </html>

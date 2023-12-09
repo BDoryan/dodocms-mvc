@@ -25,6 +25,7 @@ class Application
     private Configuration $configuration;
     private ?Database $database = null;
     private Logger $logger;
+    private string $theme = "default";
 
     public function __construct(string $root = '', string $url = '')
     {
@@ -279,6 +280,16 @@ class Application
     public function getUrl(): string
     {
         return $this->url;
+    }
+
+    public function getTheme(): string
+    {
+        return $this->theme;
+    }
+
+    public function setTheme(string $theme): void
+    {
+        $this->theme = $theme;
     }
 
     public function getConfiguration(): array

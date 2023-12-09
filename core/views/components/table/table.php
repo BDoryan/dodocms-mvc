@@ -1,5 +1,5 @@
 <div class="border-gray-500 rounded-lg border-[1px] overflow-x-auto">
-    <table class="w-full rounded-lg bg-gray-800 overflow-hidden">
+    <table class="w-full rounded-lg bg-gray-800 overflow-hidden text-sm">
         <thead class="rounded-md border-gray-500 border-b">
         <tr class="rounded-md border-gray-500 border-b">
             <?php foreach ($this->columns as $col => $column) { ?>
