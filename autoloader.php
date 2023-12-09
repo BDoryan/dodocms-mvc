@@ -18,10 +18,12 @@ if (version_compare($php_version, '7.4.0') < 0) {
  */
 require_once 'core/classes/Autoloader.php';
 Autoloader::require('core/classes', true);
+Autoloader::require('core/models', true);
 Autoloader::require('core/controllers', true);
 Autoloader::require('core/exceptions', true);
 Autoloader::require('core/routes', true);
 Autoloader::require('core/components', true);
+
 Autoloader::require('models', true);
 
 /**

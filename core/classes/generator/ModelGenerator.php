@@ -52,7 +52,7 @@ class ModelGenerator
                 $classContent .= "    }\n\n";
             }
             $classContent .= "    public static function findAll(string ".'$columns'.", array ".'r $conditions'." = [], ".'$orderBy'." = ''): ?array \n{\n
-        return (new ".$className."())->find(".'$columns'.", ".'$conditions'.", ".'$orderBy'.");\n
+        return (new ".$className."())->getAll(".'$columns'.", ".'$conditions'.", ".'$orderBy'.");\n
         }\n\n";
 
             $classContent .= "/** Warning: if you want create or edit entries you need to create the form with a override of getFields(); */\n\n";

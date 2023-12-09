@@ -11,7 +11,7 @@ class PageModel extends Model
     protected string $seo_description;
     protected string $seo_keywords;
     protected string $slug;
-    protected ?ResourceModel $favicon;
+//    protected ?ResourceModel $favicon;
 
     /**
      * @param string $name
@@ -27,7 +27,7 @@ class PageModel extends Model
         $this->seo_description = $seo_description;
         $this->seo_keywords = $seo_keywords;
         $this->slug = $slug;
-        $this->favicon = $favicon;
+//        $this->favicon = $favicon;
     }
 
     public function getSeoKeywords(): string
@@ -80,79 +80,85 @@ class PageModel extends Model
         return $this->seo_description;
     }
 
+    public function view()
+    {
+        echo "Hello World";
+        exit;
+    }
+
     public function setSeoDescription(string $seo_description): void
     {
         $this->seo_description = $seo_description;
     }
 
-    public function getFavicon(): ?int
-    {
-        return $this->favicon->getId();
-    }
-
-    public function getFaviconResourceId(): ?ResourceModel
-    {
-        return $this->favicon ?? null;
-    }
-
-    public function setFaviconResourceModel(?ResourceModel $favicon): void
-    {
-        $this->favicon = $favicon;
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function setFavicon($resource_id): void
-    {
-        if(empty($resource_id)){
-            $this->favicon = null;
-            return;
-        }
-
-        $resourceModel = Model::getModelByTableName(ResourceModel::TABLE_NAME);
-        $resourceModel->id($resource_id);
-        if($resourceModel->fetch() !== null) {
-            $this->favicon = $resourceModel;
-            return;
-        }
-        throw new Exception("Resource not found : $resource_id");
-    }
+//    public function getFavicon(): ?int
+//    {
+//        return $this->favicon->getId();
+//    }
+//
+//    public function getFaviconResourceId(): ?ResourceModel
+//    {
+//        return $this->favicon ?? null;
+//    }
+//
+//    public function setFaviconResourceModel(?ResourceModel $favicon): void
+//    {
+//        $this->favicon = $favicon;
+//    }
+//
+//    /**
+//     * @throws Exception
+//     */
+//    public function setFavicon($resource_id): void
+//    {
+//        if(empty($resource_id)){
+//            $this->favicon = null;
+//            return;
+//        }
+//
+//        $resourceModel = Model::getModelByTableName(ResourceModel::TABLE_NAME);
+//        $resourceModel->id($resource_id);
+//        if($resourceModel->fetch() !== null) {
+//            $this->favicon = $resourceModel;
+//            return;
+//        }
+//        throw new Exception("Resource not found : $resource_id");
+//    }
 
     public function getFields(): array
     {
         $fields = parent::getFields();
         $fields["name"] = [
             "size" => "w-full",
-            "field" => Text::create()->name("name")->label(__('admin.panel.pages.fields.label.name'))->value($this->name)
+            "field" => Text::create()->name("name")->label(__('admin.panel.pages_manager.fields.label.name'))->value($this->name)
         ];
         $fields["seo_title"] = [
             "size" => "w-full",
-            "field" => Text::create()->name("seo_title")->label(__('admin.panel.pages.fields.label.seo_title'))->value($this->seo_title)
+            "field" => Text::create()->name("seo_title")->label(__('admin.panel.pages_manager.fields.label.seo_title'))->value($this->seo_title)
         ];
         $fields["seo_description"] = [
             "size" => "w-full",
-            "field" => Text::create()->name("seo_description")->label(__('admin.panel.pages.fields.label.seo_description'))->value($this->seo_description)
+            "field" => Text::create()->name("seo_description")->label(__('admin.panel.pages_manager.fields.label.seo_description'))->value($this->seo_description)
         ];
         $fields["seo_keywords"] = [
             "size" => "w-full",
-            "field" => Text::create()->name("seo_keywords")->label(__('admin.panel.pages.fields.label.seo_keywords'))->value($this->seo_keywords)
+            "field" => Text::create()->name("seo_keywords")->label(__('admin.panel.pages_manager.fields.label.seo_keywords'))->value($this->seo_keywords)
         ];
         $fields["slug"] = [
             "size" => "w-full",
-            "field" => Text::create()->name("slug")->label(__('admin.panel.pages.fields.label.slug'))->value($this->slug)
+            "field" => Text::create()->name("slug")->label(__('admin.panel.pages_manager.fields.label.slug'))->value($this->slug)
         ];
-        $fields["favicon"] = [
-            "size" => "w-full",
-            "field" => ResourceSelector::create()->name("favicon")->label(__('admin.panel.pages.fields.label.favicon'))->resources(isset($this->favicon) ? [$this->favicon] : [])
-        ];
+//        $fields["favicon"] = [
+//            "size" => "w-full",
+//            "field" => ResourceSelector::create()->name("favicon")->label(__('admin.panel.pages_manager.fields.label.favicon'))->resources(isset($this->favicon) ? [$this->favicon] : [])
+//        ];
         return $fields;
     }
 
 
     public static function findAll(string $columns, array $conditions = [], $orderBy = ''): ?array
     {
-        return (new PageModel())->findAll($columns, $conditions, $orderBy);
+        return (new PageModel())->getAll($columns, $conditions, $orderBy);
     }
 }
 

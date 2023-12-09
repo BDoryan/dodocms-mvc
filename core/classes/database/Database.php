@@ -88,7 +88,7 @@ class Database
         $prepare->execute(array_merge($attributes, $conditions));
     }
 
-    private function prepareSelect($table, $columns = '*', $conditions = [], $orderBy = null, $limit = null)
+    private function prepareSelect($table, $columns = '*', $conditions = [], $orderBy = "", $limit = null)
     {
         try {
             $query = "SELECT $columns FROM $table";
@@ -99,7 +99,7 @@ class Database
                     }, array_keys($conditions), $conditions));
             }
 
-            if ($orderBy !== null) {
+            if (!empty($orderBy)) {
                 $query .= " ORDER BY $orderBy";
             }
 

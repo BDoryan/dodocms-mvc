@@ -87,10 +87,8 @@ class TableManagementController extends PanelController
         exit;
     }
 
-    public function entries($params)
+    public function getEntries(string $table_name): array
     {
-        $table_name = $params['table'];
-
         $table = Table::getTable($table_name);
         if (empty($table)) {
             $this->addToast(new Toast(__("admin.panel.toast.error"), __("admin.panel.tables.table.not_found", ["table" => $table_name]), Toast::TYPE_DANGER));
@@ -134,11 +132,19 @@ class TableManagementController extends PanelController
             $rows[] = $row;
         }
 
-        $this->viewSection('table/entry/entries', [
+        return [
             'table_name' => $table_name,
             'columns' => $columns,
             'rows' => $rows
-        ]);
+        ];
+    }
+
+    public function entries($params)
+    {
+        $table_name = $params['table'];
+        $entriesData = $this->getEntries($table_name);
+
+        $this->viewSection('table/entry/entries', $entriesData);
     }
 
     public function deleteEntry(array $params): void
@@ -200,7 +206,7 @@ class TableManagementController extends PanelController
             $post_data = array_slice($_POST, 0);
 
             if (!empty($post_data)) {
-                if(isset($entry_id))
+                if (isset($entry_id))
                     $model->id($entry_id);
 
                 $model->hydrate($post_data);

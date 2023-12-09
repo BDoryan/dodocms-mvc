@@ -4,6 +4,7 @@ Autoloader::require("core/controllers/PanelController.php");
 Autoloader::require("core/controllers/TableManagementController.php");
 Autoloader::require("core/controllers/ResourcesManagerController.php");
 Autoloader::require("core/controllers/api/resources/ApiResourcesController.php");
+Autoloader::require("core/controllers/api/page/PageController.php");
 Autoloader::require("core/controllers/api/DefaultApiController.php");
 Autoloader::require("core/classes/Application.php");
 Autoloader::require("core/classes/Router.php");
@@ -23,6 +24,11 @@ class Routes
     const ADMIN_TABLE_EDIT_ENTRY = "/admin/tables/{table}/entries/edit/{id}";
     const ADMIN_TABLE_DELETE_ENTRY = "/admin/tables/{table}/entries/delete/{id}";
     const ADMIN_RESOURCES_MANAGER = "/admin/resources/";
+
+    const ADMIN_PAGES_MANAGER = "/admin/pages";
+    const ADMIN_PAGES_MANAGER_NEW = "/admin/pages/new";
+    const ADMIN_PAGES_MANAGER_EDIT = "/admin/pages/edit/{id}";
+    const ADMIN_PAGES_MANAGER_DELETE = "/admin/pages/delete/{id}";
 
     const ADMIN_API_UPLOAD_RESOURCE = "/admin/api/resources/upload";
     const ADMIN_API_GET_RESOURCE = "/admin/api/resources/html/{id}";
@@ -70,6 +76,16 @@ class Routes
         $router->get(self::ADMIN_API_GET_RESOURCE, [$resourcesManagerController, 'getResource']);
 
         /**
+         * Pages manager routes
+         */
+//        $router->get(self::ADMIN_PAGES_MANAGER, [$ptmController, 'entries']);
+//        $router->get(self::ADMIN_PAGES_MANAGER_NEW, [$ptmController, 'newEntry']);
+//        $router->post(self::ADMIN_PAGES_MANAGER_NEW, [$ptmController, 'newEntry']);
+//        $router->get(self::ADMIN_PAGES_MANAGER_EDIT, [$ptmController, 'editEntry']);
+//        $router->post(self::ADMIN_PAGES_MANAGER_EDIT, [$ptmController, 'editEntry']);
+//        $router->get(self::ADMIN_PAGES_MANAGER_DELETE, [$ptmController, 'deleteEntry']);
+
+        /**
          * Api routes
          */
         $router->post(self::ADMIN_API_UPLOAD_RESOURCE, [$apiResourcesController, "upload"]);
@@ -88,6 +104,26 @@ class Routes
          * Section route
          */
         $router->get(self::ADMIN_PANEL . "/{section}", [$adminController, 'section']);
+
+        $pageController = new PageController();
+
+        /**
+         * Pages routes
+         */
+        $pages  = PageModel::findAll("*");
+        foreach ($pages as $page) {
+            $router->get($page->getSlug(), function () use ($page, $pageController) {
+                $pageController->viewPage($page);
+            });
+        }
+    }
+
+    public static function getRoute(string $route, array $replaces = []): string
+    {
+        foreach ($replaces as $key => $value) {
+            $route = str_replace("{" . $key . "}", $value, $route);
+        }
+        return $route;
     }
 
     public static function route(string $route, array $replaces = []): string
