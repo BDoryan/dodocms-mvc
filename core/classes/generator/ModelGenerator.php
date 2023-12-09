@@ -20,7 +20,7 @@ class ModelGenerator
             $classContent .= "    public const TABLE_NAME = \"$tableName\";\n\n";
 
             foreach ($attributes as $value) {
-                $classContent .= "    private $" . $value . ";\n";
+                $classContent .= "    protected $" . $value . ";\n";
             }
 
             $classContent .= "    public function __construct(";

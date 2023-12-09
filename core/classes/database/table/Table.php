@@ -43,6 +43,13 @@ class Table extends CMSObject
         Application::get()->getDatabase()->execute($sql);
     }
 
+    private function getConstraintNameByColumn($column_name)
+    {
+        $sql = "SELECT CONSTRAINT_NAME FROM information_schema.KEY_COLUMN_USAGE WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = '" . $this->getName() . "' AND COLUMN_NAME = '$column_name' AND REFERENCED_TABLE_NAME IS NOT NULL LIMIT 1";
+        $result = Application::get()->getDatabase()->fetch($sql);
+        return $result['CONSTRAINT_NAME'];
+    }
+
     public function update(Table $collection): string
     {
         $sql = "";
@@ -57,6 +64,9 @@ class Table extends CMSObject
                 if ($attribute->isPrimaryKey()) {
                     $sql .= "ALTER TABLE " . $this->getName() . " DROP PRIMARY KEY;\n";
                 }
+                if (!empty($attribute->getAssociation())) {
+                    $sql .= "ALTER TABLE " . $this->getName() . " DROP FOREIGN KEY ".($this->getConstraintNameByColumn($attribute->getName()))."\n";
+                }
                 $sql .= "ALTER TABLE " . $this->getName() . " DROP COLUMN " . $attribute->getName() . ";\n";
             }
         }
@@ -68,10 +78,16 @@ class Table extends CMSObject
                 $sql .= "ALTER TABLE " . $this->getName() . " ADD COLUMN " . $attribute->getName() . " " . $attribute->getType() . " $length " . ($attribute->isNullable() ? "NULL" : "NOT NULL") . " " . ($attribute->isAutoIncrement() ? "AUTO_INCREMENT" : "") . " " . (!empty($attribute->getDefaultValue()) ? "DEFAULT " . ($attribute->getDefaultValue() === "CURRENT_TIMESTAMP" ? $attribute->getDefaultValue() : "'" . $attribute->getDefaultValue() . "'") : "") . ";\n";
 
                 if ($attribute->hasAssociation()) {
-                    $sql .= "ALTER TABLE " . $this->getName() . " ADD CONSTRAINT " . 'fk_'.$attribute->getAssociation() . " FOREIGN KEY (" . $attribute->getName() . ") REFERENCES " . $attribute->getAssociation() . "(id);\n";
+                    $sql .= "ALTER TABLE " . $this->getName() . " ADD CONSTRAINT " . 'fk_' . $attribute->getAssociation() . " FOREIGN KEY (" . $attribute->getName() . ") REFERENCES " . $attribute->getAssociation() . "(id);\n";
                 }
             } else {
                 $existingAttribute = $this->getAttribute($attribute);
+
+
+                if ($existingAttribute->isNullable() != $attribute->isNullable()) {
+                    $sql .= "ALTER TABLE " . $this->getName() . " MODIFY COLUMN " . $attribute->getName() . " " . $attribute->getType() . " $length " . ($attribute->isNullable() ? "NULL" : "NOT NULL") . " " . ($attribute->isAutoIncrement() ? "AUTO_INCREMENT" : "") . " " . (!empty($attribute->getDefaultValue()) ? "DEFAULT " . ($attribute->getDefaultValue() === "CURRENT_TIMESTAMP" ? $attribute->getDefaultValue() : "'" . $attribute->getDefaultValue() . "'") : "") . ";\n";
+                }
+
                 if ($attribute->isPrimaryKey() != $existingAttribute->isPrimaryKey() && $attribute->isPrimaryKey()) {
                     $sql .= "ALTER TABLE " . $this->getName() . " ADD PRIMARY KEY (" . $attribute->getName() . ");\n";
                 }
@@ -85,7 +101,7 @@ class Table extends CMSObject
                         if (!empty($existingAttribute->getAssociation())) {
                             $sql .= "ALTER TABLE " . $this->getName() . " DROP FOREIGN KEY " . $existingAttribute->getAssociation() . ";\n";
                         }
-                        $sql .= "ALTER TABLE " . $this->getName() . " ADD CONSTRAINT " . 'fk_'.$attribute->getAssociation() . " FOREIGN KEY (" . $attribute->getName() . ") REFERENCES " . $attribute->getAssociation() . "(id);\n";
+                        $sql .= "ALTER TABLE " . $this->getName() . " ADD CONSTRAINT " . 'fk_' . $attribute->getAssociation() . " FOREIGN KEY (" . $attribute->getName() . ") REFERENCES " . $attribute->getAssociation() . "(id);\n";
                     }
                 }
             }
@@ -122,7 +138,8 @@ class Table extends CMSObject
         $this->hydrate(self::getTableData($this->getName()));
     }
 
-    public function toJson() {
+    public function toJson()
+    {
         return json_encode($this->toArray());
     }
 
@@ -166,7 +183,7 @@ class Table extends CMSObject
         $sql = rtrim($sql, ",\n") . "\n);";
 
         try {
-            $attributes = array_map(function(TableAttribute $attribute) {
+            $attributes = array_map(function (TableAttribute $attribute) {
                 return $attribute->getName();
             }, $this->attributes);
 
@@ -336,7 +353,8 @@ class Table extends CMSObject
         return $collection;
     }
 
-    public static function listTablesName(): array {
+    public static function listTablesName(): array
+    {
         $database = Application::get()->getDatabase();
         return $database->showTables();;
     }

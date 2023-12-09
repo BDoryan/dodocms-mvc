@@ -7,7 +7,7 @@ abstract class Field extends Component
 
     protected string $template;
     protected array $parameters = [];
-    protected bool $required;
+    protected bool $required = false;
 
     protected string $label;
     protected string $name;

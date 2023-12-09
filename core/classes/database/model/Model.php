@@ -48,6 +48,9 @@ abstract class Model extends CMSObjectHydration
     public function create(): bool
     {
         $database = Application::get()->getDatabase();
+//        echo "<pre>";
+//        var_dump($this->getAttributes());
+//        echo "</pre>";
         $database->insert($this->table_name, $this->getAttributes());
         $this->id = $database->lastInsertId();
         return true;
@@ -233,5 +236,13 @@ abstract class Model extends CMSObjectHydration
         if (empty($model))
             return null;
         return new $model();
+    }
+
+    public static function getModelByTableName(string $table_name): ?Model
+    {
+        $table = Table::getTable($table_name);
+        if (empty($table))
+            return null;
+        return self::getModel($table);
     }
 }

@@ -15,6 +15,11 @@ class ResourceSelector extends Field
         $this->multiple = $multiple;
     }
 
+    public function isMultiple(): bool
+    {
+        return $this->multiple;
+    }
+
     public function multiple(bool $multiple = true): ResourceSelector {
         $this->multiple = $multiple;
         return $this;

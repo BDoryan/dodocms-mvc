@@ -105,5 +105,15 @@
   "admin.panel.resources.edited": "The resource selected has been edited.",
   "admin.panel.resources.count": "{count} resources founds.",
   "admin.panel.resources.add": "Add a resource",
-  "admin.panel.resources.new": "Upload a new resource"
+  "admin.panel.resources.new": "Upload a new resource",
+  "admin.panel.pages.title": "Page manager",
+  "admin.panel.pages.description": "Explore the creation, reading, updating, and deletion of pages within the website. Effortlessly manage your pages to suit your needs.",
+  "admin.panel.pages.button.new_page": "Create a new page",
+  "admin.panel.pages.fields.label.name": "Name",
+  "admin.panel.pages.fields.label.title": "Title",
+  "admin.panel.pages.fields.label.slug": "Slug",
+  "admin.panel.pages.fields.label.seo_title": "SEO title",
+  "admin.panel.pages.fields.label.seo_description": "SEO description",
+  "admin.panel.pages.fields.label.seo_keywords": "SEO keywords",
+  "admin.panel.pages.fields.label.favicon": "Favicon"
 }

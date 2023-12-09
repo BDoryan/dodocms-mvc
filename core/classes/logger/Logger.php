@@ -61,7 +61,7 @@ class Logger
         $this->error($e->getMessage());
         $this->error(Tools::removeFirstSlash($e->getFile()) . ":" . $e->getLine());
         foreach ($e->getTrace() as $log) {
-            $this->error(Tools::removeFirstSlash($e->getFile()) . ":" . $e->getLine());
+            $this->error(Tools::removeFirstSlash($log['file']) . ":" . $log['line']);
         }
     }
 
