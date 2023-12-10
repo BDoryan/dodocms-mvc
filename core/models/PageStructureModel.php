@@ -6,68 +6,95 @@ class PageStructureModel extends Model
 {
     public const TABLE_NAME = "PagesStructures";
 
-    protected string $name;
-    protected string $path;
+    protected ?string $page_order;
+    protected string $block_json;
+    protected ?int $page_id;
+    protected ?int $block_id;
 
-    public function __construct(string $name = "", string $path = "")
+    /**
+     * @param string $page_order
+     * @param string $block_json
+     * @param ?int $page_id
+     * @param ?int $block_id
+     */
+    public function __construct(string $page_order = "", string $block_json = "", ?int $page_id = null, ?int $block_id = null)
     {
         parent::__construct(self::TABLE_NAME);
-        $this->name = $name;
-        $this->path = $path;
+        $this->page_order = $page_order;
+        $this->block_json = $block_json;
+        $this->page_id = $page_id;
+        $this->block_id = $block_id;
     }
 
-    public function setName(string $name)
+    public function getPageOrder(): string
     {
-        $this->name = $name;
+        return $this->page_order;
     }
 
-    public function getName(): string
+    public function setPageOrder(?string $page_order): void
     {
-        return $this->name;
+        $this->page_order = $page_order;
     }
 
-    public function setPath(string $path)
+    public function getCustom()
     {
-        $this->path = $path;
-    }
-
-    public function getPath(): string
-    {
-        return $this->path;
-    }
-
-    public function getCustom(int $page_id)
-    {
-        $block = Application::get()->getDatabase()->find('PagesStructures', '*', ['block_id' => $this->id]);
-        $json = $block['block_json'];
-        if(empty($json))
+        if(empty($this->block_json))
             return null;
-        return json_decode($json, true);
+        return json_decode($this->block_json, true);
     }
 
-    public function getView(): ?string
+    public function getBlockJson(): string
     {
-        $path = Application::get()->getTheme()->toRoot("/blocks/" . $this->getPath());
-        if (!Tools::endsWith($path, ".php"))
-            $path .= ".php";
-
-        if (file_exists($path))
-            return $path;
-        return null;
+        return $this->block_json;
     }
 
-    public function getFields(): array
+    public function setBlockJson(string $block_json): void
     {
-        $fields = parent::getFields();
-        $fields['name'] = [
-            'size' => 'w-full',
-            "field" => Text::create()->name("name")->label(__('admin.panel.blocks_manager.fields.label.name'))->value($this->name)
-        ];
-        $fields['path'] = [
-            'size' => 'w-full',
-            "field" => Text::create()->name("path")->label(__('admin.panel.blocks_manager.fields.label.path'))->value($this->name)
-        ];
-        return $fields;
+        $this->block_json = $block_json;
+    }
+
+    public function getPageId(): ?int
+    {
+        return $this->page_id;
+    }
+
+    public function setPageId(?int $page_id): void
+    {
+        $this->page_id = $page_id;
+    }
+
+    public function getBlockId(): ?int
+    {
+        return $this->block_id;
+    }
+
+    public function setBlockId(?int $block_id): void
+    {
+        $this->block_id = $block_id;
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function getPage(): PageModel
+    {
+        $page = new PageModel();
+        $page->id($this->page_id);
+        $page->fetch();
+
+        return $page;
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function getBlock(): BlockModel
+    {
+        $page = new BlockModel();
+        $page->id($this->block_id);
+        $page->fetch();
+
+        return $page;
     }
 
     public static function findAll(string $columns, array $conditions = [], $orderBy = ''): ?array
@@ -76,4 +103,4 @@ class PageStructureModel extends Model
     }
 }
 
-Table::$models[BlocksModel::TABLE_NAME] = BlocksModel::class;
+Table::$models[BlockModel::TABLE_NAME] = BlockModel::class;

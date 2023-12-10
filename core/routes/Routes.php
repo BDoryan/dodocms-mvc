@@ -6,6 +6,7 @@ Autoloader::require("core/controllers/ResourcesManagerController.php");
 Autoloader::require("core/controllers/api/resources/ApiResourcesController.php");
 Autoloader::require("core/controllers/page/PageController.php");
 Autoloader::require("core/controllers/api/DefaultApiController.php");
+Autoloader::require("core/controllers/api/page/ApiPageController.php");
 Autoloader::require("core/classes/Application.php");
 Autoloader::require("core/classes/Router.php");
 
@@ -26,7 +27,6 @@ class Routes
     const ADMIN_RESOURCES_MANAGER = "/admin/resources/";
 
     const ADMIN_PAGES_MANAGER = "/admin/pages";
-    const ADMIN_PAGE_CONTENT_UPDATE = "/admin/pages/{page_block_id}/update";
     const ADMIN_PAGES_MANAGER_NEW = "/admin/pages/new";
     const ADMIN_PAGES_MANAGER_EDIT = "/admin/pages/edit/{id}";
     const ADMIN_PAGES_MANAGER_DELETE = "/admin/pages/delete/{id}";
@@ -35,6 +35,7 @@ class Routes
     const ADMIN_API_GET_RESOURCE = "/admin/api/resources/html/{id}";
     const ADMIN_API_EDIT_RESOURCE = "/admin/api/resources/edit/{id}";
     const ADMIN_API_DELETE_RESOURCE = "/admin/api/resources/delete/{id}";
+    const ADMIN_API_PAGE_STRUCTURE_EDIT = "/admin/api/pages/edit/{id}";
     const ADMIN_API = "/admin/api.*";
 
     public static function loadRoutes(Application $application, Router $router)
@@ -43,8 +44,8 @@ class Routes
         $ptmController = new TableManagementController();
         $resourcesManagerController = new ResourcesManagerController();
         $defaultApiController = new DefaultApiController();
-        $pageController = new PageController();
         $apiResourcesController = new ApiResourcesController();
+        $apiPageController = new ApiPageController();
 
         $router->get(self::ADMIN_PANEL, [$adminController, 'index']);
         $router->get(self::ADMIN_LOGIN, [$adminController, 'login']);
@@ -80,7 +81,7 @@ class Routes
         /**
          * Pages manager routes
          */
-        $router->post(self::ADMIN_PAGE_CONTENT_UPDATE, [$pageController, 'editBlock']);
+        $router->post(self::ADMIN_API_PAGE_STRUCTURE_EDIT, [$apiPageController, 'editStructure']);
 //        $router->get(self::ADMIN_PAGES_MANAGER, [$ptmController, 'entries']);
 //        $router->get(self::ADMIN_PAGES_MANAGER_NEW, [$ptmController, 'newEntry']);
 //        $router->post(self::ADMIN_PAGES_MANAGER_NEW, [$ptmController, 'newEntry']);
@@ -99,9 +100,9 @@ class Routes
         /**
          * Test
          */
-        $router->get('/test', function () {
-            new ModelGenerator("Client", ["name", "email", "phone_number", "address"]);
-        });
+//        $router->get('/test', function () {
+//            new ModelGenerator("Client", ["name", "email", "phone_number", "address"]);
+//        });
 
         /**
          * Section route

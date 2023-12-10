@@ -5,3 +5,17 @@
 [editable] {
     border: 2px solid transparent;
 }
+
+button[data-block-action="save"] {
+    border-radius: 5px;
+    border: none;
+    background: darkgreen;
+    padding: 10px 8px
+}
+
+button[data-block-action="delete"] {
+    border-radius: 5px;
+    border: none;
+    background: firebrick;
+    padding: 10px 8px
+}

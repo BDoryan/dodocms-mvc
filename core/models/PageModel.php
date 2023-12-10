@@ -11,7 +11,7 @@ class PageModel extends ModelAssociated
     protected string $seo_description;
     protected string $seo_keywords;
     protected string $slug;
-//    protected array $blocks;
+    protected array $blocks;
 
 //    protected ?ResourceModel $favicon;
 
@@ -21,7 +21,7 @@ class PageModel extends ModelAssociated
      * @param string $seo_description
      * @param ?int $favicon
      */
-    public function __construct(string $name = "", string $seo_title = "", string $seo_description = "", string $seo_keywords = "", string $slug = "", /* array $blocks = [], */ ?ResourceModel $favicon = null)
+    public function __construct(string $name = "", string $seo_title = "", string $seo_description = "", string $seo_keywords = "", string $slug = "", array $blocks = [], ?ResourceModel $favicon = null)
     {
         parent::__construct(self::TABLE_NAME);
         $this->name = $name;
@@ -29,13 +29,12 @@ class PageModel extends ModelAssociated
         $this->seo_description = $seo_description;
         $this->seo_keywords = $seo_keywords;
         $this->slug = $slug;
-//        $this->blocks = $blocks;
+        $this->blocks = $blocks;
 //        $this->favicon = $favicon;
     }
 
     public function getBlocks(): array
     {
-
         return $this->blocks;
     }
 
@@ -94,10 +93,9 @@ class PageModel extends ModelAssociated
         return $this->seo_description;
     }
 
-    public function view()
+    public function getPageStructures(): ?array
     {
-        echo "Hello World";
-        exit;
+        return PageStructureModel::findAll("*", ["page_id" => $this->id]);
     }
 
     public function setSeoDescription(string $seo_description): void
@@ -169,7 +167,6 @@ class PageModel extends ModelAssociated
         return $fields;
     }
 
-
     public static function findAll(string $columns, array $conditions = [], $orderBy = ''): ?array
     {
         return (new PageModel())->getAll($columns, $conditions, $orderBy);
@@ -178,12 +175,12 @@ class PageModel extends ModelAssociated
     public function associates(): ?array
     {
         return [
-//            "blocks" => new ModelAssociation(
-//                BlocksModel::TABLE_NAME,
-//                "PagesStructures",
-//                "page_id",
-//                "block_id",
-//            )
+            "blocks" => new ModelAssociation(
+                BlockModel::TABLE_NAME,
+                "PagesStructures",
+                "page_id",
+                "block_id",
+            )
         ];
     }
 }

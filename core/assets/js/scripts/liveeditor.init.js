@@ -5,6 +5,8 @@ $(document).ready(() => {
         element.setAttribute('contenteditable', 'true');
         CKEDITOR.inline(element);
     });
+
+    $('br[type=_moz]').remove();
 });
 
 $(document).on("click", "[data-block-action]", function () {
@@ -17,11 +19,25 @@ $(document).on("click", "[data-block-action]", function () {
 
             break;
         case "save":
+            const page_block_id = block.attr("page-structure-id");
+
+            let data = {};
+
             elements = content.find("[editable]");
             elements.each((index, element) => {
-                const page_block_id = block.getAttribute("page-block-id");
-                const name = element.getAttribute("editable");
+                const name = $(element).attr("editable");
                 const html = element.innerHTML;
+
+                data[name] = html;
+            });
+
+            $.ajax({
+                url: DODOCMS_APPLICATION.toApi("/pages/edit/") + page_block_id,
+                method: "POST",
+                data,
+                success: function (response) {
+                    console.log(response);
+                }
             });
             break;
     }

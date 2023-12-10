@@ -2,7 +2,7 @@
 
 Autoloader::require("core/classes/database/model/Model.php");
 
-class BlocksModel extends Model
+class BlockModel extends Model
 {
     public const TABLE_NAME = "Blocks";
 
@@ -72,8 +72,8 @@ class BlocksModel extends Model
 
     public static function findAll(string $columns, array $conditions = [], $orderBy = ''): ?array
     {
-        return (new BlocksModel())->getAll($columns, $conditions, $orderBy);
+        return (new BlockModel())->getAll($columns, $conditions, $orderBy);
     }
 }
 
-Table::$models[BlocksModel::TABLE_NAME] = BlocksModel::class;
+Table::$models[BlockModel::TABLE_NAME] = BlockModel::class;

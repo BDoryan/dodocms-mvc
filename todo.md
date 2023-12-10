@@ -1,15 +1,6 @@
-## Tâches à faire
+## ModelLocalAssociated
 
-### Système de resources
+Mettre en place un système qui va permettre d'avoir un modèle 
+et que celui-ci puissent associé vers un autre model depuis un
+de ses attributs
 
-### Gestion des entitées
-
-### Gestion des pages
-
-### Gestion du contenu d'une page
-
-### Intégration du live-editing
-
-## Tâches en cours
-
-## Tâches terminées

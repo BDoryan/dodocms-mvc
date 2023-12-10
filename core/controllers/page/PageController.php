@@ -15,32 +15,18 @@ class PageController extends DOMController
         // Not Found ?
     }
 
-    public function editBlock($params) {
-        $block_id = $params['block'];
-        $block = Application::get()->getDatabase()->find('Blocks', '*', ['id' => $block_id]);
-        if(empty($block))
-            return;
-
-        $block = new BlocksModel($block['name'], $block['path']);
-        $block->setId($block_id);
-
-        $json = $block->getCustom(0);
-        if(empty($json))
-            $json = [];
-
-        $json['content'] = $_POST['content'];
-        $block->setCustom(0, $json);
-        $block->save();
-    }
-
+    /**
+     * @throws Exception
+     */
     public function viewPage(PageModel $page)
     {
         $start = microtime(true);
         $isAdmin = isset($_GET['isAdmin']);
         ob_start();
 
-        /** @var BlocksModel $block */
-        foreach ($page->getBlocks() as $block) {
+        /** @var PageStructureModel $page_structure */
+        foreach ($page->getPageStructures() as $page_structure) {
+            $block = $page_structure->getBlock();
             $view = $block->getView();
             $block_content = fetch($view, ['block' => $block]);
 
@@ -48,13 +34,20 @@ class PageController extends DOMController
             $document->loadHTML('<?xml encoding="UTF-8">' . $block_content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
 
             // apply custom data to the block
-            $custom_data = $block->getCustom($page->getId());
+            $custom_data = $page_structure->getCustom();
             if (!empty($custom_data)) {
                 foreach ($custom_data as $key => $value) {
                     $xpath = new DOMXPath($document);
                     $nodes = $xpath->query('//*[@editable="' . $key . '"]');
+
+//                    echo "<pre style='white-space: pre-wrap'>";
+//                    echo htmlspecialchars($value);
+//                    echo "</pre>";
+
                     foreach ($nodes as $node) {
-                        $node->nodeValue = $value;
+                        $fragment = DOMDocumentUtils::htmlToNode($node, $value);
+                        $node->nodeValue = '';
+                        $node->appendChild($fragment);
                     }
                 }
             }
@@ -62,12 +55,12 @@ class PageController extends DOMController
             // if the user are not admin, remove all editable attributes for security
             if(!$isAdmin) {
                 $xpath = new DOMXPath($document);
-                $nodes = $xpath->query('//*[@block-name or @block-content or @block-page-id]');
+                $nodes = $xpath->query('//*[@editable or @block-name or @block-content or @page-structure-id]');
                 foreach ($nodes as $node) {
                     $node->removeAttribute('editable');
                     $node->removeAttribute('block-name');
                     $node->removeAttribute('block-content');
-                    $node->removeAttribute('page-block-id');
+                    $node->removeAttribute('page-structure-id');
                 }
             }
 
@@ -77,6 +70,7 @@ class PageController extends DOMController
                 view(
                     Application::get()->toRoot('/core/views/admin/liveeditor/block-editor.php'), [
                         'block' => $block,
+                        'page_structure' => $page_structure,
                         'content' => $block_content
                     ]
                 );
