@@ -70,7 +70,7 @@ class Logger
         $this->log("[EXCEPTION] " . $e->getMessage());
         $this->log("[EXCEPTION] " . Tools::removeFirstSlash($e->getFile()) . ":" . $e->getLine());
         foreach ($e->getTrace() as $log) {
-            $this->log("[EXCEPTION] " . Tools::removeFirstSlash($log['file']) . ":" . $log['line']);
+            $this->log("[EXCEPTION] " . Tools::removeFirstSlash($log['file'] ?? '') . ":" . ($log['line'] ?? ''));
         }
     }
 

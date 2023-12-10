@@ -31,7 +31,8 @@ class ModelGenerator
                 }
             }
             $classContent .= ")\n";
-            $classContent .= "    {\n";
+            $classContent .= "    {\n
+        parent::__construct(self::TABLE_NAME);\n";
             foreach ($attributes as $value) {
                 $classContent .= "        \$this->$value = $" . $value . ";\n";
             }
@@ -51,7 +52,7 @@ class ModelGenerator
                 $classContent .= "        return \$this->$value;\n";
                 $classContent .= "    }\n\n";
             }
-            $classContent .= "    public static function findAll(string ".'$columns'.", array ".'r $conditions'." = [], ".'$orderBy'." = ''): ?array \n{\n
+            $classContent .= "    public static function findAll(string ".'$columns'.", array ".' $conditions'." = [], ".'$orderBy'." = ''): ?array \n{\n
         return (new ".$className."())->getAll(".'$columns'.", ".'$conditions'.", ".'$orderBy'.");\n
         }\n\n";
 

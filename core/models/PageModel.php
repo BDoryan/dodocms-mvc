@@ -2,7 +2,7 @@
 
 Autoloader::require("core/classes/database/model/Model.php");
 
-class PageModel extends Model
+class PageModel extends ModelAssociated
 {
     public const TABLE_NAME = "Page";
 
@@ -11,6 +11,8 @@ class PageModel extends Model
     protected string $seo_description;
     protected string $seo_keywords;
     protected string $slug;
+//    protected array $blocks;
+
 //    protected ?ResourceModel $favicon;
 
     /**
@@ -19,7 +21,7 @@ class PageModel extends Model
      * @param string $seo_description
      * @param ?int $favicon
      */
-    public function __construct(string $name = "", string $seo_title = "", string $seo_description = "", string $seo_keywords = "", string $slug = "", ?ResourceModel $favicon = null)
+    public function __construct(string $name = "", string $seo_title = "", string $seo_description = "", string $seo_keywords = "", string $slug = "", /* array $blocks = [], */ ?ResourceModel $favicon = null)
     {
         parent::__construct(self::TABLE_NAME);
         $this->name = $name;
@@ -27,7 +29,19 @@ class PageModel extends Model
         $this->seo_description = $seo_description;
         $this->seo_keywords = $seo_keywords;
         $this->slug = $slug;
+//        $this->blocks = $blocks;
 //        $this->favicon = $favicon;
+    }
+
+    public function getBlocks(): array
+    {
+
+        return $this->blocks;
+    }
+
+    public function setBlocks(array $blocks): void
+    {
+        $this->blocks = $blocks;
     }
 
     public function getSeoKeywords(): string
@@ -159,6 +173,18 @@ class PageModel extends Model
     public static function findAll(string $columns, array $conditions = [], $orderBy = ''): ?array
     {
         return (new PageModel())->getAll($columns, $conditions, $orderBy);
+    }
+
+    public function associates(): ?array
+    {
+        return [
+//            "blocks" => new ModelAssociation(
+//                BlocksModel::TABLE_NAME,
+//                "PagesStructures",
+//                "page_id",
+//                "block_id",
+//            )
+        ];
     }
 }
 

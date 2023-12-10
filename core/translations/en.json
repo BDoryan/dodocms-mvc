@@ -115,5 +115,7 @@
   "admin.panel.pages_manager.fields.label.seo_title": "SEO title",
   "admin.panel.pages_manager.fields.label.seo_description": "SEO description",
   "admin.panel.pages_manager.fields.label.seo_keywords": "SEO keywords",
-  "admin.panel.pages_manager.fields.label.favicon": "Favicon"
+  "admin.panel.pages_manager.fields.label.favicon": "Favicon",
+  "liveeditor.block.save": "Save changes",
+  "liveeditor.block.delete": "Delete"
 }

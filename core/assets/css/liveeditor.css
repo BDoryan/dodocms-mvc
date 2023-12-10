@@ -1,0 +1,7 @@
+[editable]:hover {
+    border: 2px solid green;
+}
+
+[editable] {
+    border: 2px solid transparent;
+}

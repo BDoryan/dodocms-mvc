@@ -5,6 +5,7 @@ Autoloader::require('core/classes/database/Database.php');
 Autoloader::require('core/classes/i18n/Internationalization.php');
 Autoloader::require("core/controllers/PanelController.php");
 Autoloader::require("core/controllers/TableManagementController.php");
+Autoloader::require("core/classes/theme/Theme.php");
 
 class Application
 {
@@ -25,7 +26,7 @@ class Application
     private Configuration $configuration;
     private ?Database $database = null;
     private Logger $logger;
-    private string $theme = "default";
+    private Theme $theme;
 
     public function __construct(string $root = '', string $url = '')
     {
@@ -39,6 +40,7 @@ class Application
         $this->logger = new Logger($this->toRoot("/logs/" . "log-" . date("Y-m-d") . ".log"), $this->isDebugMode());
 
         self::$application = $this;
+        $this->theme = new Theme( "default");
     }
 
     /**
@@ -282,12 +284,12 @@ class Application
         return $this->url;
     }
 
-    public function getTheme(): string
+    public function getTheme(): Theme
     {
         return $this->theme;
     }
 
-    public function setTheme(string $theme): void
+    public function setTheme(Theme $theme): void
     {
         $this->theme = $theme;
     }

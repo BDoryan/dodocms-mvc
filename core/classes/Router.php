@@ -77,10 +77,12 @@ class Router
     public function getRequestURI(): string
     {
         $requestedUrl = $_SERVER['REQUEST_URI'];
-        if (substr($requestedUrl, -1) == '/')
-            $requestedUrl = substr($requestedUrl, 0, -1);
+
         $url = preg_replace("#^" . preg_quote($this->base, '#') . "#", "", $requestedUrl);
-        return preg_replace('/\?.*/', '', $url);
+        $url = preg_replace('/\?.*/', '', $url);
+        if (substr($url, -1) == '/')
+            $url =  substr($url, 0, -1);
+        return $url;
     }
 
     public function dispatch(): bool

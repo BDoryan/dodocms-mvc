@@ -220,6 +220,7 @@ abstract class Model extends CMSObjectHydration
             return array_map(function ($entry) {
                 $model = new $this();
                 $model->hydrate($entry);
+                $model->fetch();
 
                 return $model;
             }, $entries);
