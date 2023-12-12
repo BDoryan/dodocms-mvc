@@ -298,4 +298,9 @@ class Application
     {
         return $this->configuration->get();
     }
+
+    public function isDevelopment(): bool
+    {
+        return substr(DodoCMS::VERSION, 0, 11) == "development";
+    }
 }
