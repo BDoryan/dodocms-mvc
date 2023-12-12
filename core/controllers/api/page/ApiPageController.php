@@ -17,4 +17,9 @@ class ApiPageController extends ApiController {
             $this->error("structure_edit_failed", ['exception' => $e->getMessage()]);
         }
     }
+
+    public function blocks() {
+        $blocks = BlockModel::findAll('*');
+        $this->success("blocks_found", ['blocks' => $blocks]);
+    }
 }

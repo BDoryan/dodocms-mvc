@@ -22,16 +22,19 @@ class PageController extends DOMController
     {
         $start = microtime(true);
         $isAdmin = isset($_GET['isAdmin']);
-        ob_start();
+        $structures = $page->getPageStructures();
 
+        ob_start();
         /** @var PageStructureModel $page_structure */
-        foreach ($page->getPageStructures() as $page_structure) {
+        for ($i = 0; $i < count($structures); $i++) {
+            $page_structure = $structures[$i];
+
             $block = $page_structure->getBlock();
             $view = $block->getView();
             $block_content = fetch($view, ['block' => $block]);
 
             $document = new DOMDocument();
-            $document->loadHTML('<?xml encoding="UTF-8">' . $block_content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+            $document->loadHTML(/*'<?xml encoding="UTF-8">' . */$block_content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
 
             // apply custom data to the block
             $custom_data = $page_structure->getCustom();
@@ -40,11 +43,12 @@ class PageController extends DOMController
                     $xpath = new DOMXPath($document);
                     $nodes = $xpath->query('//*[@editable="' . $key . '"]');
 
-//                    echo "<pre style='white-space: pre-wrap'>";
-//                    echo htmlspecialchars($value);
-//                    echo "</pre>";
-
                     foreach ($nodes as $node) {
+                        // get if is a img
+                        if ($node->nodeName === 'img') {
+                            $node->setAttribute('src', $value);
+                            continue;
+                        }
                         $fragment = DOMDocumentUtils::htmlToNode($node, $value);
                         $node->nodeValue = '';
                         $node->appendChild($fragment);
@@ -54,13 +58,25 @@ class PageController extends DOMController
 
             // if the user are not admin, remove all editable attributes for security
             if(!$isAdmin) {
+                $attributes = [
+                    'editable',
+                    'block-name',
+                    'block-content',
+                    'page-structure-id',
+                    'model-name',
+                    'entity-id',
+                    'model-data',
+                    'editable-model-data'
+                ];
+
+                $query = "//*[@" . implode(' or @', $attributes) . "]";
+
                 $xpath = new DOMXPath($document);
-                $nodes = $xpath->query('//*[@editable or @block-name or @block-content or @page-structure-id]');
+                $nodes = $xpath->query($query);
                 foreach ($nodes as $node) {
-                    $node->removeAttribute('editable');
-                    $node->removeAttribute('block-name');
-                    $node->removeAttribute('block-content');
-                    $node->removeAttribute('page-structure-id');
+                    foreach ($attributes as $attribute) {
+                        $node->removeAttribute($attribute);
+                    }
                 }
             }
 
@@ -68,10 +84,11 @@ class PageController extends DOMController
 
             if ($isAdmin) {
                 view(
-                    Application::get()->toRoot('/core/views/admin/liveeditor/block-editor.php'), [
+                    Application::get()->toRoot('/core/views/admin/live-editor/block-editor.php'), [
                         'block' => $block,
                         'page_structure' => $page_structure,
-                        'content' => $block_content
+                        'content' => $block_content,
+                        'isLast' => $i === count($structures) - 1
                     ]
                 );
                 continue;

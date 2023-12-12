@@ -6,7 +6,7 @@
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
 <link rel="stylesheet" href="<?= Application::get()->getTheme()->toURL("/assets/css/style.css") ?>">
-<link rel="stylesheet" href="<?= Application::get()->toURL("/core/assets/css/liveeditor.css") ?>">
+<link rel="stylesheet" href="<?= Application::get()->toURL("/core/assets/css/dodocms.css") ?>">
 
 <meta name="theme-color" content="#712cf9">
 <!--<script src="https://cdn.tailwindcss.com"></script>-->
@@ -25,4 +25,4 @@
 <script type="module" src="<?= Application::get()->toURL("/core/assets/js/modules/upload.js") ?>"></script>
 <script type="module" src="<?= Application::get()->toURL("/core/assets/js/init.js") ?>"></script>
 
-<script defer src="<?= Application::get()->toURL("/core/assets/js/scripts/liveeditor.init.js") ?>"></script>
+<script defer src="<?= Application::get()->toURL("/core/assets/js/scripts/live-editor.init.js") ?>"></script>

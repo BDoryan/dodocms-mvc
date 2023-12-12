@@ -1,5 +1,5 @@
 <form class="relative h-full resource-item" method="POST">
-    <div class="h-full rounded-lg border-gray-300 border-opacity-25" style="height: 200px;">
+    <div class="h-full rounded-lg border-gray-300 border-opacity-25" style="min-width: 500px; height: 200px;">
         <img class="rounded-lg h-full w-full"
              :class="{'blur-sm p-2': resourceTarget === '<?= $resource->getSrc() ?>'}"
              src="<?= $resource->getSrc() ?>"

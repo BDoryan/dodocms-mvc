@@ -402,9 +402,6 @@ Application.get().addRunner(() => {
 
     const updateResource = (resources_items) => {
         const empty = $(resources_items).closest('.resources-selector').find(".resource-selector-empty");
-        console.log(empty)
-
-        console.log(resources_items.children().length);
 
         if (resources_items.children().length > 0) {
             empty.addClass("hidden");

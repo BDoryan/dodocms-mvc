@@ -1,0 +1,74 @@
+[editable-model-data]:hover, [editable]:hover {
+    border: 2px solid forestgreen;
+}
+
+[editable-model-data], [editable] {
+    border: 2px solid transparent;
+}
+
+[page-structure-actions] {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0px;
+}
+
+button[page-structure-action="add"]:before {
+    content: '+';
+    color: white;
+    font-weight: bold;
+    font-size: 2em;
+    line-height: 1em;
+}
+
+button[page-structure-action="add"] {
+    background: forestgreen;
+    border-radius: 25px;
+    border: none;
+    width: 40px;
+    height: 40px;
+    margin: 0.5em;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+}
+
+button[page-structure-action="add"]:hover {
+    background: rgb(0, 120, 0);
+}
+
+button[data-block-action="save"] {
+    border-radius: 5px;
+    border: none;
+    background: forestgreen;
+    padding: 10px 8px
+}
+
+[model-name] {
+    margin-top: 5px;
+    border: 1px solid forestgreen;
+    padding: 5px;
+}
+
+[block-name] {
+    margin-top: 5px;
+    border: 1px solid green;
+}
+
+[model-action='new'] {
+    background: forestgreen;
+    border: none;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: auto;
+    margin: 0.5em;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+}
+
+button[data-block-action="delete"] {
+    border-radius: 5px;
+    border: none;
+    background: firebrick;
+    padding: 10px 8px
+}
