@@ -3,13 +3,13 @@
       integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
       crossorigin="anonymous" referrerpolicy="no-referrer"/>
 <link rel="icon" href="<?= Application::get()->toURL("/core/assets/favicon.png") ?>" sizes="32x32" type="image/png">
-<?php if(!Application::get()->isDevelopment()) { ?>
-    <link rel="stylesheet" href="<?= Application::get()->toURL("/core/assets/css/tailwind.css") ?>">
-<?php } ?>
-
-<?php if(Application::get()->isDevelopment()) { ?>
-    <script src="https://cdn.tailwindcss.com"></script>
-<?php } ?>
+<link rel="stylesheet" href="<?= Application::get()->toURL("/core/assets/css/tailwind.css") ?>">
+<?php //if(!Application::get()->isDevelopment()) { ?>
+<?php //} ?>
+<!---->
+<?php //if(Application::get()->isDevelopment()) { ?>
+<!--    <script src="https://cdn.tailwindcss.com"></script>-->
+<?php //} ?>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>

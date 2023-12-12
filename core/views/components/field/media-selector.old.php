@@ -5,48 +5,48 @@ foreach ($this->medias as $media) {
 }
 ?>
 <input type="hidden" name="<?= $this->name ?>" value="<?= $list_id ?>">
-<div class="w-full">
-    <div class="max-w-screen-lg mx-auto bg-gray-700 border border-gray-500 rounded-md text-white outline-none focus:border-gray-400 mb-1">
-        <div id="image-gallery" class="relative" x-data="{ imageTarget: null }">
-            <div id="image-slider" class="flex overflow-x-auto">
+<div class="dodocms-w-full">
+    <div class="dodocms-max-dodocms-w-screen-lg dodocms-mx-auto dodocms-bg-gray-700 dodocms-border dodocms-border-gray-500 dodocms-rounded-md dodocms-text-white dodocms-outline-none focus:dodocms-border-gray-400 dodocms-mb-1">
+        <div id="image-gallery" class="dodocms-relative" x-data="{ imageTarget: null }">
+            <div id="image-slider" class="dodocms-flex dodocms-overflow-x-auto">
                 <?php if(empty($this->medias)) { ?>
-                <div class="media relative w-full h-64 rounded-lg flex-shrink-0 shadow-lg flex group image-container hover:cursor-pointer">
-                    <p class="text-lg m-auto    <">Ajouter du contenu</p>
+                <div class="media dodocms-relative dodocms-w-full dodocms-h-64 dodocms-rounded-lg dodocms-flex-shrink-0 dodocms-shadow-lg dodocms-flex group image-container hover:cursor-pointer">
+                    <p class="dodocms-text-lg dodocms-m-auto    <">Ajouter du contenu</p>
                 </div>
                 <?php } ?>
                 <?php foreach ($this->medias as $media): ?>
-                <div class="media relative w-full h-64 rounded-lg flex-shrink-0 shadow-lg flex group image-container hover:cursor-pointer">
-                    <img class="h-full object-contain mx-auto" src="<?= $media->getSrc() ?>"
+                <div class="media dodocms-relative dodocms-w-full dodocms-h-64 dodocms-rounded-lg dodocms-flex-shrink-0 dodocms-shadow-lg dodocms-flex group image-container hover:cursor-pointer">
+                    <img class="dodocms-h-full object-contain dodocms-mx-auto" src="<?= $media->getSrc() ?>"
                          alt="<?= $media->getAlternativeText() ?>"
                          style="background-size: contain; background: url('<?= Application::toURL("/admin/assets/imgs/transparent.jpg") ?>'); object-fit: contain; object-position: center;">
-                    <div class="opacity-0 group-hover:opacity-100 absolute z-10 top-0 right-0 bottom-0 left-0 flex flex-col">
-                        <div class="ms-auto me-3 mt-3 flex flex-row gap-2"
+                    <div class="dodocms-opacity-0 groudodocms-p-hover:dodocms-opacity-100 dodocms-absolute dodocms-z-10 dodocms-top-0 dodocms-right-0 dodocms-bottom-0 dodocms-left-0 dodocms-flex dodocms-flex-col">
+                        <div class="dodocms-ms-auto dodocms-me-3 dodocms-mt-3 dodocms-flex dodocms-flex-row dodocms-p-2"
                              x-show="!(imageTarget != null && imageTarget === '<?= $media->getSrc() ?>')">
                             <a href="<?= Application::toURL($media->getDefaultSrc()) ?>"
-                               class="text-white bg-blue-500 h-8 w-8 rounded-full hover:bg-blue-600 flex">
-                                <i class="text-sm fa-solid fa-eye m-auto"></i>
+                               class="dodocms-text-white dodocms-bg-blue-500 dodocms-h-8 dodocms-w-8 dodocms-rounded-full hover:dodocms-bg-blue-600 dodocms-flex">
+                                <i class="dodocms-text-sm fa-solid fa-eye dodocms-m-auto"></i>
                             </a>
                             <button type="button" @click="imageTarget='<?= $media->getSrc() ?>'"
-                                    class="text-white bg-blue-500 h-8 w-8 rounded-full hover:bg-blue-600">
-                                <i class="text-sm fa-solid fa-edit"></i>
+                                    class="dodocms-text-white dodocms-bg-blue-500 dodocms-h-8 dodocms-w-8 dodocms-rounded-full hover:dodocms-bg-blue-600">
+                                <i class="dodocms-text-sm fa-solid fa-edit"></i>
                             </button>
                             <button type="button"
-                                    class="remove text-white bg-red-500 h-8 w-8 rounded-full hover:bg-red-600">
-                                <i class="text-sm fa-solid fa-minus"></i>
+                                    class="remove dodocms-text-white dodocms-bg-red-500 dodocms-h-8 dodocms-w-8 dodocms-rounded-full hover:dodocms-bg-red-600">
+                                <i class="dodocms-text-sm fa-solid fa-minus"></i>
                             </button>
                         </div>
                     </div>
-                    <div class="z-30 rounded-lg bg-gray-800 bg-opacity-75 p-3 absolute top-0 bottom-0 left-0 right-0 flex flex-col"
-                         x-show="imageTarget === '<?= $media->getSrc() ?>'" class="mt-2">
+                    <div class="dodocms-z-30 dodocms-rounded-lg dodocms-bg-gray-800 dodocms-bg-opacity-75 dodocms-p-3 dodocms-absolute dodocms-top-0 dodocms-bottom-0 dodocms-left-0 dodocms-right-0 dodocms-flex dodocms-flex-col"
+                         x-show="imageTarget === '<?= $media->getSrc() ?>'" class="dodocms-mt-2">
                         <input type="hidden" name="id" value="<?= $media->getId() ?>">
                         <?= Text::create()->label("Texte alternatif")->value($media->getAlternativeText())->name("alternativeText")->render() ?>
-                        <div class="mt-auto flex flex-row">
+                        <div class="dodocms-mt-auto dodocms-flex dodocms-flex-row">
                             <button type="button"
-                                    class="bg-gray-700 bg-opacity-50 hover:bg-opacity-100 border-[1px] border-gray-300 border-opacity-50 hover:border-opacity-75 py-2 px-3 rounded-md mt-auto"
+                                    class="dodocms-bg-gray-700 dodocms-bg-opacity-50 hover:dodocms-bg-opacity-100 dodocms-border-[1px] dodocms-border-gray-300 dodocms-border-opacity-50 hover:dodocms-border-opacity-75 dodocms-py-2 dodocms-px-3 dodocms-rounded-md dodocms-mt-auto"
                                     @click="imageTarget=null">Annuler
                             </button>
                             <button type="button"
-                                    class="save bg-blue-700 hover:bg-blue-800 py-2 px-3 rounded-md mt-auto ms-auto"
+                                    class="save dodocms-bg-blue-700 hover:dodocms-bg-blue-800 dodocms-py-2 dodocms-px-3 dodocms-rounded-md dodocms-mt-auto dodocms-ms-auto"
                                     @click="imageTarget=null">Enregistrer
                             </button>
                         </div>
@@ -55,11 +55,11 @@ foreach ($this->medias as $media) {
                 <?php endforeach; ?>
             </div>
             <button type="button" id="prev-button"
-                    class="hover:bg-blue-700 z-20 text-lg h-10 w-10 bg-blue-600 rounded-full absolute top-1/2 left-2 transform -translate-y-1/2 text-white hover:text-gray-200">
+                    class="hover:dodocms-bg-blue-700 dodocms-z-20 dodocms-text-lg dodocms-h-10 dodocms-w-10 dodocms-bg-blue-600 dodocms-rounded-full dodocms-absolute dodocms-top-1/2 dodocms-left-2 transform -translate-y-1/2 dodocms-text-white hover:dodocms-text-gray-200">
                 &larr;
             </button>
             <button type="button" id="next-button"
-                    class="hover:bg-blue-700 z-20 text-lg h-10 w-10 bg-blue-600 rounded-full absolute top-1/2 right-2 transform -translate-y-1/2 text-white hover:text-gray-200">
+                    class="hover:dodocms-bg-blue-700 dodocms-z-20 dodocms-text-lg dodocms-h-10 dodocms-w-10 dodocms-bg-blue-600 dodocms-rounded-full dodocms-absolute dodocms-top-1/2 dodocms-right-2 transform -translate-y-1/2 dodocms-text-white hover:dodocms-text-gray-200">
                 &rarr;
             </button>
         </div>

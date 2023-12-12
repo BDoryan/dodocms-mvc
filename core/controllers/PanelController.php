@@ -17,18 +17,18 @@ class PanelController extends AdminController
     {
         $this->sidebar = new Sidebar([
             new SidebarCategory(__("admin.panel.content_manager"), [
-                new SidebarSection("me-1 fa-solid fa-images", __('admin.panel.resources.title'), Routes::ADMIN_RESOURCES_MANAGER, [
-                    new SidebarSection("me-1 fa-solid fa-layer-group", __('admin.panel.dashboard.button.store_file'), Routes::ADMIN_TABLES_NEW),
+                new SidebarSection("dodocms-me-1 fa-solid fa-images", __('admin.panel.resources.title'), Routes::ADMIN_RESOURCES_MANAGER, [
+                    new SidebarSection("dodocms-me-1 fa-solid fa-layer-group", __('admin.panel.dashboard.button.store_file'), Routes::ADMIN_TABLES_NEW),
                 ]),
             ]),
             new SidebarCategory(__("admin.panel.admin_center"), [
-                new SidebarSection("me-1 fa-solid fa-file-lines", __('admin.panel.pages_manager.title'), Routes::getRoute(Routes::ADMIN_TABLES_TABLE_ENTRIES, ['table' => 'Page']), [
-                    new SidebarSection("me-1 fa-solid fa-layer-group", __('admin.panel.dashboard.button.store_file'), Routes::ADMIN_PAGES_MANAGER_NEW),
+                new SidebarSection("dodocms-me-1 fa-solid fa-file-lines", __('admin.panel.pages_manager.title'), Routes::getRoute(Routes::ADMIN_TABLES_TABLE_ENTRIES, ['table' => 'Page']), [
+                    new SidebarSection("dodocms-me-1 fa-solid fa-layer-group", __('admin.panel.dashboard.button.store_file'), Routes::ADMIN_PAGES_MANAGER_NEW),
                 ]),
             ]),
             new SidebarCategory(__("admin.panel.developer_center"), [
-                new SidebarSection("me-1 fa-solid fa-layer-group", __('admin.panel.table_management'), Routes::ADMIN_TABLES, [
-                    new SidebarSection("me-1 fa-solid fa-layer-group", __('admin.panel.table_management.new'), Routes::ADMIN_TABLES_NEW),
+                new SidebarSection("dodocms-me-1 fa-solid fa-layer-group", __('admin.panel.table_management'), Routes::ADMIN_TABLES, [
+                    new SidebarSection("dodocms-me-1 fa-solid fa-layer-group", __('admin.panel.table_management.new'), Routes::ADMIN_TABLES_NEW),
                 ]),
             ])
         ]);

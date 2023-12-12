@@ -5,32 +5,32 @@
         exit;
     }
 ?>
-<div class="flex-shrink-0 w-64 bg-gray-800">
-    <div class="flex flex-col h-full">
+<div class="dodocms-flex-shrink-0 dodocms-w-64 dodocms-bg-gray-800">
+    <div class="dodocms-flex dodocms-flex-col dodocms-h-full">
 
-        <div class="flex flex-col items-center justify-center py-3 bg-gray-900">
+        <div class="dodocms-flex dodocms-flex-col dodocms-items-center dodocms-justify-center dodocms-py-3 dodocms-bg-gray-900">
             <img width="60" height="60" src="<?= Application::get()->toURL("/core/assets/imgs/logo.png") ?>">
-            <span class="text-white text-xl font-semibold"><?= __("dashboard") ?></span>
+            <span class="dodocms-text-white dodocms-text-xl dodocms-font-semibold"><?= __("dashboard") ?></span>
         </div>
-        <nav class="flex-1 overflow-y-auto">
+        <nav class="dodocms-flex-1 dodocms-overflow-y-auto">
             <?php
             /** @var SidebarCategory $category */
             foreach ($sidebar->getCategories() as $category):
                 ?>
-                <span class="px-4 flex items-center mt-4 mb-1 text-stone-300 text-sm"><?= $category->getLabel() ?></span>
+                <span class="dodocms-px-4 dodocms-flex dodocms-items-center dodocms-mt-4 dodocms-mb-1 dodocms-text-stone-300 dodocms-text-sm"><?= $category->getLabel() ?></span>
                 <?php
                 /** @var SidebarSection $section */
                 foreach ($category->getSections() as $section):
                     ?>
                     <a href="<?= Application::get()->toURL($section->getHref()) ?>"
-                       class="flex gap-2 items-center py-2 px-4 text-gray-300 <?= $section->isActive() ? "bg-gray-700" :"" ?> hover:bg-gray-700 hover:text-white font-semibold text-base">
-                        <i style="width: 20px;" class="flex justify-center items-center <?= $section->getIcon() ?>"></i>
+                       class="dodocms-flex dodocms-p-2 dodocms-items-center dodocms-py-2 dodocms-px-4 dodocms-text-gray-300 <?= $section->isActive() ? "dodocms-bg-gray-700" :"" ?> hover:dodocms-bg-gray-700 hover:dodocms-text-white dodocms-font-semibold dodocms-text-base">
+                        <i style="width: 20px;" class="dodocms-flex dodocms-justify-center dodocms-items-center <?= $section->getIcon() ?>"></i>
                         <?= $section->getLabel() ?>
                     </a>
                 <?php endforeach; ?>
             <?php endforeach; ?>
         </nav>
-        <div class="text-white px-3 text-center italic py-2 text-md font-semibold bg-gray-900">
+        <div class="dodocms-text-white dodocms-px-3 dodocms-text-center italic dodocms-py-2 dodocms-text-md dodocms-font-semibold dodocms-bg-gray-900">
             <?= DodoCMS::VERSION ?>
         </div>
     </div>

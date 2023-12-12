@@ -60,11 +60,11 @@ class BlockModel extends Model
     {
         $fields = parent::getFields();
         $fields['name'] = [
-            'size' => 'w-full',
+            'size' => 'dodocms-w-full',
             "field" => Text::create()->name("name")->label(__('admin.panel.blocks_manager.fields.label.name'))->value($this->name)
         ];
         $fields['path'] = [
-            'size' => 'w-full',
+            'size' => 'dodocms-w-full',
             "field" => Text::create()->name("path")->label(__('admin.panel.blocks_manager.fields.label.path'))->value($this->name)
         ];
         return $fields;

@@ -1,25 +1,25 @@
-<div class="border-gray-500 rounded-lg border-[1px] overflow-x-auto">
-    <table class="w-full rounded-lg bg-gray-800 overflow-hidden text-sm">
-        <thead class="rounded-md border-gray-500 border-b">
-        <tr class="rounded-md border-gray-500 border-b">
+<div class="dodocms-border-gray-500 dodocms-rounded-lg dodocms-border-[1px] dodocms-overflow-x-auto">
+    <table class="dodocms-w-full dodocms-rounded-lg dodocms-bg-gray-800 dodocms-overflow-dodocms-hidden dodocms-text-sm">
+        <thead class="dodocms-rounded-md dodocms-border-gray-500 dodocms-border-b">
+        <tr class="dodocms-rounded-md dodocms-border-gray-500 dodocms-border-b">
             <?php foreach ($this->columns as $col => $column) { ?>
-                <th class="px-4 py-2 text-start border-gray-500 <?= $col < (count($this->columns) - 1) ? "border-e" : "" ?>"><?php echo $column; ?></th>
+                <th class="dodocms-px-4 dodocms-py-2 dodocms-text-start dodocms-border-gray-500 <?= $col < (count($this->columns) - 1) ? "dodocms-border-e" : "" ?>"><?php echo $column; ?></th>
             <?php } ?>
         </tr>
         </thead>
-        <tbody class="mx-2">
+        <tbody class="dodocms-mx-2">
         <?php if (!empty($this->rows)) { ?>
             <?php foreach ($this->rows as $line => $row) { ?>
-                <tr class="odd:bg-gray-800 odd:bg-gray-900 text-start py-5">
+                <tr class="odd:dodocms-bg-gray-900 dodocms-text-start dodocms-py-5">
                     <?php foreach ($row as $col => $data) { ?>
-                        <td class="whitespace-nowrap py-2 px-4 border-gray-500 <?= $line > 0 ? "border-t" : "" ?> <?= $col < (count($this->columns) - 1) ? "border-e" : "" ?>"><?php echo $data; ?></td>
+                        <td class="dodocms-whitespace-nowrap dodocms-py-2 dodocms-px-4 dodocms-border-gray-500 <?= $line > 0 ? "dodocms-border-t" : "" ?> <?= $col < (count($this->columns) - 1) ? "dodocms-border-e" : "" ?>"><?php echo $data; ?></td>
                     <?php } ?>
                 </tr>
             <?php } ?>
         <?php } else { ?>
             <tr>
                 <td colspan="<?= count($this->columns) ?>"
-                    class="text-xl text-center py-5 bg-gray-800 border-gray-500 rounded-b-lg"><?= __("components.table.rows.empty") ?></td>
+                    class="dodocms-text-xl dodocms-text-center dodocms-py-5 dodocms-bg-gray-800 dodocms-border-gray-500 dodocms-rounded-b-lg"><?= __("components.table.rows.empty") ?></td>
             </tr>
         <?php } ?>
         </tbody>

@@ -1,13 +1,13 @@
-<div class="relative group w-full bg-gray-700 px-3 py-2 border border-gray-500 rounded-md text-white outline-none focus:border-gray-400 mb-1 h-[300px] flex flex-col overflow-hidden">
-    <div class="opacity-0 group-hover:opacity-100 group-hover:bg-gray-400/[.05] absolute top-0 bottom-0 left-0 right-0 flex flex-col">
-        <div class="m-auto flex flex-col text-center">
-            <i class="fa-solid fa-plus-circle text-4xl text-green-600"></i>
-            <span class="text-gray-300 text-opacity-75">
+<div class="dodocms-relative group dodocms-w-full dodocms-bg-gray-700 dodocms-px-3 dodocms-py-2 dodocms-border dodocms-border-gray-500 dodocms-rounded-md dodocms-text-white dodocms-outline-none focus:dodocms-border-gray-400 dodocms-mb-1 h-[300px] dodocms-flex dodocms-flex-col dodocms-overflow-dodocms-hidden">
+    <div class="dodocms-opacity-0 groudodocms-p-hover:dodocms-opacity-100 groudodocms-p-hover:dodocms-bg-gray-400/[.05] dodocms-absolute dodocms-top-0 dodocms-bottom-0 dodocms-left-0 dodocms-right-0 dodocms-flex dodocms-flex-col">
+        <div class="dodocms-m-auto dodocms-flex dodocms-flex-col dodocms-text-center">
+            <i class="fa-solid fa-plus-circle dodocms-text-4xl dodocms-text-green-600"></i>
+            <span class="dodocms-text-gray-300 dodocms-text-dodocms-opacity-75">
             Appliquer une resource pour cet élément.
         </span>
         </div>
     </div>
-    <div class="group-hover:opacity-0 m-auto text-gray-300 text-opacity-75">
+    <div class="groudodocms-p-hover:dodocms-opacity-0 dodocms-m-auto dodocms-text-gray-300 dodocms-text-dodocms-opacity-75">
         Vous avez défini aucune ressources pour cet élément.
     </div>
 </div>

@@ -122,15 +122,15 @@ class ResourceModel extends Model
     {
         $fields = parent::getFields();
         $fields["name"] = [
-            "size" => "w-4/12",
+            "size" => "dodocms-w-4/12",
             "field" => Text::create()->name("name")->label("Nom de l'image")->value($this->getName() ?? "")->required(),
         ];
         $fields["src"] = [
-            "size" => "w-4/12",
+            "size" => "dodocms-w-4/12",
             "field" => Text::create()->name("src")->label("Chemin de l'image")->value($this->getSrc() ?? "")->required(),
         ];
         $fields["alternativeText"] = [
-            "size" => "w-4/12",
+            "size" => "dodocms-w-4/12",
             "field" => Text::create()->name("alternativeText")->label("Texte alternatif de l'image")->value($this->getAlternativeText() ?? "")->required(),
         ];
         return $fields;

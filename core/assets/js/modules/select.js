@@ -29,18 +29,18 @@ $(document).on("keydown", ".select", function (e) {
             const textDisplay = $(this).find(".select-text");
             textDisplay.text(text);
 
-            dropdown.addClass("hidden");
+            dropdown.addClass("dodocms-hidden");
         }
     }
 });
 
 $(document).on("click", ".select-button", function () {
-    $(this).closest(".select").find(".select-menu").toggleClass("hidden");
+    $(this).closest(".select").find(".select-menu").toggleClass("dodocms-hidden");
 });
 
 $(document).on("click", ".select-menu li", function () {
     const dropmenu = $(this).closest(".select-menu");
-    dropmenu.toggleClass("hidden");
+    dropmenu.toggleClass("dodocms-hidden");
 
     const select = $(this).closest(".select").find("select");
     const value = $(this).data("value");
@@ -53,6 +53,6 @@ $(document).on("click", ".select-menu li", function () {
 
 $(document).on("click", function (e) {
     if (!$(e.target).closest(".select-button").length) {
-        $(".select-menu").addClass("hidden");
+        $(".select-menu").addClass("dodocms-hidden");
     }
 });

@@ -197,7 +197,7 @@ abstract class Model extends CMSObjectHydration
         $fields = [];
         if (!empty($this->language)) {
             $fields["language"] = [
-                "size" => "w-full",
+                "size" => "dodocms-w-full",
                 "field" => Text::create()->name("language")->label("Langue")->value($this->language)
             ];
         }

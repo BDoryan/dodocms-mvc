@@ -1,14 +1,14 @@
 <form data-type="attribute" id="attribute-form"
-      class="bg-gray-800 shadow-lg rounded-xl flex flex-row flex-wrap p-5 gap-2 relative">
-    <div class="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2">
+      class="dodocms-bg-gray-800 dodocms-shadow-lg dodocms-rounded-xl dodocms-flex dodocms-flex-row dodocms-flex-wrap dodocms-p-5 dodocms-p-2 dodocms-relative">
+    <div class="dodocms-absolute dodocms-top-0 dodocms-right-0 transform translate-x-1/2 -translate-y-1/2">
         <button type="button" id="remove-attribute"
-                class="h-10 w-10 bg-red-700 hover:bg-red-800 hover:border hover:border-red-700 text-xl rounded-full flex items-center justify-center text-white">
-            <i class="me-1 fa-solid fa-trash"></i>
+                class="dodocms-h-10 dodocms-w-10 dodocms-bg-red-700 hover:dodocms-bg-red-800 hover:dodocms-border hover:dodocms-border-red-700 dodocms-text-xl dodocms-rounded-full dodocms-flex dodocms-items-center dodocms-justify-center dodocms-text-white">
+            <i class="fa-solid fa-trash"></i>
         </button>
     </div>
-    <div class="flex flex-wrap gap-y-3 -mx-2 w-full">
-        <div class="w-4/12 px-2">
-            <?= Text::create()
+    <div class="dodocms-flex dodocms-flex-wrap dodocms-gap-y-3 -dodocms-mx-2 dodocms-w-full">
+        <div class="dodocms-w-4/12 dodocms-px-2">
+            <?php Text::create()
                 ->label(__('admin.panel.tables.table.attribute.name'))
                 ->readonly(!empty($table_name))
                 ->value(!empty($attribute) ? $attribute->getName() : "")
@@ -18,8 +18,8 @@
                 ->placeholder("name")
                 ->render(); ?>
         </div>
-        <div class="w-4/12 px-2">
-            <?= Select::create()
+        <div class="dodocms-w-4/12 dodocms-px-2">
+            <?php Select::create()
                 ->placeholder(__('admin.panel.tables.table.attribute.type_attribut'))
                 ->selected(!empty($attribute) ? $attribute->getType() : "VARCHAR")
                 ->label(__('admin.panel.tables.table.attribute.type_attribut'))
@@ -28,8 +28,8 @@
                 ->options(Select::toCombine(TableAttribute::TYPES, function ($type) { return $type; } ))
                 ->render() ?>
         </div>
-        <div class="w-4/12 px-2">
-            <?= Text::create()
+        <div class="dodocms-w-4/12 dodocms-px-2">
+            <?php Text::create()
                 ->label(__('admin.panel.tables.table.attribute.length'))
                 ->type("number")
                 ->value(!empty($attribute) ? $attribute->getLength()."" : "")
@@ -38,16 +38,16 @@
                 ->placeholder("255")
                 ->render(); ?>
         </div>
-        <div class="w-6/12 px-2">
-            <?= CheckBox::create()
+        <div class="dodocms-w-6/12 dodocms-px-2">
+            <?php CheckBox::create()
                 ->label(__('admin.panel.tables.table.attribute.allow_undefined_values'))
                 ->checked(!empty($attribute) ? $attribute->isNullable() : false)
                 ->name("attribute_nullable")
                 ->placeholder("Activer les valeurs non définies")
                 ->render() ?>
         </div>
-        <div class="w-6/12 px-2">
-            <?= CheckBox::create()
+        <div class="dodocms-w-6/12 dodocms-px-2">
+            <?php CheckBox::create()
                 ->label(__('admin.panel.tables.table.attribute.is_this_attribute_a_primary_key'))
                 ->readonly(!empty($table_name) && !empty($table))
                 ->checked(!empty($attribute) ? $attribute->isPrimaryKey() : false)
@@ -55,8 +55,8 @@
                 ->placeholder("Utiliser en tant que clé primaire")
                 ->render() ?>
         </div>
-        <div class="w-6/12 px-2">
-            <?= CheckBox::create()
+        <div class="dodocms-w-6/12 dodocms-px-2">
+            <?php CheckBox::create()
                 ->label(__('admin.panel.tables.table.attribute.do_you_want_to_use_auto_increment'))
                 ->readonly(!empty($attribute) && !$attribute->isPrimaryKey())
                 ->checked(!empty($attribute) ? $attribute->isAutoIncrement() : false)
@@ -64,8 +64,8 @@
                 ->placeholder("Activer l'auto-incrémentation")
                 ->render() ?>
         </div>
-        <div class="w-6/12 px-2">
-            <?= Text::create()
+        <div class="dodocms-w-6/12 dodocms-px-2">
+            <?php Text::create()
                 ->label(__('admin.panel.tables.table.attribute.default_value'))
                 ->type("text")
                 ->value(!empty($attribute) ? $attribute->getDefaultValue() : "")
@@ -74,8 +74,8 @@
                 ->placeholder("CURRENT_TIMESTAMP")
                 ->render(); ?>
         </div>
-        <div class="w-full px-2">
-            <?= Select::create()
+        <div class="dodocms-w-full dodocms-px-2">
+            <?php Select::create()
                 ->placeholder(__('admin.panel.tables.table.attribute.select_a_table'))
                 ->disabled(!empty($table_name) && !empty($table) && !empty($attribute->getAssociation()))
                 ->undefinable(true)

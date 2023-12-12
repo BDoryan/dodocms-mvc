@@ -7,8 +7,8 @@
         value="<?= $this->value ?? "" ?>"
         <?= $this->required ? "required" : "" ?>
         placeholder="<?= $this->placeholder ?? "" ?> "
-        class="w-full bg-gray-700 px-3 py-2 border border-gray-500 rounded-md text-white outline-none focus:border-gray-400 mb-1"
+        class="dodocms-w-full dodocms-bg-gray-700 dodocms-px-3 dodocms-py-2 dodocms-border dodocms-border-gray-500 dodocms-rounded-md dodocms-text-white dodocms-outline-none focus:dodocms-border-gray-400 dodocms-mb-1"
 >
 <?php if($this->useValidator): ?>
-<span class="text-red-700 hidden" id="validation-message"></span>
+<span class="dodocms-text-red-700 dodocms-hidden" id="validation-message"></span>
 <?php endif; ?>

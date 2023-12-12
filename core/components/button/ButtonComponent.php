@@ -18,7 +18,10 @@ abstract class ButtonComponent extends Component
 
     public function style(string $background_color, string $text_color, int $background_level = 700, $outline = false): ButtonComponent
     {
-        $this->class = ($outline ? "border-[2px]" : "border-[2px] border-$background_color-$background_level hover:border-$background_color-".($background_level + 100))." " .($outline ? "border" : "bg")."-$background_color-$background_level hover:".($outline ? "border" : "bg")."-$background_color-" . ($background_level + 100) . " text-".($outline ? "$background_color-".($background_level - 100) . " hover:text-$background_color-$background_level" : $text_color)." text-center px-3 py-2 rounded-lg shadow-sm font-semibold uppercase".$this->customClass;
+        $backgroundClass = $outline ? "dodocms-border-$background_color-500" : "dodocms-bg-$background_color-$background_level hover:dodocms-bg-$background_color-" . ($background_level + 100);
+        $textClass = $outline ? "dodocms-text-$background_color-400 hover:dodocms-text-$background_color-500" : "dodocms-text-$text_color";
+
+        $this->class = "$backgroundClass $textClass dodocms-text-center dodocms-px-3 dodocms-py-2 dodocms-rounded-lg dodocms-shadow-sm dodocms-font-semibold dodocms-uppercase" . $this->customClass;
         return $this;
     }
 

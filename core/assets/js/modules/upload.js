@@ -22,20 +22,20 @@ Application.get().addRunner(() => {
 
     function disableStartButton() {
         start.prop("disabled", true);
-        start.addClass("opacity-50 cursor-not-allowed hover:none")
+        start.addClass("dodocms-opacity-50 dodocms-cursor-not-allowed hover:dodocms-none")
     }
 
     function enableStartButton() {
         start.prop("disabled", false);
-        start.removeClass("opacity-50 cursor-not-allowed hover:none")
+        start.removeClass("dodocms-opacity-50 dodocms-cursor-not-allowed hover:dodocms-none")
     }
 
     function hideDropzone() {
-        dropzone.addClass("hidden");
+        dropzone.addClass("dodocms-hidden");
     }
 
     function showDropzone() {
-        dropzone.removeClass("hidden");
+        dropzone.removeClass("dodocms-hidden");
     }
 
     async function sendFile(formData, onprogress) {
@@ -102,7 +102,7 @@ Application.get().addRunner(() => {
                 const progressBar = progression.find(".progress-bar");
                 const progressText = progressBar.find(".progress-number");
 
-                progression.removeClass("hidden");
+                progression.removeClass("dodocms-hidden");
                 const result = await sendFile(formData, function (progress) {
                     progress = progress.toFixed(0);
                     progressBar.css("width", progress + "%");
@@ -162,30 +162,30 @@ Application.get().addRunner(() => {
     function hideEdition(target) {
         let edition = target.find(".edition");
 
-        edition.addClass("hidden");
+        edition.addClass("dodocms-hidden");
     }
 
     function showEdition(target) {
         let edition = target.find(".edition");
 
-        edition.removeClass("hidden");
+        edition.removeClass("dodocms-hidden");
     }
 
     function showActionBar(target) {
         let action_bar = target.find(".action-bar");
 
-        action_bar.removeClass("hidden");
+        action_bar.removeClass("dodocms-hidden");
     }
 
     function hideActionBar(target) {
         let action_bar = target.find(".action-bar");
 
-        action_bar.addClass("hidden");
+        action_bar.addClass("dodocms-hidden");
     }
 
     function isToggled(target) {
         let edition = target.find(".edition");
-        return !edition.hasClass("hidden");
+        return !edition.hasClass("dodocms-hidden");
     }
 
     function closeEditionOpened() {
@@ -369,7 +369,7 @@ Application.get().addRunner(() => {
 
     window.openUploadModal = (multiple = true, target = "") => {
         const elements = $('.modal-background, .modal-content');
-        elements.removeClass('hidden')
+        elements.removeClass('dodocms-hidden')
 
         const input = $(elements).find('#dropzone-file');
         input.prop('multiple', multiple);
@@ -379,7 +379,7 @@ Application.get().addRunner(() => {
     const closeUploadModal = () => {
         target_field = null;
         const elements = $('.modal-background, .modal-content');
-        elements.addClass('hidden')
+        elements.addClass('dodocms-hidden')
     }
     window.closeUploadModal = closeUploadModal;
 
@@ -404,9 +404,9 @@ Application.get().addRunner(() => {
         const empty = $(resources_items).closest('.resources-selector').find(".resource-selector-empty");
 
         if (resources_items.children().length > 0) {
-            empty.addClass("hidden");
+            empty.addClass("dodocms-hidden");
         } else {
-            empty.removeClass("hidden");
+            empty.removeClass("dodocms-hidden");
         }
     }
 

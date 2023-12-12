@@ -1,21 +1,21 @@
 <?php view(Application::get()->toRoot('/core/views/components/toast/toast.template.php')) ?>
 <?php view(__DIR__ . '/debug.php') ?>
-<div class="bg-gray-100 font-sans leading-normal tracking-normal min-h-screen">
-    <div class="flex h-screen bg-gray-200">
+<div class="dodocms-bg-gray-100 dodocms-font-sans dodocms-leading-normal dodocms-tracking-normal dodocms-min-h-screen">
+    <div class="dodocms-flex dodocms-h-screen dodocms-bg-gray-200">
         <?= $header ?? '' ?>
         <?php view(__DIR__ . '/sidebar.php', ["sidebar" => $sidebar ?? null]) ?>
-        <div class="flex-1 flex flex-col overflow-hidden">
-            <header class="bg-gray-800 text-white shadow">
-                <div class="flex items-center justify-between">
-                    <span class="ps-4 text-lg font-semibold"><?= __("admin.panel.welcome", ["username" => 'Developper']) ?></span>
+        <div class="dodocms-flex-1 dodocms-flex dodocms-flex-col dodocms-overflow-dodocms-hidden">
+            <header class="dodocms-bg-gray-800 dodocms-text-white dodocms-shadow">
+                <div class="dodocms-flex dodocms-items-center dodocms-justify-between">
+                    <span class="dodocms-ps-4 dodocms-text-lg dodocms-font-semibold"><?= __("admin.panel.welcome", ["username" => 'Developper']) ?></span>
                     <a href="<?= Application::get()->toURL("/admin/logout") ?>"
-                       class="text-gray-600 focus:outline-none bg-red-600 hover:bg-red-700 text-white font-semibold uppercase p-4">
-                        <i class="me-1 fa-solid fa-sign-out"></i> <?= __("admin.logout") ?>
+                       class="focus:dodocms-outline-none dodocms-bg-red-600 hover:dodocms-bg-red-700 dodocms-text-white dodocms-font-semibold dodocms-uppercase dodocms-p-4">
+                        <i class="dodocms-me-1 fa-solid fa-sign-out"></i> <?= __("admin.logout") ?>
                     </a>
                 </div>
             </header>
-            <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-700 text-white">
-                <div class="px-8 py-8">
+            <main class="dodocms-flex-1 dodocms-overflow-x-dodocms-hidden dodocms-overflow-y-auto dodocms-bg-gray-700 dodocms-text-white">
+                <div class="dodocms-px-8 dodocms-py-8">
                     <?= $content ?? '' ?>
                 </div>
             </main>
@@ -23,7 +23,7 @@
         <?= $footer ?? '' ?>
     </div>
 </div>
-<div class="toast-container fixed bottom-0 right-0 items-end p-4 flex flex-col gap-3 justify-end overflow-hidden z-50">
+<div class="toast-container dodocms-fixed dodocms-bottom-0 dodocms-right-0 dodocms-items-end dodocms-p-4 dodocms-flex dodocms-flex-col dodocms-gap-3 dodocms-justify-end dodocms-overflow-hidden dodocms-z-50">
     <!-- Render all toast -->
 </div>
 <?php array_map(function ($toast) { $toast->render(); }, $toasts ?? []); ?>

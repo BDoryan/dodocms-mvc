@@ -141,27 +141,27 @@ class PageModel extends ModelAssociated
     {
         $fields = parent::getFields();
         $fields["name"] = [
-            "size" => "w-full",
+            "size" => "dodocms-w-full",
             "field" => Text::create()->name("name")->label(__('admin.panel.pages_manager.fields.label.name'))->value($this->name)
         ];
         $fields["seo_title"] = [
-            "size" => "w-full",
+            "size" => "dodocms-w-full",
             "field" => Text::create()->name("seo_title")->label(__('admin.panel.pages_manager.fields.label.seo_title'))->value($this->seo_title)
         ];
         $fields["seo_description"] = [
-            "size" => "w-full",
+            "size" => "dodocms-w-full",
             "field" => Text::create()->name("seo_description")->label(__('admin.panel.pages_manager.fields.label.seo_description'))->value($this->seo_description)
         ];
         $fields["seo_keywords"] = [
-            "size" => "w-full",
+            "size" => "dodocms-w-full",
             "field" => Text::create()->name("seo_keywords")->label(__('admin.panel.pages_manager.fields.label.seo_keywords'))->value($this->seo_keywords)
         ];
         $fields["slug"] = [
-            "size" => "w-full",
+            "size" => "dodocms-w-full",
             "field" => Text::create()->name("slug")->label(__('admin.panel.pages_manager.fields.label.slug'))->value($this->slug)
         ];
 //        $fields["favicon"] = [
-//            "size" => "w-full",
+//            "size" => "dodocms-w-full",
 //            "field" => ResourceSelector::create()->name("favicon")->label(__('admin.panel.pages_manager.fields.label.favicon'))->resources(isset($this->favicon) ? [$this->favicon] : [])
 //        ];
         return $fields;

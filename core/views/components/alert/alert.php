@@ -1,9 +1,9 @@
-<div class='my-0 bg-<?= self::STYLES[$this->type] ?>-700 border border-<?= self::STYLES[$this->type] ?>-800 text-<?= self::STYLES[$this->type] ?>-50 px-3 py-3 rounded relative'
+<div class='dodocms-my-0 dodocms-bg-<?= self::STYLES[$this->type] ?>-700 dodocms-border dodocms-border-<?= self::STYLES[$this->type] ?>-800 dodocms-text-<?= self::STYLES[$this->type] ?>-50 dodocms-px-3 dodocms-py-3 dodocms-rounded dodocms-relative'
      role='alert'>
     <?php if (!empty($this->title)) { ?>
-        <div class="border-b-[1px] border-gray-200 border-opacity-25 mb-4">
-            <h1 class="text-lg font-bold uppercase pb-2"><?= $this->title ?></h1>
+        <div class="dodocms-border-b-[1px] dodocms-border-gray-200 dodocms-border-opacity-25 dodocms-mb-4">
+            <h1 class="dodocms-text-lg dodocms-font-bold dodocms-uppercase pb-2"><?= $this->title ?></h1>
         </div>
     <?php } ?>
-    <span class='block sm:inline'><?= $this->message ?></span>
+    <span class='dodocms-block sm:inline'><?= $this->message ?></span>
 </div>

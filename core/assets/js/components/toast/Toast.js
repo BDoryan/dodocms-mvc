@@ -21,9 +21,8 @@ class Toast extends Component {
         }
 
         const close = (toast) => {
-            toast.removeClass('translate-x-0')
+            toast.addClass('dodocms-translate-x-full');
             // get toast width
-            toast.addClass('translate-x-['+(toast.width() + 150)+'px]');
             setTimeout(() => {
                 toast.remove()
             }, 750);
@@ -33,12 +32,14 @@ class Toast extends Component {
 
         toast.find('.toast-title').text(this.title);
         toast.find('.toast-message').text(this.message);
-        toast.addClass(`bg-${bgColors[this.type]}-700`);
-        toast.removeClass('hidden');
+        toast.addClass(`dodocms-bg-${bgColors[this.type]}-700`);
+        toast.removeClass('dodocms-hidden');
         toastContainer.append(toast);
         setTimeout(() => {
-            toast.removeClass('opacity-0');
-            toast.addClass('translate-x-0');
+            console.log('add class')
+            toast.removeClass('dodocms-opacity-0');
+            toast.removeClass('dodocms-translate-x-full');
+            console.log(toast)
             setTimeout(() => {
                 close(toast);
             }, this.timeout);
