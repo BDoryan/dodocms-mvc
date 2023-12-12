@@ -19,7 +19,7 @@ foreach ($this->medias as $media) {
                     <img class="dodocms-h-full object-contain dodocms-mx-auto" src="<?= $media->getSrc() ?>"
                          alt="<?= $media->getAlternativeText() ?>"
                          style="background-size: contain; background: url('<?= Application::toURL("/admin/assets/imgs/transparent.jpg") ?>'); object-fit: contain; object-position: center;">
-                    <div class="dodocms-opacity-0 groudodocms-p-hover:dodocms-opacity-100 dodocms-absolute dodocms-z-10 dodocms-top-0 dodocms-right-0 dodocms-bottom-0 dodocms-left-0 dodocms-flex dodocms-flex-col">
+                    <div class="dodocms-opacity-0 dodocms-group-p-hover:dodocms-opacity-100 dodocms-absolute dodocms-z-10 dodocms-top-0 dodocms-right-0 dodocms-bottom-0 dodocms-left-0 dodocms-flex dodocms-flex-col">
                         <div class="dodocms-ms-auto dodocms-me-3 dodocms-mt-3 dodocms-flex dodocms-flex-row dodocms-p-2"
                              x-show="!(imageTarget != null && imageTarget === '<?= $media->getSrc() ?>')">
                             <a href="<?= Application::toURL($media->getDefaultSrc()) ?>"

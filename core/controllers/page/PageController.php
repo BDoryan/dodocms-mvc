@@ -34,7 +34,8 @@ class PageController extends DOMController
             $block_content = fetch($view, ['block' => $block]);
 
             $document = new DOMDocument();
-            $document->loadHTML(/*'<?xml encoding="UTF-8">' . */$block_content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+//            echo htmlspecialchars($block_content);
+            $document->loadHTML(/*'<?xml encoding="UTF-8">' . */$block_content, LIBXML_NOERROR | LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
 
             // apply custom data to the block
             $custom_data = $page_structure->getCustom();
@@ -80,6 +81,8 @@ class PageController extends DOMController
                 }
             }
 
+//            echo htmlspecialchars($document->saveHTML());
+//            exit;
             $block_content = $document->saveHTML();
 
             if ($isAdmin) {
@@ -99,6 +102,13 @@ class PageController extends DOMController
         }
 
         $content = ob_get_clean();
+        if($isAdmin) {
+            $content .= '
+            <div page-structure-actions>
+                <button page-structure-action="add"></button>
+            </div>
+        ';
+        }
 
         $this->header = $this->fetch("header");
         $this->footer = $this->fetch("footer");

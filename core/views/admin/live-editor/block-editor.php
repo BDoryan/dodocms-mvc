@@ -17,8 +17,3 @@ if(!isset($block) || !isset($page_structure)) {
         <button data-block-action="save"><?= __('live-editor.block.save') ?></button>
     </div>
 </div>
-<?php if($isLast ?? false) {  ?>
-    <div page-structure-actions>
-        <button page-structure-action="add"></button>
-    </div>
-<?php } ?>

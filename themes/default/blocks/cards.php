@@ -10,8 +10,8 @@
             ?>
             <div class="col-4">
                 <div entity-id="<?= $article->getId() ?>" class="card shadow-sm">
-                    <img src="<?= $article->getIllustrationResource()->getSrc() ?>"
-                         class="object-fit-contain bd-placeholder-img card-img-top" width="100%" height="225" alt="">
+                    <img src="<?= $article->getIllustrationResource() !== null ? $article->getIllustrationResource()->getSrc() : '' ?>"
+                         class="object-fit-contain bd-placeholder-img card-img-top" width="100%" style="height: 225px;" alt="">
                     <div class="card-body bg-secondary">
                         <h1 editable-model-data="title"><?= $article->getTitle() ?></h1>
                         <p class="card-text" editable-model-data="subtitle"><?= $article->getSubtitle() ?></p>

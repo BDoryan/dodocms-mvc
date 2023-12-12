@@ -46,6 +46,11 @@ class ApiModelController extends ApiController
 
             $post_data = array_slice($_POST, 0);
 
+            foreach ($post_data as $key => $value) {
+                if (strpos($value, '<br type="_moz">') !== false)
+                    $post_data[$key] = str_replace('<br type="_moz">', '', $value);
+            }
+
             if (!empty($post_data)) {
                 if (isset($entry_id))
                     $model->id($entry_id);
