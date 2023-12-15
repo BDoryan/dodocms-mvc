@@ -27,6 +27,7 @@ class Application
     private ?Database $database = null;
     private Logger $logger;
     private Theme $theme;
+    private array $vue_components = [];
 
     public function __construct(string $root = '', string $url = '')
     {
@@ -41,6 +42,23 @@ class Application
 
         self::$application = $this;
         $this->theme = new Theme( "default");
+    }
+
+    public function getVueComponents(): array {
+        return $this->vue_components;
+    }
+
+    public function addVueComponent(VueComponent $component) {
+        $this->vue_components[] = $component;
+    }
+
+    public function removeVueComponent(VueComponent $component) {
+        $this->vue_components = array_filter(
+            $this->vue_components,
+            function ($component_) use ($component) {
+                return $component_ !== $component;
+            }
+        );
     }
 
     /**
@@ -85,6 +103,21 @@ class Application
         $this->logger->info("Error and exception handler has been initialized !");
     }
 
+    private function initVueComponents() {
+        $this->addVueComponent(
+            new VueComponent(
+                $this->toRoot('/core/views/admin/vue/resource-item.php'),
+                $this->toURL('/core/assets/js/vue/ResourceItem.js')
+            )
+        );
+        $this->addVueComponent(
+            new VueComponent(
+                $this->toRoot('/core/views/admin/vue/resource-viewer.php'),
+                $this->toURL('/core/assets/js/vue/ResourceViewer.js')
+            )
+        );
+    }
+
     public function errorHandler($errno, $errstr, $errfile, $errline): bool
     {
         view($this->toRoot("/core/views/error.php"), [
@@ -123,6 +156,8 @@ class Application
             $this->init();
             $this->logger->debug("Application->loadAdminPanel();");
             $this->loadAdminPanel();
+            $this->logger->debug("Application->initVueComponents();");
+            $this->initVueComponents();
 
             $this->logger->debug("dispatch();");
             if ($this->router->dispatch()) {

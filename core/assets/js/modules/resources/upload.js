@@ -1,4 +1,4 @@
-import Toast from "../components/toast/Toast.js";
+import Toast from "../../components/toast/Toast.js";
 
 Application.get().addRunner(() => {
     const translations = DODOCMS_APPLICATION.getI18n();
@@ -208,16 +208,6 @@ Application.get().addRunner(() => {
         }
     }
 
-    function toggleEdition(target) {
-        if (!isToggled(target)) {
-            showEdition(target);
-            hideActionBar(target);
-        } else {
-            hideEdition(target);
-            showActionBar(target);
-        }
-    }
-
     function addFile(target_files, multiple = false) {
         if (!multiple) {
             selected_files = [];
@@ -228,7 +218,7 @@ Application.get().addRunner(() => {
             let file = target_files[i];
             const url = URL.createObjectURL(file);
 
-            let template = $("#image").html();
+            let template = $("#resource").html();
             let element = $(template);
 
             element.find("img").attr("src", url);
@@ -368,7 +358,7 @@ Application.get().addRunner(() => {
     let target_field = null;
 
     window.openUploadModal = (multiple = true, target = "") => {
-        const elements = $('.modal-background, .modal-content');
+        const elements = $('.modal-upload-background, .modal-upload-content');
         elements.removeClass('dodocms-hidden')
 
         const input = $(elements).find('#dropzone-file');
@@ -378,7 +368,7 @@ Application.get().addRunner(() => {
 
     const closeUploadModal = () => {
         target_field = null;
-        const elements = $('.modal-background, .modal-content');
+        const elements = $('.modal-upload-background, .modal-upload-content');
         elements.addClass('dodocms-hidden')
     }
     window.closeUploadModal = closeUploadModal;

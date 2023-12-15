@@ -7,6 +7,8 @@
         <?= $head ?? '' ?>
     </head>
     <body>
-    <?= $content ?? '' ?>
+        <div id="app">
+            <?= $content ?? '' ?>
+        </div>
     </body>
 </html>

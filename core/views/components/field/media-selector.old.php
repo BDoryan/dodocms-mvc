@@ -109,7 +109,7 @@ foreach ($this->medias as $media) {
     });
 
     $(document).ready(function () {
-        const imageSlider = $('#image-slider');
+        const imageSlider = $('#resource-slider');
         const prevButton = $('#prev-button');
         const nextButton = $('#next-button');
 
@@ -119,7 +119,7 @@ foreach ($this->medias as $media) {
         let currentImageIndex = 0;
 
         function showImage(index) {
-            const images = $('#image-slider > div');
+            const images = $('#resource-slider > div');
             images.hide();
             images.eq(index).show();
         }
@@ -132,7 +132,7 @@ foreach ($this->medias as $media) {
         }
 
         function showNextImage() {
-            const images = $('#image-slider > div');
+            const images = $('#resource-slider > div');
             if (currentImageIndex < images.length - 1) {
                 currentImageIndex++;
                 showImage(currentImageIndex);

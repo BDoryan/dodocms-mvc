@@ -47,8 +47,10 @@ class Routes
      * Resources api routes
      */
     const ADMIN_API_UPLOAD_RESOURCE = "/admin/api/resources/upload";
-    const ADMIN_API_GET_RESOURCE = "/admin/api/resources/html/{id}";
+    const ADMIN_API_GET_HTML_RESOURCE = "/admin/api/resources/html/{id}";
     const ADMIN_API_EDIT_RESOURCE = "/admin/api/resources/edit/{id}";
+    const ADMIN_API_GET_RESOURCE = "/admin/api/resources/get/{id}";
+    const ADMIN_API_GET_RESOURCES = "/admin/api/resources/";
     const ADMIN_API_DELETE_RESOURCE = "/admin/api/resources/delete/{id}";
     const ADMIN_API_PAGE_STRUCTURE_EDIT = "/admin/api/pages/edit/{id}";
     const ADMIN_API_PAGE_STRUCTURE_BLOCKS = "/admin/api/pages/blocks/{id}";
@@ -107,7 +109,7 @@ class Routes
          * Resources manager routes
          */
         $router->get(self::ADMIN_RESOURCES_MANAGER, [$resourcesManagerController, 'index']);
-        $router->get(self::ADMIN_API_GET_RESOURCE, [$resourcesManagerController, 'getResource']);
+        $router->get(self::ADMIN_API_GET_HTML_RESOURCE, [$resourcesManagerController, 'getResource']);
 
         /**
          * Pages manager routes
@@ -127,11 +129,10 @@ class Routes
         $router->post(self::ADMIN_API_UPLOAD_RESOURCE, [$apiResourcesController, "upload"]);
         $router->put(self::ADMIN_API_EDIT_RESOURCE, [$apiResourcesController, "edit"]);
         $router->delete(self::ADMIN_API_DELETE_RESOURCE, [$apiResourcesController, "delete"]);
+        $router->get(self::ADMIN_API_GET_RESOURCE, [$apiResourcesController, "get"]);
+        $router->get(self::ADMIN_API_GET_RESOURCES, [$apiResourcesController, "all"]);
         $router->get(self::ADMIN_API, [$defaultApiController, "notFound"]);
 
-        /**
-         * Test
-         */
 //        $router->get('/test', function () {
 //            new ModelGenerator("Client", ["name", "email", "phone_number", "address"]);
 //        });

@@ -5,10 +5,10 @@ if (!isset($var)) {
     return;
 }
 ?>
-<div class="modal-background dodocms-hidden dodocms-fixed dodocms-inset-0 dodocms-bg-black dodocms-opacity-50 dodocms-z-50"></div>
-<div id="file-upload" class="modal-content dodocms-hidden dodocms-fixed dodocms-inset-0 dodocms-flex dodocms-items-center dodocms-justify-center dodocms-z-50">
+<div class="modal-upload-background dodocms-hidden dodocms-fixed dodocms-inset-0 dodocms-bg-black dodocms-opacity-50 dodocms-z-50"></div>
+<div id="file-upload" class="modal-upload-content dodocms-hidden dodocms-fixed dodocms-inset-0 dodocms-flex dodocms-items-center dodocms-justify-center dodocms-z-50">
     <!-- Modal content -->
-    <div class="dodocms-relative dodocms-bg-white dodocms-rounded-lg dodocms-shadow dark:dodocms-bg-gray-700 dodocms-rounded-lg dodocms-shadow-lg dodocms-w-2/4" tabindex="-1" aria-hidden="true">
+    <div class="dodocms-relative dodocms-bg-white dark:dodocms-bg-gray-700 dodocms-rounded-lg dodocms-shadow-lg dodocms-w-2/4" tabindex="-1" aria-hidden="true">
         <!-- Modal header -->
         <div class="dodocms-flex dodocms-items-center dodocms-justify-between dodocms-p-4 md:dodocms-p-5 dodocms-border-b dodocms-rounded-t dark:dodocms-border-gray-600">
             <h3 class="dodocms-text-xl dodocms-font-semibold dodocms-text-gray-900 dark:dodocms-text-white">
@@ -44,7 +44,7 @@ if (!isset($var)) {
                 </label>
             </div>
             <div class="dodocms-flex dodocms-flex-row dodocms-flex-wrap -dodocms-m-1 pe-2" id="files"
-                 style="dodocms-max-height: 300px; dodocms-overflow-y: auto;">
+                 style="max-height: 300px; overflow-y: auto;">
             </div>
         </div>
         <!-- Modal footer -->

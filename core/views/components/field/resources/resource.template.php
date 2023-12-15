@@ -1,4 +1,4 @@
-<script type="text/template" id="image">
+<script type="text/template" id="resource">
     <div class="dodocms-p-1 dodocms-w-4/12">
         <div class="dodocms-relative dodocms-h-full">
             <div class="dodocms-h-full dodocms-rounded-lg dodocms-border-[1px] dodocms-border-gray-300" style="height: 200px;">

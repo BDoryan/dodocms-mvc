@@ -4,12 +4,7 @@
       crossorigin="anonymous" referrerpolicy="no-referrer"/>
 <link rel="icon" href="<?= Application::get()->toURL("/core/assets/favicon.png") ?>" sizes="32x32" type="image/png">
 <link rel="stylesheet" href="<?= Application::get()->toURL("/core/assets/css/tailwind.css") ?>">
-<?php //if(!Application::get()->isDevelopment()) { ?>
-<?php //} ?>
-<!---->
-<?php //if(Application::get()->isDevelopment()) { ?>
-<!--    <script src="https://cdn.tailwindcss.com"></script>-->
-<?php //} ?>
+
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
@@ -23,5 +18,21 @@
     DODOCMS_APPLICATION = new Application('<?= Application::get()->getUrl() ?>', '<?= Application::get()->getInternationalization()->getLanguage() ?>', '<?= Application::get()->toURL("/admin/api/") ?>');
 </script>
 <script type="module" src="<?= Application::get()->toURL("/core/assets/js/modules/select.js") ?>"></script>
-<script type="module" src="<?= Application::get()->toURL("/core/assets/js/modules/upload.js") ?>"></script>
+<script type="module" src="<?= Application::get()->toURL("/core/assets/js/modules/resources/upload.js") ?>"></script>
+<script type="module" src="<?= Application::get()->toURL("/core/assets/js/modules/resources/selector.js") ?>"></script>
 <script type="module" src="<?= Application::get()->toURL("/core/assets/js/init.js") ?>"></script>
+
+<!-- Load vue.js -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+<!-- Load all vue components -->
+<?php
+    /** @var VueComponent $component */
+    foreach (Application::get()->getVueComponents() as $component) {
+ ?>
+<?= fetch($component->getTemplateFile()) ?>
+<script defer src="<?= $component->getScript() ?>"></script>
+<?php } ?>
+
+<!-- Load vue.js app -->
+<script defer src="<?= Application::get()->toURL("core/assets/js/vue/app.js") ?>"></script>

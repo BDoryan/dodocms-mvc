@@ -20,7 +20,15 @@ class ApiResourcesController extends ApiController
         return $this->fileManager;
     }
 
-    public function upload()
+    public function all()
+    {
+        $resources = ResourceModel::findAll('*');
+        $this->success("medias_fetch", array_map(function ($resource) {
+            return $resource->toArray();
+        }, $resources));
+    }
+
+    public function upload(): bool
     {
         try {
             $fileManager = $this->getFileManager();
@@ -39,17 +47,16 @@ class ApiResourcesController extends ApiController
                 }
             } else {
                 $this->error("missing_parameters");
+                return false;
             }
         } catch (FileUnauthorizedException $e) {
             Application::get()->getLogger()->printException($e);
             $this->error("resource_upload_unauthorized", ["file_name" => $e->getFileName()]);
-            return;
         } catch (Exception $e) {
             Application::get()->getLogger()->printException($e);
             $this->error("resource_upload_error", ["exception" => $e->getMessage()]);
-            return;
         }
-        $this->error("resource_upload_failed");
+        return false;
     }
 
     public function edit(array $params)
@@ -88,6 +95,32 @@ class ApiResourcesController extends ApiController
             return;
         }
         $this->error("resource_delete_failed");
+    }
+
+    public function get(array $params)
+    {
+        try {
+            if (isset($params['id'])) {
+                $id = $params['id'];
+
+                $resourceModel = new ResourceModel();
+                $resourceModel->id($id);
+                if ($resourceModel->fetch() !== null) {
+                    $this->success("resource_fetch", $resourceModel->toArray());
+                    return;
+                }
+                $this->error("resource_not_found");
+                return;
+            } else {
+                $this->error("missing_parameters");
+                return;
+            }
+        } catch
+        (Exception $e) {
+            $this->error("failed_to_fetch_resource");
+            Application::get()->getLogger()->printException($e);
+            return;
+        }
     }
 
     public function delete(array $params)

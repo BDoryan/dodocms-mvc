@@ -40,7 +40,7 @@ button[data-block-action="save"] {
     border-radius: 5px;
     border: none;
     background: forestgreen;
-    padding: 10px 8px
+    padding: 6px 8px
 }
 
 [model-name] {
@@ -70,5 +70,5 @@ button[data-block-action="delete"] {
     border-radius: 5px;
     border: none;
     background: firebrick;
-    padding: 10px 8px
+    padding: 6px 8px
 }

@@ -24,7 +24,7 @@ integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2
     DODOCMS_APPLICATION = new Application('<?= Application::get()->getUrl() ?>', '<?= Application::get()->getInternationalization()->getLanguage() ?>', '<?= Application::get()->toURL("/admin/api/") ?>');
 </script>
 <script type="module" src="<?= Application::get()->toURL("/core/assets/js/modules/select.js") ?>"></script>
-<script type="module" src="<?= Application::get()->toURL("/core/assets/js/modules/upload.js") ?>"></script>
+<script type="module" src="<?= Application::get()->toURL("/core/assets/js/modules/resources/upload.js") ?>"></script>
 <script type="module" src="<?= Application::get()->toURL("/core/assets/js/init.js") ?>"></script>
 
 <script defer src="<?= Application::get()->toURL("/core/assets/js/scripts/live-editor.init.js") ?>"></script>

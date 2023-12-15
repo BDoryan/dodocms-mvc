@@ -10,10 +10,11 @@
                     <i class="fa-solid fa-cloud dodocms-text-xl"></i>
                     <?= __('admin.panel.resources.new') ?>
                 </button>
-                <button disabled type="button"
+                <button type="button"
+                        onclick="openSelectResourcesModal(<?= $this->multiple ? 'true' : 'false' ?>, '<?= $this->name ?>')"
                         class="dodocms-ms-auto dodocms-z-10 dodocms-flex dodocms-flex-col dodocms-text-center dodocms-text-dodocms-opacity-75 hover:dodocms-text-green-200 dodocms-text-gray-100 dodocms-bg-gray-800 dodocms-bg-opacity-90 hover:dodocms-bg-opacity-100 dodocms-p-3 dodocms-rounded-lg">
                     <i class="fa-solid fa-plus-circle dodocms-text-xl"></i>
-                    <?= __('admin.panel.resources.add') ?>
+                    <?= __('admin.panel.resources.select') ?>
                 </button>
             </div>
         </div>

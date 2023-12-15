@@ -3,7 +3,7 @@
 ## TODO
 
 ### 13.12.2023
-- Faire en sorte que l'on peut associer des resources déjà existant à une entité
+- Faire en sorte que l'on peut associer des resources déjà existant à une entité (en cours...)
 - Faire en sorte que les doublons ne se font pas lorsque qu'on n'est pas sur un "input multiple"
 - Intégrer correctement le système de "modal" avec le component
 - Ajouter des blocs à une page

@@ -45,7 +45,7 @@ if (!isset($var)) {
                 </label>
             </div>
             <div class="dodocms-flex dodocms-flex-row dodocms-flex-wrap -dodocms-m-1 pe-2" id="files"
-                 style="dodocms-max-height: 300px; dodocms-overflow-y: auto;">
+                 style="max-height: 300px; overflow-y: auto;">
             </div>
         </div>
         <!-- Modal footer -->
