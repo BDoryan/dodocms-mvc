@@ -17,6 +17,30 @@
 <script>
     DODOCMS_APPLICATION = new Application('<?= Application::get()->getUrl() ?>', '<?= Application::get()->getInternationalization()->getLanguage() ?>', '<?= Application::get()->toURL("/admin/api/") ?>');
 </script>
+
+<!-- Translations for JavaScript -->
+<script>
+    const translations_json = '<?= str_replace("'", "\'", json_encode(Application::get()->getInternationalization()->getTranslations())) ?>';
+    const translations = JSON.parse(translations_json);
+
+    window.getTranslate = (key) => {
+        if (translations[key]) {
+            return translations[key];
+        }
+
+        return key;
+    }
+
+    window.translate = (key, options = {}) => {
+        let translation = getTranslate(key);
+        for (const [k, v] of Object.entries(options)) {
+            translation = translation.replace(new RegExp(`{${k}}`, 'g'), v);
+        }
+        return translation;
+    }
+</script>
+
+<!-- Load all modules -->
 <script type="module" src="<?= Application::get()->toURL("/core/assets/js/modules/select.js") ?>"></script>
 <script type="module" src="<?= Application::get()->toURL("/core/assets/js/modules/resources/upload.js") ?>"></script>
 <script type="module" src="<?= Application::get()->toURL("/core/assets/js/modules/resources/selector.js") ?>"></script>
@@ -27,12 +51,14 @@
 
 <!-- Load all vue components -->
 <?php
-    /** @var VueComponent $component */
-    foreach (Application::get()->getVueComponents() as $component) {
- ?>
-<?= fetch($component->getTemplateFile()) ?>
-<script defer src="<?= $component->getScript() ?>"></script>
+/** @var VueComponent $component */
+foreach (Application::get()->getVueComponents() as $component) {
+    ?>
+    <?= fetch($component->getTemplateFile()) ?>
+    <script defer type="module" src="<?= $component->getScript() ?>"></script>
 <?php } ?>
 
 <!-- Load vue.js app -->
 <script defer src="<?= Application::get()->toURL("core/assets/js/vue/app.js") ?>"></script>
+
+<!-- Test -->

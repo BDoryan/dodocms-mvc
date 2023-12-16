@@ -76,7 +76,6 @@ class ResourceModel extends Model
         finfo_close($finfo);
         $extension = explode("/", $mime_type)[1];
 
-
         if (Tools::startsWith($mime_type, "image/")) {
             $src = $this->getURL();
         } else {
@@ -127,7 +126,7 @@ class ResourceModel extends Model
         ];
         $fields["src"] = [
             "size" => "dodocms-w-4/12",
-            "field" => Text::create()->name("src")->label("Chemin de l'image")->value($this->getSrc() ?? "")->required(),
+            "field" => Text::create()->name("src")->label("Chemin de l'image")->value($this->getDefaultSrc() ?? "")->required(),
         ];
         $fields["alternativeText"] = [
             "size" => "dodocms-w-4/12",

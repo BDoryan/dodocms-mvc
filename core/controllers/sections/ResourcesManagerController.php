@@ -14,6 +14,15 @@ class ResourcesManagerController extends PanelController
     public function index()
     {
         $resources = ResourceModel::findAll("*", [], "createdAt DESC");
+        /** @var ResourceModel $resource */
+        $resources = array_map(function ($resource) {
+            $resource_data = $resource->toArray();
+            $resource_data['src'] = $resource->getURL();
+            return $resource_data;
+        }, $resources);
+//        $page = $_GET['page'] - 1 ?? 0;
+//        $resources = array_slice($resources, 12 * $page, 12);
+
         $this->viewSection("resources/index", ["resources" => $resources]);
     }
 

@@ -122,5 +122,8 @@
   "admin.panel.resources.delete.error.resource_not_found": "The resource targeted is not found.",
   "live-editor.block.save": "Save changes",
   "live-editor.block.delete": "Delete",
-  "live-editor.entries.add": "New an entry"
+  "live-editor.entries.add": "New an entry",
+  "panel.admin.resource.item.edit.save": "Sauvegarder",
+  "panel.admin.resource.item.edit.cancel": "Annuler",
+  "panel.admin.resource.item.edit.alternativeText": "Texte alternatif"
 }

@@ -1,19 +1,27 @@
 Vue.component('resource-viewer', {
-    props: ['items'],
+    props: ['items', 'selectable', 'editable', 'deletable'],
     template: '#resource-viewer-template',
     data() {
         return {
-            localItems: this.items ? [...this.items] : [] // Copie de la prop items comme donnée locale
+            localItems: this.items ? [...this.items] : [],
+            localSelectable: this.selectable ?? false
         };
     },
     methods: {
-        editItem: (item) => {
+        toggleItem(item, toggled) {
+            console.log('toggleItem', item, toggled)
+        },
+        editItem(item) {
             console.log('edit', item)
         },
-        deleteItem(item) {
-            console.log(this.localItems, item)
-            const index = this.localItems.indexOf(item);
-            console.log('delete', index)
+        getStatus() {
+            return "Aucun status défini";
+        },
+        getTitle() {
+            return translate('admin.panel.resources.count', {'count': this.localItems.length});
+        },
+        deleteItem(id) {
+            const index = this.localItems.findIndex((el) => el.id === id);
             if (index > -1) {
                 this.$delete(this.localItems, index);
                 this.localItems = [...this.localItems];

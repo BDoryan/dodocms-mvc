@@ -53,8 +53,13 @@ abstract class Component implements IRenderer
             $attributes .= "$key=\"$value\" ";
         }
 
-        $attributes = rtrim($attributes);
-        return $attributes;
+//        if($this instanceof Text) {
+//            echo "test";
+//            var_dump($attributes);
+//            exit;
+//        }
+
+        return rtrim($attributes);
     }
 
     public function html(): string

@@ -13,7 +13,7 @@
     <div class="dodocms-rounded-lg dodocms-bg-gray-800 dodocms-bg-opacity-75 dodocms-p-3 dodocms-absolute dodocms-top-0 dodocms-bottom-0 dodocms-left-0 dodocms-right-0 dodocms-flex dodocms-flex-col"
          x-cloak x-show="resourceTarget === '<?= $resource->getSrc() ?>'" class="dodocms-mt-2">
         <input type="hidden" name="id" value="<?= $resource->getid() ?>">
-        <?= Text::create()
+        <?php Text::create()
             ->label("Texte alternatif")
             ->value($resource->getAlternativeText())
             ->name("alternativeText")

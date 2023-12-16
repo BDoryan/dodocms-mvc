@@ -46,6 +46,12 @@ abstract class ButtonComponent extends Component
         return $this;
     }
 
+    public function gray(int $background_level = 700, $outline = false): ButtonComponent
+    {
+        $this->style('gray', 'white', $background_level, $outline);
+        return $this;
+    }
+
     public function red(int $background_level = 700, $outline = false): ButtonComponent
     {
         $this->style('red', 'white', $background_level, $outline);

@@ -3,6 +3,11 @@
 class Tools
 {
 
+    public static function parseJsonToHtmlAttribute(string $json) {
+        $json = str_replace("'", "\'", $json);
+        return str_replace("\"", "'", $json);
+    }
+
     public static function randomId($begin): string
     {
         return $begin . "-" . self::uuid();
