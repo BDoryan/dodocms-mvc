@@ -116,6 +116,21 @@ class Application
                 $this->toURL('/core/assets/js/vue/ResourceViewer.js')
             )
         );
+        $this->addVueComponent(
+            new VueComponent(
+                $this->toRoot('/core/views/admin/vue/modal.php'),
+            )
+        );
+        $this->addVueComponent(
+            new VueComponent(
+                $this->toRoot('/core/views/admin/vue/resources/upload-modal.php'),
+            )
+        );
+        $this->addVueComponent(
+            new VueComponent(
+                $this->toRoot('/core/views/admin/vue/resources/resources.php'),
+            )
+        );
     }
 
     public function errorHandler($errno, $errstr, $errfile, $errline): bool

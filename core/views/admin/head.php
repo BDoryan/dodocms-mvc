@@ -48,6 +48,7 @@
 
 <!-- Load vue.js -->
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+<script src="https://unpkg.com/vuex@4.1.0/dist/vuex.global.js"></script>
 
 <!-- Load all vue components -->
 <?php
@@ -55,10 +56,10 @@
 foreach (Application::get()->getVueComponents() as $component) {
     ?>
     <?= fetch($component->getTemplateFile()) ?>
-    <script defer type="module" src="<?= $component->getScript() ?>"></script>
+    <?php if (!empty($component->getScript())) { ?>
+        <script defer type="module" src="<?= $component->getScript() ?>"></script>
+    <?php } ?>
 <?php } ?>
 
 <!-- Load vue.js app -->
 <script defer src="<?= Application::get()->toURL("core/assets/js/vue/app.js") ?>"></script>
-
-<!-- Test -->

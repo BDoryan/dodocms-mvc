@@ -36,10 +36,8 @@ class Toast extends Component {
         toast.removeClass('dodocms-hidden');
         toastContainer.append(toast);
         setTimeout(() => {
-            console.log('add class')
             toast.removeClass('dodocms-opacity-0');
             toast.removeClass('dodocms-translate-x-full');
-            console.log(toast)
             setTimeout(() => {
                 close(toast);
             }, this.timeout);

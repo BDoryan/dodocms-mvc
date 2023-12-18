@@ -3,7 +3,7 @@ Vue.component('resource-viewer', {
     template: '#resource-viewer-template',
     data() {
         return {
-            localItems: this.items ? [...this.items] : [],
+            // localItems: this.items ? [...this.items] : [],
             localSelectable: this.selectable ?? false
         };
     },
@@ -18,13 +18,13 @@ Vue.component('resource-viewer', {
             return "Aucun status défini";
         },
         getTitle() {
-            return translate('admin.panel.resources.count', {'count': this.localItems.length});
+            return translate('admin.panel.resources.count', {'count': this.items.length});
         },
         deleteItem(id) {
-            const index = this.localItems.findIndex((el) => el.id === id);
+            const index = this.items.findIndex((el) => el.id === id);
             if (index > -1) {
-                this.$delete(this.localItems, index);
-                this.localItems = [...this.localItems];
+                this.$delete(this.items, index);
+                this.items = [...this.items];
             }
         }
     }

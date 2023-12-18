@@ -5,18 +5,17 @@ if (!isset($var)) {
     return;
 }
 ?>
-<div x-cloak x-show="<?= $var ?>" @click.away="<?= $var ?> = false" class="modal-background dodocms-fixed dodocms-inset-0 dodocms-bg-black dodocms-opacity-50 dodocms-z-50"></div>
-<div id="file-upload" x-cloak x-show="<?= $var ?>" class="modal dodocms-fixed dodocms-inset-0 dodocms-flex dodocms-items-center dodocms-justify-center dodocms-z-50">
+<div class="modal-upload-background dodocms-hidden dodocms-fixed dodocms-inset-0 dodocms-bg-black dodocms-opacity-50 dodocms-z-50"></div>
+<div id="file-upload" class="modal-upload-content dodocms-hidden dodocms-fixed dodocms-inset-0 dodocms-flex dodocms-items-center dodocms-justify-center dodocms-z-50">
     <!-- Modal content -->
-    <div @click.stop class="dodocms-relative dodocms-bg-white dodocms-rounded-lg dodocms-shadow dark:dodocms-bg-gray-700 dodocms-rounded-lg dodocms-shadow-lg dodocms-w-2/4" tabindex="-1" aria-hidden="true">
+    <div class="dodocms-relative dodocms-bg-white dark:dodocms-bg-gray-700 dodocms-rounded-lg dodocms-shadow-lg dodocms-w-2/4" tabindex="-1" aria-hidden="true">
         <!-- Modal header -->
         <div class="dodocms-flex dodocms-items-center dodocms-justify-between dodocms-p-4 md:dodocms-p-5 dodocms-border-b dodocms-rounded-t dark:dodocms-border-gray-600">
             <h3 class="dodocms-text-xl dodocms-font-semibold dodocms-text-gray-900 dark:dodocms-text-white">
                 <i class="fa-solid fa-cloud-upload dodocms-me-1"></i> <?= __('admin.panel.resources.upload.title') ?>
             </h3>
             <button type="button"
-                    @click="<?= $var ?> = false"
-                    class="dodocms-text-gray-400 dodocms-bg-transparent hover:dodocms-bg-gray-200 hover:dodocms-text-gray-900 dodocms-rounded-lg dodocms-text-sm dodocms-w-8 dodocms-h-8 dodocms-ms-auto dodocms-inline-flex dodocms-justify-center dodocms-items-center dark:hover:dodocms-bg-gray-600 dark:hover:dodocms-text-white">
+                    class="close-upload-modal dodocms-text-gray-400 dodocms-bg-transparent hover:dodocms-bg-gray-200 hover:dodocms-text-gray-900 dodocms-rounded-lg dodocms-text-sm dodocms-w-8 dodocms-h-8 dodocms-ms-auto dodocms-inline-flex dodocms-justify-center dodocms-items-center dark:hover:dodocms-bg-gray-600 dark:hover:dodocms-text-white">
                 <svg class="dodocms-w-3 dodocms-h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                      viewBox="0 0 14 14">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -39,9 +38,9 @@ if (!isset($var)) {
                         </svg>
                         <p class="dodocms-mb-2 dodocms-text-sm dodocms-text-gray-500 dark:dodocms-text-gray-400"><span class="dodocms-font-semibold"><?= __("admin.panel.resources.upload.click_to_upload") ?></span>
                             <?= __("admin.panel.resources.upload.drag_and_drop") ?></p>
-                        <p class="dodocms-text-xs dodocms-text-gray-500 dark:dodocms-text-gray-400">PDF, JPEG, PNG, JPG or GIF</p>
+                        <p class="dodocms-text-xs dodocms-text-gray-500 dark:dodocms-text-gray-400">PDF, JPEG, PNG or JPG</p>
                     </div>
-                    <input name="files[]" id="dropzone-file" type="file" multiple class="dodocms-absolute dodocms-w-full dodocms-h-full dodocms-opacity-0"/>
+                    <input name="files[]" id="dropzone-file" type="file" class="dodocms-absolute dodocms-w-full dodocms-h-full dodocms-opacity-0"/>
                 </label>
             </div>
             <div class="dodocms-flex dodocms-flex-row dodocms-flex-wrap -dodocms-m-1 pe-2" id="files"
@@ -50,14 +49,12 @@ if (!isset($var)) {
         </div>
         <!-- Modal footer -->
         <div class="dodocms-flex dodocms-items-center dodocms-p-4 md:dodocms-p-5 dodocms-border-t dodocms-border-gray-200 dodocms-rounded-b dark:dodocms-border-gray-600">
-            <button @click="<?= $var ?> = false" type="button"
-                    class="dodocms-me-auto dodocms-text-gray-500 dodocms-bg-white hover:dodocms-bg-gray-100 focus:ring-4 focus:dodocms-outline-none focus:ring-blue-300 dodocms-rounded-lg dodocms-border dodocms-border-gray-200 dodocms-text-sm dodocms-font-medium dodocms-px-5 dodocms-py-2.5 hover:dodocms-text-gray-900 focus:dodocms-z-10 dark:dodocms-bg-gray-700 dark:dodocms-text-gray-300 dark:dodocms-border-gray-500 dark:hover:dodocms-text-white dark:hover:dodocms-bg-gray-600 dark:focus:ring-gray-600">
+            <button type="button" class="close-upload-modal dodocms-me-auto dodocms-text-gray-500 dodocms-bg-white hover:dodocms-bg-gray-100 focus:ring-4 focus:dodocms-outline-none focus:ring-blue-300 dodocms-rounded-lg dodocms-border dodocms-border-gray-200 dodocms-text-sm dodocms-font-medium dodocms-px-5 dodocms-py-2.5 hover:dodocms-text-gray-900 focus:dodocms-z-10 dark:dodocms-bg-gray-700 dark:dodocms-text-gray-300 dark:dodocms-border-gray-500 dark:hover:dodocms-text-white dark:hover:dodocms-bg-gray-600 dark:focus:ring-gray-600">
                 <?= __("admin.panel.resources.upload.close") ?>
             </button>
             <div class="dodocms-me-auto dodocms-text-white dodocms-opacity-75" id="state">
             </div>
-            <button id="start"
-                    class="dodocms-text-white dodocms-bg-blue-700 hover:dodocms-bg-blue-800 focus:ring-4 focus:dodocms-outline-none focus:ring-blue-300 dodocms-font-medium dodocms-rounded-lg dodocms-text-sm dodocms-px-5 dodocms-py-2.5 dodocms-text-center dark:dodocms-bg-blue-600 dark:hover:dodocms-bg-blue-700 dark:focus:ring-blue-800">
+            <button id="start" class="dodocms-text-white dodocms-bg-blue-700 hover:dodocms-bg-blue-800 focus:ring-4 focus:dodocms-outline-none focus:ring-blue-300 dodocms-font-medium dodocms-rounded-lg dodocms-text-sm dodocms-px-5 dodocms-py-2.5 dodocms-text-center dark:dodocms-bg-blue-600 dark:hover:dodocms-bg-blue-700 dark:focus:ring-blue-800">
                 <?= __("admin.panel.resources.upload.submit") ?>
             </button>
         </div>

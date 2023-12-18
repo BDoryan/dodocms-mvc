@@ -3,9 +3,9 @@
         <div class="dodocms-px-4 dodocms-py-2 dodocms-bg-gray-700 dodocms-border-b-[1px] dodocms-border-gray-500 dodocms-text-lg">
             {{ getTitle() }}
         </div>
-        <div v-if="localItems.length > 0" class="dodocms-p-4 dodocms-h-full dodocms-w-full dodocms-grid dodocms-grid-cols-4 dodocms-gap-4">
+        <div v-if="items.length > 0" class="dodocms-p-4 dodocms-h-full dodocms-w-full dodocms-grid dodocms-grid-cols-4 dodocms-gap-4">
             <resource-item
-                    v-for="item in localItems"
+                    v-for="item in items"
 
                     :key="item.id"
                     :id="item.id"
@@ -22,7 +22,7 @@
             >
             </resource-item>
         </div>
-        <span v-if="localItems.length === 0"
+        <span v-if="items.length === 0"
           class="dodocms-text-gray-300 dodocms-mx-auto dodocms-m-auto dodocms-text-xl">
             <?= __('admin.panel.resources.empty') ?>
         </span>
@@ -51,6 +51,6 @@
 <!--                </nav>-->
 <!--            </div>-->
 <!--        </div>-->
-        <!--        <span v-if="localItems.length > 0" class="dodocms-text-gray-300 dodocms-pt-4 dodocms-mx-auto">{{ getStatus() }}</span>-->
+        <!--        <span v-if="items.length > 0" class="dodocms-text-gray-300 dodocms-pt-4 dodocms-mx-auto">{{ getStatus() }}</span>-->
     </div>
 </script>

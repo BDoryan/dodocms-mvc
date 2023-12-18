@@ -8,10 +8,12 @@
         $resource_data['src'] = $resource->getURL();
         return $resource_data;
     }, ResourceModel::findAll('*'));
-    $resources = array_slice($resources,0, 5);
+    $resources = array_slice($resources, 0, 5);
 
     $json = Tools::parseJsonToHtmlAttribute(json_encode($resources, JSON_HEX_QUOT));
     ?>
-    <resource-viewer :editable="true" deletable="true" :selectable="true"
-                     :items="<?= $json ?>"></resource-viewer>
+    <resource-viewer :editable="true" deletable="true" :selectable="true" :items="<?= $json ?>"></resource-viewer>
+<!--    --><?php //= fetch('core/views/admin/vue/resources/upload-modal.php') ?>
+<!--    <modal-upload></modal-upload>-->
+    <button class="dodocms-bg-red-500 dodocms-p-3" @click="openModal('upload-modal')">Open modal</button>
 </div>

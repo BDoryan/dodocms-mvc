@@ -3,14 +3,14 @@
 class VueComponent
 {
 
-    private $templateFile;
-    private $script;
+    private string $templateFile;
+    private string $script;
 
     /**
-     * @param $templateFile
-     * @param $script
+     * @param string $templateFile
+     * @param string $script
      */
-    public function __construct($templateFile, $script)
+    public function __construct(string $templateFile, string $script = "")
     {
         $this->templateFile = $templateFile;
         $this->script = $script;
