@@ -26,7 +26,7 @@ foreach ($this->medias as $media) {
                                class="dodocms-text-white dodocms-bg-blue-500 dodocms-h-8 dodocms-w-8 dodocms-rounded-full hover:dodocms-bg-blue-600 dodocms-flex">
                                 <i class="dodocms-text-sm fa-solid fa-eye dodocms-m-auto"></i>
                             </a>
-                            <button type="button" @click="imageTarget='<?= $media->getSrc() ?>'"
+                            <button type="button" v-on:click="imageTarget='<?= $media->getSrc() ?>'"
                                     class="dodocms-text-white dodocms-bg-blue-500 dodocms-h-8 dodocms-w-8 dodocms-rounded-full hover:dodocms-bg-blue-600">
                                 <i class="dodocms-text-sm fa-solid fa-edit"></i>
                             </button>
@@ -43,11 +43,11 @@ foreach ($this->medias as $media) {
                         <div class="dodocms-mt-auto dodocms-flex dodocms-flex-row">
                             <button type="button"
                                     class="dodocms-bg-gray-700 dodocms-bg-opacity-50 hover:dodocms-bg-opacity-100 dodocms-border-[1px] dodocms-border-gray-300 dodocms-border-opacity-50 hover:dodocms-border-opacity-75 dodocms-py-2 dodocms-px-3 dodocms-rounded-md dodocms-mt-auto"
-                                    @click="imageTarget=null">Annuler
+                                    v-on:click="imageTarget=null">Annuler
                             </button>
                             <button type="button"
                                     class="save dodocms-bg-blue-700 hover:dodocms-bg-blue-800 dodocms-py-2 dodocms-px-3 dodocms-rounded-md dodocms-mt-auto dodocms-ms-auto"
-                                    @click="imageTarget=null">Enregistrer
+                                    v-on:click="imageTarget=null">Enregistrer
                             </button>
                         </div>
                     </div>

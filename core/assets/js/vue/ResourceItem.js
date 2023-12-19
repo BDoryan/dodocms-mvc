@@ -1,7 +1,7 @@
 import Toast from "../components/toast/Toast.js";
 
 Vue.component('resource-item', {
-    props: ['id', 'src', 'href', 'alternativeText', 'selectable', 'selected', 'deletable', 'editable'],
+    props: ['id', 'src', 'href', 'alternativeText', 'selectable', 'selected', 'deletable', 'editable', 'removable'],
     template: '#resource-item-template',
     data() {
         return {
@@ -24,6 +24,10 @@ Vue.component('resource-item', {
                 this.$emit('toggle', false, this);
                 this.isSelected = false;
             }
+        },
+        removeItem() {
+            const resourceItem = this;
+            resourceItem.$emit('remove', resourceItem.id);
         },
         deleteItem() {
             const translations = DODOCMS_APPLICATION.getI18n();

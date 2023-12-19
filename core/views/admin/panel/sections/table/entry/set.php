@@ -4,7 +4,7 @@ if (empty($model)) {
     return;
 }
 ?>
-<div class="entity-set dodocms-border dodocms-border-gray-500 dodocms-bg-gray-600 dodocms-rounded-xl dodocms-p-3 dodocms-border-[1px] dodocms-text-base dodocms-w-8/12 dodocms-mx-auto">
+<div class="entity-set dodocms-border dodocms-border-gray-500 dodocms-bg-gray-600 dodocms-rounded-xl dodocms-p-3 dodocms-text-base dodocms-w-8/12 dodocms-mx-auto">
     <h1 class="dodocms-text-2xl pb-5 dodocms-font-bold dodocms-text-center dodocms-uppercase"><?= $table_name ?? '' ?></h1>
     <form class="dodocms-flex dodocms-flex-row dodocms-flex-wrap -dodocms-mx-2 dodocms-gap-y-2" method="post" action=""
           enctype="multipart/form-data">
@@ -32,6 +32,7 @@ if (empty($model)) {
             ?>
         </div>
     </form>
-    <?php view(Application::get()->toRoot("core/views/admin/components/resources/upload-modal.php"), ["var" => 'uploadModal']); ?>
-    <?php view(Application::get()->toRoot("core/views/admin/components/resources/selector-modal.php"), ["var" => 'uploadModal']); ?>
+    <modal-upload></modal-upload>
+<!--    --><?php //view(Application::get()->toRoot("core/views/admin/components/resources/upload-modal.php"), ["var" => 'uploadModal']); ?>
+<!--    --><?php //view(Application::get()->toRoot("core/views/admin/components/resources/selector-modal.php"), ["var" => 'uploadModal']); ?>
 </div>

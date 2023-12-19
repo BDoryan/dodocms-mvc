@@ -1,9 +1,18 @@
 <script type="text/x-template" id="resource-viewer-template">
-    <div class="dodocms-relative dodocms-group dodocms-w-full dodocms-bg-gray-600 dodocms-rounded-xl dodocms-border-[1px] dodocms-border-gray-500 dodocms-shadow-lg dodocms-text-white dodocms-outline-none focus:dodocms-border-gray-400 dodocms-mb-1 dodocms-min-h-[400px] dodocms-flex dodocms-flex-col dodocms-overflow-hidden">
-        <div class="dodocms-px-4 dodocms-py-2 dodocms-bg-gray-700 dodocms-border-b-[1px] dodocms-border-gray-500 dodocms-text-lg">
+    <div class="dodocms-relative dodocms-group dodocms-w-full dodocms-bg-gray-700 dodocms-rounded-xl dodocms-border-[1px] dodocms-border-gray-500 dodocms-shadow-lg dodocms-text-white dodocms-outline-none focus:dodocms-border-gray-400 dodocms-mb-1 dodocms-min-h-[400px] dodocms-flex dodocms-flex-col dodocms-overflow-hidden" :class="{'dodocms-max-h-[400px]': scrollable}">
+        <input type="hidden" :name="name" :value="ids()">
+        <div class="dodocms-px-4 dodocms-py-2 dodocms-bg-gray-800 dodocms-items-center dodocms-border-b-[1px] dodocms-border-gray-500 dodocms-text-lg dodocms-flex dodocms-flex-row">
             {{ getTitle() }}
+            <div class="dodocms-ms-auto">
+                <button v-if="addable" v-on:click="" type="button" class="dodocms-text-white dodocms-bg-green-600 hover:dodocms-bg-green-700 dodocms-h-8 dodocms-w-8 dodocms-rounded-2xl">
+                    <i class="fa-solid fa-plus"></i>
+                </button>
+                <button v-if="uploadable" v-on:click="openUploadModal()" type="button" class="dodocms-text-white dodocms-bg-indigo-500 hover:dodocms-bg-indigo-600 dodocms-h-8 dodocms-w-8 dodocms-rounded-2xl  dodocms-text-sm">
+                    <i class="fa-solid fa-cloud-upload"></i>
+                </button>
+            </div>
         </div>
-        <div v-if="items.length > 0" class="dodocms-p-4 dodocms-h-full dodocms-w-full dodocms-grid dodocms-grid-cols-4 dodocms-gap-4">
+        <div v-if="items.length > 0" class="dodocms-p-4 dodocms-h-full dodocms-w-full dodocms-grid dodocms-grid-cols-4 dodocms-gap-4" :class="{ 'dodocms-overflow-y-auto': scrollable }">
             <resource-item
                     v-for="item in items"
 
@@ -12,12 +21,14 @@
                     :selectable="selectable"
                     :editable="editable"
                     :deletable="deletable"
+                    :removable="removable"
                     :src="item.src"
                     :href="item.src"
                     :alternativeText="item.alternativeText"
 
                     @toggle="toggleItem($event)"
                     @edit="editItem($event)"
+                    @remove="deleteItem($event)"
                     @delete="deleteItem($event)"
             >
             </resource-item>

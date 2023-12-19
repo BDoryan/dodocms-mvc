@@ -16,7 +16,7 @@ if (Application::get()->isDebugMode()) {
                 <?php
                 Button::create()
                     ->green(700)
-                    ->attribute("@click", "showLogs = !showLogs")
+                    ->attribute("v-on:click", "showLogs = !showLogs")
                     ->text('<i class="dodocms-me-1 fa-solid fa-eye"></i> ' . __('admin.debug.read_logs'))
                     ->render();
                 ?>

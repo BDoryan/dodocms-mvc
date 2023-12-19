@@ -16,29 +16,35 @@
             <div class="dodocms-me-auto">
                 <button
                         v-if="selectable && isSelected"
-                        @click="deselectItem"
+                        v-on:click="deselectItem"
                         type="button"
                         class="dodocms-border dodocms-border-white dodocms-border-opacity-75 dodocms-h-8 dodocms-w-8 dodocms-rounded-full dodocms-text-white dodocms-bg-gray-800">
                     <i class="dodocms-text-md fa-solid fa-check"></i>
                 </button>
                 <button v-else-if="selectable && !isSelected"
-                        @click="selectItem"
+                        v-on:click="selectItem"
                         type="button"
                         class="dodocms-border dodocms-border-white dodocms-border-opacity-60 dodocms-h-8 dodocms-w-8 dodocms-rounded-full dodocms-text-white dodocms-bg-gray-600 hover:dodocms-bg-gray-700">
                     <i class="dodocms-text-md fa-solid fa-check"></i>
                 </button>
             </div>
             <button v-if="editable"
-                    @click="showEdition"
+                    v-on:click="showEdition"
                     type="button"
                     class="dodocms-text-white dodocms-bg-blue-500 dodocms-h-8 dodocms-w-8 dodocms-rounded-full hover:dodocms-bg-blue-600">
                 <i class="dodocms-text-sm fa-solid fa-edit"></i>
             </button>
             <button v-if="deletable"
-                    @click="deleteItem"
+                    v-on:click="deleteItem"
                     type="button"
-                    class="delete dodocms-text-white dodocms-bg-red-500 dodocms-h-8 dodocms-w-8 dodocms-rounded-full hover:dodocms-bg-red-600">
+                    class="dodocms-text-white dodocms-bg-red-500 dodocms-h-8 dodocms-w-8 dodocms-rounded-full hover:dodocms-bg-red-600">
                 <i class="dodocms-text-sm fa-solid fa-trash"></i>
+            </button>
+            <button v-if="removable"
+                    v-on:click="removeItem"
+                    type="button"
+                    class="dodocms-text-white dodocms-bg-red-500 dodocms-h-8 dodocms-w-8 dodocms-rounded-full hover:dodocms-bg-red-600">
+                <i class="dodocms-text-sm fa-solid fa-minus"></i>
             </button>
         </div>
         <div v-if="(inEdition || inUploading())"
@@ -58,7 +64,7 @@
                         ->addClass("dodocms-text-sm")
                         ->gray()
                         ->text(__('panel.admin.resource.item.edit.cancel'))
-                        ->attribute("@click", 'cancelEdition')
+                        ->attribute("v-on:click", 'cancelEdition')
                         ->render()
                     ?>
                     <?php
@@ -66,7 +72,7 @@
                         ->addClass("dodocms-text-sm dodocms-ms-auto")
                         ->blue()
                         ->text(__('panel.admin.resource.item.edit.save'))
-                        ->attribute("@click", 'applyEdition')
+                        ->attribute("v-on:click", 'applyEdition')
                         ->render()
                     ?>
                 </div>

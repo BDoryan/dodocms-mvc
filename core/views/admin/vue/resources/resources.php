@@ -31,14 +31,14 @@
                 '<div class="dodocms-flex dodocms-flex-row">' .
                 Button::create()
                     ->blue()
-                    ->attribute('@click', "openModal")
+                    ->attribute('v-on:click', "openModal")
                     ->text('<i class="fa-solid fa-cloud-upload dodocms-me-1"></i> ' . __('admin.panel.dashboard.button.upload_file'))
                     ->html()
                 . '</div>'
             )
             ->render();
         ?>
-        <resource-viewer :deletable="true" :editable="true" :selectable="false"
+        <resource-viewer :deletable="true" :editable="true"  :addable="false" :removable="false" :uploadable="false" :selectable="false"
                          :items="localResources"></resource-viewer>
         <modal-upload @resourceUploaded="addResource" @finishUpload="" :multiple="true"></modal-upload>
     </div>

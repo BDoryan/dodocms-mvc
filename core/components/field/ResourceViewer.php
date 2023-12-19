@@ -2,7 +2,7 @@
 
 Autoloader::require('core/components/field/Field.php');
 
-class ResourceSelector extends Field
+class ResourceViewer extends Field
 {
 
     private array $resources;
@@ -20,12 +20,12 @@ class ResourceSelector extends Field
         return $this->multiple;
     }
 
-    public function multiple(bool $multiple = true): ResourceSelector {
+    public function multiple(bool $multiple = true): ResourceViewer {
         $this->multiple = $multiple;
         return $this;
     }
 
-    public function resources(array $resources): ResourceSelector {
+    public function resources(array $resources): ResourceViewer {
         $this->resources = $resources;
         return $this;
     }
@@ -39,11 +39,18 @@ class ResourceSelector extends Field
         return substr($string, 0, -1);
     }
 
+    public function resourceToJson() {
+        foreach ($this->resources as $resource) {
+            $resource->setSrc($resource->getSrc());
+        }
+        return json_encode($this->resources, JSON_HEX_QUOT);
+    }
+
     public function render(): void
     {
         parent::render();
 
-        include "$this->template/resources/resources-selector.php";
+        include "$this->template/resources/resources-viewer.php";
     }
 
     /**
@@ -54,8 +61,8 @@ class ResourceSelector extends Field
         return $this->resources;
     }
 
-    public static function create(): ResourceSelector
+    public static function create(): ResourceViewer
     {
-        return new ResourceSelector();
+        return new ResourceViewer();
     }
 }

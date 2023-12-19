@@ -84,11 +84,11 @@ class ArticlesModel extends ModelAssociated
         ];
         $fields['illustration'] = [
             'size' => 'dodocms-w-full',
-            "field" => ResourceSelector::create()->name("illustration")->label(__('admin.panel.articles.fields.label.illustration'))->resources($this->getIllustrationResource() !== null ? [$this->getIllustrationResource()] : [])
+            "field" => ResourceViewer::create()->name("illustration")->label(__('admin.panel.articles.fields.label.illustration'))->resources($this->getIllustrationResource() !== null ? [$this->getIllustrationResource()] : [])
         ];
         $fields['images'] = [
             'size' => 'dodocms-w-full',
-            "field" => ResourceSelector::create()->multiple()->name("images")->label(__('admin.panel.articles.fields.label.images'))->resources($this->getImages())
+            "field" => ResourceViewer::create()->multiple()->name("images")->label(__('admin.panel.articles.fields.label.images'))->resources($this->getImages())
         ];
         return $fields;
     }

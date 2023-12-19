@@ -5,17 +5,17 @@ if (!isset($var)) {
     return;
 }
 ?>
-<div x-cloak x-show="<?= $var ?>" @click.away="<?= $var ?> = false" class="modal-background dodocms-fixed dodocms-inset-0 dodocms-bg-black dodocms-opacity-50 dodocms-z-50"></div>
+<div x-cloak x-show="<?= $var ?>" v-on:click.away="<?= $var ?> = false" class="modal-background dodocms-fixed dodocms-inset-0 dodocms-bg-black dodocms-opacity-50 dodocms-z-50"></div>
 <div id="file-upload" x-cloak x-show="<?= $var ?>" class="modal dodocms-fixed dodocms-inset-0 dodocms-flex dodocms-items-center dodocms-justify-center dodocms-z-50">
     <!-- Modal content -->
-    <div @click.stop class="dodocms-relative dodocms-bg-white dodocms-rounded-lg dodocms-shadow dark:dodocms-bg-gray-700 dodocms-rounded-lg dodocms-shadow-lg dodocms-w-2/4" tabindex="-1" aria-hidden="true">
+    <div v-on:click.stop class="dodocms-relative dodocms-bg-white dodocms-rounded-lg dodocms-shadow dark:dodocms-bg-gray-700 dodocms-rounded-lg dodocms-shadow-lg dodocms-w-2/4" tabindex="-1" aria-hidden="true">
         <!-- Modal header -->
         <div class="dodocms-flex dodocms-items-center dodocms-justify-between dodocms-p-4 md:dodocms-p-5 dodocms-border-b dodocms-rounded-t dark:dodocms-border-gray-600">
             <h3 class="dodocms-text-xl dodocms-font-semibold dodocms-text-gray-900 dark:dodocms-text-white">
                 <i class="fa-solid fa-cloud-upload dodocms-me-1"></i> <?= __('admin.panel.resources.upload.title') ?>
             </h3>
             <button type="button"
-                    @click="<?= $var ?> = false"
+                    v-on:click="<?= $var ?> = false"
                     class="dodocms-text-gray-400 dodocms-bg-transparent hover:dodocms-bg-gray-200 hover:dodocms-text-gray-900 dodocms-rounded-lg dodocms-text-sm dodocms-w-8 dodocms-h-8 dodocms-ms-auto dodocms-inline-flex dodocms-justify-center dodocms-items-center dark:hover:dodocms-bg-gray-600 dark:hover:dodocms-text-white">
                 <svg class="dodocms-w-3 dodocms-h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                      viewBox="0 0 14 14">
@@ -50,7 +50,7 @@ if (!isset($var)) {
         </div>
         <!-- Modal footer -->
         <div class="dodocms-flex dodocms-items-center dodocms-p-4 md:dodocms-p-5 dodocms-border-t dodocms-border-gray-200 dodocms-rounded-b dark:dodocms-border-gray-600">
-            <button @click="<?= $var ?> = false" type="button"
+            <button v-on:click="<?= $var ?> = false" type="button"
                     class="dodocms-me-auto dodocms-text-gray-500 dodocms-bg-white hover:dodocms-bg-gray-100 focus:ring-4 focus:dodocms-outline-none focus:ring-blue-300 dodocms-rounded-lg dodocms-border dodocms-border-gray-200 dodocms-text-sm dodocms-font-medium dodocms-px-5 dodocms-py-2.5 hover:dodocms-text-gray-900 focus:dodocms-z-10 dark:dodocms-bg-gray-700 dark:dodocms-text-gray-300 dark:dodocms-border-gray-500 dark:hover:dodocms-text-white dark:hover:dodocms-bg-gray-600 dark:focus:ring-gray-600">
                 <?= __("admin.panel.resources.upload.close") ?>
             </button>

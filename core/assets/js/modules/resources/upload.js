@@ -357,25 +357,25 @@ Application.get().addRunner(() => {
     // current field
     let target_field = null;
 
-    window.openUploadModal = (multiple = true, target = "") => {
-        const elements = $('.modal-upload-background, .modal-upload-content');
-        elements.removeClass('dodocms-hidden')
-
-        const input = $(elements).find('#dropzone-file');
-        input.prop('multiple', multiple);
-        target_field = target;
-    }
-
-    const closeUploadModal = () => {
-        target_field = null;
-        const elements = $('.modal-upload-background, .modal-upload-content');
-        elements.addClass('dodocms-hidden')
-    }
-    window.closeUploadModal = closeUploadModal;
-
-    $(document).on("click", ".close-upload-modal", (e) => {
-        closeUploadModal();
-    })
+    // window.openUploadModal = (multiple = true, target = "") => {
+    //     const elements = $('.modal-upload-background, .modal-upload-content');
+    //     elements.removeClass('dodocms-hidden')
+    //
+    //     const input = $(elements).find('#dropzone-file');
+    //     input.prop('multiple', multiple);
+    //     target_field = target;
+    // }
+    //
+    // const closeUploadModal = () => {
+    //     target_field = null;
+    //     const elements = $('.modal-upload-background, .modal-upload-content');
+    //     elements.addClass('dodocms-hidden')
+    // }
+    // window.closeUploadModal = closeUploadModal;
+    //
+    // $(document).on("click", ".close-upload-modal", (e) => {
+    //     closeUploadModal();
+    // })
 
     const appendResource = (parent, id) => {
         const url = CONTEXTS.get_resource + '/' + id;

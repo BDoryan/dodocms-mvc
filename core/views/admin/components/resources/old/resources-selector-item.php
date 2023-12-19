@@ -21,17 +21,17 @@
         <div class="dodocms-mt-auto dodocms-flex dodocms-flex-row">
             <button type="button"
                     class="dodocms-bg-gray-700 dodocms-bg-opacity-50 hover:dodocms-bg-opacity-100 dodocms-border-[1px] dodocms-border-gray-300 dodocms-border-opacity-50 hover:dodocms-border-opacity-75 dodocms-py-2 dodocms-px-3 dodocms-rounded-md dodocms-mt-auto"
-                    @click="resourceTarget=null">Annuler
+                    v-on:click="resourceTarget=null">Annuler
             </button>
             <button type="button"
                     class="save dodocms-bg-blue-700 hover:dodocms-bg-blue-800 dodocms-py-2 dodocms-px-3 dodocms-rounded-md dodocms-mt-auto dodocms-ms-auto"
-                    @click="resourceTarget=null">Enregistrer
+                    v-on:click="resourceTarget=null">Enregistrer
             </button>
         </div>
     </div>
     <div x-cloak x-show="!(resourceTarget != null && resourceTarget === '<?= $resource->getSrc() ?>')"
          class="dodocms-absolute dodocms-top-2 dodocms-right-2 space-x-1">
-        <button type="button" @click="resourceTarget='<?= $resource->getSrc() ?>'"
+        <button type="button" v-on:click="resourceTarget='<?= $resource->getSrc() ?>'"
                 class="dodocms-text-white dodocms-bg-blue-500 dodocms-h-8 dodocms-w-8 dodocms-rounded-full hover:dodocms-bg-blue-600">
             <i class="dodocms-text-sm fa-solid fa-edit"></i>
         </button>

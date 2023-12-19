@@ -35,7 +35,7 @@ class PageController extends DOMController
 
             $document = new DOMDocument();
 //            echo htmlspecialchars($block_content);
-            $document->loadHTML(/*'<?xml encoding="UTF-8">' . */$block_content, LIBXML_NOERROR | LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+            $document->loadHTML($block_content, LIBXML_NOERROR | LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
 
             // apply custom data to the block
             $custom_data = $page_structure->getCustom();
@@ -84,6 +84,7 @@ class PageController extends DOMController
 //            echo htmlspecialchars($document->saveHTML());
 //            exit;
             $block_content = $document->saveHTML();
+
 
             if ($isAdmin) {
                 view(

@@ -5,7 +5,7 @@
         data() {
             return {
                 files: [],
-                isMultiple: this.multiple ?? false
+                isMultiple: this.multiple ?? false,
             }
         },
         methods: {
@@ -65,18 +65,18 @@
                 })
             },
             async startUpload() {
-                this.$emit('startUpload', this.files);
+                this.$emit('upload-start', this.files);
 
                 let uploadedFiles = [];
                 try {
-
-
                     for (let index = 0; index < this.files.length; index++) {
                         const file = this.files[index];
                         const resource = await this.uploadFile(file, index);
                         this.$emit('resourceUploaded', resource.data);
                         uploadedFiles.push(file);
                     }
+                    this.$emit('resources-uploaded', uploadedFiles);
+                    console.log('emit event resources-uploaded', uploadedFiles)
                 } catch (error) {
                     console.error('Upload failed:', error);
                 } finally {
@@ -88,9 +88,8 @@
 
                     if (this.files.length === 0) {
                         this.close();
+                        this.$emit('upload-finish', uploadedFiles)
                     }
-                    this.$emit('finishUpload');
-                    console.log('finishUpload')
                 }
             }
         }
@@ -99,7 +98,7 @@
 <script type="text/x-template" id="modal-upload-template">
     <modal name="upload-modal">
         <template v-slot:title>
-            <i class='fa-solid fa-cloud-upload dodocms-me-1'></i> Upload a new resource(s)
+            <i class='fa-solid fa-cloud-upload dodocms-me-1'></i> Upload a new resources
         </template>
         <template v-slot:body>
             <div class="dodocms-flex dodocms-items-center dodocms-justify-center dodocms-w-full">
@@ -140,13 +139,13 @@
         </template>
         <template v-slot:footer>
             <button type="button"
-                    @click="close"
+                    v-on:click="close"
                     class="close-upload-modal dodocms-me-auto dodocms-text-gray-500 dodocms-bg-white hover:dodocms-bg-gray-100 focus:ring-4 focus:dodocms-outline-none focus:ring-blue-300 dodocms-rounded-lg dodocms-border dodocms-border-gray-200 dodocms-text-sm dodocms-font-medium dodocms-px-5 dodocms-py-2.5 hover:dodocms-text-gray-900 focus:dodocms-z-10 dark:dodocms-bg-gray-700 dark:dodocms-text-gray-300 dark:dodocms-border-gray-500 dark:hover:dodocms-text-white dark:hover:dodocms-bg-gray-600 dark:focus:ring-gray-600">
                 <?= __("admin.panel.resources.upload.close") ?>
             </button>
             <div class="dodocms-me-auto dodocms-text-white dodocms-opacity-75" id="state">
             </div>
-            <button @click="startUpload"
+            <button v-on:click="startUpload"
                     class="dodocms-text-white dodocms-bg-blue-700 hover:dodocms-bg-blue-800 focus:ring-4 focus:dodocms-outline-none focus:ring-blue-300 dodocms-font-medium dodocms-rounded-lg dodocms-text-sm dodocms-px-5 dodocms-py-2.5 dodocms-text-center dark:dodocms-bg-blue-600 dark:hover:dodocms-bg-blue-700 dark:focus:ring-blue-800">
                 <?= __("admin.panel.resources.upload.submit") ?>
             </button>

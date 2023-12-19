@@ -1,6 +1,6 @@
 <?php
 
-class ResourceModel extends Model
+class ResourceModel extends Model implements JsonSerializable
 {
 
     public const TABLE_NAME = "Resources";
@@ -140,7 +140,10 @@ class ResourceModel extends Model
         return (new ResourceModel())->getAll($columns, $conditions, $orderBy);
     }
 
-
+    public function jsonSerialize()
+    {
+        return $this->toArray();
+    }
 }
 
 Table::$models[ResourceModel::TABLE_NAME] = ResourceModel::class;
