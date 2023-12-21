@@ -1,6 +1,8 @@
 <script type="text/x-template" id="resource-item-template">
     <div class="dodocms-w-full dodocms-rounded-lg dodocms-border-[1px] dodocms-border-gray-300 dodocms-relative dodocms-overflow-hidden"
-         style="height: 200px;">
+         style="height: 200px;"
+         :class="{'dodocms-order-1': selected,'dodocms-order-2': !selected}"
+    >
         <img
                 class="dodocms-w-full dodocms-h-full"
                 :src="src"
@@ -15,16 +17,16 @@
              class="dodocms-absolute dodocms-top-0 dodocms-flex dodocms-flex-row dodocms-space-x-1 dodocms-w-full dodocms-p-2">
             <div class="dodocms-me-auto">
                 <button
-                        v-if="selectable && isSelected"
+                        v-if="selectable && isSelected()"
                         v-on:click="deselectItem"
                         type="button"
                         class="dodocms-border dodocms-border-white dodocms-border-opacity-75 dodocms-h-8 dodocms-w-8 dodocms-rounded-full dodocms-text-white dodocms-bg-gray-800">
                     <i class="dodocms-text-md fa-solid fa-check"></i>
                 </button>
-                <button v-else-if="selectable && !isSelected"
+                <button v-else-if="selectable && !isSelected()"
                         v-on:click="selectItem"
                         type="button"
-                        class="dodocms-border dodocms-border-white dodocms-border-opacity-60 dodocms-h-8 dodocms-w-8 dodocms-rounded-full dodocms-text-white dodocms-bg-gray-600 hover:dodocms-bg-gray-700">
+                        class="dodocms-border dodocms-border-white dodocms-border-opacity-60 dodocms-bg-opacity-75 dodocms-text-opacity-75 hover:dodocms-bg-opacity-100 hover:dodocms-text-opacity-100 dodocms-h-8 dodocms-w-8 dodocms-rounded-full dodocms-text-white dodocms-bg-gray-600 hover:dodocms-bg-gray-700">
                     <i class="dodocms-text-md fa-solid fa-check"></i>
                 </button>
             </div>

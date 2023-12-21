@@ -7,22 +7,22 @@ Vue.component('resource-item', {
         return {
             originalAlternativeText: '',
             localAlternativeText: this.alternativeText ?? '',
-            isSelected: this.selected || false,
             inEdition: false,
             uploadProgression: null
         };
     },
     methods: {
+        isSelected() {
+            return this.selected ?? false;
+        },
         selectItem() {
             if (this.selectable) {
-                this.$emit('toggle', true, this);
-                this.isSelected = true;
+                this.$emit('toggleSelection', true, this);
             }
         },
         deselectItem() {
             if (this.selectable) {
-                this.$emit('toggle', false, this);
-                this.isSelected = false;
+                this.$emit('toggleSelection', false, this);
             }
         },
         removeItem() {
@@ -102,9 +102,4 @@ Vue.component('resource-item', {
             }
         }
     },
-    watch: {
-        selected(newVal) {
-            this.isSelected = newVal || false; // Update local data when prop changes
-        }
-    }
 });

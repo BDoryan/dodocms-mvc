@@ -10,7 +10,6 @@
         methods: {
             addResource(resource) {
                 resource.src = DODOCMS_APPLICATION.toRoot(resource.src);
-                // push to top of array
                 this.localResources = [resource, ...this.localResources];
                 console.log('add resources', this.localResources)
             },

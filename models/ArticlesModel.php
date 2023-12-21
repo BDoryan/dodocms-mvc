@@ -22,7 +22,7 @@ class ArticlesModel extends ModelAssociated
 
     public function getImages(): array
     {
-        return $this->images;
+        return $this->images ?? [];
     }
 
     public function setImages(array $images): void

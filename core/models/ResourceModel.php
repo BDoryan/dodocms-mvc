@@ -3,6 +3,10 @@
 class ResourceModel extends Model implements JsonSerializable
 {
 
+    /**
+     * TODO: Il y a un très gros problème avec les chemins src de resource model, ce n'est pas normal de devoir 'bricoler' pour trouver la bonne route grâce aux 'root'
+     */
+
     public const TABLE_NAME = "Resources";
 
     protected string $name;

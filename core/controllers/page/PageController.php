@@ -23,6 +23,7 @@ class PageController extends DOMController
         $start = microtime(true);
         $isAdmin = isset($_GET['isAdmin']);
         $structures = $page->getPageStructures();
+        $utf8 = "<?xml encoding='utf-8' ?>";
 
         ob_start();
         /** @var PageStructureModel $page_structure */
@@ -33,9 +34,11 @@ class PageController extends DOMController
             $view = $block->getView();
             $block_content = fetch($view, ['block' => $block]);
 
+
             $document = new DOMDocument();
-//            echo htmlspecialchars($block_content);
-            $document->loadHTML($block_content, LIBXML_NOERROR | LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+
+            // Because DOMDocument broke the encoding
+            $document->loadHTML($utf8.$block_content, LIBXML_NOERROR | LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
 
             // apply custom data to the block
             $custom_data = $page_structure->getCustom();
@@ -81,9 +84,10 @@ class PageController extends DOMController
                 }
             }
 
-//            echo htmlspecialchars($document->saveHTML());
-//            exit;
-            $block_content = $document->saveHTML();
+            $html = $document->saveHTML();
+
+            $html = str_replace("$utf8", '', $html);
+            $block_content = $html;
 
 
             if ($isAdmin) {

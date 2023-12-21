@@ -128,6 +128,11 @@ class Application
         );
         $this->addVueComponent(
             new VueComponent(
+                $this->toRoot('/core/views/admin/vue/resources/resources-selector-modal.php'),
+            )
+        );
+        $this->addVueComponent(
+            new VueComponent(
                 $this->toRoot('/core/views/admin/vue/resources/resources.php'),
             )
         );

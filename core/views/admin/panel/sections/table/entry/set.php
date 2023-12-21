@@ -32,7 +32,6 @@ if (empty($model)) {
             ?>
         </div>
     </form>
-    <modal-upload></modal-upload>
-<!--    --><?php //view(Application::get()->toRoot("core/views/admin/components/resources/upload-modal.php"), ["var" => 'uploadModal']); ?>
-<!--    --><?php //view(Application::get()->toRoot("core/views/admin/components/resources/selector-modal.php"), ["var" => 'uploadModal']); ?>
-</div>
+    <modal-upload :ref="`ref_upload_modal`"></modal-upload>
+    <resources-selector-modal :resources="<?= Tools::parseJsonToHtmlAttribute(json_encode(ResourceModel::findAll('*'), JSON_HEX_QUOT)) ?>" :ref="`ref_resources_selector_modal`"></resources-selector-modal>
+    </div>

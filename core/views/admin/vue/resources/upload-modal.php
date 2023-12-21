@@ -1,11 +1,12 @@
 <script defer type="module">
     Vue.component('modal-upload', {
-        props: ['name', 'multiple'],
+        props: ['name'],
         template: '#modal-upload-template',
         data() {
             return {
                 files: [],
-                isMultiple: this.multiple ?? false,
+                multiple: true
+                // isMultiple: this.multiple ?? false,
             }
         },
         methods: {
@@ -15,10 +16,13 @@
             close() {
                 this.$root.closeModal('upload-modal')
             },
-            getSrc(file) {
+                getSrc(file) {
                 return URL.createObjectURL(file);
             },
             selectFiles(event) {
+                if(!this.multiple)
+                    this.files = [];
+
                 for (let i = 0; i < event.target.files.length; i++) {
                     const file = event.target.files[i];
                     this.files.push(file);
@@ -29,8 +33,6 @@
             },
             async uploadFile(file, index) {
                 const ref = this.$refs['resourceItem_' + index][0] ?? null;
-
-                const self = this;
 
                 const formData = new FormData();
                 formData.append('file', file);
@@ -68,15 +70,17 @@
                 this.$emit('upload-start', this.files);
 
                 let uploadedFiles = [];
+                let resourcesFiles = [];
                 try {
                     for (let index = 0; index < this.files.length; index++) {
                         const file = this.files[index];
                         const resource = await this.uploadFile(file, index);
-                        this.$emit('resourceUploaded', resource.data);
+                        this.$root.$emit('resourceUploaded', resource.data);
                         uploadedFiles.push(file);
+                        resourcesFiles.push(resource.data);
                     }
-                    this.$emit('resources-uploaded', uploadedFiles);
-                    console.log('emit event resources-uploaded', uploadedFiles)
+                    console.log(this.$root)
+                    this.$root.$emit('resources-uploaded', resourcesFiles);
                 } catch (error) {
                     console.error('Upload failed:', error);
                 } finally {
@@ -118,7 +122,7 @@
                         <p class="dodocms-text-xs dodocms-text-gray-500 dark:dodocms-text-gray-400">PDF, JPEG, PNG or
                             JPG</p>
                     </div>
-                    <input @change="selectFiles" :multiple="isMultiple" name="files[]" id="dropzone-file" type="file"
+                    <input @change="selectFiles" :multiple="multiple" name="files[]" id="dropzone-file" type="file"
                            class="dodocms-absolute dodocms-w-full dodocms-h-full dodocms-opacity-0"/>
                 </label>
             </div>

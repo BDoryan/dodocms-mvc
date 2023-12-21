@@ -1,24 +1,51 @@
 Vue.component('resource-viewer', {
-    props: ['name', 'items', 'selectable', 'editable', 'deletable', 'removable', 'addable', 'scrollable', 'uploadable'],
+    props: ['name', 'items', 'selectable', 'editable', 'deletable', 'removable', 'addable', 'scrollable', 'uploadable', 'multiple', 'itemsSelected'],
     template: '#resource-viewer-template',
     data() {
         return {
             // localItems: this.items ? [...this.items] : [],
-            localSelectable: this.selectable ?? false
+            localSelectable: this.selectable ?? false,
+            localItemsSelected: this.itemsSelected ?? [],
+            localItems: this.items ?? [],
         };
     },
     methods: {
+        getItemsSelected() {
+            return this.localItemsSelected;
+        },
+        isSelected(item) {
+            return this.getItemsSelected().includes(item.id);
+        },
+        isMultiple() {
+            return this.multiple ?? true;
+        },
         openUploadModal() {
-            this.$root.openModal('upload-modal');
-            console.log('open upload modal', this);
-            this.$emit('upload-modal-open', this);
+            this.$root.$emit('upload-modal-open', this);
+        },
+        openResourcesSelectorModal() {
+            this.$root.$emit('resources-selector-modal-open', this);
+        },
+        setItems(items) {
+            console.log("before", this.localItems)
+            this.localItems = items;
+            console.log("after", this.localItems)
+        },
+        listItemsId() {
+            return this.localItems.map((el) => el.id);
         },
         ids() {
-            const ids = this.items.map((el) => el.id);
-            return ids.join(',');
+            return this.listItemsId().join(',');
         },
-        toggleItem(item, toggled) {
-            console.log('toggleItem', item, toggled)
+        toggleItem(toggled, item) {
+            if (!this.isMultiple()) {
+                this.localItemsSelected = [];
+            }
+
+            if (toggled) {
+                this.localItemsSelected = [...this.getItemsSelected(), item.id];
+            } else {
+                this.localItemsSelected = this.getItemsSelected().filter((el) => el !== item.id);
+            }
         },
         editItem(item) {
             console.log('edit', item)
@@ -27,16 +54,19 @@ Vue.component('resource-viewer', {
             return "Aucun status défini";
         },
         getTitle() {
-            return translate('admin.panel.resources.count', {'count': this.items.length});
+            return this.$root.translate('admin.panel.resources.count', {'count': this.localItems.length});
         },
         addItem(item) {
-            this.items = [...this.items, item];
+            if (!this.multiple)
+                this.localItems = [];
+
+            this.localItems = [...this.localItems, item];
         },
         deleteItem(id) {
-            const index = this.items.findIndex((el) => el.id === id);
+            const index = this.localItems.findIndex((el) => el.id === id);
             if (index > -1) {
-                this.$delete(this.items, index);
-                this.items = [...this.items];
+                this.$delete(this.localItems, index);
+                this.localItems = [...this.localItems];
             }
         }
     }
