@@ -221,7 +221,7 @@ class TableManagementController extends PanelController
                     }
                 } else {
                     Application::get()->getLogger()->error("Error while setting entry");
-                    $this->addAlert(new Alert(__("admin.panel.toast.error"), isset($entry_id) ? __("admin.panel.tables.table.entries.edit_entry.error") : __("admin.panel.tables.table.entries.create_entry.error"), Toast::TYPE_DANGER));
+                    $this->addAlert(new Alert(__("admin.panel.toast.error"), isset($entry_id) ?     __("admin.panel.tables.table.entries.edit_entry.error") : __("admin.panel.tables.table.entries.create_entry.error"), Toast::TYPE_DANGER));
                 }
             }
         } catch (Exception $e) {

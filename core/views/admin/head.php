@@ -18,13 +18,24 @@
 <script src="<?= Application::get()->toURL("/core/assets/js/classes/Application.js") ?>"></script>
 
 <script>
-    DODOCMS_APPLICATION = new Application('<?= Application::get()->getUrl() ?>', '<?= Application::get()->getInternationalization()->getLanguage() ?>', '<?= Application::get()->toURL("/admin/api/") ?>');
+    //DODOCMS_APPLICATION = new Application('<?php //= Application::get()->getUrl() ?>//', '<?php //= Application::get()->getInternationalization()->getLanguage() ?>//', '<?php //= Application::get()->toURL("/admin/api/") ?>//');
 </script>
 
 <!-- Translations for JavaScript -->
 <script>
     const translations_json = '<?= str_replace("'", "\'", json_encode(Application::get()->getInternationalization()->getTranslations())) ?>';
     const translations = JSON.parse(translations_json);
+
+    const root = '<?= Application::get()->toURL("/") ?>';
+    const api = '<?= Application::get()->toURL("/admin/api/") ?>';
+
+    window.toRoot = (path) => {
+        return root + path;
+    }
+
+    window.toApi = (path) => {
+        return api + path;
+    }
 
     window.getTranslate = (key) => {
         if (translations[key]) {
@@ -44,10 +55,8 @@
 </script>
 
 <!-- Load all modules -->
-<script type="module" src="<?= Application::get()->toURL("/core/assets/js/modules/select.js") ?>"></script>
-<script type="module" src="<?= Application::get()->toURL("/core/assets/js/modules/resources/upload.js") ?>"></script>
-<script type="module" src="<?= Application::get()->toURL("/core/assets/js/modules/resources/selector.js") ?>"></script>
-<script type="module" src="<?= Application::get()->toURL("/core/assets/js/init.js") ?>"></script>
+<script type="module" src="<?= Application::get()->toURL("/core/assets/js/scripts/select.js") ?>"></script>
+<!--<script type="module" src="--><?php //= Application::get()->toURL("/core/assets/js/init.js") ?><!--"></script>-->
 
 <!-- Load vue.js -->
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>

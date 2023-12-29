@@ -136,6 +136,11 @@ class Application
                 $this->toRoot('/core/views/admin/vue/resources/resources.php'),
             )
         );
+        $this->addVueComponent(
+            new VueComponent(
+                $this->toRoot('/core/views/admin/vue/toast.php'),
+            )
+        );
     }
 
     public function errorHandler($errno, $errstr, $errfile, $errline): bool

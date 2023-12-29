@@ -25,7 +25,7 @@
                 return this.resources;
             },
             getSrc(resource) {
-                return DODOCMS_APPLICATION.toRoot(resource.src);
+                return window.toRoot(resource.src);
             },
             finish() {
                 this.close();
@@ -47,7 +47,7 @@
         },
         mounted() {
             this.resources = this.resources.map((resource) => {
-                resource.src = DODOCMS_APPLICATION.toRoot(resource.src);
+                resource.src = window.toRoot(resource.src);
                 return resource;
             });
         }

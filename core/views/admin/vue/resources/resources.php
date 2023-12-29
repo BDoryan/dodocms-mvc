@@ -9,7 +9,7 @@
         },
         methods: {
             addResource(resource) {
-                resource.src = DODOCMS_APPLICATION.toRoot(resource.src);
+                resource.src = window.toRoot(resource.src);
                 this.localResources = [resource, ...this.localResources];
                 console.log('add resources', this.localResources)
             },

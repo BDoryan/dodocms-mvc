@@ -5,21 +5,14 @@ class Toast extends Component
 
     const TYPE_INFO = "info";
     const TYPE_SUCCESS = "success";
-    const TYPE_DANGER = "danger";
+    const TYPE_ERROR = "error";
     const TYPE_WARNING = "warning";
-
-    const STYLES = [
-        self::TYPE_INFO => "blue",
-        self::TYPE_SUCCESS => "green",
-        self::TYPE_DANGER => "red",
-        self::TYPE_WARNING => "orange",
-    ];
 
     protected string $type = self::TYPE_INFO;
     protected string $title;
     protected string $message;
 
-    protected int $timeout = 5000;
+    protected int $duration = 5000;
 
     /**
      * @param string $title
@@ -36,6 +29,16 @@ class Toast extends Component
     public function getTitle(): string
     {
         return str_replace("'", "\\'", $this->title);
+    }
+
+    public function getType(): string
+    {
+        return $this->type;
+    }
+
+    public function getDuration(): int
+    {
+        return $this->duration;
     }
 
     public function getMessage(): string
@@ -61,9 +64,9 @@ class Toast extends Component
         return $this;
     }
 
-    public function timeout(int $timeout): Toast
+    public function duration(int $duration): Toast
     {
-        $this->timeout = $timeout;
+        $this->duration = $duration;
         return $this;
     }
 

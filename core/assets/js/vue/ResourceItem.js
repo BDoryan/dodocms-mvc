@@ -30,21 +30,20 @@ Vue.component('resource-item', {
             resourceItem.$emit('remove', resourceItem.id);
         },
         deleteItem() {
-            const translations = DODOCMS_APPLICATION.getI18n();
             const id = this.id;
             const resourceItem = this;
 
             if (id) {
                 $.ajax({
-                    url: DODOCMS_APPLICATION.toApi("/resources/delete") + '/' + id,
+                    url: window.toApi("/resources/delete") + '/' + id,
                     type: "DELETE",
                     success: function (data) {
                         if (data.status === "success") {
-                            let toast = new Toast(translations.translate('admin.panel.resources.title'), translations.translate('admin.panel.resources.deleted'), "success", 5000);
+                            let toast = new Toast(window.translate('admin.panel.resources.title'), window.translate('admin.panel.resources.deleted'), "success", 5000);
                             toast.render();
                             resourceItem.$emit('delete', resourceItem.id);
                         } else {
-                            let toast = new Toast(translations.translate('error.message'), translations.translate('admin.panel.resources.delete.error.' + data.message, {'file_name': data.data.file_name}), "danger", 15000);
+                            let toast = new Toast(window.translate('error.message'), window.translate('admin.panel.resources.delete.error.' + data.message, {'file_name': data.data.file_name}), "error", 15000);
                             toast.render();
                         }
                     }
@@ -75,24 +74,23 @@ Vue.component('resource-item', {
         applyEdition() {
             this.hideEdition();
 
-            const translations = DODOCMS_APPLICATION.getI18n();
             const alternativeText = this.localAlternativeText;
 
             const id = this.id;
 
             if (id) {
                 $.ajax({
-                    url: DODOCMS_APPLICATION.toApi("/resources/edit") + '/' + id,
+                    url: window.toApi("/resources/edit") + '/' + id,
                     type: "PUT",
                     data: {
                         alternativeText
                     },
                     success: function (data) {
                         if (data.status === "success") {
-                            let toast = new Toast(translations.translate('admin.panel.resources.title'), translations.translate('admin.panel.resources.edited'), "success", 5000);
+                            let toast = new Toast(window.translate('admin.panel.resources.title'), window.translate('admin.panel.resources.edited'), "success", 5000);
                             toast.render();
                         } else {
-                            let toast = new Toast(translations.translate('error.message'), data.message, "danger", 15000);
+                            let toast = new Toast(window.translate('error.message'), data.message, "error", 15000);
                             toast.render();
                         }
                     }

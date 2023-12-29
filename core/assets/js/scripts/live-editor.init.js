@@ -19,7 +19,7 @@ Application.get().addRunner(() => {
         $(model).addClass("position-relative");
 
         const button = document.createElement("button");
-        button.innerHTML = DODOCMS_APPLICATION.getI18n().translate('live-editor.entries.add');
+        button.innerHTML = window.translate('live-editor.entries.add');
 
         button.setAttribute("model-name", $(model).attr("model-name"));
         button.setAttribute("model-action", "new");
@@ -51,7 +51,7 @@ $(document).on("click", "[data-block-action]", function () {
 
             if (elements.length > 0) {
                 $.ajax({
-                    url: DODOCMS_APPLICATION.toApi("/pages/edit/") + page_block_id,
+                    url: window.toApi("/pages/edit/") + page_block_id,
                     method: "POST",
                     data,
                     success: function (response) {
@@ -83,7 +83,7 @@ $(document).on("click", "[data-block-action]", function () {
                             });
 
                             $.ajax({
-                                url: DODOCMS_APPLICATION.toApi("/entries/update/") + model_name + "/" + entity_id,
+                                url: window.toApi("/entries/update/") + model_name + "/" + entity_id,
                                 method: "POST",
                                 data,
                                 success: function (response) {

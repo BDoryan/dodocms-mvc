@@ -23,7 +23,10 @@
         <?= $footer ?? '' ?>
     </div>
 </div>
-<div class="toast-container dodocms-fixed dodocms-bottom-0 dodocms-right-0 dodocms-items-end dodocms-p-4 dodocms-flex dodocms-flex-col dodocms-gap-3 dodocms-justify-end dodocms-overflow-hidden dodocms-z-50">
-    <!-- Render all toast -->
+<div ref="toastContainer" class="dodocms-max-w-[25vw] toast-container dodocms-fixed dodocms-bottom-0 dodocms-right-0 dodocms-items-end dodocms-p-4 dodocms-flex dodocms-flex-col dodocms-gap-3 dodocms-justify-end dodocms-overflow-hidden dodocms-z-50">
+<!--    <toast type="info" title="info" message="Lorem uid zahnuidzauod zapidh jzaoidhza pdiuhzn oduzhndoiazh diuaznhdiuha nziuhdzaiuàdhza npjzapod jaz;idjaz ,daz ohduzaidhpzdaz"></toast>-->
+<!--    <toast type="error" title="error" message="Lorem uid zahnuidzauod zapidh jzaoidhza pdiuhzn oduzhndoiazh diuaznhdiuha nziuhdzaiuàdhza npjzapod jaz;idjaz ,daz ohduzaidhpzdaz"></toast>-->
+<!--    <toast type="success" title="success" message="Lorem uid zahnuidzauod zapidh jzaoidhza pdiuhzn oduzhndoiazh diuaznhdiuha nziuhdzaiuàdhza npjzapod jaz;idjaz ,daz ohduzaidhpzdaz"></toast>-->
+<!--    <toast type="warning" title="warning" message="Lorem uid zahnuidzauod zapidh jzaoidhza pdiuhzn oduzhndoiazh diuaznhdiuha nziuhdzaiuàdhza npjzapod jaz;idjaz ,daz ohduzaidhpzdaz"></toast>-->
+    <?php array_map(function ($toast) { $toast->render(); }, $toasts ?? []); ?>
 </div>
-<?php array_map(function ($toast) { $toast->render(); }, $toasts ?? []); ?>

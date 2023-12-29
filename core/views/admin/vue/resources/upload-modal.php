@@ -62,7 +62,7 @@
                         reject('Network error while uploading file');
                     };
 
-                    xhr.open('POST', DODOCMS_APPLICATION.toApi("/resources/upload"), true);
+                    xhr.open('POST', window.toApi("/resources/upload"), true);
                     xhr.send(formData);
                 })
             },
