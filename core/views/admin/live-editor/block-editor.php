@@ -4,9 +4,7 @@ if (!isset($block) || !isset($page_structure)) {
     exit;
 }
 ?>
-<div page-structure-actions>
-    <button page-structure-action="add"></button>
-</div>
+<?= fetch(Application::get()->toRoot('/core/views/admin/live-editor/block-add.php'), ['position' => $position ?? '']) ?>
 <div block-name="<?= $block->getName() ?>" page-structure-id="<?= $page_structure->getId() ?? null ?>">
     <div style="display: flex; background: black; width: 100%; color: white; padding: 10px 15px; align-items: center;"><?= $block->getName() ?? 'unnamed' ?>
         <span style="white-space: nowrap">

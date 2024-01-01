@@ -1,5 +1,3 @@
-import Toast from "../components/toast/Toast.js";
-
 Vue.component('resource-item', {
     props: ['id', 'src', 'href', 'alternativeText', 'selectable', 'selected', 'deletable', 'editable', 'removable'],
     template: '#resource-item-template',

@@ -3,9 +3,25 @@ new Vue({
     data: {
         modals: [],
         toasts: [],
+        liveEditor: {
+            position: null
+        },
         currentResourceViewer: null
     },
     methods: {
+        showBlocksModal(position){
+            this.setPosition(position);
+            this.openModal('blocks-modal');
+        },
+        setPosition(position){
+            this.liveEditor.position = position;
+        },
+        addBlock(block_id) {
+            console.log('liveEditor.position', this.liveEditor.position)
+            console.log('add block', block_id);
+
+
+        },
         showToast(data) {
             const toast = new Vue({
                 el: document.createElement('div'),
@@ -25,11 +41,9 @@ new Vue({
             this.$refs.toastContainer.appendChild(toast.$el);
         },
         openModal(name) {
-            console.log(this.modals, name)
             this.modals = [...this.modals, name]
         },
         closeModal(name) {
-            console.log(this.modals, name)
             this.modals = this.modals.filter(modal => modal !== name);
         },
         modalIsOpen(name) {

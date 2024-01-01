@@ -1,3 +1,5 @@
+console.log('LIVE EDITOR INIT')
+
 $(document).ready(() => {
     const editableElements = $("[editable],[editable-model-data]");
 
@@ -8,11 +10,9 @@ $(document).ready(() => {
     });
 
     $('br[type=_moz]').remove();
-
 });
 
-
-Application.get().addRunner(() => {
+$(document).ready(() => {
     const models = $("[model-name]");
     // add html button to add new entry
     models.each((index, model) => {
@@ -55,7 +55,7 @@ $(document).on("click", "[data-block-action]", function () {
                     method: "POST",
                     data,
                     success: function (response) {
-                        console.log(response);
+                        window.showToast(new Toast(window.translate(`live-editor.structure.update.toast.${response.status}`), window.translate(`live-editor.structure.update.toast.${response.message}`), response.status, 5000))
                     }
                 });
             } else {

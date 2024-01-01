@@ -1,9 +1,6 @@
-import Component from "../Component.js";
-
-class Toast extends Component {
+class Toast  {
 
     constructor(title = '', message = '', type = '', duration = 5000) {
-        super("toast");
         this.title = title;
         this.message = message;
         this.type = type;
@@ -14,5 +11,3 @@ class Toast extends Component {
         window.showToast(this);
     }
 }
-
-export default Toast;

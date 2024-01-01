@@ -25,7 +25,7 @@ class TableManagementController extends PanelController
     {
         $table = Table::getTable($table_name);
         if (!isset($table)) {
-            $this->addToast(new Toast(__("admin.panel.toast.error"), __("admin.panel.tables.table.not_found", ["table" => $table_name]), Toast::TYPE_DANGER));
+            $this->addToast(new Toast(__("admin.panel.toast.error"), __("admin.panel.tables.table.not_found", ["table" => $table_name]), Toast::TYPE_ERROR));
             header("Location: " . Routes::route(Routes::ADMIN_TABLES));
             exit;
         }
@@ -36,7 +36,7 @@ class TableManagementController extends PanelController
     {
         $model = Model::getModel($table);
         if (!isset($model)) {
-            $this->addToast(new Toast(__("admin.panel.toast.error"), __("admin.panel.tables.table.model_not_found", ["model" => $table->getName()]), Toast::TYPE_DANGER));
+            $this->addToast(new Toast(__("admin.panel.toast.error"), __("admin.panel.tables.table.model_not_found", ["model" => $table->getName()]), Toast::TYPE_ERROR));
             header('Location: ' . Routes::route(Routes::ADMIN_TABLES_TABLE_ENTRIES, ["table" => $table->getName()]));
             exit;
         }
@@ -82,7 +82,7 @@ class TableManagementController extends PanelController
             Application::get()->getRouter()->redirect(Routes::ADMIN_TABLES);
             exit;
         }
-        $this->addToast(new Toast(__("admin.panel.toast.error"), __("admin.panel.tables.table.not_found", ["table" => $table_name]), Toast::TYPE_DANGER));
+        $this->addToast(new Toast(__("admin.panel.toast.error"), __("admin.panel.tables.table.not_found", ["table" => $table_name]), Toast::TYPE_ERROR));
         header("Location: " . Routes::route(Routes::ADMIN_TABLES));
         exit;
     }
@@ -91,7 +91,7 @@ class TableManagementController extends PanelController
     {
         $table = Table::getTable($table_name);
         if (empty($table)) {
-            $this->addToast(new Toast(__("admin.panel.toast.error"), __("admin.panel.tables.table.not_found", ["table" => $table_name]), Toast::TYPE_DANGER));
+            $this->addToast(new Toast(__("admin.panel.toast.error"), __("admin.panel.tables.table.not_found", ["table" => $table_name]), Toast::TYPE_ERROR));
             header("Location: " . Routes::route(Routes::ADMIN_TABLES));
             exit;
         }
@@ -157,19 +157,19 @@ class TableManagementController extends PanelController
 
         try {
             if ($model->id($entry_id)->fetch() == null) {
-                $this->addToast(new Toast(__("admin.panel.toast.error"), __("admin.panel.tables.table.entries.entry_not_found", ["table" => $table_name, "entry_id" => $entry_id]), Toast::TYPE_DANGER));
+                $this->addToast(new Toast(__("admin.panel.toast.error"), __("admin.panel.tables.table.entries.entry_not_found", ["table" => $table_name, "entry_id" => $entry_id]), Toast::TYPE_ERROR));
             } else {
                 if ($model->delete()) {
                     $this->addToast(new Toast(__("admin.panel.toast.success"), __("admin.panel.tables.table.entries.delete_entry.success"), Toast::TYPE_SUCCESS));
                 } else {
                     Application::get()->getLogger()->error("Error while deleting entry");
-                    $this->addAlert(new Alert(__("admin.panel.toast.error"), __("admin.panel.tables.table.entries.delete_entry.error"), Toast::TYPE_DANGER));
+                    $this->addAlert(new Alert(__("admin.panel.toast.error"), __("admin.panel.tables.table.entries.delete_entry.error"), Toast::TYPE_ERROR));
                 }
             }
         } catch (Exception $e) {
             Application::get()->getLogger()->error("Error while deleting entry");
             Application::get()->getLogger()->printException($e);
-            $this->addAlert(new Alert(__("admin.panel.toast.error"), __("admin.panel.tables.table.entries.delete_entry.error"), Toast::TYPE_DANGER));
+            $this->addAlert(new Alert(__("admin.panel.toast.error"), __("admin.panel.tables.table.entries.delete_entry.error"), Toast::TYPE_ERROR));
         }
         header('Location: ' . Routes::route(Routes::ADMIN_TABLES_TABLE_ENTRIES, ["table" => $table_name]));
     }
@@ -197,7 +197,7 @@ class TableManagementController extends PanelController
         try {
             if (isset($entry_id)) {
                 if ($model->id($entry_id)->fetch() == null) {
-                    $this->addToast(new Toast(__("admin.panel.toast.error"), __("admin.panel.tables.table.entries.entry_not_found", ["table" => $table_name, "entry_id" => $entry_id]), Toast::TYPE_DANGER));
+                    $this->addToast(new Toast(__("admin.panel.toast.error"), __("admin.panel.tables.table.entries.entry_not_found", ["table" => $table_name, "entry_id" => $entry_id]), Toast::TYPE_ERROR));
                     header('Location: ' . Routes::route(Routes::ADMIN_TABLES_TABLE_ENTRIES, ["table" => $table_name]));
                     exit;
                 }
@@ -221,13 +221,13 @@ class TableManagementController extends PanelController
                     }
                 } else {
                     Application::get()->getLogger()->error("Error while setting entry");
-                    $this->addAlert(new Alert(__("admin.panel.toast.error"), isset($entry_id) ?     __("admin.panel.tables.table.entries.edit_entry.error") : __("admin.panel.tables.table.entries.create_entry.error"), Toast::TYPE_DANGER));
+                    $this->addAlert(new Alert(__("admin.panel.toast.error"), isset($entry_id) ?     __("admin.panel.tables.table.entries.edit_entry.error") : __("admin.panel.tables.table.entries.create_entry.error"), Toast::TYPE_ERROR));
                 }
             }
         } catch (Exception $e) {
             Application::get()->getLogger()->error("Error while setting entry");
             Application::get()->getLogger()->printException($e);
-            $this->addAlert(new Alert(__("admin.panel.toast.error"), isset($entry_id) ? __("admin.panel.tables.table.entries.edit_entry.error") : __("admin.panel.tables.table.entries.create_entry.error"), Toast::TYPE_DANGER));
+            $this->addAlert(new Alert(__("admin.panel.toast.error"), isset($entry_id) ? __("admin.panel.tables.table.entries.edit_entry.error") : __("admin.panel.tables.table.entries.create_entry.error"), Toast::TYPE_ERROR));
         }
 
 
@@ -253,7 +253,7 @@ class TableManagementController extends PanelController
 
                 // Check if the posted data is valid
                 if (empty($table_data) || !isset($table_data['name']) || !isset($table_data['attributes'])) {
-                    $this->addToast(new Toast(__("admin.panel.toast.error"), __("admin.panel.tables.table.set.error.invalid_json"), Toast::TYPE_DANGER));
+                    $this->addToast(new Toast(__("admin.panel.toast.error"), __("admin.panel.tables.table.set.error.invalid_json"), Toast::TYPE_ERROR));
                 } else {
                     try {
                         if (empty($table)) {
@@ -271,7 +271,7 @@ class TableManagementController extends PanelController
                         Application::get()->getLogger()->printException($e);
                         $table = $post_table;
                         $data['sql'] = $e->getSql();
-                        $this->addAlert(new Alert(__("admin.panel.toast.error"), __("admin.panel.tables.table.set.error.sql", ["table" => $post_table->getName(), "error" => $e->getMessage()]), Toast::TYPE_DANGER));
+                        $this->addAlert(new Alert(__("admin.panel.toast.error"), __("admin.panel.tables.table.set.error.sql", ["table" => $post_table->getName(), "error" => $e->getMessage()]), Toast::TYPE_ERROR));
                     }
                 }
             }

@@ -93,6 +93,7 @@ class PageController extends DOMController
             if ($isAdmin) {
                 view(
                     Application::get()->toRoot('/core/views/admin/live-editor/block-editor.php'), [
+                        'position' => $i,
                         'block' => $block,
                         'page_structure' => $page_structure,
                         'content' => $block_content,
@@ -108,11 +109,9 @@ class PageController extends DOMController
 
         $content = ob_get_clean();
         if($isAdmin) {
-            $content .= '
-            <div page-structure-actions>
-                <button page-structure-action="add"></button>
-            </div>
-        ';
+            $content .= fetch(Application::get()->toRoot('/core/views/admin/live-editor/block-add.php'), [
+                'position' => count($structures)
+            ]);
         }
 
         $this->header = $this->fetch("header");

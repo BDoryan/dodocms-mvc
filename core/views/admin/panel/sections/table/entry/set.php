@@ -32,6 +32,4 @@ if (empty($model)) {
             ?>
         </div>
     </form>
-    <modal-upload :ref="`ref_upload_modal`"></modal-upload>
-    <resources-selector-modal :resources="<?= Tools::parseJsonToHtmlAttribute(json_encode(ResourceModel::findAll('*'), JSON_HEX_QUOT)) ?>" :ref="`ref_resources_selector_modal`"></resources-selector-modal>
     </div>

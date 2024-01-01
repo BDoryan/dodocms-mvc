@@ -1,6 +1,6 @@
-/*
-! tailwindcss v3.3.6 | MIT License | https://tailwindcss.com
-*/
+/* Remove base styles  */
+
+/* ! tailwindcss v3.3.6 | MIT License | https://tailwindcss.com  */
 
 /*
 1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
@@ -572,6 +572,10 @@ video {
   bottom: 0px;
 }
 
+.dodocms-bottom-2 {
+  bottom: 0.5rem;
+}
+
 .dodocms-left-0 {
   left: 0px;
 }
@@ -761,10 +765,6 @@ video {
   margin-top: auto;
 }
 
-.-dodocms-mb-2 {
-  margin-bottom: -0.5rem;
-}
-
 .dodocms-block {
   display: block;
 }
@@ -913,12 +913,12 @@ video {
   min-width: 100%;
 }
 
-.dodocms-max-w-\[50vw\] {
-  max-width: 50vw;
-}
-
 .dodocms-max-w-\[25vw\] {
   max-width: 25vw;
+}
+
+.dodocms-max-w-\[30vw\] {
+  max-width: 30vw;
 }
 
 .dodocms-flex-1 {
@@ -929,58 +929,8 @@ video {
   flex-shrink: 0;
 }
 
-.dodocms-translate-x-\[102vw\] {
-  --tw-translate-x: 102vw;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
 .dodocms-translate-x-full {
   --tw-translate-x: 100%;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.dodocms-translate-x-\[100vw\] {
-  --tw-translate-x: 100vw;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.dodocms-translate-x-\[110\%\] {
-  --tw-translate-x: 110%;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.dodocms-translate-x-\[25vw\] {
-  --tw-translate-x: 25vw;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.dodocms-translate-x-\[250px\] {
-  --tw-translate-x: 250px;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.dodocms-translate-x-0 {
-  --tw-translate-x: 0px;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.dodocms-translate-x-\[12vw\] {
-  --tw-translate-x: 12vw;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.-dodocms-translate-x-full {
-  --tw-translate-x: -100%;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.-dodocms-translate-x-1\/2 {
-  --tw-translate-x: -50%;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.dodocms-translate-x-1\/2 {
-  --tw-translate-x: 50%;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
@@ -1006,6 +956,10 @@ video {
 
 .dodocms-flex-wrap {
   flex-wrap: wrap;
+}
+
+.dodocms-flex-nowrap {
+  flex-wrap: nowrap;
 }
 
 .dodocms-items-end {
@@ -1210,6 +1164,11 @@ video {
   border-color: rgb(255 255 255 / var(--tw-border-opacity));
 }
 
+.dodocms-border-gray-700 {
+  --tw-border-opacity: 1;
+  border-color: rgb(55 65 81 / var(--tw-border-opacity));
+}
+
 .dodocms-border-opacity-20 {
   --tw-border-opacity: 0.2;
 }
@@ -1310,9 +1269,9 @@ video {
   background-color: rgb(49 46 129 / var(--tw-bg-opacity));
 }
 
-.dodocms-bg-orange-500 {
+.dodocms-bg-pink-500 {
   --tw-bg-opacity: 1;
-  background-color: rgb(249 115 22 / var(--tw-bg-opacity));
+  background-color: rgb(236 72 153 / var(--tw-bg-opacity));
 }
 
 .dodocms-bg-red-500 {
@@ -1337,16 +1296,6 @@ video {
 .dodocms-bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-
-.dodocms-bg-pink-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(236 72 153 / var(--tw-bg-opacity));
-}
-
-.dodocms-bg-pink-800 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(157 23 77 / var(--tw-bg-opacity));
 }
 
 .dodocms-bg-opacity-25 {
@@ -1560,6 +1509,10 @@ video {
   text-transform: uppercase;
 }
 
+.dodocms-italic {
+  font-style: italic;
+}
+
 .dodocms-leading-5 {
   line-height: 1.25rem;
 }
@@ -1631,6 +1584,10 @@ video {
   --tw-text-opacity: 0.75;
 }
 
+.dodocms-text-opacity-25 {
+  --tw-text-opacity: 0.25;
+}
+
 .dodocms-opacity-0 {
   opacity: 0;
 }
@@ -1641,10 +1598,6 @@ video {
 
 .dodocms-opacity-75 {
   opacity: 0.75;
-}
-
-.dodocms-opacity-100 {
-  opacity: 1;
 }
 
 .dodocms-shadow {

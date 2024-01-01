@@ -13,7 +13,7 @@
                     <img src="<?= $article->getIllustrationResource() !== null ? $article->getIllustrationResource()->getSrc() : '' ?>"
                          class="object-fit-contain bd-placeholder-img card-img-top" width="100%" style="height: 225px;" alt="">
                     <div class="card-body bg-secondary">
-                        <h1 editable-model-data="title"><?= $article->getTitle() ?></h1>
+                        <h5 editable-model-data="title"><?= $article->getTitle() ?></h5>
                         <p class="card-text" editable-model-data="subtitle"><?= $article->getSubtitle() ?></p>
                     </div>
                 </div>

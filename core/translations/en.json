@@ -120,10 +120,16 @@
   "admin.panel.pages_manager.fields.label.seo_keywords": "SEO keywords",
   "admin.panel.pages_manager.fields.label.favicon": "Favicon",
   "admin.panel.resources.delete.error.resource_not_found": "The resource targeted is not found.",
+  "panel.admin.resource.item.edit.save": "Sauvegarder",
+  "panel.admin.resource.item.edit.cancel": "Annuler",
+  "panel.admin.resource.item.edit.alternativeText": "Texte alternatif",
   "live-editor.block.save": "Save changes",
   "live-editor.block.delete": "Delete",
   "live-editor.entries.add": "New an entry",
-  "panel.admin.resource.item.edit.save": "Sauvegarder",
-  "panel.admin.resource.item.edit.cancel": "Annuler",
-  "panel.admin.resource.item.edit.alternativeText": "Texte alternatif"
+  "live-editor.structure.update.toast.success": "The structure of the block has been updated",
+  "live-editor.structure.update.toast.error": "The structure of the block has not been updated",
+  "live-editor.structure.update.toast.structure_edit_success": "The operation has been completed successfully",
+  "live-editor.structure.update.toast.structure_edit_failed": "An error has occurred while updating the structure of the block",
+  "live-editor.page.structure.blocks.modal.title": "Select a block",
+  "live-editor.page.structure.blocks.finish": "Confirm the selection"
 }
