@@ -23,7 +23,7 @@
                     /** @var BlockModel $block */
                     foreach (BlockModel::findAll('*') as $block) {
                 ?>
-                    <button class="w-4/12 dodocms-p-3 dodocms-flex dodocms-flex-col dodocms-justify-center dodocms-rounded-lg dodocms-bg-gray-800 dodocms-border-1 dodocms-border-gray-700 hover:dodocms-bg-blue-600">
+                    <button v-on:click="$root.addBlock(<?= $block->getId() ?>)" class="w-4/12 dodocms-p-3 dodocms-flex dodocms-flex-col dodocms-justify-center dodocms-rounded-lg dodocms-bg-gray-800 dodocms-border-1 dodocms-border-gray-700 hover:dodocms-bg-blue-600">
                         <span class="dodocms-text-2xl"><?= $block->getName() ?></span>
                         <span class="text-gray-200 dodocms-text-opacity-25 dodocms-italic"><?= $block->getPath() ?>.php</span>
                     </button>

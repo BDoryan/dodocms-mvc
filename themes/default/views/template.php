@@ -8,7 +8,7 @@
         <?= $head ?? '' ?>
     </head>
     <body data-bs-theme="dark">
-        <div id="app">
+        <div id="app" page-id="<?= $page_id ?? '' ?>">
             <?= $content ?? '' ?>
 
             <modal-upload :ref="`ref_upload_modal`"></modal-upload>

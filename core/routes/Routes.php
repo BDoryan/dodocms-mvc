@@ -53,7 +53,10 @@ class Routes
     const ADMIN_API_GET_RESOURCES = "/admin/api/resources/";
     const ADMIN_API_DELETE_RESOURCE = "/admin/api/resources/delete/{id}";
     const ADMIN_API_PAGE_STRUCTURE_EDIT = "/admin/api/pages/edit/{id}";
-    const ADMIN_API_PAGE_STRUCTURE_BLOCKS = "/admin/api/pages/blocks/{id}";
+//    const ADMIN_API_PAGE_STRUCTURE_BLOCKS = "/admin/api/pages/blocks/{id}";
+    const ADMIN_API_PAGE_STRUCTURE_ADD_BLOCK = "/admin/api/pages/add";
+    const ADMIN_API_PAGE_STRUCTURE_DELETE_BLOCK = "/admin/api/pages/delete/{id}";
+
 
     /**
      * Entity of table api routes
@@ -114,8 +117,10 @@ class Routes
         /**
          * Pages manager routes
          */
-        $router->post(self::ADMIN_API_PAGE_STRUCTURE_EDIT, [$apiPageController, 'editStructure']);
-        $router->get(self::ADMIN_API_PAGE_STRUCTURE_BLOCKS, [$apiPageController, 'editStructure']);
+        $router->post(self::ADMIN_API_PAGE_STRUCTURE_EDIT, [$apiPageController, 'editContentOfBlock']);
+//        $router->get(self::ADMIN_API_PAGE_STRUCTURE_BLOCKS, [$apiPageController, 'editStructure']); Je comprend pas sont utilisation
+        $router->post(self::ADMIN_API_PAGE_STRUCTURE_ADD_BLOCK, [$apiPageController, 'addBlockToPage']);
+        $router->post(self::ADMIN_API_PAGE_STRUCTURE_DELETE_BLOCK, [$apiPageController, 'deleteStructureOfPage']);
 //        $router->get(self::ADMIN_PAGES_MANAGER, [$ptmController, 'entries']);
 //        $router->get(self::ADMIN_PAGES_MANAGER_NEW, [$ptmController, 'newEntry']);
 //        $router->post(self::ADMIN_PAGES_MANAGER_NEW, [$ptmController, 'newEntry']);

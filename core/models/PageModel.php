@@ -95,7 +95,7 @@ class PageModel extends ModelAssociated
 
     public function getPageStructures(): ?array
     {
-        return PageStructureModel::findAll("*", ["page_id" => $this->id]);
+        return PageStructureModel::findAll("*", ["page_id" => $this->id], 'page_order ASC');
     }
 
     public function setSeoDescription(string $seo_description): void

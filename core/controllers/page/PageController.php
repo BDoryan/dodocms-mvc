@@ -124,6 +124,6 @@ class PageController extends DOMController
         $now = microtime(true);
         $time = $now - $start;
         echo "<!-- Page generated in " . $time . " seconds -->\n";
-        $this->view('layout', ['content' => $content]);
+        $this->view('layout', ['content' => $content, 'page_id' => $page->getId()]);
     }
 }

@@ -1,6 +1,4 @@
-console.log('LIVE EDITOR INIT')
-
-$(document).ready(() => {
+const loadLiveEditor = () => {
     const editableElements = $("[editable],[editable-model-data]");
 
     editableElements.each((index, element) => {
@@ -10,9 +8,7 @@ $(document).ready(() => {
     });
 
     $('br[type=_moz]').remove();
-});
 
-$(document).ready(() => {
     const models = $("[model-name]");
     // add html button to add new entry
     models.each((index, model) => {
@@ -26,6 +22,10 @@ $(document).ready(() => {
 
         $(model).append(button);
     });
+}
+
+$(document).ready(() => {
+    loadLiveEditor();
 });
 
 $(document).on("click", "[data-block-action]", function () {
@@ -33,12 +33,28 @@ $(document).on("click", "[data-block-action]", function () {
     const block = $(this).closest('[block-name]');
     const content = block.find("[block-content]");
 
-    switch (action) {
-        case "remove":
+    console.log(action);
 
+    switch (action) {
+        case "delete":
+            const page_block_id = block.attr("page-structure-id");
+            console.log(page_block_id);
+
+            $.ajax({
+                url: window.toApi("/pages/delete/") + page_block_id,
+                method: "POST",
+                success: function (response) {
+                    reloadPage(() => {
+                        window.showToast(new Toast(window.translate(`live-editor.structure.delete.toast.${response.status}`), window.translate(`live-editor.structure.delete.toast.${response.message}`), response.status, 5000))
+                    });
+                },
+                error: function (response) {
+                    window.showToast(new Toast(window.translate(`live-editor.structure.delete.toast.${response.status}`), window.translate(`live-editor.structure.delete.toast.${response.message}`), response.status, 5000))
+                }
+            });
             break;
         case "save":
-            const page_block_id = block.attr("page-structure-id");
+            const page_block_structure_id = block.attr("page-structure-id");
 
             let data = {};
 
@@ -51,7 +67,7 @@ $(document).on("click", "[data-block-action]", function () {
 
             if (elements.length > 0) {
                 $.ajax({
-                    url: window.toApi("/pages/edit/") + page_block_id,
+                    url: window.toApi("/pages/edit/") + page_block_structure_id,
                     method: "POST",
                     data,
                     success: function (response) {
@@ -102,3 +118,5 @@ $(document).on("click", "[data-block-action]", function () {
             break;
     }
 });
+
+window.loadLiveEditor = loadLiveEditor;
