@@ -44,7 +44,7 @@ abstract class AdminController extends DOMController
         $toasts = $_SESSION['toasts'] ?? [];
         $_SESSION['toasts'] = [];
         return $toasts;
-    }
+    }   
 
     public function authenticated(): bool
     {

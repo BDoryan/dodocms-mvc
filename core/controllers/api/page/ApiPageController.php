@@ -93,6 +93,72 @@ class ApiPageController extends ApiController
         }
     }
 
+    /**
+     * You can move the block structure to up
+     *
+     * @param $params
+     * @return void
+     */
+    public function moveStructureOfPageToUp($params) {
+        try {
+            $structure_id = $params['id'];
+            $structure = new PageStructureModel();
+            $structure->id($structure_id);
+            $structure->fetch();
+
+            if($structure->getPageOrder() == 0) {
+                $this->error("structure_move_failed", ['exception' => "structure_is_already_on_top"]);
+                return;
+            }
+
+            $above_structure = PageStructureModel::findAll('*', ['page_id' => $structure->getPageId(), "page_order" => $structure->getPageOrder() - 1]);
+            $above_structure = $above_structure[0];
+            $above_structure->setPageOrder($above_structure->getPageOrder() + 1);
+            $above_structure->update();
+
+            $structure->setPageOrder($structure->getPageOrder() - 1);
+            $structure->update();
+
+            $this->success("structure_move_success", ['structure' => $structure->toArray()]);
+        } catch (Exception $e) {
+            $this->error("structure_move_failed", ['exception' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * You can move the block structure to down
+     *
+     * @param $params
+     * @return void
+     */
+    public function moveStructureOfPageToDown($params) {
+        try {
+            $structure_id = $params['id'];
+            $structure = new PageStructureModel();
+            $structure->id($structure_id);
+            $structure->fetch();
+
+            $total = Application::get()->getDatabase()->count(PageStructureModel::TABLE_NAME, ['page_id' => $structure->getPageId()]);
+
+            if($structure->getPageOrder() >= $total) {
+                $this->error("structure_move_failed", ['exception' => "structure_is_already_on_bottom"]);
+                return;
+            }
+
+            $below_structure = PageStructureModel::findAll('*', ['page_id' => $structure->getPageId(), "page_order" => $structure->getPageOrder() + 1]);
+            $below_structure = $below_structure[0];
+            $below_structure->setPageOrder($below_structure->getPageOrder() - 1);
+            $below_structure->update();
+
+            $structure->setPageOrder($structure->getPageOrder() + 1);
+            $structure->update();
+
+            $this->success("structure_move_success", ['structure' => $structure->toArray()]);
+        } catch (Exception $e) {
+            $this->error("structure_move_failed", ['exception' => $e->getMessage()]);
+        }
+    }
+
     public function blocks()
     {
         $blocks = BlockModel::findAll('*');

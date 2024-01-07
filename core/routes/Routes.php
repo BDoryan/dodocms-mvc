@@ -56,6 +56,8 @@ class Routes
 //    const ADMIN_API_PAGE_STRUCTURE_BLOCKS = "/admin/api/pages/blocks/{id}";
     const ADMIN_API_PAGE_STRUCTURE_ADD_BLOCK = "/admin/api/pages/add";
     const ADMIN_API_PAGE_STRUCTURE_DELETE_BLOCK = "/admin/api/pages/delete/{id}";
+    const ADMIN_API_PAGE_STRUCTURE_BLOCK_MOVE_TO_UP = "/admin/api/pages/move/up/{id}";
+    const ADMIN_API_PAGE_STRUCTURE_BLOCK_MOVE_TO_DOWN = "/admin/api/pages/move/down/{id}";
 
 
     /**
@@ -121,6 +123,8 @@ class Routes
 //        $router->get(self::ADMIN_API_PAGE_STRUCTURE_BLOCKS, [$apiPageController, 'editStructure']); Je comprend pas sont utilisation
         $router->post(self::ADMIN_API_PAGE_STRUCTURE_ADD_BLOCK, [$apiPageController, 'addBlockToPage']);
         $router->post(self::ADMIN_API_PAGE_STRUCTURE_DELETE_BLOCK, [$apiPageController, 'deleteStructureOfPage']);
+        $router->post(self::ADMIN_API_PAGE_STRUCTURE_BLOCK_MOVE_TO_UP, [$apiPageController, 'moveStructureOfPageToUp']);
+        $router->post(self::ADMIN_API_PAGE_STRUCTURE_BLOCK_MOVE_TO_DOWN, [$apiPageController, 'moveStructureOfPageToDown']);
 //        $router->get(self::ADMIN_PAGES_MANAGER, [$ptmController, 'entries']);
 //        $router->get(self::ADMIN_PAGES_MANAGER_NEW, [$ptmController, 'newEntry']);
 //        $router->post(self::ADMIN_PAGES_MANAGER_NEW, [$ptmController, 'newEntry']);

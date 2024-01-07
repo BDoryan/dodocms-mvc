@@ -6,14 +6,14 @@ class FormUtils {
             validationMessage.text(message);
             validationMessage.show();
 
-            $(input).addClass("border-red-700")
+            $(input).addClass("dodocms-border-red-700")
         }
     }
 
     static clearValidationMessage(input) {
         const validationMessage = $(input).parent().find('#validation-message');
         validationMessage.hide();
-        $(input).removeClass("border-red-700")
+        $(input).removeClass("dodocms-border-red-700")
     }
 
     /**
@@ -31,14 +31,14 @@ class FormUtils {
                     validationMessage.text(input.validationMessage);
                     validationMessage.show();
 
-                    $(input).addClass("border-red-700")
+                    $(input).addClass("dodocms-border-red-700")
                     success = false;
                 } else {
                     input.reportValidity();
                 }
             } else {
                 validationMessage.hide();
-                $(input).removeClass("border-red-700")
+                $(input).removeClass("dodocms-border-red-700")
             }
         });
         return success;

@@ -35,13 +35,46 @@ $(document).on("click", "[data-block-action]", function () {
 
     console.log(action);
 
+    const page_block_id = block.attr("page-structure-id");
+
     switch (action) {
         case "delete":
-            const page_block_id = block.attr("page-structure-id");
             console.log(page_block_id);
 
             $.ajax({
                 url: window.toApi("/pages/delete/") + page_block_id,
+                method: "POST",
+                success: function (response) {
+                    reloadPage(() => {
+                        window.showToast(new Toast(window.translate(`live-editor.structure.move.toast.${response.status}`), window.translate(`live-editor.structure.move.toast.${response.message}`), response.status, 5000))
+                    });
+                },
+                error: function (response) {
+                    window.showToast(new Toast(window.translate(`live-editor.structure.move.toast.${response.status}`), window.translate(`live-editor.structure.move.toast.${response.message}`), response.status, 5000))
+                }
+            });
+            break;
+        case "moveToUp":
+            console.log(page_block_id);
+
+            $.ajax({
+                url: window.toApi("/pages/move/up/") + page_block_id,
+                method: "POST",
+                success: function (response) {
+                    reloadPage(() => {
+                        window.showToast(new Toast(window.translate(`live-editor.structure.move.toast.${response.status}`), window.translate(`live-editor.structure.move.toast.${response.message}`), response.status, 5000))
+                    });
+                },
+                error: function (response) {
+                    window.showToast(new Toast(window.translate(`live-editor.structure.move.toast.${response.status}`), window.translate(`live-editor.structure.move.toast.${response.message}`), response.status, 5000))
+                }
+            });
+            break;
+        case "moveToDown":
+            console.log(page_block_id);
+
+            $.ajax({
+                url: window.toApi("/pages/move/down/") + page_block_id,
                 method: "POST",
                 success: function (response) {
                     reloadPage(() => {

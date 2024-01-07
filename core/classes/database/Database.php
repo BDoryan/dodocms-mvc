@@ -88,6 +88,21 @@ class Database
         $prepare->execute(array_merge($attributes, $conditions));
     }
 
+    public function count($table, $conditions = []): int
+    {
+        $conditions_string = implode(' AND ', array_map(function ($key, $value) {
+            return "$key = :$key";
+        }, array_keys($conditions), $conditions));
+
+        $sql = "SELECT COUNT(*) FROM $table";
+        if (!empty($conditions_string)) {
+            $sql .= " WHERE $conditions_string";
+        }
+        $prepare = $this->currentConnection()->prepare($sql);
+        $prepare->execute($conditions);
+        return $prepare->fetchColumn();
+    }
+
     private function prepareSelect($table, $columns = '*', $conditions = [], $orderBy = "", $limit = null)
     {
         try {

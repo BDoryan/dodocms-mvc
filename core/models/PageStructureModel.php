@@ -6,18 +6,18 @@ class PageStructureModel extends Model
 {
     public const TABLE_NAME = "PagesStructures";
 
-    protected ?string $page_order;
+    protected ?int $page_order;
     protected string $block_json;
     protected ?int $page_id;
     protected ?int $block_id;
 
     /**
-     * @param string $page_order
+     * @param int $page_order
      * @param string $block_json
      * @param ?int $page_id
      * @param ?int $block_id
      */
-    public function __construct(string $page_order = "", string $block_json = "", ?int $page_id = null, ?int $block_id = null)
+    public function __construct(int $page_order = null, string $block_json = "", ?int $page_id = null, ?int $block_id = null)
     {
         parent::__construct(self::TABLE_NAME);
         $this->page_order = $page_order;
@@ -26,12 +26,12 @@ class PageStructureModel extends Model
         $this->block_id = $block_id;
     }
 
-    public function getPageOrder(): string
+    public function getPageOrder(): int
     {
         return $this->page_order;
     }
 
-    public function setPageOrder(?string $page_order): void
+    public function setPageOrder(?int $page_order): void
     {
         $this->page_order = $page_order;
     }

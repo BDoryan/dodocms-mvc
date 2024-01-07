@@ -36,7 +36,7 @@ button[page-structure-action="add"]:hover {
     background: rgb(0, 120, 0);
 }
 
-button[data-block-action="save"] {
+button[data-block-action="save"], button[model-action="new"] {
     border-radius: 5px;
     border: none;
     background: forestgreen;
@@ -64,6 +64,14 @@ button[data-block-action="save"] {
     width: auto;
     margin: 0.5em;
     box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+}
+
+button[data-block-action="moveToUp"], button[data-block-action="moveToDown"] {
+    border-radius: 5px;
+    border: none;
+    color: white;
+    background: royalblue;
+    padding: 6px 8px
 }
 
 button[data-block-action="delete"] {
