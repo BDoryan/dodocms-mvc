@@ -63,7 +63,10 @@ class Routes
     /**
      * Entity of table api routes
      */
-    const ADMIN_API_TABLE_ENTITY = "/admin/api/entries/update/{model}/{id}";
+    const ADMIN_API_TABLE_EDIT_ENTITY = "/admin/api/entries/set/{model}/{id}";
+    const ADMIN_API_TABLE_DELETE_ENTITY= "/admin/api/entries/delete/{model}/{id}";
+    const ADMIN_API_TABLE_NEW_ENTITY = "/admin/api/entries/set/{model}";
+    const ADMIN_API_TABLE_ENTITY_FORM = "/admin/api/entries/form/{model}";
 
     /**
      * Default api route
@@ -108,7 +111,10 @@ class Routes
         /**
          * Api
          */
-        $router->post(self::ADMIN_API_TABLE_ENTITY, [$apiModelController, 'setEntry']);
+        $router->post(self::ADMIN_API_TABLE_EDIT_ENTITY, [$apiModelController, 'setEntry']);
+        $router->post(self::ADMIN_API_TABLE_NEW_ENTITY, [$apiModelController, 'setEntry']);
+        $router->post(self::ADMIN_API_TABLE_DELETE_ENTITY, [$apiModelController, 'deleteEntry']);
+        $router->get(self::ADMIN_API_TABLE_ENTITY_FORM, [$apiModelController, 'getForm']);
 
         /**
          * Resources manager routes

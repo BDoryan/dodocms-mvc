@@ -7,25 +7,84 @@ const loadLiveEditor = () => {
         CKEDITOR.inline(element);
     });
 
+    // remove the br tag added by firefox
     $('br[type=_moz]').remove();
 
     const models = $("[model-name]");
     // add html button to add new entry
     models.each((index, model) => {
         $(model).addClass("position-relative");
+        const model_name = $(model).attr("model-name");
 
-        const button = document.createElement("button");
-        button.innerHTML = window.translate('live-editor.entries.add');
+        const newEntryButton = document.createElement("button");
 
-        button.setAttribute("model-name", $(model).attr("model-name"));
-        button.setAttribute("model-action", "new");
+        newEntryButton.innerHTML = window.translate('live-editor.entries.add');
+        newEntryButton.setAttribute("model-action", "new");
 
-        $(model).append(button);
+        // get all entities
+        const entities = $(model).find('[entity-id]');
+        entities.each((index, entity) => {
+            $(entity).addClass('position-relative');
+
+            const actionBar = document.createElement("div");
+            actionBar.setAttribute("entity-action-bar", "");
+
+            const deleteEntryButton = document.createElement("button");
+            const editEntryButton = document.createElement("button");
+
+            deleteEntryButton.innerHTML = window.translate('live-editor.entries.delete');
+            deleteEntryButton.setAttribute("model-action", "delete");
+
+            editEntryButton.innerHTML = window.translate('live-editor.entries.edit');
+            editEntryButton.setAttribute("model-action", "edit");
+
+            $(actionBar).append(editEntryButton);
+            $(actionBar).append(deleteEntryButton);
+
+            $(entity).append(actionBar);
+        });
+
+        $(model).append(newEntryButton);
     });
 }
 
 $(document).ready(() => {
     loadLiveEditor();
+});
+
+$(document).on("click", "[model-action]", function () {
+    const action = $(this).attr("model-action");
+    const model = $(this).closest('[model-name]').attr("model-name");
+
+    const entity_id = $(this).closest('[entity-id]').attr("entity-id");
+
+    switch (action) {
+        case "new":
+            openEntrySet('ref_set_entry_modal', model);
+            break;
+        case "edit":
+            openEntrySet('ref_set_entry_modal', model, entity_id);
+            break;
+        case "delete":
+
+            // confirm delete
+            const confirmDelete = confirm(window.translate('live-editor.entries.delete.confirm'));
+            if (confirmDelete) {
+                $.ajax({
+                    url: window.toApi("/entries/delete/") + model + "/" + entity_id,
+                    method: "POST",
+                    success: function (response) {
+                        reloadPage(() => {
+                            window.showToast(new Toast(window.translate(`live-editor.entries.delete.toast.${response.status}`), window.translate(`live-editor.entries.delete.toast.${response.message}`), response.status, 5000))
+                        })
+                    }
+                });
+            }
+
+            break;
+        default:
+            break;
+    }
 });
 
 $(document).on("click", "[data-block-action]", function () {
@@ -132,7 +191,7 @@ $(document).on("click", "[data-block-action]", function () {
                             });
 
                             $.ajax({
-                                url: window.toApi("/entries/update/") + model_name + "/" + entity_id,
+                                url: window.toApi("/entries/set/") + model_name + "/" + entity_id,
                                 method: "POST",
                                 data,
                                 success: function (response) {

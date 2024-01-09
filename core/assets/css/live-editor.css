@@ -66,6 +66,31 @@ button[data-block-action="save"], button[model-action="new"] {
     box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
 }
 
+div[entity-action-bar] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+}
+
+[model-action='delete'] {
+    background: darkred;
+    border: none;
+    padding: 8px 12px;
+    margin: 0.5em;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+}
+
+[model-action='edit'] {
+    background: steelblue;
+    border: none;
+    padding: 8px 12px;
+    margin: 0.5em;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+}
+
 button[data-block-action="moveToUp"], button[data-block-action="moveToDown"] {
     border-radius: 5px;
     border: none;

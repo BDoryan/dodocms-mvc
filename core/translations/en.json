@@ -126,6 +126,8 @@
   "live-editor.block.save": "Save changes",
   "live-editor.block.delete": "Delete",
   "live-editor.entries.add": "New an entry",
+  "live-editor.entries.edit": "Edit this entry",
+  "live-editor.entries.delete": "Delete this entry",
   "live-editor.structure.update.toast.success": "The structure of the block has been updated",
   "live-editor.structure.update.toast.error": "The structure of the block has not been updated",
   "live-editor.structure.update.toast.structure_edit_success": "The operation has been completed successfully",

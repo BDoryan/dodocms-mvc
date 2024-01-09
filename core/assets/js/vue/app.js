@@ -5,15 +5,20 @@ const loadApplication = () => {
         });
     });
 
-    new Vue({
+    const modals = window.app.modals ?? [];
+    const toasts = window.app.toasts ?? [];
+    const liveEditor = window.app.liveEditor ?? {
+        position: null
+    }
+    const currentResourceViewer = window.app.currentResourceViewer ?? null;
+
+    window.app = new Vue({
         el: '#app',
         data: {
-            modals: [],
-            toasts: [],
-            liveEditor: {
-                position: null
-            },
-            currentResourceViewer: null
+            modals,
+            toasts,
+            liveEditor,
+            currentResourceViewer,
         },
         methods: {
             showBlocksModal(position) {
@@ -25,10 +30,6 @@ const loadApplication = () => {
             },
             addBlock(block_id) {
                 const page_id = $(this.$root.$el).attr('page-id')
-
-                console.log('liveEditor.position', this.liveEditor.position)
-                console.log('page_id', page_id)
-                console.log('add block', block_id);
 
                 const data = {
                     block_id,
@@ -47,7 +48,7 @@ const loadApplication = () => {
                     },
                     error: function (response) {
                         window.showToast(new Toast(window.translate(`live-editor.structure.add.toast.${response.status}`), window.translate(`live-editor.structure.add.toast.${response.message}`), response.status, 5000))
-                       }
+                    }
                 });
             },
             showToast(data) {
@@ -66,7 +67,7 @@ const loadApplication = () => {
                     `,
                 });
 
-                this.$refs.toastContainer.appendChild(toast.$el);
+                window.app.$refs.toastContainer.appendChild(toast.$el);
             },
             openModal(name) {
                 this.modals = [...this.modals, name]
@@ -80,38 +81,49 @@ const loadApplication = () => {
             translate(key, replaces) {
                 return window.translate(key, replaces);
             },
+            listeners(component = null) {
+                if(component == null)
+                    component = this;
+
+                component.$on('upload-modal-open', function (resourceViewer) {
+                    this.currentResourceViewer = resourceViewer;
+                    window.app.$refs['ref_upload_modal'].multiple = resourceViewer.multiple ?? false;
+                    window.app.openModal('upload-modal');
+                });
+
+                component.$on('resources-selector-modal-open', function (resourceViewer) {
+                    this.currentResourceViewer = resourceViewer;
+                    const modal = window.app.$refs['ref_resources_selector_modal'];
+                    console.log(resourceViewer.multiple)
+
+                    modal.setMultiple(resourceViewer.multiple ?? false);
+                    modal.open(resourceViewer.listItemsId())
+                });
+
+                component.$on('finish-resources-selection', function (resources) {
+                    console.log('resources', resources)
+                    this.currentResourceViewer.setItems(resources);
+                    this.currentResourceViewer = null;
+                });
+
+                component.$on('resources-uploaded', function (resources) {
+                    resources.forEach((resource) => {
+                        resource.src = window.toRoot(resource.src);
+                        this.currentResourceViewer.addItem(resource)
+                    })
+                    this.currentResourceViewer = null;
+                });
+            }
         },
         mounted() {
-            this.$on('upload-modal-open', function (resourceViewer) {
-                this.currentResourceViewer = resourceViewer;
-                this.$refs['ref_upload_modal'].multiple = resourceViewer.multiple ?? false;
-                this.$root.openModal('upload-modal');
-            });
-
-            this.$on('resources-selector-modal-open', function (resourceViewer) {
-                this.currentResourceViewer = resourceViewer;
-                const modal = this.$refs['ref_resources_selector_modal'];
-                console.log(resourceViewer.multiple)
-
-                modal.setMultiple(resourceViewer.multiple ?? false);
-                modal.open(resourceViewer.listItemsId())
-            });
-
-            this.$on('finish-resources-selection', function (resources) {
-                console.log('resources', resources)
-                this.currentResourceViewer.setItems(resources);
-                this.currentResourceViewer = null;
-            });
-
-            this.$on('resources-uploaded', function (resources) {
-                resources.forEach((resource) => {
-                    resource.src = window.toRoot(resource.src);
-                    this.currentResourceViewer.addItem(resource)
-                })
-                this.currentResourceViewer = null;
-            });
+            this.listeners();
 
             window.showToast = this.showToast;
+            window.openModal = this.openModal;
+
+            window.openEntrySet = (ref, ...arguments) => {
+                console.log(window.app.$refs[ref].open(...arguments))
+            }
         }
     });
 }

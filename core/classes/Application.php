@@ -146,6 +146,11 @@ class Application
                 $this->toRoot('/core/views/admin/vue/blocks-modal.php'),
             )
         );
+        $this->addVueComponent(
+            new VueComponent(
+                $this->toRoot('/core/views/admin/vue/set-entry-modal.php'),
+            )
+        );
     }
 
     public function errorHandler($errno, $errstr, $errfile, $errline): bool

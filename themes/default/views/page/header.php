@@ -1,4 +1,4 @@
-<header class="navbar navbar-expand-lg fixed-top">
+<header class="navbar navbar-expand-lg fixed-top z-1">
     <nav id="navbar-scrollspy" class="container d-flex flex-wrap justify-content-center">
         <a href="/"
            class="text-start d-flex flex-wrap align-items-start text-decoration-none me-md-auto"><img

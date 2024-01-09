@@ -41,7 +41,7 @@
                     </button>
                 </div>
                 <!-- Modal body -->
-                <div class="dodocms-p-4 md:dodocms-p-5 space-y-4">
+                <div class="dodocms-p-4 md:dodocms-p-5 space-y-4 dodocms-max-h-[74vh] dodocms-overflow-y-auto">
                     <slot name="body"></slot>
                 </div>
                 <!-- Modal footer -->

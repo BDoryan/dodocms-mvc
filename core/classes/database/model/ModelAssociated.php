@@ -53,8 +53,9 @@ abstract class ModelAssociated extends Model
      */
     public function delete(): bool
     {
+        /** @var ModelAssociation $associate */
         foreach ($this->associates() as $variable => $associate) {
-            $this->dissociates($associate->getAssociateTable(), $associate->getForeignModelKey());
+            $this->dissociates($associate, $associate->getForeignAssociatedKey());
         }
 
         if (!parent::delete()) return false;
