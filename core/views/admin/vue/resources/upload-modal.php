@@ -16,11 +16,11 @@
             close() {
                 this.$root.closeModal('upload-modal')
             },
-                getSrc(file) {
+            getSrc(file) {
                 return URL.createObjectURL(file);
             },
             selectFiles(event) {
-                if(!this.multiple)
+                if (!this.multiple)
                     this.files = [];
 
                 for (let i = 0; i < event.target.files.length; i++) {

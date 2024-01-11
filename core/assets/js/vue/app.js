@@ -94,7 +94,6 @@ const loadApplication = () => {
                 component.$on('resources-selector-modal-open', function (resourceViewer) {
                     this.currentResourceViewer = resourceViewer;
                     const modal = window.app.$refs['ref_resources_selector_modal'];
-                    console.log(resourceViewer.multiple)
 
                     modal.setMultiple(resourceViewer.multiple ?? false);
                     modal.open(resourceViewer.listItemsId())
@@ -121,7 +120,7 @@ const loadApplication = () => {
             window.showToast = this.showToast;
             window.openModal = this.openModal;
 
-            window.openEntrySet = (ref, ...arguments) => {
+            window.openModalWithArguments = (ref, ...arguments) => {
                 console.log(window.app.$refs[ref].open(...arguments))
             }
         }

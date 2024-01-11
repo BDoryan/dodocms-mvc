@@ -151,6 +151,11 @@ class Application
                 $this->toRoot('/core/views/admin/vue/set-entry-modal.php'),
             )
         );
+        $this->addVueComponent(
+            new VueComponent(
+                $this->toRoot('/core/views/admin/vue/set-resource.php'),
+            )
+        );
     }
 
     public function errorHandler($errno, $errstr, $errfile, $errline): bool

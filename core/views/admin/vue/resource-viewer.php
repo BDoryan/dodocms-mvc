@@ -3,7 +3,7 @@
          :class="{'dodocms-max-h-[400px]': scrollable}">
         <input type="hidden" :name="name" :value="ids()">
         <div class="dodocms-px-4 dodocms-py-2 dodocms-bg-gray-800 dodocms-localItems-center dodocms-border-b-[1px] dodocms-border-gray-500 dodocms-text-lg dodocms-flex dodocms-flex-row">
-            {{ getTitle() }} <span
+            {{ getTitle() }} <span v-show="selectable"
                     class="dodocms-my-auto dodocms-ps-2 dodocms-text-gray-400 dodocms-text-sm">({{ isMultiple() ? "vous pouvez en sélectionner plusieurs" : "vous pouvez en sélectionner uniquement une seule"}})</span>
             <div class="dodocms-ms-auto">
                 <button v-if="addable" v-on:click="openResourcesSelectorModal()" type="button"

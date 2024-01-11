@@ -48,10 +48,21 @@ class PageController extends DOMController
                     $nodes = $xpath->query('//*[@editable="' . $key . '"]');
 
                     foreach ($nodes as $node) {
-                        // get if is a img
+//                        if ($node->nodeName === 'img')
+//                        $node->setAttribute('resource-id', 1486);
+                        if(empty($value))continue;
                         if ($node->nodeName === 'img') {
-                            $node->setAttribute('src', $value);
-                            continue;
+                            $resource = new ResourceModel();
+
+                            if(!$resource->id($value)->fetch()) {
+                                $node->setAttribute('src', "/not_found_404.png");
+                                $node->setAttribute('alt', "Resource not found");
+                                $node->setAttribute('resource-id', 'resource_not_found');
+                            } else {
+                                $node->setAttribute('src', $resource->getSrc());
+                                $node->setAttribute('alt', $resource->getAlternativeText());
+                                $node->setAttribute('resource-id', $value);
+                            }
                         }
                         $fragment = DOMDocumentUtils::htmlToNode($node, $value);
                         $node->nodeValue = '';
@@ -112,6 +123,10 @@ class PageController extends DOMController
             $content .= fetch(Application::get()->toRoot('/core/views/admin/live-editor/block-add.php'), [
                 'position' => count($structures)
             ]);
+            $content .= fetch(
+                Application::get()->toRoot('/core/views/admin/live-editor/front.php'), [
+                ]
+            );
         }
 
         $this->header = $this->fetch("header");

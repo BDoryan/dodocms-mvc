@@ -13,11 +13,11 @@ if (!isset($block) || !isset($page_structure)) {
 
         <div style="width: 100%; display: flex; flex-direction: row; gap: 10px; padding: 0px 10px; justify-content: end; font-size: medium;">
             <div style="display: flex; flex-direction: row; gap: 10px; margin-right: 20px">
-                <button data-block-action="moveToUp"><i class="fa-solid fa-arrow-up"></i></button>
-                <button data-block-action="moveToDown"><i class="fa-solid fa-arrow-down"></i></button>
+                <button data-block-action="moveToUp"></button>
+                <button data-block-action="moveToDown"></button>
             </div>
-            <button data-block-action="delete"><?= __('live-editor.block.delete') ?></button>
-            <button data-block-action="save"><?= __('live-editor.block.save') ?></button>
+            <button data-block-action="delete"></button>
+<!--            <button data-block-action="save">--><?php //= __('live-editor.block.save') ?><!--</button>-->
         </div>
     </div>
     <div block-content>

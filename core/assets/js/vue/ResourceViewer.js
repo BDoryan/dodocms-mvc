@@ -30,6 +30,12 @@ Vue.component('resource-viewer', {
             this.localItems = items;
             console.log("after", this.localItems)
         },
+        getItems() {
+            return this.localItems;
+        },
+        getItemById(id) {
+            return this.localItems.find((el) => el.id === id);
+        },
         listItemsId() {
             return this.localItems.map((el) => el.id);
         },

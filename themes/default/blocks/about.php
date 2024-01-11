@@ -10,7 +10,7 @@
         <div class="col-12 col-md-4 d-flex">
             <div animation="animate__fadeInUp"
                  class="d-flex flex-column justify-content-center bg-dark rounded-3 px-4 py-5 w-100 animate__animated active animate__fadeInUp">
-                <img src="/assets/imgs/pp.jpeg" class="ms-auto me-auto logo mb-3" alt="C'est moi">
+                <img editable="profil_picture" src="https://www.doryanbessiere.fr/assets/imgs/pp.jpeg" class="ms-auto me-auto logo mb-3" alt="C'est moi">
                 <h4 editable="name" class="lh-1 mb-0"> Doryan BESSIERE</h4>
                 <h4 editable="age" class="text-secondary mb-3">19 ans</h4>
                 <div class="row">

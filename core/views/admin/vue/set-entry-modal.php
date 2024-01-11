@@ -50,7 +50,7 @@
 
                 // fetch form data
                 $.ajax({
-                    url: window.toApi("/entries/set/") + this.model_name,
+                    url: window.toApi("/entries/set/") + this.model_name + (this.entry_id != null ? `/${this.entry_id}` : ""),
                     method: "POST",
                     data: formData,
                     processData: false,
@@ -103,7 +103,7 @@
             </button>
             <button v-on:click="submit()"
                     class="dodocms-text-white dodocms-bg-blue-700 hover:dodocms-bg-blue-800 focus:ring-4 focus:dodocms-outline-none focus:ring-blue-300 dodocms-font-medium dodocms-rounded-lg dodocms-text-sm dodocms-px-5 dodocms-py-2.5 dodocms-text-center dark:dodocms-bg-blue-600 dark:hover:dodocms-bg-blue-700 dark:focus:ring-blue-800">
-                Create new entry
+                {{ entry_id != null ? 'Edit this entry' : 'Create new entry' }}
             </button>
         </template>
     </modal>

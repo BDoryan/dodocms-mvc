@@ -36,13 +36,6 @@ button[page-structure-action="add"]:hover {
     background: rgb(0, 120, 0);
 }
 
-button[data-block-action="save"], button[model-action="new"] {
-    border-radius: 5px;
-    border: none;
-    background: forestgreen;
-    padding: 6px 8px
-}
-
 [model-name] {
     margin-top: 5px;
     border: 1px solid forestgreen;
@@ -54,16 +47,34 @@ button[data-block-action="save"], button[model-action="new"] {
     border: 1px solid green;
 }
 
-[model-action='new'] {
+[model-action='add']::before, [model-action='new']::before {
+    content: '';
+    filter: invert(100%);
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+
+    background: url('../imgs/icons/plus-solid.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+
+button[data-block-action="add"], button[model-action="new"] {
+    line-height: 1;
     background: forestgreen;
     border: none;
-    padding: 8px 12px;
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: auto;
-    margin: 0.5em;
+    border-radius: 25px;
+    width: 35px;
+    height: 35px;
     box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+}
+
+[model-action='new'] {
+    position: absolute;
+    top: 5px;
+    right: 5px;
 }
 
 div[entity-action-bar] {
@@ -72,36 +83,143 @@ div[entity-action-bar] {
     top: 0;
     padding: 5px;
     display: flex;
+    gap: 5px;
     flex-direction: row;
 }
 
+[model-action='delete']::before {
+    content: '';
+    filter: invert(100%);
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+
+    background: url('../imgs/icons/trash-solid.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
 [model-action='delete'] {
-    background: darkred;
+    line-height: 1;
+    background: firebrick;
     border: none;
-    padding: 8px 12px;
-    margin: 0.5em;
+    border-radius: 25px;
+    width: 35px;
+    height: 35px;
     box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+}
+
+[model-action='edit']::before {
+    content: '';
+    filter: invert(100%);
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+
+    background: url('../imgs/icons/pen-to-square-regular.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 [model-action='edit'] {
-    background: steelblue;
+    line-height: 1;
+    background: royalblue;
     border: none;
-    padding: 8px 12px;
-    margin: 0.5em;
+    border-radius: 25px;
+    width: 35px;
+    height: 35px;
     box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
 }
 
+button[data-block-action="moveToUp"]::before {
+    content: '';
+    filter: invert(100%);
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+
+    background: url('../imgs/icons/arrow-up-solid.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+button[data-block-action="moveToDown"]:before {
+    content: '';
+    filter: invert(100%);
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+
+    background: url('../imgs/icons/arrow-down-solid.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
 button[data-block-action="moveToUp"], button[data-block-action="moveToDown"] {
-    border-radius: 5px;
+    line-height: 1;
+    border-radius: 25px;
+    width: 35px;
+    height: 35px;
     border: none;
     color: white;
     background: royalblue;
     padding: 6px 8px
 }
 
+button[data-block-action="delete"]:before {
+    content: '';
+    filter: invert(100%);
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+
+    background: url('../imgs/icons/trash-solid.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
 button[data-block-action="delete"] {
-    border-radius: 5px;
+    line-height: 1;
     border: none;
     background: firebrick;
-    padding: 6px 8px
+    padding: 6px 8px;
+    border-radius: 25px;
+    width: 35px;
+    height: 35px;
+}
+
+button[liveeditor-action="save"] {
+    border: none;
+    background: forestgreen;
+    padding: 6px 8px;
+    border-radius: 5px;
+}
+
+div[liveeditor-bar] {
+    /* add effect background blur */
+    backdrop-filter: blur(5px);
+
+    background: rgba(255,255,255,0.2);
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    border-radius: 5px;
+    margin: 25px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex-direction: row;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+}
+
+div[liveeditor-bar] img.dodocms-logo {
+    margin-right: 20px;
+    width: auto;
+    height: 38px;
 }

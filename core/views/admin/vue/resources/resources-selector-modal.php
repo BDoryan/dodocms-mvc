@@ -24,6 +24,9 @@
             getResources() {
                 return this.resources;
             },
+            getResourceById(id) {
+                return this.getResources().find((resource) => resource.id == id);
+            },
             getSrc(resource) {
                 return window.toRoot(resource.src);
             },
@@ -71,20 +74,8 @@
                                  :itemsSelected="resourcesSelected" :selectable="true" :editable="true"
                                  :multiple="multiple"
                                  :uploadable="false" :deletable="false" :addable="false" :removable="false"
-                                 :scrollable="true"></resource-viewer>
-                <!--                <resource-item v-for="(resource, index) in resources"-->
-                <!--                               :ref="`resourceItem_${index}`"-->
-                <!--                               :key="index"-->
-                <!--                               :selected="resourcesSelected.includes(resource.id)"-->
-                <!--                               :editable="true"-->
-                <!--                               :deletable="false"-->
-                <!--                               :removable="false"-->
-                <!--                               :selectable="true"-->
-                <!--                               :src="getSrc(resource)"-->
-                <!--                               :alternativeText="''"-->
-                <!--                               v-on:toggleSelection="toggleSelection"-->
-                <!--                >-->
-                <!--                </resource-item>-->
+                                 :scrollable="true">
+                </resource-viewer>
             </div>
         </template>
         <template v-slot:footer>
