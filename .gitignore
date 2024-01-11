@@ -1,0 +1,4 @@
+/cache/*
+/logs/*
+/models/*
+package-lock.json
