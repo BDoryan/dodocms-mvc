@@ -89,7 +89,7 @@
 <script type="text/x-template" id="set-entry-modal-template">
     <modal name="set-entry-modal">
         <template v-slot:title>
-            <i class='fa-solid fa-cloud-upload dodocms-me-1'></i> PREPARING
+                <i :class="{ 'fa-plus-circle': entry_id == null, 'fa-pen-to-square': entry_id != null }" class='fa-solid dodocms-me-1'></i> {{ entry_id != null ? $root.translate('live-editor.entries.edit.title') :  $root.translate('live-editor.entries.new.title') }}
         </template>
         <template v-slot:body>
             <div class="form-content"></div>

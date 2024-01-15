@@ -125,6 +125,7 @@
   "panel.admin.resource.item.edit.alternativeText": "Texte alternatif",
   "live-editor.block.save": "Save changes",
   "live-editor.block.delete": "Delete",
+  "live-editor.block.delete.confirm": "Are you sure you want to delete this block?",
   "live-editor.entries.add": "New an entry",
   "live-editor.entries.edit": "Edit this entry",
   "live-editor.entries.delete": "Delete this entry",
@@ -133,5 +134,12 @@
   "live-editor.structure.update.toast.structure_edit_success": "The operation has been completed successfully",
   "live-editor.structure.update.toast.structure_edit_failed": "An error has occurred while updating the structure of the block",
   "live-editor.page.structure.blocks.modal.title": "Select a block",
-  "live-editor.page.structure.blocks.finish": "Confirm the selection"
+  "live-editor.page.structure.blocks.finish": "Confirm the selection",
+  "live-editor.entries.edit.title": "Edit an entry",
+  "live-editor.entries.new.title": "Create a new entry",
+  "live-editor.entries.delete.confirm": "Are you sure you want to delete this entry?",
+  "live-editor.block.move.toast.success": "The block has been moved",
+  "live-editor.block.move.toast.error": "The block has not been moved",
+  "live-editor.structure.delete.toast.structure_move_success": "The operation has been completed successfully",
+  "live-editor.block.move.toast.structure_move_success": "The operation has been completed successfully"
 }

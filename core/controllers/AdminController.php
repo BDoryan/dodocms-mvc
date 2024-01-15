@@ -44,10 +44,20 @@ abstract class AdminController extends DOMController
         $toasts = $_SESSION['toasts'] ?? [];
         $_SESSION['toasts'] = [];
         return $toasts;
-    }   
+    }
 
     public function authenticated(): bool
     {
+        return true;
+    }
+
+    public function authentificationMiddleware(): bool
+    {
+        if (!$this->authenticated()) {
+            Application::get()->getLogger()->info("Unauthenticated user tried to access the admin panel");
+            $this->redirect(Routes::ADMIN_LOGIN);
+            return false;
+        }
         return true;
     }
 
@@ -60,6 +70,7 @@ abstract class AdminController extends DOMController
             $this->redirect(Routes::ADMIN_PANEL);
             return;
         }
+
         /**
          * Echec de l'authentification
          */

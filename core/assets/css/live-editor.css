@@ -219,7 +219,7 @@ div[liveeditor-bar] {
 }
 
 div[liveeditor-bar] img.dodocms-logo {
-    margin-right: 20px;
+    margin: 0px 20px;
     width: auto;
     height: 38px;
 }

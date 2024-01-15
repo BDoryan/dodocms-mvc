@@ -64,7 +64,7 @@ class Routes
      * Entity of table api routes
      */
     const ADMIN_API_TABLE_EDIT_ENTITY = "/admin/api/entries/set/{model}/{id}";
-    const ADMIN_API_TABLE_DELETE_ENTITY= "/admin/api/entries/delete/{model}/{id}";
+    const ADMIN_API_TABLE_DELETE_ENTITY = "/admin/api/entries/delete/{model}/{id}";
     const ADMIN_API_TABLE_NEW_ENTITY = "/admin/api/entries/set/{model}";
     const ADMIN_API_TABLE_ENTITY_FORM = "/admin/api/entries/form/{model}";
 
@@ -83,86 +83,98 @@ class Routes
         $apiResourcesController = new ApiResourcesController();
         $apiPageController = new ApiPageController();
 
-        $router->get(self::ADMIN_PANEL, [$adminController, 'index']);
+        $authentificationMiddleware = [$adminController, 'authentificationMiddleware'];
+
+        /**
+         * Panel route
+         */
+
         $router->get(self::ADMIN_LOGIN, [$adminController, 'login']);
         $router->post(self::ADMIN_LOGIN, [$adminController, 'authentication']);
+
+        $router->middleware($authentificationMiddleware,
+            $router->get(self::ADMIN_PANEL, [$adminController, 'index']),
+        );
 
         /**
          * Table routes
          */
-        $router->get(self::ADMIN_TABLES, [$ptmController, 'tables']);
-        $router->get(self::ADMIN_TABLES_TABLE_ATTRIBUTE, [$ptmController, 'attribute']);
-        $router->get(self::ADMIN_TABLES_NEW, [$ptmController, 'new']);
-        $router->post(self::ADMIN_TABLES_NEW, [$ptmController, 'new']);
-        $router->get(self::ADMIN_TABLES_EDIT, [$ptmController, 'edit']);
-        $router->post(self::ADMIN_TABLES_EDIT, [$ptmController, 'edit']);
-        $router->post(self::ADMIN_TABLES_DELETE, [$ptmController, 'delete']);
+        $router->middleware($authentificationMiddleware,
+            $router->get(self::ADMIN_TABLES, [$ptmController, 'tables']),
+            $router->get(self::ADMIN_TABLES_TABLE_ATTRIBUTE, [$ptmController, 'attribute']),
+            $router->get(self::ADMIN_TABLES_NEW, [$ptmController, 'new']),
+            $router->post(self::ADMIN_TABLES_NEW, [$ptmController, 'new']),
+            $router->get(self::ADMIN_TABLES_EDIT, [$ptmController, 'edit']),
+            $router->post(self::ADMIN_TABLES_EDIT, [$ptmController, 'edit']),
+            $router->post(self::ADMIN_TABLES_DELETE, [$ptmController, 'delete']),
+        );
 
         /**
          * Entries routes
          */
-        $router->get(self::ADMIN_TABLES_TABLE_ENTRIES, [$ptmController, 'entries']);
-        $router->get(self::ADMIN_TABLE_NEW_ENTRY, [$ptmController, 'newEntry']);
-        $router->post(self::ADMIN_TABLE_NEW_ENTRY, [$ptmController, 'newEntry']);
-        $router->get(self::ADMIN_TABLE_EDIT_ENTRY, [$ptmController, 'editEntry']);
-        $router->post(self::ADMIN_TABLE_EDIT_ENTRY, [$ptmController, 'editEntry']);
-        $router->get(self::ADMIN_TABLE_DELETE_ENTRY, [$ptmController, 'deleteEntry']);
+        $router->middleware($authentificationMiddleware,
+            $router->get(self::ADMIN_TABLES_TABLE_ENTRIES, [$ptmController, 'entries']),
+            $router->get(self::ADMIN_TABLE_NEW_ENTRY, [$ptmController, 'newEntry']),
+            $router->post(self::ADMIN_TABLE_NEW_ENTRY, [$ptmController, 'newEntry']),
+            $router->get(self::ADMIN_TABLE_EDIT_ENTRY, [$ptmController, 'editEntry']),
+            $router->post(self::ADMIN_TABLE_EDIT_ENTRY, [$ptmController, 'editEntry']),
+            $router->get(self::ADMIN_TABLE_DELETE_ENTRY, [$ptmController, 'deleteEntry']),
+        );
 
         /**
          * Api
          */
-        $router->post(self::ADMIN_API_TABLE_EDIT_ENTITY, [$apiModelController, 'setEntry']);
-        $router->post(self::ADMIN_API_TABLE_NEW_ENTITY, [$apiModelController, 'setEntry']);
-        $router->post(self::ADMIN_API_TABLE_DELETE_ENTITY, [$apiModelController, 'deleteEntry']);
-        $router->get(self::ADMIN_API_TABLE_ENTITY_FORM, [$apiModelController, 'getForm']);
+        $router->middleware($authentificationMiddleware,
+            $router->post(self::ADMIN_API_TABLE_EDIT_ENTITY, [$apiModelController, 'setEntry']),
+            $router->post(self::ADMIN_API_TABLE_NEW_ENTITY, [$apiModelController, 'setEntry']),
+            $router->post(self::ADMIN_API_TABLE_DELETE_ENTITY, [$apiModelController, 'deleteEntry']),
+            $router->get(self::ADMIN_API_TABLE_ENTITY_FORM, [$apiModelController, 'getForm']),
+        );
 
         /**
          * Resources manager routes
          */
-        $router->get(self::ADMIN_RESOURCES_MANAGER, [$resourcesManagerController, 'index']);
-        $router->get(self::ADMIN_API_GET_HTML_RESOURCE, [$resourcesManagerController, 'getResource']);
+        $router->middleware($authentificationMiddleware,
+            $router->get(self::ADMIN_RESOURCES_MANAGER, [$resourcesManagerController, 'index']),
+            $router->get(self::ADMIN_API_GET_HTML_RESOURCE, [$resourcesManagerController, 'getResource']),
+        );
 
         /**
          * Pages manager routes
          */
-        $router->post(self::ADMIN_API_PAGE_STRUCTURE_EDIT, [$apiPageController, 'editContentOfBlock']);
-//        $router->get(self::ADMIN_API_PAGE_STRUCTURE_BLOCKS, [$apiPageController, 'editStructure']); Je comprend pas sont utilisation
-        $router->post(self::ADMIN_API_PAGE_STRUCTURE_ADD_BLOCK, [$apiPageController, 'addBlockToPage']);
-        $router->post(self::ADMIN_API_PAGE_STRUCTURE_DELETE_BLOCK, [$apiPageController, 'deleteStructureOfPage']);
-        $router->post(self::ADMIN_API_PAGE_STRUCTURE_BLOCK_MOVE_TO_UP, [$apiPageController, 'moveStructureOfPageToUp']);
-        $router->post(self::ADMIN_API_PAGE_STRUCTURE_BLOCK_MOVE_TO_DOWN, [$apiPageController, 'moveStructureOfPageToDown']);
-//        $router->get(self::ADMIN_PAGES_MANAGER, [$ptmController, 'entries']);
-//        $router->get(self::ADMIN_PAGES_MANAGER_NEW, [$ptmController, 'newEntry']);
-//        $router->post(self::ADMIN_PAGES_MANAGER_NEW, [$ptmController, 'newEntry']);
-//        $router->get(self::ADMIN_PAGES_MANAGER_EDIT, [$ptmController, 'editEntry']);
-//        $router->post(self::ADMIN_PAGES_MANAGER_EDIT, [$ptmController, 'editEntry']);
-//        $router->get(self::ADMIN_PAGES_MANAGER_DELETE, [$ptmController, 'deleteEntry']);
+        $router->middleware($authentificationMiddleware,
+            $router->post(self::ADMIN_API_PAGE_STRUCTURE_EDIT, [$apiPageController, 'editContentOfBlock']),
+            $router->post(self::ADMIN_API_PAGE_STRUCTURE_ADD_BLOCK, [$apiPageController, 'addBlockToPage']),
+            $router->post(self::ADMIN_API_PAGE_STRUCTURE_DELETE_BLOCK, [$apiPageController, 'deleteStructureOfPage']),
+            $router->post(self::ADMIN_API_PAGE_STRUCTURE_BLOCK_MOVE_TO_UP, [$apiPageController, 'moveStructureOfPageToUp']),
+            $router->post(self::ADMIN_API_PAGE_STRUCTURE_BLOCK_MOVE_TO_DOWN, [$apiPageController, 'moveStructureOfPageToDown']),
+        );
 
         /**
          * Api routes
          */
-        $router->post(self::ADMIN_API_UPLOAD_RESOURCE, [$apiResourcesController, "upload"]);
-        $router->put(self::ADMIN_API_EDIT_RESOURCE, [$apiResourcesController, "edit"]);
-        $router->delete(self::ADMIN_API_DELETE_RESOURCE, [$apiResourcesController, "delete"]);
-        $router->get(self::ADMIN_API_GET_RESOURCE, [$apiResourcesController, "get"]);
-        $router->get(self::ADMIN_API_GET_RESOURCES, [$apiResourcesController, "all"]);
-        $router->get(self::ADMIN_API, [$defaultApiController, "notFound"]);
-
-//        $router->get('/test', function () {
-//            new ModelGenerator("Client", ["name", "email", "phone_number", "address"]);
-//        });
-
-        /**
-         * Section route
-         */
-        $router->get(self::ADMIN_PANEL . "/{section}", [$adminController, 'section']);
+        $router->middleware($authentificationMiddleware,
+            $router->post(self::ADMIN_API_UPLOAD_RESOURCE, [$apiResourcesController, "upload"]),
+            $router->put(self::ADMIN_API_EDIT_RESOURCE, [$apiResourcesController, "edit"]),
+            $router->delete(self::ADMIN_API_DELETE_RESOURCE, [$apiResourcesController, "delete"]),
+            $router->get(self::ADMIN_API_GET_RESOURCE, [$apiResourcesController, "get"]),
+            $router->get(self::ADMIN_API_GET_RESOURCES, [$apiResourcesController, "all"]),
+            $router->get(self::ADMIN_API, [$defaultApiController, "notFound"])
+        );
 
         $pageController = new PageController();
 
         /**
+         * Sections route
+         */
+        $router->middleware($authentificationMiddleware,
+            $router->get(self::ADMIN_PANEL . "/{section}", [$adminController, 'section'])
+        );
+
+        /**
          * Pages routes
          */
-        $pages  = PageModel::findAll("*");
+        $pages = PageModel::findAll("*");
         foreach ($pages as $page) {
             $router->get($page->getSlug(), function () use ($page, $pageController) {
                 $pageController->viewPage($page);

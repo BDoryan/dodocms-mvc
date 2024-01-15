@@ -4,7 +4,6 @@ class Router
 {
 
     private array $routes = [];
-    private array $middlewares = [];
     private string $base;
 
     /**
@@ -15,40 +14,42 @@ class Router
         $this->base = $base;
     }
 
-    public function addRoute(string $route, $handler, string $method = "GET"): Router
+    public function addRoute(string $route, $handler, string $method = "GET"): Route
     {
         if (substr($route, -1) == '/')
             $route = substr($route, 0, -1);
 
-        $this->routes[$method][$route] = $handler;
-        return $this;
+        $route_ = new Route($this, $route, $method, $handler);
+        $this->routes[$method][$route] = $route_;
+        return $route_;
     }
 
-    public function get(string $route, $handler): Router
+    public function get(string $route, $handler): Route
     {
         return $this->addRoute($route, $handler);
     }
 
-    public function post(string $route, $handler): Router
+    public function post(string $route, $handler): Route
     {
         return $this->addRoute($route, $handler, "POST");
     }
 
-    public function put(string $route, $handler): Router
+    public function put(string $route, $handler): Route
     {
         return $this->addRoute($route, $handler, "PUT");
     }
 
-    public function delete(string $route, $handler): Router
+    public function delete(string $route, $handler): Route
     {
         return $this->addRoute($route, $handler, "DELETE");
     }
 
-    public function middleware($handler): Router
+    public function middleware($handler, ...$routes): Router
     {
-        end($this->routes);
-        $route = key($this->routes);
-        $this->middlewares[$route] = $handler;
+        /** @var Route $route */
+        foreach ($routes as $route) {
+            $route->setMiddleware($handler);
+        }
         return $this;
     }
 
@@ -91,21 +92,23 @@ class Router
 
         $method = $_SERVER['REQUEST_METHOD'];
 
-//        echo $method;
-//        exit;
-
         if(!isset($this->routes[$method]))
             return false;
 
-        foreach ($this->routes[$method] as $route => $callback) {
-            $pattern = str_replace('/', '\/', $route);
+        /** @var Route $route */
+        foreach ($this->routes[$method] as $route) {
+            $pattern = str_replace('/', '\/', $route->getRoute());
             $pattern = '#^' . preg_replace('/\{([a-zA-Z]+)\}/', '(?<$1>[^\/]+)', $pattern) . '$#';
 
             if (preg_match($pattern, $url, $matches)) {
                 $params = array_intersect_key($matches, array_flip(array_filter(array_keys($matches), 'is_string')));
-                if (!empty($this->middlewares[$route]))
-                    call_user_func_array($this->middlewares[$route], [$params]);
-                call_user_func_array($callback, [$params]);
+                $continue = true;
+
+                if ($route->getMiddleware() !== null)
+                    $continue = call_user_func_array($route->getMiddleware(), [$params]);
+
+                if($continue)
+                    call_user_func_array($route->getHandler(), [$params]);
                 return true;
             }
         }

@@ -47,11 +47,11 @@ class PanelController extends AdminController
 
     public function viewSection($section, $data = [])
     {
-        if (!$this->authenticated()) {
-            Application::get()->getLogger()->info("Unauthenticated user tried to access the admin panel");
-            $this->redirect(Routes::ADMIN_LOGIN);
-            return;
-        }
+//        if (!$this->authenticated()) {
+//            Application::get()->getLogger()->info("Unauthenticated user tried to access the admin panel");
+//            $this->redirect(Routes::ADMIN_LOGIN);
+//            return;
+//        }
 
         Application::get()->getLogger()->debug("PanelController->initSidebar()");
         $this->initSidebar();

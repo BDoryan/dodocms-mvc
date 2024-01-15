@@ -29,7 +29,10 @@ const save = (content, block, page_block_structure_id) => {
             method: "POST",
             data,
             success: function (response) {
-                window.showToast(new Toast(window.translate(`live-editor.structure.update.toast.${response.status}`), window.translate(`live-editor.structure.update.toast.${response.message}`), response.status, 5000))
+                window.showToast(new Toast(window.translate(`live-editor.block.update.toast.${response.status}`), window.translate(`live-editor.block.update.toast.${response.message}`), response.status, 2000))
+            },
+            error: function (response) {
+                window.showToast(new Toast(window.translate(`live-editor.block.update.toast.${response.status}`), window.translate(`live-editor.block.update.toast.${response.message}`), response.status, 5000))
             }
         });
     } else {
@@ -192,18 +195,18 @@ $(document).on("click", "[data-block-action]", function () {
 
     switch (action) {
         case "delete":
-            const confirmDelete = confirm(window.translate('live-editor.structure.delete.confirm'));
+            const confirmDelete = confirm(window.translate('live-editor.block.delete.confirm'));
             if (confirmDelete) {
                 $.ajax({
                     url: window.toApi("/pages/delete/") + page_block_id,
                     method: "POST",
                     success: function (response) {
                         reloadPage(() => {
-                            window.showToast(new Toast(window.translate(`live-editor.structure.move.toast.${response.status}`), window.translate(`live-editor.structure.move.toast.${response.message}`), response.status, 5000))
+                            window.showToast(new Toast(window.translate(`live-editor.block.move.toast.${response.status}`), window.translate(`live-editor.block.move.toast.${response.message}`), response.status, 5000))
                         });
                     },
                     error: function (response) {
-                        window.showToast(new Toast(window.translate(`live-editor.structure.move.toast.${response.status}`), window.translate(`live-editor.structure.move.toast.${response.message}`), response.status, 5000))
+                        window.showToast(new Toast(window.translate(`live-editor.block.move.toast.${response.status}`), window.translate(`live-editor.block.move.toast.${response.message}`), response.status, 5000))
                     }
                 });
             }
@@ -216,11 +219,11 @@ $(document).on("click", "[data-block-action]", function () {
                 method: "POST",
                 success: function (response) {
                     reloadPage(() => {
-                        window.showToast(new Toast(window.translate(`live-editor.structure.move.toast.${response.status}`), window.translate(`live-editor.structure.move.toast.${response.message}`), response.status, 5000))
+                        window.showToast(new Toast(window.translate(`live-editor.block.move.toast.${response.status}`), window.translate(`live-editor.block.move.toast.${response.message}`), response.status, 5000))
                     });
                 },
                 error: function (response) {
-                    window.showToast(new Toast(window.translate(`live-editor.structure.move.toast.${response.status}`), window.translate(`live-editor.structure.move.toast.${response.message}`), response.status, 5000))
+                    window.showToast(new Toast(window.translate(`live-editor.block.move.toast.${response.status}`), window.translate(`live-editor.block.move.toast.${response.message}`), response.status, 5000))
                 }
             });
             break;
@@ -232,11 +235,11 @@ $(document).on("click", "[data-block-action]", function () {
                 method: "POST",
                 success: function (response) {
                     reloadPage(() => {
-                        window.showToast(new Toast(window.translate(`live-editor.structure.delete.toast.${response.status}`), window.translate(`live-editor.structure.delete.toast.${response.message}`), response.status, 5000))
+                        window.showToast(new Toast(window.translate(`live-editor.block.move.toast.${response.status}`), window.translate(`live-editor.block.move.toast.${response.message}`), response.status, 5000))
                     });
                 },
                 error: function (response) {
-                    window.showToast(new Toast(window.translate(`live-editor.structure.delete.toast.${response.status}`), window.translate(`live-editor.structure.delete.toast.${response.message}`), response.status, 5000))
+                    window.showToast(new Toast(window.translate(`live-editor.block.move.toast.${response.status}`), window.translate(`live-editor.block.move.toast.${response.message}`), response.status, 5000))
                 }
             });
             break;

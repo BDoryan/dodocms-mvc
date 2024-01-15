@@ -1,13 +1,16 @@
 <div id="home" class="position-relative welcome">
     <div class="d-flex background">
         <img class="background-image" src="https://www.doryanbessiere.fr/assets/imgs/background.jpg" alt="fond">
-        <div class="position-absolute top-100 start-50 translate-middle row g-2 container justify-content-center "><a
-                    href="#experiences" class="col-auto text-center text-decoration-none text-white">
+        <div class="position-absolute top-100 start-50 translate-middle row g-2 container justify-content-center ">
+            <a href="#experiences" class="col-auto text-center text-decoration-none text-white">
                 <div class="info-badge py-3 px-5 rounded-5 bg-dark shadow h-100 d-flex">
-                    <h5 class="mt-auto mb-auto"><span class="text-primary">7 années</span> en autodidacte</h5></div>
-            </a><a href="#projects" class="col-auto text-center text-decoration-none text-white">
-                <div class="info-badge py-3 px-5 rounded-5 bg-dark shadow h-100 d-flex"><h5 class="mt-auto mb-auto">
-                        <span class="text-primary">14 projets</span> réalisés</h5></div>
+                    <h5 class="mt-auto mb-auto"><span class="text-primary">7 années</span> en autodidacte</h5>
+                </div>
+            </a>
+            <a href="#projects" class="col-auto text-center text-decoration-none text-white">
+                <div class="info-badge py-3 px-5 rounded-5 bg-dark shadow h-100 d-flex">
+                    <h5 class="mt-auto mb-auto"><span class="text-primary">14 projets</span> réalisés</h5>
+                </div>
             </a>
         </div>
     </div>
