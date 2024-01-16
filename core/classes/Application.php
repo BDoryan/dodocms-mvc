@@ -41,18 +41,21 @@ class Application
         $this->logger = new Logger($this->toRoot("/logs/" . "log-" . date("Y-m-d") . ".log"), $this->isDebugMode());
 
         self::$application = $this;
-        $this->theme = new Theme( "default");
+        $this->theme = new Theme("default");
     }
 
-    public function getVueComponents(): array {
+    public function getVueComponents(): array
+    {
         return $this->vue_components;
     }
 
-    public function addVueComponent(VueComponent $component) {
+    public function addVueComponent(VueComponent $component)
+    {
         $this->vue_components[] = $component;
     }
 
-    public function removeVueComponent(VueComponent $component) {
+    public function removeVueComponent(VueComponent $component)
+    {
         $this->vue_components = array_filter(
             $this->vue_components,
             function ($component_) use ($component) {
@@ -103,7 +106,8 @@ class Application
         $this->logger->info("Error and exception handler has been initialized !");
     }
 
-    private function initVueComponents() {
+    private function initVueComponents()
+    {
         $this->addVueComponent(
             new VueComponent(
                 $this->toRoot('/core/views/admin/vue/resource-item.php'),
@@ -296,7 +300,11 @@ class Application
 
     public function toURL(string $path): string
     {
-        return $this->url . "/" . (trim($path, "/"));
+        $url = $this->url . "/" . (trim($path, "/"));
+        $url = preg_replace('#/{2,}#', '/', $url);
+        $url = rtrim($url, '/');
+
+        return $url;
     }
 
     /**

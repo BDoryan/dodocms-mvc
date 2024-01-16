@@ -7,13 +7,13 @@ class Alert extends Component
 
     const TYPE_INFO = "info";
     const TYPE_SUCCESS = "success";
-    const TYPE_DANGER = "danger";
+    const TYPE_ERROR = "error";
     const TYPE_WARNING = "warning";
 
     const STYLES = [
         self::TYPE_INFO => "blue",
         self::TYPE_SUCCESS => "green",
-        self::TYPE_DANGER => "red",
+        self::TYPE_ERROR => "red",
         self::TYPE_WARNING => "orange",
     ];
 

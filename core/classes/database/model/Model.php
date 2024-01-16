@@ -150,9 +150,9 @@ abstract class Model extends CMSObjectHydration
     }
 
     /**
-     * @param string $language
+     * @param string|null $language
      */
-    public function setLanguage(string $language): void
+    public function setLanguage(?string $language): void
     {
         $this->language = $language;
     }

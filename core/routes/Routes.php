@@ -124,7 +124,7 @@ class Routes
         /**
          * Api
          */
-        $router->middleware($authentificationMiddleware,
+        $router->middleware([$defaultApiController, 'checkAuthorization'],
             $router->post(self::ADMIN_API_TABLE_EDIT_ENTITY, [$apiModelController, 'setEntry']),
             $router->post(self::ADMIN_API_TABLE_NEW_ENTITY, [$apiModelController, 'setEntry']),
             $router->post(self::ADMIN_API_TABLE_DELETE_ENTITY, [$apiModelController, 'deleteEntry']),
@@ -142,7 +142,7 @@ class Routes
         /**
          * Pages manager routes
          */
-        $router->middleware($authentificationMiddleware,
+        $router->middleware([$defaultApiController, 'checkAuthorization'],
             $router->post(self::ADMIN_API_PAGE_STRUCTURE_EDIT, [$apiPageController, 'editContentOfBlock']),
             $router->post(self::ADMIN_API_PAGE_STRUCTURE_ADD_BLOCK, [$apiPageController, 'addBlockToPage']),
             $router->post(self::ADMIN_API_PAGE_STRUCTURE_DELETE_BLOCK, [$apiPageController, 'deleteStructureOfPage']),
@@ -153,7 +153,7 @@ class Routes
         /**
          * Api routes
          */
-        $router->middleware($authentificationMiddleware,
+        $router->middleware([$defaultApiController, 'checkAuthorization'],
             $router->post(self::ADMIN_API_UPLOAD_RESOURCE, [$apiResourcesController, "upload"]),
             $router->put(self::ADMIN_API_EDIT_RESOURCE, [$apiResourcesController, "edit"]),
             $router->delete(self::ADMIN_API_DELETE_RESOURCE, [$apiResourcesController, "delete"]),
@@ -195,6 +195,9 @@ class Routes
         foreach ($replaces as $key => $value) {
             $route = str_replace("{" . $key . "}", $value, $route);
         }
+
+
+
         return Application::get()->toURL($route);
     }
 }
