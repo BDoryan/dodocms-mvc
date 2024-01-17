@@ -5,9 +5,10 @@ class UserModel extends Model
 
     public const TABLE_NAME = "Users";
 
-    private string $username;
-    private string $email;
-    private string $password;
+    protected string $username;
+    protected string $email;
+    protected string $password;
+    private array $tokens;
 
     /**
      * @param string $username
@@ -23,6 +24,20 @@ class UserModel extends Model
         $this->email = $email;
         $this->password = $password;
         $this->language = $language;
+    }
+
+    public function fetch(): ?UserModel
+    {
+        $this->tokens = UserSessionModel::findAll("*", ["user_id" => $this->getId()]) ?? [];
+        return parent::fetch();
+    }
+
+    /**
+     * @return array
+     */
+    public function getTokens(): array
+    {
+        return $this->tokens;
     }
 
     /**
@@ -43,10 +58,9 @@ class UserModel extends Model
      */
     public function setEmail(string $email): void
     {
-        $regex = "/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/";
-        if (!preg_match($regex, $email)) {
-            throw new Exception("Invalid email");
-        }
+//        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+//            throw new Exception("Invalid email");
+//        }
         $this->email = $email;
     }
 
@@ -76,6 +90,7 @@ class UserModel extends Model
      */
     public function setPassword(string $password): void
     {
+        if(empty($password))return;
         $this->password = password_get_info($password)['algo'] ? $password : password_hash($password, PASSWORD_BCRYPT);
     }
 
@@ -87,6 +102,45 @@ class UserModel extends Model
     public function getPassword(): string
     {
         return $this->password;
+    }
+
+    /**
+     * Return if the token is valid (not expired and in the database)
+     *
+     * @throws Exception
+     */
+    public function checkToken(string $token): bool
+    {
+        $jwtManager = Application::get()->getJwtManager();
+        if($jwtManager->verifyToken($token) === null) return false;
+        return in_array($token, $this->tokens);
+    }
+
+    /**
+     * Return the user session if the password is correct
+     *
+     * @param string $password
+     * @return bool
+     */
+    public function createToken(string $password): ?UserSessionModel
+    {
+        if ($this->checkPassword($password)) {
+            $jwtManager = Application::get()->getJwtManager();
+
+            $token = $jwtManager->createToken(["user_id" => $this->getId()]);
+
+            $userSession = new UserSessionModel($this->getId(), $token);
+            $userSession->create();
+
+            $this->tokens[] = $token;
+            return $userSession;
+        }
+        return null;
+    }
+
+    public function checkPassword(string $password): bool
+    {
+        return password_verify($password, $this->getPassword());
     }
 
     /**
@@ -107,7 +161,7 @@ class UserModel extends Model
         ];
         $fields["password"] = [
             "size" => "dodocms-w-full",
-            "field" => Text::create()->name("email")->label(__('admin.panel.users.password'))->value("")->required(),
+            "field" => Text::create()->type('password')->name("password")->placeholder("Laisser vide pour maintenir l'ancien mot de passe.")->label(__('admin.panel.users.password'))->value(""),
         ];
         return $fields;
     }

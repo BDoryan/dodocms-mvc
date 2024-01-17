@@ -213,7 +213,10 @@ class TableManagementController extends PanelController
                 if (isset($entry_id) ? $model->update() : $model->create()) {
                     $this->addToast(new Toast(__("admin.panel.toast.success"), isset($entry_id) ? __("admin.panel.tables.table.entries.edit_entry.success") : __("admin.panel.tables.table.entries.create_entry.success"), Toast::TYPE_SUCCESS));
                     if (!isset($entry_id)) {
-                        header('Location: ' . Routes::route(Routes::ADMIN_TABLES_TABLE_ENTRIES, ["table" => $table_name]));
+                        Application::get()->redirect(Routes::getRoute(Routes::ADMIN_TABLES_TABLE_ENTRIES, ["table" => $table_name]));
+                        exit;
+                    } else {
+                        Application::get()->redirect(Routes::getRoute(Routes::ADMIN_TABLE_EDIT_ENTRY, ["table" => $table_name, "id" => $entry_id]));
                         exit;
                     }
                 } else {
@@ -232,6 +235,7 @@ class TableManagementController extends PanelController
         $data['table_name'] = $table_name;
         $data['model'] = $model;
         $data['entry_id'] = $entry_id;
+
         $this->viewSection('table/entry/set', $data);
     }
 

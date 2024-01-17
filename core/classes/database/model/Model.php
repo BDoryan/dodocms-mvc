@@ -18,6 +18,7 @@ abstract class Model extends CMSObjectHydration
     protected string $createdAt;
     protected string $updatedAt;
     protected ?string $language;
+    protected bool $active;
 
     public function __construct($table_name)
     {
@@ -128,6 +129,19 @@ abstract class Model extends CMSObjectHydration
         return $this->id;
     }
 
+    /**
+     * @param bool $active
+     */
+    public function setActive(bool $active): void
+    {
+        $this->active = $active;
+    }
+
+    public function isActive(): bool
+    {
+        return $this->active;
+    }
+
     public function hasId(): bool
     {
         return isset($this->id);
@@ -186,9 +200,9 @@ abstract class Model extends CMSObjectHydration
      */
 
     /**
-     *
-     * Fields for add or edit model
-     * - language : Text
+     * Add default fields
+     * - language
+     * - active
      *
      * @return array
      */
@@ -201,6 +215,10 @@ abstract class Model extends CMSObjectHydration
                 "field" => Text::create()->name("language")->label("Langue")->value($this->language)
             ];
         }
+        $fields['active'] = [
+            "size" => "dodocms-w-full dodocms-order-1",
+            "field" => Checkbox::create()->name("active")->placeholder("Activation de cet élément")->label("Voulez-vous activer cet élément ?")->value($this->active)
+        ];
         return $fields;
     }
 

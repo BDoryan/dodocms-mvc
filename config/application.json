@@ -1,6 +1,10 @@
 {
   "installed": true,
   "password_policy": "/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()-_=+{};:,<.>]).{8,}$/",
+  "jwt": {
+    "secret": "rL8T#r^R9K@trL8T#r^R9K@trd&rL8T#r^R9K@trd&egZ*egZ*rd&egZ*",
+    "expiresIn": "1h"
+  },
   "mysql": {
     "installed": true,
     "hostname": "localhost",

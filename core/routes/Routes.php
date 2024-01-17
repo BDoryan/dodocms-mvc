@@ -15,6 +15,7 @@ class Routes
 {
 
     const ADMIN_LOGIN = "/admin/login";
+    const ADMIN_LOGOUT = "/admin/logout";
     const ADMIN_PANEL = "/admin";
 
     /**
@@ -36,9 +37,12 @@ class Routes
     const ADMIN_RESOURCES_MANAGER = "/admin/resources/";
 
     /**
-     * Pages routes
+     * Pages panel routes
      */
     const ADMIN_PAGES_MANAGER = "/admin/pages";
+    const ADMIN_USERS_MANAGER = "/admin/users";
+    const ADMIN_USERS_MANAGER_NEW = "/admin/users/new";
+
     const ADMIN_PAGES_MANAGER_NEW = "/admin/pages/new";
     const ADMIN_PAGES_MANAGER_EDIT = "/admin/pages/edit/{id}";
     const ADMIN_PAGES_MANAGER_DELETE = "/admin/pages/delete/{id}";
@@ -53,12 +57,10 @@ class Routes
     const ADMIN_API_GET_RESOURCES = "/admin/api/resources/";
     const ADMIN_API_DELETE_RESOURCE = "/admin/api/resources/delete/{id}";
     const ADMIN_API_PAGE_STRUCTURE_EDIT = "/admin/api/pages/edit/{id}";
-//    const ADMIN_API_PAGE_STRUCTURE_BLOCKS = "/admin/api/pages/blocks/{id}";
     const ADMIN_API_PAGE_STRUCTURE_ADD_BLOCK = "/admin/api/pages/add";
     const ADMIN_API_PAGE_STRUCTURE_DELETE_BLOCK = "/admin/api/pages/delete/{id}";
     const ADMIN_API_PAGE_STRUCTURE_BLOCK_MOVE_TO_UP = "/admin/api/pages/move/up/{id}";
     const ADMIN_API_PAGE_STRUCTURE_BLOCK_MOVE_TO_DOWN = "/admin/api/pages/move/down/{id}";
-
 
     /**
      * Entity of table api routes
@@ -67,6 +69,10 @@ class Routes
     const ADMIN_API_TABLE_DELETE_ENTITY = "/admin/api/entries/delete/{model}/{id}";
     const ADMIN_API_TABLE_NEW_ENTITY = "/admin/api/entries/set/{model}";
     const ADMIN_API_TABLE_ENTITY_FORM = "/admin/api/entries/form/{model}";
+
+    /**
+     *
+     */
 
     /**
      * Default api route
@@ -88,8 +94,8 @@ class Routes
         /**
          * Panel route
          */
-
         $router->get(self::ADMIN_LOGIN, [$adminController, 'login']);
+        $router->get(self::ADMIN_LOGOUT, [$adminController, 'logout']);
         $router->post(self::ADMIN_LOGIN, [$adminController, 'authentication']);
 
         $router->middleware($authentificationMiddleware,
@@ -192,12 +198,7 @@ class Routes
 
     public static function route(string $route, array $replaces = []): string
     {
-        foreach ($replaces as $key => $value) {
-            $route = str_replace("{" . $key . "}", $value, $route);
-        }
-
-
-
+        $route = self::getRoute($route, $replaces);
         return Application::get()->toURL($route);
     }
 }

@@ -18,6 +18,8 @@
   "admin.panel.dashboard.description": "Welcome to DodoCMS admin panel.",
   "admin.panel.table_management": "Table management",
   "admin.panel.table_management.description": "Designed for developers, this section is your go-to for creating a new table (entity), where you'll explore an array of collection management features, perfect for crafting and refining your tables with precision.",
+  "admin.panel.block_manager": "Blocks manager",
+  "admin.panel.block_manager.description": "Designed for developers, this section is your reference for creating a new block, which will allow you to compose your pages with precision.",
   "admin.panel.dashboard.button.new_table": "Create a new table",
   "admin.debug.read_logs": "Read logs",
   "admin.debug.title": "Debug mode",
@@ -141,5 +143,15 @@
   "live-editor.block.move.toast.success": "The block has been moved",
   "live-editor.block.move.toast.error": "The block has not been moved",
   "live-editor.structure.delete.toast.structure_move_success": "The operation has been completed successfully",
-  "live-editor.block.move.toast.structure_move_success": "The operation has been completed successfully"
+  "live-editor.block.move.toast.structure_move_success": "The operation has been completed successfully",
+  "admin.panel.users.title": "User manager",
+  "admin.panel.users.description": "Explore the creation, reading, updating, and deletion of users back-office. Effortlessly manage your users to suit your needs.",
+  "admin.panel.users.new": "Create a new user",
+  "admin.panel.users.edit": "Edit this user",
+  "admin.panel.users.delete": "Delete this user",
+  "admin.login.form.error.empty.title": "Error, the form is empty.",
+  "admin.login.form.error.empty.message": "Please fill all fields.",
+  "admin.login.form.error.invalid.title": "Error, invalid credentials.",
+  "admin.login.form.error.invalid.message": "Please check your credentials.",
+  "admin.panel.configuration.title": "Configuration"
 }

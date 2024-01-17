@@ -23,7 +23,7 @@
                 foreach ($category->getSections() as $section):
                     ?>
                     <a href="<?= Application::get()->toURL($section->getHref()) ?>"
-                       class="dodocms-flex dodocms-p-2 dodocms-items-center dodocms-py-2 dodocms-px-4 dodocms-text-gray-300 <?= $section->isActive() ? "dodocms-bg-gray-700 dodocms-shadow-xl" :"" ?> hover:dodocms-bg-gray-700 hover:dodocms-shadow-2xl hover:dodocms-text-white dodocms-font-semibold dodocms-text-base">
+                       class="dodocms-gap-1 dodocms-flex dodocms-p-2 dodocms-items-center dodocms-py-2 dodocms-px-4 dodocms-text-gray-300 <?= $section->isActive() ? "dodocms-bg-gray-700 dodocms-shadow-xl" :"" ?> hover:dodocms-bg-gray-700 hover:dodocms-shadow-2xl hover:dodocms-text-white dodocms-font-semibold dodocms-text-base">
                         <i style="width: 20px;" class="dodocms-flex dodocms-justify-center dodocms-items-center <?= $section->getIcon() ?>"></i>
                         <?= $section->getLabel() ?>
                     </a>

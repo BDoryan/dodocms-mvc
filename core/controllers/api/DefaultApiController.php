@@ -8,7 +8,13 @@ class DefaultApiController extends ApiController
     }
 
     public function checkAuthorization(): bool {
-        $this->error("unauthorized");
+        try {
+            if(Session::authenticated())return true;
+            $this->error("unauthorized");
+        } catch (Exception $e) {
+            $this->error("authorization_check_error");
+            Application::get()->getLogger()->error('Error while checking authorization: ' . $e->getMessage());
+        }
         return false;
     }
 

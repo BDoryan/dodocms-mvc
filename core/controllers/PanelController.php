@@ -23,12 +23,20 @@ class PanelController extends AdminController
             ]),
             new SidebarCategory(__("admin.panel.admin_center"), [
                 new SidebarSection("dodocms-me-1 fa-solid fa-file-lines", __('admin.panel.pages_manager.title'), Routes::getRoute(Routes::ADMIN_TABLES_TABLE_ENTRIES, ['table' => 'Page']), [
-                    new SidebarSection("dodocms-me-1 fa-solid fa-layer-group", __('admin.panel.dashboard.button.store_file'), Routes::ADMIN_PAGES_MANAGER_NEW),
+                    new SidebarSection("dodocms-me-1 fa-solid fa-layer-group", __('admin.panel.button.store_file'), Routes::ADMIN_PAGES_MANAGER_NEW),
+                ]),
+                new SidebarSection("dodocms-me-1 fa-solid fa-users", __('admin.panel.users.title'), Routes::getRoute(Routes::ADMIN_USERS_MANAGER, ['table' => 'Page']), [
+                    new SidebarSection("dodocms-me-1 fa-solid fa-plus-circle", __('admin.panel.button.store_file'), Routes::ADMIN_USERS_MANAGER_NEW),
+                ]),
+                new SidebarSection("dodocms-me-1 fa-solid fa-gear", __('admin.panel.configuration.title'), Routes::getRoute(Routes::ADMIN_USERS_MANAGER, ['table' => 'Page']), [
                 ]),
             ]),
             new SidebarCategory(__("admin.panel.developer_center"), [
-                new SidebarSection("dodocms-me-1 fa-solid fa-layer-group", __('admin.panel.table_management'), Routes::ADMIN_TABLES, [
-                    new SidebarSection("dodocms-me-1 fa-solid fa-layer-group", __('admin.panel.table_management.new'), Routes::ADMIN_TABLES_NEW),
+                new SidebarSection("dodocms-me-1 fa-solid fa-cube", __('admin.panel.block_manager'), Routes::ADMIN_TABLES, [
+                    new SidebarSection("dodocms-me-1 fa-solid fa-layer-group", __('admin.panel.block_manager.new'), Routes::ADMIN_TABLES_NEW),
+                ]),
+                new SidebarSection("dodocms-me-1 fa-solid fa-database", __('admin.panel.table_management'), Routes::ADMIN_TABLES, [
+                    new SidebarSection("dodocms-me-1 fa-solid fa-database", __('admin.panel.table_management.new'), Routes::ADMIN_TABLES_NEW),
                 ]),
             ])
         ]);

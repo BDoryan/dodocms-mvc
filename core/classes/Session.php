@@ -26,14 +26,52 @@ class Session
         return isset($_SESSION[$key]);
     }
 
+    /**
+     * Return true if the user is authenticated
+     *
+     * @return bool
+     * @throws Exception
+     */
     public static function authenticated(): bool
     {
-        return Session::authorized();
+        if (!self::isStarted()) return false;
+        if (self::getUserSession() == null) return false;
+        return true;
     }
 
-    public static function authorized(): bool
+    /**
+     * @throws Exception
+     */
+    public static function getUserSession(): ?UserSessionModel
     {
-        return true;
+        $token = $_SESSION['user_session'] ?? null;
+        if ($token === null) return null;
+
+        $jwtManager = Application::get()->getJwtManager();
+        if($jwtManager->verifyToken($token) === null) return null;
+
+        $sessions = UserSessionModel::findAll('*', ['token' => $token]);
+        if (empty($sessions)) return null;
+
+        return $sessions[0];
+    }
+
+    /**
+     * @throws Exception
+     */
+    public static function getUser(): ?UserModel
+    {
+        $session = self::getUserSession();
+        if($session === null) return null;
+        return $session->getUser();
+    }
+
+    public static function setUserSession(UserSessionModel $session) {
+        $_SESSION['user_session'] = $session->getToken();
+    }
+
+    public static function removeUserSession() {
+        unset($_SESSION['user_session']);
     }
 
     public static function setLanguage(string $lang): void

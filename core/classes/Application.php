@@ -27,6 +27,7 @@ class Application
     private ?Database $database = null;
     private Logger $logger;
     private Theme $theme;
+    private JWTManager $jwtManager;
     private array $vue_components = [];
 
     public function __construct(string $root = '', string $url = '')
@@ -192,14 +193,22 @@ class Application
         try {
             $this->logger->debug("Application->loadConfiguration();");
             $this->loadConfiguration();
+
+            $this->logger->debug("Application->loadJWTManager()");
+            $this->jwtManager = new JWTManager($this->getConfiguration()["jwt"]["secret"], $this->getConfiguration()["jwt"]["expiresIn"]);
+
             $this->logger->debug("Application->loadDatabase();");
             $this->loadDatabase();
+
             $this->logger->debug("Application->loadSession();");
             $this->loadSession();
+
             $this->logger->debug("Application->init();");
             $this->init();
+
             $this->logger->debug("Application->loadAdminPanel();");
             $this->loadAdminPanel();
+
             $this->logger->debug("Application->initVueComponents();");
             $this->initVueComponents();
 
@@ -380,6 +389,11 @@ class Application
     public function getConfiguration(): array
     {
         return $this->configuration->get();
+    }
+
+    public function getJwtManager(): JWTManager
+    {
+        return $this->jwtManager;
     }
 
     public function isDevelopment(): bool

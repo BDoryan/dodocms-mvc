@@ -48,7 +48,12 @@ abstract class AdminController extends DOMController
 
     public function authenticated(): bool
     {
-        return true;
+        try {
+            return Session::authenticated();
+        } catch (Exception $e) {
+            Application::get()->getLogger()->error("Error while checking if the user is authenticated: " . $e->getMessage());
+        }
+        return false;
     }
 
     public function authentificationMiddleware(): bool
@@ -61,20 +66,52 @@ abstract class AdminController extends DOMController
         return true;
     }
 
+    public function logout() {
+        Session::removeUserSession();
+        $this->redirect(Routes::ADMIN_LOGIN);
+    }
+
     public function authentication()
     {
-        /**
-         * Authentification ici
-         */
+        // Check if the user is already authenticated
         if ($this->authenticated()) {
             $this->redirect(Routes::ADMIN_PANEL);
             return;
         }
 
-        /**
-         * Echec de l'authentification
-         */
-        $this->redirect(Routes::ADMIN_LOGIN);
+        $email = $_POST['email'] ?? null;
+        $password = $_POST['password'] ?? null;
+
+        // Check if the email and password are not empty
+        if ($email === null || $password === null) {
+            $this->addToast(new Toast(__('admin.login.form.error.empty.title'), __('admin.login.form.error.empty.message'), Toast::TYPE_ERROR));
+            $this->redirect(Routes::ADMIN_LOGIN);
+            return;
+        }
+
+        // Check if the user exists
+        $users = UserModel::findAll('*', ['email' => $email]);
+        if (empty($users)) {
+            $this->addToast(new Toast(__('admin.login.form.error.invalid.title'), __('admin.login.form.error.invalid.message'), Toast::TYPE_ERROR));
+            $this->redirect(Routes::ADMIN_LOGIN);
+            return;
+        }
+
+        $user = $users[0];
+
+        // Check the password and create the session
+        $userSession = $user->createToken($password);
+        if ($userSession === null) {
+            $this->addToast(new Toast(__('admin.login.form.error.invalid.title'), __('admin.login.form.error.invalid.message'), Toast::TYPE_ERROR));
+            $this->redirect(Routes::ADMIN_LOGIN);
+            return;
+        }
+
+        // Set the user session
+        Session::setUserSession($userSession);
+
+        // Redirect to the admin panel
+        $this->redirect(Routes::ADMIN_PANEL);
     }
 
     public function login()

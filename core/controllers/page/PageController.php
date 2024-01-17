@@ -21,7 +21,7 @@ class PageController extends DOMController
     public function viewPage(PageModel $page)
     {
         $start = microtime(true);
-        $isAdmin = isset($_GET['isAdmin']);
+        $editorMode = Session::authenticated() && isset($_GET['editor']) && $_GET['editor'] === 'true';
         $structures = $page->getPageStructures();
         $utf8 = "<?xml encoding='utf-8' ?>";
 
@@ -72,7 +72,7 @@ class PageController extends DOMController
             }
 
             // if the user are not admin, remove all editable attributes for security
-            if(!$isAdmin) {
+            if(!$editorMode) {
                 $attributes = [
                     'editable',
                     'block-name',
@@ -101,7 +101,7 @@ class PageController extends DOMController
             $block_content = $html;
 
 
-            if ($isAdmin) {
+            if ($editorMode) {
                 view(
                     Application::get()->toRoot('/core/views/admin/live-editor/block-editor.php'), [
                         'position' => $i,
@@ -119,7 +119,7 @@ class PageController extends DOMController
         }
 
         $content = ob_get_clean();
-        if($isAdmin) {
+        if($editorMode) {
             $content .= fetch(Application::get()->toRoot('/core/views/admin/live-editor/block-add.php'), [
                 'position' => count($structures)
             ]);
