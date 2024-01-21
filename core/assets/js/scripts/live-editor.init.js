@@ -110,12 +110,9 @@ const loadLiveEditor = () => {
             actionBar.setAttribute("entity-action-bar", "");
 
             const deleteEntryButton = document.createElement("button");
-            const editEntryButton = document.createElement("button");
-
-            // deleteEntryButton.innerHTML = window.translate('live-editor.entries.delete');
             deleteEntryButton.setAttribute("model-action", "delete");
 
-            // editEntryButton.innerHTML = window.translate('live-editor.entries.edit');
+            const editEntryButton = document.createElement("button");
             editEntryButton.setAttribute("model-action", "edit");
 
             $(actionBar).append(editEntryButton);

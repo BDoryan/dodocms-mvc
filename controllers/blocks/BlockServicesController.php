@@ -14,4 +14,5 @@ class BlockServicesController extends BlockController
         ];
     }
 }
+
 ControllerManager::registerController(new BlockServicesController());

@@ -20,5 +20,4 @@
             </div>
         <?php } ?>
     </div>
-<!--    <button type="button" class="btn btn-success" v-on:click="openModal('upload-modal')">Upload modal !</button>-->
 </div>

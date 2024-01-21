@@ -25,6 +25,9 @@ Autoloader::require('core/exceptions', true);
 Autoloader::require('core/routes', true);
 Autoloader::require('core/components', true);
 
+/**
+ * Load externals classes, controllers
+ */
 Autoloader::require('models', true);
 Autoloader::require('controllers', true);
 

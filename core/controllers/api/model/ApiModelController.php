@@ -83,6 +83,10 @@ class ApiModelController extends ApiController
 
     public function setEntry($params)
     {
+//        echo "<pre>";
+//        var_dump($_POST);
+//        exit;
+
         $table_name = $params['model'];
         $table = $this->getTable($table_name);
         if (!isset($table))
