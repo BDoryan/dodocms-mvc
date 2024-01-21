@@ -182,8 +182,8 @@ class Routes
          */
         $pages = PageModel::findAll("*");
         foreach ($pages as $page) {
-            $router->get($page->getSlug(), function () use ($page, $pageController) {
-                $pageController->viewPage($page);
+            $router->get($page->getSlug(), function () use ($adminController, $page, $pageController) {
+                $pageController->viewPage($adminController, $page);
             });
         }
     }

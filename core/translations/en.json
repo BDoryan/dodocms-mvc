@@ -153,5 +153,7 @@
   "admin.login.form.error.empty.message": "Please fill all fields.",
   "admin.login.form.error.invalid.title": "Error, invalid credentials.",
   "admin.login.form.error.invalid.message": "Please check your credentials.",
-  "admin.panel.configuration.title": "Configuration"
+  "admin.panel.configuration.title": "Configuration",
+  "admin.session.expired.title": "Session expired",
+    "admin.session.expired.message": "Your session has expired. Please login again."
 }

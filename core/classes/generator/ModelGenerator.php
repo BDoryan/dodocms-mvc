@@ -6,7 +6,7 @@ class ModelGenerator
     public function __construct(string $tableName, array $attributes)
     {
         $filtered = array_filter($attributes, function ($value) {
-            return $value !== 'id' && $value !== 'createdAt' && $value !== 'updatedAt' && $value != 'language';
+            return $value !== 'id' && $value !== 'createdAt' && $value !== 'updatedAt' && $value != 'language' && $value != 'active';
         });
         $attributes = [...$filtered];
 

@@ -49,9 +49,14 @@ abstract class AdminController extends DOMController
     public function authenticated(): bool
     {
         try {
-            return Session::authenticated();
+            if(Session::authenticated())
+                return true;
         } catch (Exception $e) {
             Application::get()->getLogger()->error("Error while checking if the user is authenticated: " . $e->getMessage());
+        }
+        if(Session::hasUserSession()) {
+            $this->addToast(new Toast(__('admin.session.expired.title'), __('admin.session.expired.message'), Toast::TYPE_ERROR));
+            Session::removeUserSession();
         }
         return false;
     }

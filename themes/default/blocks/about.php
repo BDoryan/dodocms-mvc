@@ -16,14 +16,14 @@
                 <div class="row">
                     <div class="col-6 mt-auto">
                         <div class="text-center h-100 d-flex flex-column"><i class="fs-3 fa-solid fa-award mb-3"></i>
-                            <p class="lh-sm mb-2 small text-center">Baccalauréat professionnel système numérique
-                                (RISC)</p><span class="badge bg-primary">2019-2022</span></div>
+                            <p editable="school1" class="lh-sm mb-2 small text-center">Baccalauréat professionnel système numérique
+                                (RISC)</p><span editable="school_year1" class="badge bg-primary">2019-2022</span></div>
                     </div>
                     <div class="col-6 mt-auto">
                         <div class="text-center h-100 d-flex flex-column"><i
                                     class="fa-solid fa-school-flag fs-3 mb-3"></i>
-                            <p class="lh-sm mb-2 small text-center">BTS Services d'Informations aux Organisation
-                                (SLAM)</p><span class="badge bg-primary">2022-2024</span></div>
+                            <p editable="school2" class="lh-sm mb-2 small text-center">BTS Services d'Informations aux Organisation
+                                (SLAM)</p><span editable="school_year2" class="badge bg-primary">2022-2024</span></div>
                     </div>
                 </div>
             </div>

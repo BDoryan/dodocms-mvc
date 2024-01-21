@@ -2,18 +2,23 @@
 
 class JWTManager
 {
-    private $secretKey;
+    private string $secretKey;
+    private int $expiresIn;
 
-    public function __construct($secretKey)
+    public function __construct(string $secretKey, int $expiresIn = 3600)
     {
         $this->secretKey = $secretKey;
+        $this->expiresIn = $expiresIn;
     }
 
-    public function createToken(array $claims, $expiration = 3600)
+    public function createToken(array $claims, ?int $expiresIn = null)
     {
+        if($expiresIn == null) {
+            $expiresIn = $this->expiresIn;
+        }
         $header = base64_encode(json_encode(['alg' => 'HS256', 'typ' => 'JWT']));
 
-        $claims['exp'] = time() + $expiration;
+        $claims['exp'] = time() + $expiresIn;
 
         $headerClaims = base64_encode(json_encode($claims));
 
@@ -36,28 +41,11 @@ class JWTManager
             if (isset($decodedClaims['exp']) && $decodedClaims['exp'] > time()) {
                 return $decodedClaims;
             } else {
-                throw new Exception("Token expired");
+                Application::get()->getLogger()->warning("Token expired");
             }
         } else {
-            throw new Exception("Invalid signature");
+            Application::get()->getLogger()->warning("Invalid signature");
         }
+        return null;
     }
 }
-
-//// Exemple d'utilisation de la classe
-//$jwtManager = new JWTManager('votre_clé_secrète');
-//
-//// Créer un token avec des réclamations personnalisées
-//$token = $jwtManager->createToken(['user_id' => 123, 'username' => 'john_doe'], 3600);
-//
-//// Afficher le token
-//echo "Token: $token\n";
-//
-//// Vérifier le token
-//try {
-//    $decodedPayload = $jwtManager->verifyToken($token);
-//    print_r($decodedPayload);
-//} catch (Exception $e) {
-//    echo "Erreur: " . $e->getMessage();
-//}
-//?>

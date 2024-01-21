@@ -1,3 +1,7 @@
+<?php
+//    $services = ServicesModel::findAll("*", ["active" => 1]);
+//    ControllerManager::load('services');
+?>
 <section id="services" class="bg-dark">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 80 1440 150">
         <path fill="var(--background-color)" fill-opacity="1"
@@ -48,7 +52,7 @@
                                         class="fa-brands fa-bootstrap"></i><i class="fa-brands fa-node"></i><i
                                         class="fa-brands fa-java"></i></div>
                             <div class="separator my-3"></div>
-                            <div class="mt-auto text-start">
+                            <div class="mt-auto text-start" editable="process">
                                 <ol>
                                     <li>Comprendre vos besoins et objectifs</li>
                                     <li>Création d'un plan de navigation</li>

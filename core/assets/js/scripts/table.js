@@ -115,13 +115,14 @@ $(document).on("submit", "#table-form", function (event) {
             nullable: false,
             default_value: "CURRENT_TIMESTAMP"
         });
-        attributes.push({
-            name: "active",
-            type: "boolean",
-            nullable: false,
-            default_value: false
-        });
     }
+    
+    attributes.push({
+        name: "active",
+        type: "boolean",
+        nullable: false,
+        default_value: false
+    });
 
     const table = {
         name: data.find(element => element.name === "table_name")?.value || "null",

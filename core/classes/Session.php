@@ -48,7 +48,7 @@ class Session
         if ($token === null) return null;
 
         $jwtManager = Application::get()->getJwtManager();
-        if($jwtManager->verifyToken($token) === null) return null;
+        if ($jwtManager->verifyToken($token) === null) return null;
 
         $sessions = UserSessionModel::findAll('*', ['token' => $token]);
         if (empty($sessions)) return null;
@@ -57,20 +57,31 @@ class Session
     }
 
     /**
+     * Check if a user session is set
+     *
+     * @return bool
+     */
+    public static function hasUserSession(): bool {
+        return isset($_SESSION['user_session']);
+    }
+
+    /**
      * @throws Exception
      */
     public static function getUser(): ?UserModel
     {
         $session = self::getUserSession();
-        if($session === null) return null;
+        if ($session === null) return null;
         return $session->getUser();
     }
 
-    public static function setUserSession(UserSessionModel $session) {
+    public static function setUserSession(UserSessionModel $session)
+    {
         $_SESSION['user_session'] = $session->getToken();
     }
 
-    public static function removeUserSession() {
+    public static function removeUserSession()
+    {
         unset($_SESSION['user_session']);
     }
 

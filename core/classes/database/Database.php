@@ -70,6 +70,7 @@ class Database
 
         $sql = "INSERT INTO  $table ($columns) VALUES ($placeholders);";
         $prepare = $this->currentConnection()->prepare($sql);
+        $attributes = $this->clearBool($attributes);
         $prepare->execute(array_values($attributes));
     }
 
@@ -85,7 +86,19 @@ class Database
 
         $sql = "UPDATE $table SET $columns_string WHERE $conditions_string;";
         $prepare = $this->currentConnection()->prepare($sql);
-        $prepare->execute(array_merge($attributes, $conditions));
+        $merge = array_merge($attributes, $conditions);
+        $merge = $this->clearBool($merge);
+        $prepare->execute($merge);
+    }
+
+    private function clearBool($array): array
+    {
+        foreach ($array as $key => $value) {
+            if (is_bool($value)) {
+                $array[$key] = $value ? 1 : 0;
+            }
+        }
+        return $array;
     }
 
     public function count($table, $conditions = []): int

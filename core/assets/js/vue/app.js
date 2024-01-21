@@ -1,8 +1,6 @@
 const loadApplication = () => {
     $(document).ready(function () {
-        $('.ckeditor').each(function () {
-            CKEDITOR.replace($(this).attr('id'));
-        });
+        replaceCkEditor();
     });
 
     const modals = window.app.modals ?? [];

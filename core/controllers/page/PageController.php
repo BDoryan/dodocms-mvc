@@ -18,10 +18,10 @@ class PageController extends DOMController
     /**
      * @throws Exception
      */
-    public function viewPage(PageModel $page)
+    public function viewPage(AdminController $adminController, PageModel $page)
     {
         $start = microtime(true);
-        $editorMode = Session::authenticated() && isset($_GET['editor']) && $_GET['editor'] === 'true';
+        $editorMode = $adminController->authenticated() && isset($_GET['editor']) && $_GET['editor'] === 'true';
         $structures = $page->getPageStructures();
         $utf8 = "<?xml encoding='utf-8' ?>";
 
@@ -33,7 +33,6 @@ class PageController extends DOMController
             $block = $page_structure->getBlock();
             $view = $block->getView();
             $block_content = fetch($view, ['block' => $block]);
-
 
             $document = new DOMDocument();
 
@@ -139,6 +138,10 @@ class PageController extends DOMController
         $now = microtime(true);
         $time = $now - $start;
         echo "<!-- Page generated in " . $time . " seconds -->\n";
-        $this->view('layout', ['content' => $content, 'page_id' => $page->getId()]);
+        $this->view('layout', [
+            'content' => $content,
+            'page_id' => $page->getId(),
+            'live_editor' => $editorMode,
+            'toasts' => $adminController->getToasts()]);
     }
 }

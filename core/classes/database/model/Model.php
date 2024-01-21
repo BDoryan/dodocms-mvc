@@ -49,9 +49,6 @@ abstract class Model extends CMSObjectHydration
     public function create(): bool
     {
         $database = Application::get()->getDatabase();
-//        echo "<pre>";
-//        var_dump($this->getAttributes());
-//        echo "</pre>";
         $database->insert($this->table_name, $this->getAttributes());
         $this->id = $database->lastInsertId();
         return true;
@@ -172,9 +169,9 @@ abstract class Model extends CMSObjectHydration
     }
 
     /**
-     * @return DateTime
+     * @return string
      */
-    public function getCreatedAt(): DateTime
+    public function getCreatedAt(): string
     {
         return $this->createdAt;
     }
@@ -188,9 +185,9 @@ abstract class Model extends CMSObjectHydration
     }
 
     /**
-     * @return DateTime
+     * @return string
      */
-    public function getUpdatedAt(): DateTime
+    public function getUpdatedAt(): string
     {
         return $this->updated_at;
     }
@@ -198,6 +195,10 @@ abstract class Model extends CMSObjectHydration
     /**
      * TODO: Il faut savoir qu'il est important de pouvoir mettre en place des vues dédiées à la création du formulaire d'ajout ou de modification
      */
+
+    public function hasLanguageAttribute() {
+        return Table::getTable($this->table_name)->hasAttributeName('language');
+    }
 
     /**
      * Add default fields
@@ -209,15 +210,15 @@ abstract class Model extends CMSObjectHydration
     public function getFields(): array
     {
         $fields = [];
-        if (!empty($this->language)) {
+        if ($this->hasLanguageAttribute()) {
             $fields["language"] = [
-                "size" => "dodocms-w-full",
-                "field" => Text::create()->name("language")->label("Langue")->value($this->language)
+                "size" => "dodocms-w-6/12 dodocms-order-1",
+                "field" => Text::create()->name("language")->label("Langue")->value($this->language ?? "en")
             ];
         }
         $fields['active'] = [
-            "size" => "dodocms-w-full dodocms-order-1",
-            "field" => Checkbox::create()->name("active")->placeholder("Activation de cet élément")->label("Voulez-vous activer cet élément ?")->value($this->active)
+            "size" => "dodocms-w-6/12 dodocms-order-1",
+            "field" => Checkbox::create()->name("active")->placeholder("Activation de cet élément")->label("Voulez-vous activer cet élément ?")->value($this->active ?? false)
         ];
         return $fields;
     }
