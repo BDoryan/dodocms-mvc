@@ -1,6 +1,6 @@
 <?php
 
-Autoloader::require('core/classes/Controller.php');
+Autoloader::require('core/classes/controller/Controller.php');
 
 abstract class DOMController extends Controller
 {

@@ -144,6 +144,8 @@
   "live-editor.block.move.toast.error": "The block has not been moved",
   "live-editor.structure.delete.toast.structure_move_success": "The operation has been completed successfully",
   "live-editor.block.move.toast.structure_move_success": "The operation has been completed successfully",
+  "live-editor.block.update.toast.success": "The block has been updated",
+  "live-editor.block.update.toast.structure_edit_success": "The operation has been completed successfully",
   "admin.panel.users.title": "User manager",
   "admin.panel.users.description": "Explore the creation, reading, updating, and deletion of users back-office. Effortlessly manage your users to suit your needs.",
   "admin.panel.users.new": "Create a new user",
@@ -155,5 +157,5 @@
   "admin.login.form.error.invalid.message": "Please check your credentials.",
   "admin.panel.configuration.title": "Configuration",
   "admin.session.expired.title": "Session expired",
-    "admin.session.expired.message": "Your session has expired. Please login again."
+  "admin.session.expired.message": "Your session has expired. Please login again."
 }

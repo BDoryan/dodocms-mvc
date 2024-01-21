@@ -168,7 +168,7 @@ class Routes
             $router->get(self::ADMIN_API, [$defaultApiController, "notFound"])
         );
 
-        $pageController = new PageController();
+        $pageController = new PageBuilderController();
 
         /**
          * Sections route

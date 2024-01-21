@@ -2,7 +2,7 @@
 
 Autoloader::require('models/PageModel.php');
 
-class PageController extends DOMController
+class PageBuilderController extends DOMController
 {
 
     public function __construct()
@@ -25,14 +25,48 @@ class PageController extends DOMController
         $structures = $page->getPageStructures();
         $utf8 = "<?xml encoding='utf-8' ?>";
 
+        /** @var PageController $pageController */
+        $pageController = ControllerManager::getPageController($page->getId());
+
         ob_start();
-        /** @var PageStructureModel $page_structure */
         for ($i = 0; $i < count($structures); $i++) {
             $page_structure = $structures[$i];
 
             $block = $page_structure->getBlock();
             $view = $block->getView();
-            $block_content = fetch($view, ['block' => $block]);
+
+            $data = ['block' => $block];
+
+            /** @var PageStructureModel $page_structure */
+            if($pageController != null) {
+                Application::get()->getLogger()->debug("Page controller found for page " . $page->getId());
+                $data_ = $pageController->data();
+                Application::get()->getLogger()->debug("data=".print_r($data_, true));
+                $data = array_replace($data, $pageController->data());
+            }
+
+            /** @var BlockController $blockController */
+            $blockController = ControllerManager::getBlockController($block->getId());
+
+            if($blockController != null) {
+                Application::get()->getLogger()->debug("Block controller found for block " . $block->getId());
+                $data_ = $blockController->data();
+                Application::get()->getLogger()->debug("data=".print_r($data_, true));
+                $data = array_replace($data, $blockController->data());
+            }
+
+            /** @var StructureController $structureController */
+            $structureController = ControllerManager::getStructureController($page_structure->getId());
+            if($structureController != null) {
+                Application::get()->getLogger()->debug("Structure controller found for structure " . $page_structure->getId());
+                $data_ = $structureController->data();
+                Application::get()->getLogger()->debug("data=".print_r($data_, true));
+                $data = array_replace($data, $structureController->data());
+            }
+
+            Application::get()->getLogger()->debug("Data for block " . $block->getId() . " : " . print_r($data, true));
+
+            $block_content = fetch($view, $data);
 
             $document = new DOMDocument();
 
@@ -47,8 +81,6 @@ class PageController extends DOMController
                     $nodes = $xpath->query('//*[@editable="' . $key . '"]');
 
                     foreach ($nodes as $node) {
-//                        if ($node->nodeName === 'img')
-//                        $node->setAttribute('resource-id', 1486);
                         if(empty($value))continue;
                         if ($node->nodeName === 'img') {
                             $resource = new ResourceModel();

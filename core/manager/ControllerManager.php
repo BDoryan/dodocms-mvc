@@ -5,36 +5,59 @@ class ControllerManager
 
     private static array $controllers = [];
 
-    /**
-     * Add a controller to the controller manager with the view name
-     *
-     * @param $bview_name
-     * @param $controller
-     * @return void
-     */
-    public static function addController(string $view, $controller): void
+    public static function registerController($controller)
     {
-        self::$controllers[$view] = $controller;
-    }
-
-    public static function load(string $view): void {
-        if(!isset(self::$controllers[$view]))
-            throw new Exception("Controller not found for view $view");
-
-        self::$controllers[$view].load();
+        if ($controller instanceof BlockController) {
+            self::$controllers['block'][$controller->getBlockId()] = $controller;
+            return;
+        }
+        if ($controller instanceof StructureController) {
+            self::$controllers['structure'][$controller->getStructureId()] = $controller;
+            return;
+        }
+        if ($controller instanceof PageController) {
+            self::$controllers['page'][$controller->getPageId()] = $controller;
+            return;
+        }
+        throw new Exception('Controller must be an instance of BlockController, StructureController or PageController');
     }
 
     /**
-     * Get a controller with the view name
+     * Return the controller of the structure
      *
-     * @param $view
-     * @return mixed
+     * @param int $structure_id
+     * @return StructureController|null
      */
-    public static function getController($view)
-    {
-        return self::$controllers[$view];
+    public static function getStructureController(int $structure_id): ?StructureController {
+        return self::$controllers['structure'][$structure_id] ?? null;
     }
 
+    /**
+     * Return the controller of the block
+     *
+     * @param int $block_id
+     * @return BlockController|null
+     */
+    public static function getBlockController(int $block_id): ?BlockController {
+        return self::$controllers['block'][$block_id] ?? null;
+    }
+
+    /**
+     * Return the controller of the page
+     *
+     * @param int $page_id
+     * @return PageController|null
+     */
+    public static function getPageController(int $page_id): ?PageController
+    {
+        return self::$controllers['page'][$page_id] ?? null;
+    }
+
+    /**
+     * Return all controllers registered
+     *
+     * @return array
+     */
     public static function getControllers(): array
     {
         return self::$controllers;

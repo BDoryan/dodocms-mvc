@@ -1,6 +1,8 @@
 <?php
 
-abstract class Controller
+Autoloader::require('core/classes/controller/IController.php');
+
+abstract class Controller implements IController
 {
 
     protected string $root;
@@ -8,8 +10,6 @@ abstract class Controller
     protected string $layout;
     protected string $assets;
     protected string $content = '';
-
-    public abstract function index();
 
     public function __construct(string $name, string $root, string $asset = '/', string $layout = null)
     {
