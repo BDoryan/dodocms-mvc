@@ -7,7 +7,7 @@
       crossorigin="anonymous" referrerpolicy="no-referrer"/>
 
 <!-- Load TailwindCSS -->
-<link rel="stylesheet" href="<?= Application::get()->toURL("/core/assets/css/tailwind.css") ?>">
+<link rel="stylesheet" href="<?= Application::get()->toURL("/core/assets/css/global.css") ?>">
 
 <!-- Load JavaScript libs -->
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>

@@ -46,7 +46,8 @@
                 const self = this;
 
                 const instance = $('.form-content form textarea').attr('id');
-                CKEDITOR.instances[instance].updateElement();
+                if(instance != null)
+                    CKEDITOR.instances[instance].updateElement();
 
                 const form = $('.form-content form');
                 const formData = new FormData(form[0]);
