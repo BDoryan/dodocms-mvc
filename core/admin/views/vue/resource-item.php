@@ -7,7 +7,7 @@
                 class="dodocms-w-full dodocms-h-full"
                 :src="src"
                 :alt="alternativeText"
-                style="background-size: contain; background: url('<?= Application::get()->toURL("/core/assets/imgs/transparent.jpg") ?>'); object-fit: contain; object-position: center;"
+                style="background-size: contain; background: url('<?= Application::get()->toURL("/core/admin/assets/imgs/transparent.jpg") ?>'); object-fit: contain; object-position: center;"
         />
         <a v-if="href && href.length > 0" target="_blank" :href="href"
            class="dodocms-absolute dodocms-inset-0 dodocms-flex dodocms-items-center dodocms-justify-center dodocms-opacity-0 hover:dodocms-opacity-100 dodocms-transition dodocms-duration-300 dodocms-ease-in-out dodocms-bg-black dodocms-bg-opacity-25">

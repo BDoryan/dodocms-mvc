@@ -4,7 +4,7 @@ if (Application::get()->isDebugMode()) {
     ?>
     <div x-data="{ showLogs: false }">
         <div class="dodocms-text-white dodocms-py-2 dodocms-px-6 sticky dodocms-top-0 dodocms-w-full dodocms-z-30 dodocms-bg-indigo-900 dodocms-flex dodocms-flex-row dodocms-gap-4">
-            <img class="dodocms-w-auto dodocms-max-h-[50px]" src="<?= Application::get()->toURL("/core/assets/imgs/logo.png") ?>">
+            <img class="dodocms-w-auto dodocms-max-h-[50px]" src="<?= Application::get()->toURL("/core/admin/assets/imgs/logo.png") ?>">
             <div class="dodocms-my-auto dodocms-flex dodocms-flex-col">
                 <h1 class="dodocms-text-xl dodocms-uppercase dodocms-my-auto ms-3 dodocms-font-bold"><?= __('admin.debug.title') ?></h1>
                 <span class="dodocms-text-sm dodocms-my-auto ms-3"><?= __('admin.debug.description') ?></span>

@@ -15,7 +15,7 @@ class ControllerManager
             self::$controllers['structure'][$controller->getStructureId()] = $controller;
             return;
         }
-        if ($controller instanceof PageController) {
+        if ($controller instanceof PagesController) {
             self::$controllers['page'][$controller->getPageId()] = $controller;
             return;
         }
@@ -62,9 +62,9 @@ class ControllerManager
      * Return the controller of the page
      *
      * @param int $page_id
-     * @return PageController|null
+     * @return PagesController|null
      */
-    public static function getPageController(int $page_id): ?PageController
+    public static function getPageController(int $page_id): ?PagesController
     {
         return self::$controllers['page'][$page_id] ?? null;
     }

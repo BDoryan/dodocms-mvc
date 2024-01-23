@@ -73,7 +73,7 @@ class ResourceModel extends Model implements JsonSerializable
     public function getSrc(): string
     {
         if (!file_exists($this->getPath()))
-            return Application::get()->toURL("/core/assets/imgs/applications/404.jpg");
+            return Application::get()->toURL("/core/admin/assets/imgs/applications/404.jpg");
 
         $finfo = finfo_open(FILEINFO_MIME_TYPE);
         $mime_type = finfo_file($finfo, $this->getPath());
@@ -84,7 +84,7 @@ class ResourceModel extends Model implements JsonSerializable
             $src = $this->getURL();
         } else {
             // Warning: here if extension image doesn't exist return a invalid image
-            $src = Application::get()->toURL("/core/assets/imgs/applications/$extension.jpg");
+            $src = Application::get()->toURL("/core/admin/assets/imgs/applications/$extension.jpg");
         }
 
         return $src;

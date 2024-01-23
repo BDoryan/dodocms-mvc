@@ -1,6 +1,6 @@
 <?php
 
-class JWTUtils
+class JsonWebTokenManager
 {
     private string $secretKey;
     private int $expiresIn;

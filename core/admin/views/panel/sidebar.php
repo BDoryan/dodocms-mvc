@@ -11,7 +11,7 @@ if (!isset($sidebar)) {
     <div class="dodocms-flex dodocms-flex-col dodocms-h-full">
 
         <div class="dodocms-flex dodocms-flex-col dodocms-items-center dodocms-justify-center dodocms-py-3 dodocms-bg-gray-900">
-            <img width="60" height="60" src="<?= Application::get()->toURL("/core/assets/imgs/logo-animated.png") ?>"
+            <img width="60" height="60" src="<?= Application::get()->toURL("/core/admin/assets/imgs/logo-animated.png") ?>"
                  alt="<?= __('admin.panel.dashboard') ?>">
             <span class="dodocms-text-white dodocms-text-xl dodocms-font-semibold"><?= __("admin.panel.dashboard") ?></span>
         </div>

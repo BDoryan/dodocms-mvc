@@ -1,13 +1,13 @@
 <?php
 
-class DefaultApiController extends ApiController
-{
+class ApiAdminController extends ApiController {
 
-    public function __construct()
-    {
-    }
-
-    public function checkAuthorization(): bool
+    /**
+     * Check if the user is authorized to access the API
+     *
+     * @return bool
+     */
+    public function authorization(): bool
     {
         try {
             if (Session::authenticated()) return true;
@@ -17,10 +17,5 @@ class DefaultApiController extends ApiController
             Application::get()->getLogger()->error('Error while checking authorization: ' . $e->getMessage());
         }
         return false;
-    }
-
-    public function notFound()
-    {
-        $this->error("route_not_found");
     }
 }

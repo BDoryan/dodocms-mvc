@@ -1,6 +1,6 @@
 <?php
 
-class ApiPageController extends ApiController
+class ApiPagesController extends ApiAdminController
 {
 
     /**

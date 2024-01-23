@@ -4,7 +4,7 @@
              :class="{'dodocms-blur-sm dodocms-p-2': resourceTarget === '<?= $resource->getSrc() ?>'}"
              src="<?= $resource->getSrc() ?>"
              alt="<?= $resource->getAlternativeText() ?>"
-             style="background-size: contain; background: url('<?= Application::get()->toURL("/core/assets/imgs/transparent.jpg") ?>'); object-fit: contain; object-position: center;">
+             style="background-size: contain; background: url('<?= Application::get()->toURL("/core/admin/assets/imgs/transparent.jpg") ?>'); object-fit: contain; object-position: center;">
         <a target="_blank" href="<?= $resource->getURL() ?>"
            class="dodocms-absolute dodocms-inset-0 dodocms-flex dodocms-items-center dodocms-justify-center dodocms-opacity-0 hover:dodocms-opacity-100 dodocms-transition dodocms-duration-300 dodocms-ease-in-out dodocms-bg-black dodocms-bg-opacity-25">
             <i class="fas fa-eye dodocms-text-5xl dodocms-text-white dodocms-text-dodocms-opacity-75 hover:dodocms-text-dodocms-opacity-90 dodocms-transition-colors"></i>

@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="<?= Application::get()->getTheme()->toURL("/assets/css/style.css") ?>">
 
 <!-- Load dodocms styles -->
-<link rel="stylesheet" href="<?= Application::get()->toURL("/core/assets/css/dodocms.css") ?>">
+<link rel="stylesheet" href="<?= Application::get()->toURL("/core/admin/assets/css/dodocms.css") ?>">
 
 <!-- Scripts -->
 <script src="<?= Application::get()->getTheme()->toURL('/assets/js/main.js') ?>"></script>

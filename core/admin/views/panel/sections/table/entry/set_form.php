@@ -12,7 +12,7 @@
     <div class="dodocms-order-2 dodocms-px-2 dodocms-flex dodocms-flex-row dodocms-w-full dodocms-gap-5 dodocms-mt-3">
         <?php
         ButtonHypertext::create()
-            ->href(Routes::route(Routes::ADMIN_TABLES_TABLE_ENTRIES, ["table" => $table_name ?? '']))
+            ->href(DefaultRoutes::route(DefaultRoutes::ADMIN_TABLES_TABLE_ENTRIES, ["table" => $table_name ?? '']))
             ->text('<i class="dodocms-me-1 fa-solid fa-circle-left"></i> ' . __("admin.panel.tables.table.entries.back"))
             ->addClass("dodocms-w-full")
             ->blue()

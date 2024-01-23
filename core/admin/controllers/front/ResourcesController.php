@@ -1,9 +1,9 @@
 <?php
 
-Autoloader::require('core/controllers/DOMController.php');
+Autoloader::require('core/classes/controller/DOMController.php');
 Autoloader::require('core/admin/controllers/AdminController.php');
 
-class ResourcesManagerController extends PanelController
+class ResourcesController extends SectionController
 {
 
     public function __construct()

@@ -5,7 +5,7 @@ Autoloader::require("core/classes/database/table/Table.php");
 Autoloader::require("core/classes/database/table/model/Model.php");
 Autoloader::require("core/ui/components/alert/Alert.php");
 
-class TableManagementController extends PanelController
+class TablesController extends SectionController
 {
 
     public function __construct()
@@ -26,7 +26,7 @@ class TableManagementController extends PanelController
         $table = Table::getTable($table_name);
         if (!isset($table)) {
             $this->addToast(new Toast(__("admin.panel.toast.error"), __("admin.panel.tables.table.not_found", ["table" => $table_name]), Toast::TYPE_ERROR));
-            header("Location: " . Routes::route(Routes::ADMIN_TABLES));
+            header("Location: " . DefaultRoutes::route(DefaultRoutes::ADMIN_TABLES));
             exit;
         }
         return $table;
@@ -37,7 +37,7 @@ class TableManagementController extends PanelController
         $model = Model::getModel($table);
         if (!isset($model)) {
             $this->addToast(new Toast(__("admin.panel.toast.error"), __("admin.panel.tables.table.model_not_found", ["model" => $table->getName()]), Toast::TYPE_ERROR));
-            header('Location: ' . Routes::route(Routes::ADMIN_TABLES_TABLE_ENTRIES, ["table" => $table->getName()]));
+            header('Location: ' . DefaultRoutes::route(DefaultRoutes::ADMIN_TABLES_TABLE_ENTRIES, ["table" => $table->getName()]));
             exit;
         }
         return $model;
@@ -79,11 +79,11 @@ class TableManagementController extends PanelController
         if (!empty($table)) {
             $table->destroy();
             $this->addToast(new Toast(__("admin.panel.toast.success"), __("admin.panel.tables.table.delete.success", ["table" => $table_name]), Toast::TYPE_SUCCESS));
-            Application::get()->getRouter()->redirect(Routes::ADMIN_TABLES);
+            Application::get()->getRouter()->redirect(DefaultRoutes::ADMIN_TABLES);
             exit;
         }
         $this->addToast(new Toast(__("admin.panel.toast.error"), __("admin.panel.tables.table.not_found", ["table" => $table_name]), Toast::TYPE_ERROR));
-        header("Location: " . Routes::route(Routes::ADMIN_TABLES));
+        header("Location: " . DefaultRoutes::route(DefaultRoutes::ADMIN_TABLES));
         exit;
     }
 
@@ -92,7 +92,7 @@ class TableManagementController extends PanelController
         $table = Table::getTable($table_name);
         if (empty($table)) {
             $this->addToast(new Toast(__("admin.panel.toast.error"), __("admin.panel.tables.table.not_found", ["table" => $table_name]), Toast::TYPE_ERROR));
-            header("Location: " . Routes::route(Routes::ADMIN_TABLES));
+            header("Location: " . DefaultRoutes::route(DefaultRoutes::ADMIN_TABLES));
             exit;
         }
 
@@ -116,7 +116,7 @@ class TableManagementController extends PanelController
 
             $edit = ButtonHypertext::create()
                 ->text('<i class="dodocms-me-1 fa-solid fa-pen-to-square"></i> ' . __("admin.panel.tables.table.entries.actions.edit"))
-                ->href(Routes::route(Routes::ADMIN_TABLE_EDIT_ENTRY, ["table" => $table_name, "id" => $entry['id']]))
+                ->href(DefaultRoutes::route(DefaultRoutes::ADMIN_TABLE_EDIT_ENTRY, ["table" => $table_name, "id" => $entry['id']]))
                 ->addClass("dodocms-text-sm dodocms-whitespace-nowrap")
                 ->blue()
                 ->html();
@@ -125,7 +125,7 @@ class TableManagementController extends PanelController
                 ->text('<i class="dodocms-me-1 fa-solid fa-trash"></i> ' . __("admin.panel.tables.table.entries.actions.delete"))
                 ->addClass("dodocms-text-sm dodocms-whitespace-nowrap")
                 ->red()
-                ->href(Routes::route(Routes::ADMIN_TABLE_DELETE_ENTRY, ["table" => $table_name, "id" => $entry['id']]))
+                ->href(DefaultRoutes::route(DefaultRoutes::ADMIN_TABLE_DELETE_ENTRY, ["table" => $table_name, "id" => $entry['id']]))
                 ->html();
 
             $row[] = '<div class="dodocms-flex dodocms-flex-row dodocms-justify-center align-center dodocms-gap-3">' . "$edit $delete" . '</div>';
@@ -171,7 +171,7 @@ class TableManagementController extends PanelController
             Application::get()->getLogger()->printException($e);
             $this->addAlert(new Alert(__("admin.panel.toast.error"), __("admin.panel.tables.table.entries.delete_entry.error"), Toast::TYPE_ERROR));
         }
-        header('Location: ' . Routes::route(Routes::ADMIN_TABLES_TABLE_ENTRIES, ["table" => $table_name]));
+        header('Location: ' . DefaultRoutes::route(DefaultRoutes::ADMIN_TABLES_TABLE_ENTRIES, ["table" => $table_name]));
     }
 
     public function newEntry(array $params): void
@@ -198,7 +198,7 @@ class TableManagementController extends PanelController
             if (isset($entry_id)) {
                 if ($model->id($entry_id)->fetch() == null) {
                     $this->addToast(new Toast(__("admin.panel.toast.error"), __("admin.panel.tables.table.entries.entry_not_found", ["table" => $table_name, "entry_id" => $entry_id]), Toast::TYPE_ERROR));
-                    header('Location: ' . Routes::route(Routes::ADMIN_TABLES_TABLE_ENTRIES, ["table" => $table_name]));
+                    header('Location: ' . DefaultRoutes::route(DefaultRoutes::ADMIN_TABLES_TABLE_ENTRIES, ["table" => $table_name]));
                     exit;
                 }
             }
@@ -213,10 +213,10 @@ class TableManagementController extends PanelController
                 if (isset($entry_id) ? $model->update() : $model->create()) {
                     $this->addToast(new Toast(__("admin.panel.toast.success"), isset($entry_id) ? __("admin.panel.tables.table.entries.edit_entry.success") : __("admin.panel.tables.table.entries.create_entry.success"), Toast::TYPE_SUCCESS));
                     if (!isset($entry_id)) {
-                        Application::get()->redirect(Routes::getRoute(Routes::ADMIN_TABLES_TABLE_ENTRIES, ["table" => $table_name]));
+                        Application::get()->redirect(DefaultRoutes::getRoute(DefaultRoutes::ADMIN_TABLES_TABLE_ENTRIES, ["table" => $table_name]));
                         exit;
                     } else {
-                        Application::get()->redirect(Routes::getRoute(Routes::ADMIN_TABLE_EDIT_ENTRY, ["table" => $table_name, "id" => $entry_id]));
+                        Application::get()->redirect(DefaultRoutes::getRoute(DefaultRoutes::ADMIN_TABLE_EDIT_ENTRY, ["table" => $table_name, "id" => $entry_id]));
                         exit;
                     }
                 } else {

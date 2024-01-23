@@ -11,7 +11,7 @@ Header::create()
         ButtonHypertext::create()
             ->green()
             ->text('<i class="dodocms-me-1 fa-solid fa-plus-circle"></i> ' . __('admin.panel.users.new'))
-            ->href(Routes::route(Routes::ADMIN_USERS_MANAGER_NEW))
+            ->href(DefaultRoutes::route(DefaultRoutes::ADMIN_USERS_MANAGER_NEW))
             ->html()
     )
     ->render();

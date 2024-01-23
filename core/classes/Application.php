@@ -4,7 +4,7 @@ Autoloader::require('core/classes/Session.php');
 Autoloader::require('core/classes/database/Database.php');
 Autoloader::require('core/classes/i18n/Internationalization.php');
 Autoloader::require("core/admin/controllers/PanelController.php");
-Autoloader::require("core/controllers/TableManagementController.php");
+Autoloader::require("core/controllers/TableController.php");
 Autoloader::require("core/classes/theme/Theme.php");
 
 class Application
@@ -17,17 +17,18 @@ class Application
         return self::$application;
     }
 
-    private bool $debugMode = false;
-    private bool $showErrors = true;
-    private string $root;
-    private string $url;
     private Router $router;
     private Internationalization $internationalization;
     private Configuration $configuration;
     private ?Database $database = null;
     private Logger $logger;
     private Theme $theme;
-    private JWTUtils $jwtManager;
+    private JsonWebTokenManager $jwtManager;
+
+    private bool $debugMode = false;
+    private bool $showErrors = true;
+    private string $root;
+    private string $url;
     private array $vue_components = [];
 
     public function __construct(string $root = '', string $url = '')
@@ -66,6 +67,22 @@ class Application
     }
 
     /**
+     * Return all sections of the back office
+     *
+     * @return array
+     */
+    public function getSections(): array {
+        return [
+            new BlocksSection(),
+            new PagesSection(),
+            new ResourcesSection(),
+            new TablesSection(),
+            new ConfigurationSection(),
+            new UsersSection(),
+        ];
+    }
+
+    /**
      * @throws Exception
      */
     private function loadConfiguration()
@@ -74,26 +91,9 @@ class Application
         $this->configuration->load();
     }
 
-    /**
-     * List of controllers to register
-     *
-     * @return array
-     */
-    public function getControllers() {
-        return [
-        ];
-    }
-
-    public function registerControllers() {
-        $controllers = $this->getControllers();
-        foreach ($controllers as $controller) {
-            ControllerManager::registerController($controller);
-        }
-    }
-
     private function loadAdminPanel()
     {
-        Routes::loadRoutes($this, $this->router);
+        DefaultRoutes::loadRoutes($this, $this->router);
         $this->logger->info("Routes initialized !");
     }
 
@@ -129,13 +129,13 @@ class Application
         $this->addVueComponent(
             new VueComponent(
                 $this->toRoot('/core/admin/views/vue/resource-item.php'),
-                $this->toURL('/core/assets/js/vue/ResourceItem.js')
+                $this->toURL('/core/admin/assets/js/vue/ResourceItem.js')
             )
         );
         $this->addVueComponent(
             new VueComponent(
                 $this->toRoot('/core/admin/views/vue/resource-viewer.php'),
-                $this->toURL('/core/assets/js/vue/ResourceViewer.js')
+                $this->toURL('/core/admin/assets/js/vue/ResourceViewer.js')
             )
         );
         $this->addVueComponent(
@@ -211,11 +211,8 @@ class Application
             $this->logger->debug("Application->loadConfiguration();");
             $this->loadConfiguration();
 
-            $this->logger->debug("Application->registerControllers();");
-            $this->registerControllers();
-
             $this->logger->debug("Application->loadJWTManager()");
-            $this->jwtManager = new JWTUtils($this->getConfiguration()["jwt"]["secret"], $this->getConfiguration()["jwt"]["expiresIn"]);
+            $this->jwtManager = new JsonWebTokenManager($this->getConfiguration()["jwt"]["secret"], $this->getConfiguration()["jwt"]["expiresIn"]);
 
             $this->logger->debug("Application->loadDatabase();");
             $this->loadDatabase();
@@ -411,7 +408,7 @@ class Application
         return $this->configuration->get();
     }
 
-    public function getJwtManager(): JWTUtils
+    public function getJwtManager(): JsonWebTokenManager
     {
         return $this->jwtManager;
     }

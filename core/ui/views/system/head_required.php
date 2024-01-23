@@ -7,22 +7,22 @@
       crossorigin="anonymous" referrerpolicy="no-referrer"/>
 
 <!-- Load TailwindCSS -->
-<link rel="stylesheet" href="<?= Application::get()->toURL("/core/assets/css/global.css") ?>">
+<link rel="stylesheet" href="<?= Application::get()->toURL("/core/admin/assets/css/global.css") ?>">
 
 <!-- Load JavaScript libs -->
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
 
 <!-- Load JavaScript classes -->
-<script src="<?= Application::get()->toURL("/core/assets/js/classes/Toast.js") ?>"></script>
-<script src="<?= Application::get()->toURL("/core/assets/js/classes/FormUtils.js") ?>"></script>
+<script src="<?= Application::get()->toURL("/core/admin/assets/js/classes/Toast.js") ?>"></script>
+<script src="<?= Application::get()->toURL("/core/admin/assets/js/classes/FormUtils.js") ?>"></script>
 
 <!-- Load dodocms scripts -->
-<script defer src="<?= Application::get()->toURL("/core/assets/js/scripts/ckeditor.init.js") ?>"></script>
-<script defer src="<?= Application::get()->toURL("/core/assets/js/scripts/live-editor.init.js") ?>"></script>
+<script defer src="<?= Application::get()->toURL("/core/admin/assets/js/scripts/ckeditor.init.js") ?>"></script>
+<script defer src="<?= Application::get()->toURL("/core/admin/assets/js/scripts/live-editor.init.js") ?>"></script>
 
 <!-- Load dodocms modules -->
-<script type="module" src="<?= Application::get()->toURL("/core/assets/js/scripts/select.js") ?>"></script>
+<script type="module" src="<?= Application::get()->toURL("/core/admin/assets/js/scripts/select.js") ?>"></script>
 
 <!-- Application for JavaScript -->
 <script>
@@ -73,4 +73,4 @@ foreach (Application::get()->getVueComponents() as $component) {
 <?php } ?>
 
 <!-- Load vue.js application -->
-<script defer src="<?= Application::get()->toURL("core/assets/js/vue/app.js") ?>"></script>
+<script defer src="<?= Application::get()->toURL("core/admin/assets/js/vue/app.js") ?>"></script>

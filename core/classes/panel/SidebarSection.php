@@ -3,7 +3,6 @@
 class SidebarSection
 {
 
-
     private string $icon;
     private string $label;
     private string $href;

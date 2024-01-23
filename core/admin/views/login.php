@@ -2,7 +2,7 @@
     <div class="dodocms-backdrop-filter dodocms-backdrop-blur-lg dodocms-bg-opacity-50 dodocms-border dodocms-border-black dodocms-border-opacity-20 dodocms-bg-white dodocms-p-8 dodocms-rounded-3xl dodocms-shadow-lg dodocms-w-full md:dodocms-w-4/5 lg:dodocms-w-4/5 xl:dodocms-w-2/6">
         <div class="dodocms-text-center">
             <img class="dodocms-mx-auto dodocms-mb-5" width="110" height="110"
-                 src="<?= Application::get()->toURL("/core/assets/imgs/logo-animated.png") ?>">
+                 src="<?= Application::get()->toURL("/core/admin/assets/imgs/logo-animated.png") ?>">
             <h1 class="dodocms-text-3xl dodocms-font-semibold dodocms-text-center dodocms-mt-3 dodocms-mb-0"><?= __('admin.login.form.title') ?></h1>
 
             <form class="dodocms-text-start dodocms-flex dodocms-flex-wrap dodocms-mt-1"

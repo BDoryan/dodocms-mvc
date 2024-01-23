@@ -1,13 +1,13 @@
 <?php
 
-Autoloader::require('core/controllers/DOMController.php');
+Autoloader::require('core/classes/controller/DOMController.php');
 
 abstract class AdminController extends DOMController
 {
 
     public function __construct()
     {
-        parent::__construct('admin', $this->toRoot('/core/admin/views'), 'core/admin/assets/', 'head');
+        parent::__construct('admin', $this->toRoot('/core/admin/views'), 'core/admin/assets/', 'head', '/panel/document');
     }
 
     public function addToast(Toast $toast)
@@ -61,11 +61,16 @@ abstract class AdminController extends DOMController
         return false;
     }
 
-    public function authentificationMiddleware(): bool
+    /**
+     * Check if the user is authenticated and redirect to the login page if not
+     *
+     * @return bool
+     */
+    public function authorization(): bool
     {
         if (!$this->authenticated()) {
             Application::get()->getLogger()->info("Unauthenticated user tried to access the admin panel");
-            $this->redirect(Routes::ADMIN_LOGIN);
+            $this->redirect(DefaultRoutes::ADMIN_LOGIN);
             return false;
         }
         return true;
@@ -73,14 +78,14 @@ abstract class AdminController extends DOMController
 
     public function logout() {
         Session::removeUserSession();
-        $this->redirect(Routes::ADMIN_LOGIN);
+        $this->redirect(DefaultRoutes::ADMIN_LOGIN);
     }
 
     public function authentication()
     {
         // Check if the user is already authenticated
         if ($this->authenticated()) {
-            $this->redirect(Routes::ADMIN_PANEL);
+            $this->redirect(DefaultRoutes::ADMIN_PANEL);
             return;
         }
 
@@ -90,7 +95,7 @@ abstract class AdminController extends DOMController
         // Check if the email and password are not empty
         if ($email === null || $password === null) {
             $this->addToast(new Toast(__('admin.login.form.error.empty.title'), __('admin.login.form.error.empty.message'), Toast::TYPE_ERROR));
-            $this->redirect(Routes::ADMIN_LOGIN);
+            $this->redirect(DefaultRoutes::ADMIN_LOGIN);
             return;
         }
 
@@ -98,7 +103,7 @@ abstract class AdminController extends DOMController
         $users = UserModel::findAll('*', ['email' => $email]);
         if (empty($users)) {
             $this->addToast(new Toast(__('admin.login.form.error.invalid.title'), __('admin.login.form.error.invalid.message'), Toast::TYPE_ERROR));
-            $this->redirect(Routes::ADMIN_LOGIN);
+            $this->redirect(DefaultRoutes::ADMIN_LOGIN);
             return;
         }
 
@@ -109,7 +114,7 @@ abstract class AdminController extends DOMController
         $userSession = $user->createToken($password);
         if ($userSession === null) {
             $this->addToast(new Toast(__('admin.login.form.error.invalid.title'), __('admin.login.form.error.invalid.message'), Toast::TYPE_ERROR));
-            $this->redirect(Routes::ADMIN_LOGIN);
+            $this->redirect(DefaultRoutes::ADMIN_LOGIN);
             return;
         }
 
@@ -117,13 +122,13 @@ abstract class AdminController extends DOMController
         Session::setUserSession($userSession);
 
         // Redirect to the admin panel
-        $this->redirect(Routes::ADMIN_PANEL);
+        $this->redirect(DefaultRoutes::ADMIN_PANEL);
     }
 
     public function login()
     {
         if ($this->authenticated()) {
-            $this->redirect(Routes::ADMIN_PANEL);
+            $this->redirect(DefaultRoutes::ADMIN_PANEL);
             return;
         }
         $this->title = __('admin.login.form.title');

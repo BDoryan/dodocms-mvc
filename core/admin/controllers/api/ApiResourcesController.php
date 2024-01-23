@@ -2,7 +2,7 @@
 
 Autoloader::require("core/exceptions/FileUnauthorizedException.php");
 
-class ApiResourcesController extends ApiController
+class ApiResourcesController extends ApiAdminController
 {
 
     private FileManager $fileManager;

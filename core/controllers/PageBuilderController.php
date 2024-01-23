@@ -25,7 +25,7 @@ class PageBuilderController extends DOMController
         $structures = $page->getPageStructures();
         $utf8 = "<?xml encoding='utf-8' ?>";
 
-        /** @var PageController $pageController */
+        /** @var PagesController $pageController */
         $pageController = ControllerManager::getPageController($page->getId());
 
         ob_start();
