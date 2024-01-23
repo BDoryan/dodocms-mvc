@@ -127,9 +127,14 @@ class UserModel extends Model
         if ($this->checkPassword($password)) {
             $jwtManager = Application::get()->getJwtManager();
 
-            $token = $jwtManager->createToken(["user_id" => $this->getId()]);
+            $expires_in = $jwtManager->getExpiresIn();
 
-            $userSession = new UserSessionModel($this->getId(), $token);
+            $now = new DateTime();
+            $now = $now->add(new DateInterval('PT' . $expires_in . 'S'));
+
+            $token = $jwtManager->createToken(['user_id' => $this->getId()]);
+
+            $userSession = new UserSessionModel($this->getId(), $token, $now->format('Y-m-d H:i:s'));
             $userSession->create();
 
             $this->tokens[] = $token;

@@ -18,6 +18,13 @@ abstract class PageController implements IDataController
     }
 
     /**
+     * Handle the request
+     *
+     * @return void
+     */
+//    public abstract function handle(): void;
+
+    /**
      * Set the data for the view of the page
      */
     public abstract function data(): array;

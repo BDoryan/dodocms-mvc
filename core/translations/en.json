@@ -1,4 +1,5 @@
 {
+  "admin.panel.go_to_website": "Go to website",
   "admin.login.form.title": "DodoCMS - Admin Login",
   "admin.login.form.subtitle": "Please enter your username and password to admin login.",
   "admin.login.form.username": "Username",
@@ -156,8 +157,10 @@
   "admin.login.form.error.invalid.title": "Error, invalid credentials.",
   "admin.login.form.error.invalid.message": "Please check your credentials.",
   "admin.panel.configuration.title": "Configuration",
+  "admin.panel.configuration.description": "Explore the creation, reading, updating, and deletion of configuration variables within the website. Effortlessly manage your configuration to suit your needs.",
   "admin.session.expired.title": "Session expired",
   "admin.session.expired.message": "Your session has expired. Please login again.",
   "live-editor.entries.new.toast.error": "Errror while creating the entry",
   "live-editor.entries.new.toast.entry_set_error": "An error has occurred while creating the entry"
+
 }

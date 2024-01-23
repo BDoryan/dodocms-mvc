@@ -769,6 +769,14 @@ video {
   margin-top: auto;
 }
 
+.dodocms-mb-3 {
+  margin-bottom: 0.75rem;
+}
+
+.dodocms-mb-\[10px\] {
+  margin-bottom: 10px;
+}
+
 .dodocms-block {
   display: block;
 }

@@ -1,1 +1,0 @@
-<a href="<?= $this->href ?>" id="<?= $this->id ?>" <?= $this->attributes() ?> class="<?= $this->class ?>"><?= $this->text ?></a>

@@ -7,13 +7,15 @@ class UserSessionModel extends Model
 
     protected ?int $user_id;
     protected string $token;
+    protected string $expire_at;
 
-    public function __construct(?int $user_id = null, string $token = "")
+    public function __construct(?int $user_id = null, string $token = "", $expire_at = 'current_timestamp')
     {
         parent::__construct(self::TABLE_NAME);
 
         $this->user_id = $user_id;
         $this->token = $token;
+        $this->expire_at = $expire_at;
     }
 
     /**
@@ -33,6 +35,22 @@ class UserSessionModel extends Model
     }
 
     /**
+     * @param string $expire_at
+     */
+    public function setExpireAt(string $expire_at): void
+    {
+        $this->expire_at = $expire_at;
+    }
+
+    /**
+     * @return string
+     */
+    public function getExpireAt(): string
+    {
+        return $this->expire_at;
+    }
+
+    /**
      * @param string $token
      */
     public function setToken(string $token): void
@@ -46,10 +64,9 @@ class UserSessionModel extends Model
      * @return mixed|null
      */
     public function getUser() {
-        $user = UserModel::findAll('*', ['user_id' => $this->user_id]);
-        if(!empty($user)) {
+        $user = UserModel::findAll('*', ['id' => $this->user_id]);
+        if(!empty($user))
             return $user[0];
-        }
         return null;
     }
 

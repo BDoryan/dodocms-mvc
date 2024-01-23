@@ -7,7 +7,7 @@ abstract class AdminController extends DOMController
 
     public function __construct()
     {
-        parent::__construct('admin', $this->toRoot('/core/views'), 'core/assets/', 'head');
+        parent::__construct('admin', $this->toRoot('/core/admin/views'), 'core/admin/assets/', 'head');
     }
 
     public function addToast(Toast $toast)
@@ -102,6 +102,7 @@ abstract class AdminController extends DOMController
             return;
         }
 
+        /** @var UserModel $user */
         $user = $users[0];
 
         // Check the password and create the session

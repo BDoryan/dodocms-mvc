@@ -13,7 +13,7 @@ abstract class DOMController extends Controller
     protected string $header = '';
     protected string $footer = '';
 
-    public function __construct(string $name, string $root, string $asset = '/', $head_path = '', $layout = '/page/layout')
+    public function __construct(string $name, string $root, string $asset = '/', $head_path = '', $layout = '/panel/document')
     {
         parent::__construct($name, $root, $asset, $layout);
         $this->head_path = $head_path;

@@ -61,7 +61,8 @@ class Session
      *
      * @return bool
      */
-    public static function hasUserSession(): bool {
+    public static function hasUserSession(): bool
+    {
         return isset($_SESSION['user_session']);
     }
 
@@ -72,7 +73,11 @@ class Session
     {
         $session = self::getUserSession();
         if ($session === null) return null;
-        return $session->getUser();
+
+        if (Cache::get("user") === null)
+            Cache::set("user", $session->getUser());
+
+        return Cache::get("user");
     }
 
     public static function setUserSession(UserSessionModel $session)

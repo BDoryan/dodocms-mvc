@@ -41,6 +41,8 @@ class Routes
      */
     const ADMIN_PAGES_MANAGER = "/admin/pages";
     const ADMIN_USERS_MANAGER = "/admin/users";
+    const ADMIN_BLOCKS_MANAGER = "/admin/blocks";
+    const ADMIN_CONFIGURATION = "/admin/configuration";
     const ADMIN_USERS_MANAGER_NEW = "/admin/users/new";
 
     const ADMIN_PAGES_MANAGER_NEW = "/admin/pages/new";
@@ -84,9 +86,9 @@ class Routes
         $adminController = new PanelController();
         $ptmController = new TableManagementController();
         $resourcesManagerController = new ResourcesManagerController();
+        $apiResourcesController = new ApiResourcesController();
         $defaultApiController = new DefaultApiController();
         $apiModelController = new ApiModelController();
-        $apiResourcesController = new ApiResourcesController();
         $apiPageController = new ApiPageController();
 
         $authentificationMiddleware = [$adminController, 'authentificationMiddleware'];

@@ -65,7 +65,7 @@ abstract class Controller implements IController
 
     public function fetch($path, $data = []): string
     {
-        return fetch($this->root . '/' . $this->name . Tools::toURI($path) . '.php', $data);
+        return fetch($this->root . Tools::toURI($path) . '.php', $data);
     }
 
     public function view($view, array $data = []): void

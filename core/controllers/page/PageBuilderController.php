@@ -7,7 +7,7 @@ class PageBuilderController extends DOMController
 
     public function __construct()
     {
-        parent::__construct('page', Application::get()->getTheme()->getViews(), 'assets/', 'head', '/template');
+        parent::__construct('page', Application::get()->getTheme()->getViews(), 'assets/', 'partials/head', '/template');
     }
 
     public function index()
@@ -134,7 +134,7 @@ class PageBuilderController extends DOMController
 
             if ($editorMode) {
                 view(
-                    Application::get()->toRoot('/core/views/admin/live-editor/block-editor.php'), [
+                    Application::get()->toRoot('/core/admin/views/live-editor/block-editor.php'), [
                         'position' => $i,
                         'block' => $block,
                         'page_structure' => $page_structure,
@@ -151,17 +151,17 @@ class PageBuilderController extends DOMController
 
         $content = ob_get_clean();
         if($editorMode) {
-            $content .= fetch(Application::get()->toRoot('/core/views/admin/live-editor/block-add.php'), [
+            $content .= fetch(Application::get()->toRoot('/core/admin/views/live-editor/block-add.php'), [
                 'position' => count($structures)
             ]);
             $content .= fetch(
-                Application::get()->toRoot('/core/views/admin/live-editor/front.php'), [
+                Application::get()->toRoot('/core/admin/views/live-editor/front.php'), [
                 ]
             );
         }
 
-        $this->header = $this->fetch("header");
-        $this->footer = $this->fetch("footer");
+        $this->header = $this->fetch("partials/header");
+        $this->footer = $this->fetch("partials/footer");
 
         $this->title = $page->getSeoTitle();
         $this->description = $page->getSeoDescription();
@@ -170,7 +170,7 @@ class PageBuilderController extends DOMController
         $now = microtime(true);
         $time = $now - $start;
         echo "<!-- Page generated in " . $time . " seconds -->\n";
-        $this->view('layout', [
+        $this->view('partials/layout', [
             'content' => $content,
             'page_id' => $page->getId(),
             'live_editor' => $editorMode,

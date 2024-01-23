@@ -23,7 +23,7 @@ Autoloader::require('core/models', true);
 Autoloader::require('core/controllers', true);
 Autoloader::require('core/exceptions', true);
 Autoloader::require('core/routes', true);
-Autoloader::require('core/components', true);
+Autoloader::require('core/ui/components', true);
 
 /**
  * Load externals classes, controllers
@@ -83,5 +83,7 @@ function view(string $path, array $data = []){
     if(!empty($data)){
         extract($data);
     }
+    if(!file_exists($path))
+        throw new Exception("View not found : $path");
     include $path;
 }

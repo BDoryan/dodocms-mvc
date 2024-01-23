@@ -19,7 +19,21 @@ class ControllerManager
             self::$controllers['page'][$controller->getPageId()] = $controller;
             return;
         }
-        throw new Exception('Controller must be an instance of BlockController, StructureController or PageController');
+        if ($controller instanceof SectionController) {
+            self::$controllers['panel']['section'][$controller->getSectionName()] = $controller;
+            return;
+        }
+        throw new Exception('Controller must be an instance of BlockController, StructureController, PageController or SectionController');
+    }
+
+    public static function getSectionController(string $section_name): ?SectionController
+    {
+        return self::$controllers['panel']['section'][$section_name] ?? null;
+    }
+
+    public static function getSectionControllers(): array
+    {
+        return self::$controllers['panel']['section'] ?? [];
     }
 
     /**
@@ -28,7 +42,8 @@ class ControllerManager
      * @param int $structure_id
      * @return StructureController|null
      */
-    public static function getStructureController(int $structure_id): ?StructureController {
+    public static function getStructureController(int $structure_id): ?StructureController
+    {
         return self::$controllers['structure'][$structure_id] ?? null;
     }
 
@@ -38,7 +53,8 @@ class ControllerManager
      * @param int $block_id
      * @return BlockController|null
      */
-    public static function getBlockController(int $block_id): ?BlockController {
+    public static function getBlockController(int $block_id): ?BlockController
+    {
         return self::$controllers['block'][$block_id] ?? null;
     }
 

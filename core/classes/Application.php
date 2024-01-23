@@ -27,7 +27,7 @@ class Application
     private ?Database $database = null;
     private Logger $logger;
     private Theme $theme;
-    private JWTManager $jwtManager;
+    private JWTUtils $jwtManager;
     private array $vue_components = [];
 
     public function __construct(string $root = '', string $url = '')
@@ -74,6 +74,23 @@ class Application
         $this->configuration->load();
     }
 
+    /**
+     * List of controllers to register
+     *
+     * @return array
+     */
+    public function getControllers() {
+        return [
+        ];
+    }
+
+    public function registerControllers() {
+        $controllers = $this->getControllers();
+        foreach ($controllers as $controller) {
+            ControllerManager::registerController($controller);
+        }
+    }
+
     private function loadAdminPanel()
     {
         Routes::loadRoutes($this, $this->router);
@@ -111,61 +128,61 @@ class Application
     {
         $this->addVueComponent(
             new VueComponent(
-                $this->toRoot('/core/views/admin/vue/resource-item.php'),
+                $this->toRoot('/core/admin/views/vue/resource-item.php'),
                 $this->toURL('/core/assets/js/vue/ResourceItem.js')
             )
         );
         $this->addVueComponent(
             new VueComponent(
-                $this->toRoot('/core/views/admin/vue/resource-viewer.php'),
+                $this->toRoot('/core/admin/views/vue/resource-viewer.php'),
                 $this->toURL('/core/assets/js/vue/ResourceViewer.js')
             )
         );
         $this->addVueComponent(
             new VueComponent(
-                $this->toRoot('/core/views/admin/vue/modal.php'),
+                $this->toRoot('/core/admin/views/vue/modal.php'),
             )
         );
         $this->addVueComponent(
             new VueComponent(
-                $this->toRoot('/core/views/admin/vue/resources/upload-modal.php'),
+                $this->toRoot('/core/admin/views/vue/resources/upload-modal.php'),
             )
         );
         $this->addVueComponent(
             new VueComponent(
-                $this->toRoot('/core/views/admin/vue/resources/resources-selector-modal.php'),
+                $this->toRoot('/core/admin/views/vue/resources/resources-selector-modal.php'),
             )
         );
         $this->addVueComponent(
             new VueComponent(
-                $this->toRoot('/core/views/admin/vue/resources/resources.php'),
+                $this->toRoot('/core/admin/views/vue/resources/resources.php'),
             )
         );
         $this->addVueComponent(
             new VueComponent(
-                $this->toRoot('/core/views/admin/vue/toast.php'),
+                $this->toRoot('/core/admin/views/vue/toast.php'),
             )
         );
         $this->addVueComponent(
             new VueComponent(
-                $this->toRoot('/core/views/admin/vue/blocks-modal.php'),
+                $this->toRoot('/core/admin/views/vue/blocks-modal.php'),
             )
         );
         $this->addVueComponent(
             new VueComponent(
-                $this->toRoot('/core/views/admin/vue/set-entry-modal.php'),
+                $this->toRoot('/core/admin/views/vue/set-entry-modal.php'),
             )
         );
         $this->addVueComponent(
             new VueComponent(
-                $this->toRoot('/core/views/admin/vue/set-resource.php'),
+                $this->toRoot('/core/admin/views/vue/set-resource.php'),
             )
         );
     }
 
     public function errorHandler($errno, $errstr, $errfile, $errline): bool
     {
-        view($this->toRoot("/core/views/error.php"), [
+        view($this->toRoot("/core/ui/views/error.php"), [
             "errno" => $errno,
             "errmessage" => $errstr,
             "errfile" => $errfile,
@@ -177,7 +194,7 @@ class Application
 
     public function exceptionHandler($exception)
     {
-        view($this->toRoot("/core/views/exception.php"), [
+        view($this->toRoot("/core/ui/views/exception.php"), [
             'exception' => $exception,
         ]);
     }
@@ -194,8 +211,11 @@ class Application
             $this->logger->debug("Application->loadConfiguration();");
             $this->loadConfiguration();
 
+            $this->logger->debug("Application->registerControllers();");
+            $this->registerControllers();
+
             $this->logger->debug("Application->loadJWTManager()");
-            $this->jwtManager = new JWTManager($this->getConfiguration()["jwt"]["secret"], $this->getConfiguration()["jwt"]["expiresIn"]);
+            $this->jwtManager = new JWTUtils($this->getConfiguration()["jwt"]["secret"], $this->getConfiguration()["jwt"]["expiresIn"]);
 
             $this->logger->debug("Application->loadDatabase();");
             $this->loadDatabase();
@@ -266,9 +286,9 @@ class Application
         echo "</pre>";
         exit;
 
-        $content = $this->fetch('/core/views/error.php', ['e' => $e]);
-        $head = $this->fetch('/core/views/admin/head.php', ['title' => __('error.title')]);
-        $this->view('/core/views/page/layout.php', ['head' => $head, 'content' => $content]);
+        $content = $this->fetch('/core/ui/views/ui/error.php', ['e' => $e]);
+        $head = $this->fetch('/core/admin/views/head.php', ['title' => __('error.title')]);
+        $this->view('/core/ui/views/page/layout.php', ['head' => $head, 'content' => $content]);
     }
 
     public function exception($e): void
@@ -285,9 +305,9 @@ class Application
         echo "</pre>";
         exit;
 
-        $content = $this->fetch('/core/views/error.php', ['e' => $e]);
-        $head = $this->fetch('/core/views/admin/head.php', ['title' => __('error.title')]);
-        $this->view('/core/views/page/layout.php', ['head' => $head, 'content' => $content]);
+        $content = $this->fetch('/core/ui/views/ui/error.php', ['e' => $e]);
+        $head = $this->fetch('/core/admin/views/head.php', ['title' => __('error.title')]);
+        $this->view('/core/ui/views/page/layout.php', ['head' => $head, 'content' => $content]);
     }
 
     public function showErrors(): void
@@ -391,7 +411,7 @@ class Application
         return $this->configuration->get();
     }
 
-    public function getJwtManager(): JWTManager
+    public function getJwtManager(): JWTUtils
     {
         return $this->jwtManager;
     }
