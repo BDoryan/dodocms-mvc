@@ -7,9 +7,10 @@ class DefaultApiController extends ApiController
     {
     }
 
-    public function checkAuthorization(): bool {
+    public function checkAuthorization(): bool
+    {
         try {
-            if(Session::authenticated())return true;
+            if (Session::authenticated()) return true;
             $this->error("unauthorized");
         } catch (Exception $e) {
             $this->error("authorization_check_error");
@@ -18,7 +19,8 @@ class DefaultApiController extends ApiController
         return false;
     }
 
-    public function notFound() {
+    public function notFound()
+    {
         $this->error("route_not_found");
     }
 }

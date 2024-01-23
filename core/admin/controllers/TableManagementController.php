@@ -1,6 +1,6 @@
 <?php
 
-Autoloader::require("core/controllers/PanelController.php");
+Autoloader::require("core/admin/controllers/PanelController.php");
 Autoloader::require("core/classes/database/table/Table.php");
 Autoloader::require("core/classes/database/table/model/Model.php");
 Autoloader::require("core/ui/components/alert/Alert.php");
@@ -11,11 +11,6 @@ class TableManagementController extends PanelController
     public function __construct()
     {
         parent::__construct();
-    }
-
-    public function routes(Router $router): void
-    {
-
     }
 
     public function tables(array $params): void

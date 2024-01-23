@@ -9,11 +9,13 @@ abstract class ApiController
     const STATUS_SUCCESS = 'success';
     const STATUS_ERROR = 'error';
 
-    public function success(string $message, array $data = []) {
+    public function success(string $message, array $data = [])
+    {
         $this->response(self::STATUS_SUCCESS, $message, $data);
     }
 
-    public function error(string $message, array $data = []) {
+    public function error(string $message, array $data = [])
+    {
         $this->response(self::STATUS_ERROR, $message, $data);
     }
 

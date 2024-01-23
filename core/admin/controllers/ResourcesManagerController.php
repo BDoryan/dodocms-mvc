@@ -1,7 +1,7 @@
 <?php
 
 Autoloader::require('core/controllers/DOMController.php');
-Autoloader::require('core/controllers/AdminController.php');
+Autoloader::require('core/admin/controllers/AdminController.php');
 
 class ResourcesManagerController extends PanelController
 {

@@ -3,7 +3,7 @@
 Autoloader::require('core/classes/Session.php');
 Autoloader::require('core/classes/database/Database.php');
 Autoloader::require('core/classes/i18n/Internationalization.php');
-Autoloader::require("core/controllers/PanelController.php");
+Autoloader::require("core/admin/controllers/PanelController.php");
 Autoloader::require("core/controllers/TableManagementController.php");
 Autoloader::require("core/classes/theme/Theme.php");
 
@@ -39,7 +39,7 @@ class Application
         $this->router = new Router($url);
 
         $this->setRoot($root);
-        $this->logger = new Logger($this->toRoot("/logs/" . "log-" . date("Y-m-d") . ".log"), $this->isDebugMode());
+        $this->logger = new Logger($this->toRoot("/cache/logs/" . "log-" . date("Y-m-d") . ".log"), $this->isDebugMode());
 
         self::$application = $this;
         $this->theme = new Theme("default");

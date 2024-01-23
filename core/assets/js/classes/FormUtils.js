@@ -18,7 +18,7 @@ class FormUtils {
 
     /**
      * Text Field validator
-     * (peut être optimiser en utilisant les fonctions du dessus)
+     * (peut-être optimiser en utilisant les fonctions du dessus)
      */
     static checkForm(form) {
         let success = true;

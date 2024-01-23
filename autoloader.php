@@ -21,9 +21,11 @@ Autoloader::require('core/classes', true);
 Autoloader::require('core/manager', true);
 Autoloader::require('core/models', true);
 Autoloader::require('core/controllers', true);
+Autoloader::require('core/admin/controllers', true);
 Autoloader::require('core/exceptions', true);
 Autoloader::require('core/routes', true);
 Autoloader::require('core/ui/components', true);
+
 
 /**
  * Load externals classes, controllers

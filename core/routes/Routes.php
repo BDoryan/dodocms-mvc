@@ -1,13 +1,13 @@
 <?php
 
-Autoloader::require("core/controllers/PanelController.php");
-Autoloader::require("core/controllers/TableManagementController.php");
-Autoloader::require("core/controllers/ResourcesManagerController.php");
-Autoloader::require("core/controllers/api/resources/ApiResourcesController.php");
-Autoloader::require("core/controllers/page/PageController.php");
-Autoloader::require("core/controllers/api/DefaultApiController.php");
-Autoloader::require("core/controllers/api/model/ApiModelController.php");
-Autoloader::require("core/controllers/api/page/ApiPageController.php");
+Autoloader::require("core/admin/controllers/PanelController.php");
+Autoloader::require("core/admin/controllers/TableManagementController.php");
+Autoloader::require("core/admin/controllers/ResourcesManagerController.php");
+Autoloader::require("core/admin/controllers/api/resources/ApiResourcesController.php");
+Autoloader::require("core/admin/controllers/page/PageController.php");
+Autoloader::require("core/admin/controllers/api/DefaultApiController.php");
+Autoloader::require("core/admin/controllers/api/model/ApiModelController.php");
+Autoloader::require("core/admin/controllers/api/page/ApiPageController.php");
 Autoloader::require("core/classes/Application.php");
 Autoloader::require("core/classes/Router.php");
 

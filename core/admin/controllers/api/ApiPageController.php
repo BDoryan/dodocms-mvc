@@ -99,14 +99,15 @@ class ApiPageController extends ApiController
      * @param $params
      * @return void
      */
-    public function moveStructureOfPageToUp($params) {
+    public function moveStructureOfPageToUp($params)
+    {
         try {
             $structure_id = $params['id'];
             $structure = new PageStructureModel();
             $structure->id($structure_id);
             $structure->fetch();
 
-            if($structure->getPageOrder() == 0) {
+            if ($structure->getPageOrder() == 0) {
                 $this->error("structure_move_failed", ['exception' => "structure_is_already_on_top"]);
                 return;
             }
@@ -131,7 +132,8 @@ class ApiPageController extends ApiController
      * @param $params
      * @return void
      */
-    public function moveStructureOfPageToDown($params) {
+    public function moveStructureOfPageToDown($params)
+    {
         try {
             $structure_id = $params['id'];
             $structure = new PageStructureModel();
@@ -140,7 +142,7 @@ class ApiPageController extends ApiController
 
             $total = Application::get()->getDatabase()->count(PageStructureModel::TABLE_NAME, ['page_id' => $structure->getPageId()]);
 
-            if($structure->getPageOrder() >= $total) {
+            if ($structure->getPageOrder() >= $total) {
                 $this->error("structure_move_failed", ['exception' => "structure_is_already_on_bottom"]);
                 return;
             }

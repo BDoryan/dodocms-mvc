@@ -1,6 +1,6 @@
 <?php
 
-Autoloader::require("core/exceptions/file/FileUnauthorizedException.php");
+Autoloader::require("core/exceptions/FileUnauthorizedException.php");
 
 class FileManager
 {

@@ -1,7 +1,7 @@
 <?php
 
 Autoloader::require("core/classes/collection/attribute/TableAttribute.php");
-Autoloader::require("core/exceptions/sql/SQLException.php");
+Autoloader::require("core/exceptions/SQLException.php");
 Autoloader::require("core/classes/utils/Tools.php");
 Autoloader::require("core/classes/object/CMSObject.php");
 
