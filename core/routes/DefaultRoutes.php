@@ -6,6 +6,7 @@ Autoloader::require('core/admin/sections/ResourcesSection.php');
 Autoloader::require('core/admin/sections/ConfigurationSection.php');
 Autoloader::require('core/admin/sections/TablesSection.php');
 Autoloader::require('core/admin/sections/UsersSection.php');
+Autoloader::require('core/admin/sections/BlocksSection.php');
 
 Autoloader::require("core/admin/controllers/PanelController.php");
 Autoloader::require("core/admin/controllers/page/PageController.php");

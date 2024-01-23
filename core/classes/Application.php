@@ -79,6 +79,7 @@ class Application
             new TablesSection(),
             new ConfigurationSection(),
             new UsersSection(),
+            new BlocksSection(),
         ];
     }
 
