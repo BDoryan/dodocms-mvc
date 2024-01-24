@@ -134,7 +134,7 @@ class PageBuilderController extends DOMController
 
             if ($editorMode) {
                 view(
-                    Application::get()->toRoot('/core/admin/views/live-editor/block-editor.php'), [
+                    Application::get()->toRoot('/core/ui/views/admin/live-editor/block-editor.php'), [
                         'position' => $i,
                         'block' => $block,
                         'page_structure' => $page_structure,
@@ -151,11 +151,11 @@ class PageBuilderController extends DOMController
 
         $content = ob_get_clean();
         if($editorMode) {
-            $content .= fetch(Application::get()->toRoot('/core/admin/views/live-editor/block-add.php'), [
+            $content .= fetch(Application::get()->toRoot('/core/ui/views/admin/live-editor/block-add.php'), [
                 'position' => count($structures)
             ]);
             $content .= fetch(
-                Application::get()->toRoot('/core/admin/views/live-editor/front.php'), [
+                Application::get()->toRoot('/core/ui/views/admin/live-editor/front.php'), [
                 ]
             );
         }

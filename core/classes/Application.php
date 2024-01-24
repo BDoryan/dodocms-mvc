@@ -3,7 +3,7 @@
 Autoloader::require('core/classes/Session.php');
 Autoloader::require('core/classes/database/Database.php');
 Autoloader::require('core/classes/i18n/Internationalization.php');
-Autoloader::require("core/admin/controllers/PanelController.php");
+Autoloader::require("core/controllers/PanelController.php");
 Autoloader::require("core/controllers/TableController.php");
 Autoloader::require("core/classes/theme/Theme.php");
 
@@ -73,13 +73,13 @@ class Application
      */
     public function getSections(): array {
         return [
-            new BlocksSection(),
-            new PagesSection(),
-            new ResourcesSection(),
-            new TablesSection(),
-            new ConfigurationSection(),
-            new UsersSection(),
-            new BlocksSection(),
+            new BlocksRoutes(),
+            new PagesRoutes(),
+            new ResourcesRoutes(),
+            new TablesRoutes(),
+            new ConfigurationsRoutes(),
+            new UsersRoutes(),
+            new BlocksRoutes(),
         ];
     }
 
@@ -129,54 +129,54 @@ class Application
     {
         $this->addVueComponent(
             new VueComponent(
-                $this->toRoot('/core/admin/views/vue/resource-item.php'),
-                $this->toURL('/core/admin/assets/js/vue/ResourceItem.js')
+                $this->toRoot('/core/ui/views/admin/vue/resource-item.php'),
+                $this->toURL('/core/assets/js/vue/ResourceItem.js')
             )
         );
         $this->addVueComponent(
             new VueComponent(
-                $this->toRoot('/core/admin/views/vue/resource-viewer.php'),
-                $this->toURL('/core/admin/assets/js/vue/ResourceViewer.js')
+                $this->toRoot('/core/ui/views/admin/vue/resource-viewer.php'),
+                $this->toURL('/core/assets/js/vue/ResourceViewer.js')
             )
         );
         $this->addVueComponent(
             new VueComponent(
-                $this->toRoot('/core/admin/views/vue/modal.php'),
+                $this->toRoot('/core/ui/views/admin/vue/modal.php'),
             )
         );
         $this->addVueComponent(
             new VueComponent(
-                $this->toRoot('/core/admin/views/vue/resources/upload-modal.php'),
+                $this->toRoot('/core/ui/views/admin/vue/resources/upload-modal.php'),
             )
         );
         $this->addVueComponent(
             new VueComponent(
-                $this->toRoot('/core/admin/views/vue/resources/resources-selector-modal.php'),
+                $this->toRoot('/core/ui/views/admin/vue/resources/resources-selector-modal.php'),
             )
         );
         $this->addVueComponent(
             new VueComponent(
-                $this->toRoot('/core/admin/views/vue/resources/resources.php'),
+                $this->toRoot('/core/ui/views/admin/vue/resources/resources.php'),
             )
         );
         $this->addVueComponent(
             new VueComponent(
-                $this->toRoot('/core/admin/views/vue/toast.php'),
+                $this->toRoot('/core/ui/views/admin/vue/toast.php'),
             )
         );
         $this->addVueComponent(
             new VueComponent(
-                $this->toRoot('/core/admin/views/vue/blocks-modal.php'),
+                $this->toRoot('/core/ui/views/admin/vue/blocks-modal.php'),
             )
         );
         $this->addVueComponent(
             new VueComponent(
-                $this->toRoot('/core/admin/views/vue/set-entry-modal.php'),
+                $this->toRoot('/core/ui/views/admin/vue/set-entry-modal.php'),
             )
         );
         $this->addVueComponent(
             new VueComponent(
-                $this->toRoot('/core/admin/views/vue/set-resource.php'),
+                $this->toRoot('/core/ui/views/admin/vue/set-resource.php'),
             )
         );
     }
@@ -285,7 +285,7 @@ class Application
         exit;
 
         $content = $this->fetch('/core/ui/views/ui/error.php', ['e' => $e]);
-        $head = $this->fetch('/core/admin/views/head.php', ['title' => __('error.title')]);
+        $head = $this->fetch('/core/ui/views/admin/head.php', ['title' => __('error.title')]);
         $this->view('/core/ui/views/page/layout.php', ['head' => $head, 'content' => $content]);
     }
 
@@ -304,7 +304,7 @@ class Application
         exit;
 
         $content = $this->fetch('/core/ui/views/ui/error.php', ['e' => $e]);
-        $head = $this->fetch('/core/admin/views/head.php', ['title' => __('error.title')]);
+        $head = $this->fetch('/core/ui/views/admin/head.php', ['title' => __('error.title')]);
         $this->view('/core/ui/views/page/layout.php', ['head' => $head, 'content' => $content]);
     }
 

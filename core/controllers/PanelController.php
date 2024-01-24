@@ -1,0 +1,79 @@
+<?php
+
+Autoloader::require('core/classes/controller/DOMController.php');
+Autoloader::require('core/controllers/AdminController.php');
+
+class PanelController extends AdminController
+{
+
+    private Sidebar $sidebar;
+
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+    public function initSidebar()
+    {
+        $this->sidebar = new Sidebar([
+            new SidebarCategory(__("admin.panel.content_manager"), [
+                new SidebarSection("dodocms-me-1 fa-solid fa-images", __('admin.panel.resources.title'), DefaultRoutes::ADMIN_RESOURCES_MANAGER),
+            ]),
+            new SidebarCategory(__("admin.panel.admin_center"), [
+                new SidebarSection("dodocms-me-1 fa-solid fa-file-lines", __('admin.panel.pages_manager.title'), DefaultRoutes::getRoute(DefaultRoutes::ADMIN_PAGES_MANAGER, ['table' => 'Page'])),
+                new SidebarSection("dodocms-me-1 fa-solid fa-users", __('admin.panel.users.title'), DefaultRoutes::getRoute(DefaultRoutes::ADMIN_USERS, ['table' => 'Page'])),
+                new SidebarSection("dodocms-me-1 fa-solid fa-gear", __('admin.panel.configuration.title'), DefaultRoutes::getRoute(DefaultRoutes::ADMIN_CONFIGURATION, ['table' => 'Page'])),
+            ]),
+            new SidebarCategory(__("admin.panel.developer_center"), [
+                new SidebarSection("dodocms-me-1 fa-solid fa-cube", __('admin.panel.block_manager'), DefaultRoutes::ADMIN_BLOCKS_MANAGER),
+                new SidebarSection("dodocms-me-1 fa-solid fa-database", __('admin.panel.table_management'), DefaultRoutes::ADMIN_TABLES),
+            ])
+        ]);
+
+        $url = Application::get()->getRouter()->getRequestURI();
+        $section = $this->sidebar->getSectionByHref($url);
+        if ($section) {
+            $section->setActive(true);
+        }
+    }
+
+    public function index()
+    {
+        $this->section(["section" => "dashboard"]);
+    }
+
+    public function viewSection($section, $data = [])
+    {
+//        if (!$this->authenticated()) {
+//            Application::get()->getLogger()->info("Unauthenticated user tried to access the admin panel");
+//            $this->redirect(Routes::ADMIN_LOGIN);
+//            return;
+//        }
+
+        Application::get()->getLogger()->debug("PanelController->initSidebar()");
+        $this->initSidebar();
+
+        $this->title = 'DodoCMS - ' . __('admin.panel.dashboard');
+
+        $alerts =  $this->getAlerts();
+        Application::get()->getLogger()->debug("AdminController->getAlerts() : " . (var_export($alerts, true)));
+
+        $section = $this->fetch('panel/index', [
+            'alerts' => $alerts,
+            'section' => $section,
+            'section_data' => $data,
+        ]);
+
+        $this->view('panel/layout', [
+                'sidebar' => $this->sidebar,
+                'content' => $section
+            ]
+        );
+    }
+
+    public function section(array $params, $data = [])
+    {
+        $section = $params["section"];
+        $this->viewSection($section, $data);
+    }
+}

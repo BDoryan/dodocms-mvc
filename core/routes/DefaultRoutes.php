@@ -1,15 +1,15 @@
 <?php
 
-Autoloader::require('core/admin/sections/BlocksSection.php');
-Autoloader::require('core/admin/sections/PagesSection.php');
-Autoloader::require('core/admin/sections/ResourcesSection.php');
-Autoloader::require('core/admin/sections/ConfigurationSection.php');
-Autoloader::require('core/admin/sections/TablesSection.php');
-Autoloader::require('core/admin/sections/UsersSection.php');
-Autoloader::require('core/admin/sections/BlocksSection.php');
+Autoloader::require('core/admin/BlocksRoutes.php');
+Autoloader::require('core/admin/PagesRoutes.php');
+Autoloader::require('core/admin/ResourcesRoutes.php');
+Autoloader::require('core/admin/ConfigurationsRoutes.php');
+Autoloader::require('core/admin/TablesRoutes.php');
+Autoloader::require('core/admin/UsersRoutes.php');
+Autoloader::require('core/admin/BlocksRoutes.php');
 
-Autoloader::require("core/admin/controllers/PanelController.php");
-Autoloader::require("core/admin/controllers/page/PageController.php");
+Autoloader::require("core/controllers/PanelController.php");
+Autoloader::require("core/controllers/page/PageController.php");
 Autoloader::require("core/classes/Application.php");
 Autoloader::require("core/classes/Router.php");
 
@@ -79,8 +79,8 @@ class DefaultRoutes
         $router->get(self::ADMIN_LOGOUT, [$adminController, 'logout']);
         $router->post(self::ADMIN_LOGIN, [$adminController, 'authentication']);
 
-        $sections = Application::get()->getSections();
-        foreach ($sections as $route) {
+        $routes = Application::get()->getSections();
+        foreach ($routes as $route) {
             $route->routes($router);
         }
 

@@ -25,4 +25,4 @@
         ?>
     </div>
 </div>
-<?php view(Application::get()->toRoot('/core/admin/views/components/resources/resource.template.php')) ?>
+<?php view(Application::get()->toRoot('/core/ui/views/admin/components/resources/resource.template.php')) ?>
