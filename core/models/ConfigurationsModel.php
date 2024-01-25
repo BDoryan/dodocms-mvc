@@ -6,9 +6,9 @@ class ConfigurationsModel extends Model
 {
     public const TABLE_NAME = "Configurations";
 
-    protected $name;
-    protected $value;
-    public function __construct($name, $value)
+    protected string $name;
+    protected string $value;
+    public function __construct(string $name = '', string $value = '')
     {
 
         parent::__construct(self::TABLE_NAME);
@@ -16,22 +16,22 @@ class ConfigurationsModel extends Model
         $this->value = $value;
     }
 
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = $name;
     }
 
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    public function setValue($value)
+    public function setValue(string $value)
     {
         $this->value = $value;
     }
 
-    public function getValue()
+    public function getValue(): string
     {
         return $this->value;
     }

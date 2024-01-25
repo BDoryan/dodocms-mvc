@@ -231,11 +231,11 @@ abstract class Model extends CMSObjectHydration
         return $this->table_name;
     }
 
-    public function getAll(string $columns, array $conditions = [], $orderBy = ''): ?array
+    public function getAll(string $columns, array $conditions = [], $orderBy = '', $operators = [], $limit = null): ?array
     {
         $table = Table::getTable($this->table_name);
         if (isset($table)) {
-            $entries = $table->findAll($columns, $conditions, $orderBy);
+            $entries = $table->findAll($columns, $conditions, $orderBy, $operators, $limit);
             return array_map(function ($entry) {
                 $model = new $this();
                 $model->hydrate($entry);

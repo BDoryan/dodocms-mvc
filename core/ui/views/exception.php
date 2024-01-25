@@ -13,7 +13,7 @@ $message = $e->getMessage();
 $traces = $e->getTrace();
 
 ?>
-<div class='container dodocms-my-3 dodocms-bg-red-700 dodocms-shadow-lg dodocms-rounded-xl dodocms-text-white dodocms-px-[20px] dodocms-py-[20px] dodocms-text-lg'>
+<div class='container dodocms-my-3 dodocms-bg-red-700 dodocms-shadow-lg dodocms-rounded-lg dodocms-text-white dodocms-px-[20px] dodocms-py-[20px] dodocms-text-lg'>
     <div class='dodocms-flex dodocms-flex-row pb-3 dodocms-border-b-[1px] dodocms-border-white'>
         <img src='<?= Application::get()->toURL("/core/assets/imgs/logo.png") ?>' width='80' height='80'/>
         <div class='dodocms-flex dodocms-flex-col ms-3'>

@@ -102,17 +102,16 @@ class TablesController extends SectionController
 
         $entries = $table->findAll();
 
-        $columns = [...$attributes, __("admin.panel.tables.table.entries.actions")];
+        $columns = [...$attributes, "admin.panel.tables.table.entries.actions"];
         $rows = [];
         foreach ($entries as $entry) {
-            $row = array_values($entry);
             $row = array_map(function ($value) {
                 $value = htmlspecialchars($value);
                 if (strlen($value) > 50) {
                     $value = substr($value, 0, 50) . "...";
                 }
                 return $value;
-            }, $row);
+            }, $entry);
 
             $edit = ButtonHypertext::create()
                 ->text('<i class="dodocms-me-1 fa-solid fa-pen-to-square"></i> ' . __("admin.panel.tables.table.entries.actions.edit"))
@@ -128,7 +127,7 @@ class TablesController extends SectionController
                 ->href(DefaultRoutes::route(DefaultRoutes::ADMIN_TABLE_DELETE_ENTRY, ["table" => $table_name, "id" => $entry['id']]))
                 ->html();
 
-            $row[] = '<div class="dodocms-flex dodocms-flex-row dodocms-justify-center align-center dodocms-gap-3">' . "$edit $delete" . '</div>';
+            $row['admin.panel.tables.table.entries.actions'] = '<div class="dodocms-flex dodocms-flex-row dodocms-justify-center align-center dodocms-gap-3">' . "$edit $delete" . '</div>';
             $rows[] = $row;
         }
 

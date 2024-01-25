@@ -125,9 +125,9 @@ class Table extends CMSObject
         }
     }
 
-    public function findAll($columns = '*', $conditions = [], $orderBy = null, $limit = null): array
+    public function findAll($columns = '*', $conditions = [], $orderBy = null, $operators = [], $limit = null): array
     {
-        return Application::get()->getDatabase()->findAll($this->getName(), $columns, $conditions, $orderBy, $limit);
+        return Application::get()->getDatabase()->findAll($this->getName(), $columns, $conditions, $orderBy, $operators, $limit);
     }
 
     /**

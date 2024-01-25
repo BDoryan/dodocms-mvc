@@ -1,20 +1,30 @@
 <?php
-
-
-
-
 Header::create()
     ->template('/core/ui/views/admin/components')
-    ->title(__('admin.panel.users.title'))
-    ->description(__('admin.panel.users.description'))
+    ->title(__('admin.panel.configuration.title'))
+    ->description(__('admin.panel.configuration.description'))
     ->content(
-        ButtonHypertext::create()
+        Button::create()
             ->green()
-            ->text('<i class="dodocms-me-1 fa-solid fa-plus-circle"></i> ' . __('admin.panel.users.new'))
-            ->href(DefaultRoutes::route(DefaultRoutes::ADMIN_USERS_MANAGER_NEW))
+            ->text('<i class="dodocms-me-1 fa-solid fa-plus-circle"></i> ' . __('admin.panel.configuration.new'))
+            ->attribute('v-on:click', '')
+//            ->href(DefaultRoutes::route(DefaultRoutes::ADMIN_USERS_MANAGER_NEW))
             ->html()
     )
     ->render();
 
+TableComponent::create()
+    ->columns($columns ?? [])
+    ->rows($rows ?? [])
+    ->render();
 ?>
-<p class="dodocms-gray-200 dodocms-opacity-75 dodocms-italic">En cours de développement...</p>
+<modal name="blocks-modal">
+    <template v-slot:title>
+        <i class='fa-solid fa-cloud-upload dodocms-me-1'></i> <?= __('admin.panel.configuration.new') ?>
+    </template>
+    <template v-slot:body>
+        Hello World !
+    </template>
+    <template v-slot:footer>
+    </template>
+</modal>

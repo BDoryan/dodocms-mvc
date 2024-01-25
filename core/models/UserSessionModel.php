@@ -80,9 +80,9 @@ class UserSessionModel extends Model
         return $this->token;
     }
 
-    public static function findAll(string $columns = '*', array $conditions = [], $orderBy = ''): ?array
+    public static function findAll(string $columns = '*', array $conditions = [], $orderBy = '', $operators = []): ?array
     {
-        return (new UserSessionModel())->getAll($columns, $conditions, $orderBy);
+        return (new UserSessionModel())->getAll($columns, $conditions, $orderBy, $operators);
     }
 }
 

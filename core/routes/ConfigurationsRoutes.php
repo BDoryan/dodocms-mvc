@@ -12,6 +12,7 @@ class ConfigurationsRoutes extends Section
     {
         $router->middleware([$this->getController(), 'authorization'],
             $router->get(DefaultRoutes::ADMIN_CONFIGURATION, [$this->getController(), 'index']),
+            $router->post(DefaultRoutes::ADMIN_CONFIGURATION, [$this->getController(), 'index']),
         );
     }
 }

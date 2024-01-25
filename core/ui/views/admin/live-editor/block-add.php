@@ -1,3 +1,10 @@
 <div page-structure-actions>
-    <button page-block-position="<?= $position ?? '' ?>" v-on:click="showBlocksModal(<?= $position ?? '' ?>)" page-structure-action="add"></button>
+    <?php
+        Button::create()
+        ->green()
+            ->attribute('page-block-position', $position ?? '')
+            ->attribute('page-structure-action', 'add')
+            ->attribute('v-on:click', "showBlocksModal($position)" ?? '')
+        ->render();
+    ?>
 </div>

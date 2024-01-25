@@ -116,14 +116,15 @@ class Database
         return $prepare->fetchColumn();
     }
 
-    private function prepareSelect($table, $columns = '*', $conditions = [], $orderBy = "", $limit = null)
+    private function prepareSelect($table, $columns = '*', $conditions = [], $orderBy = "", $operators = [], $limit = null)
     {
         try {
             $query = "SELECT $columns FROM $table";
 
             if (!empty($conditions)) {
-                $query .= " WHERE " . implode(" AND ", array_map(function ($key, $value) {
-                        return "$key = :$key";
+                $query .= " WHERE " . implode(" AND ", array_map(function ($key, $value) use ($operators) {
+                        $operator = $operators[$key] ?? "=";
+                        return "$key $operator :$key";
                     }, array_keys($conditions), $conditions));
             }
 
@@ -168,9 +169,9 @@ class Database
         return $this->connection->lastInsertId();
     }
 
-    public function findAll($table, $columns = '*', $conditions = [], $orderBy = null, $limit = null)
+    public function findAll($table, $columns = '*', $conditions = [], $orderBy = null, $operators = [], $limit = null)
     {
-        $prepare = $this->prepareSelect($table, $columns, $conditions, $orderBy, $limit);
+        $prepare = $this->prepareSelect($table, $columns, $conditions, $orderBy, $operators, $limit);
         if (!empty($prepare))
             return $prepare->fetchAll(PDO::FETCH_ASSOC);
         return [];

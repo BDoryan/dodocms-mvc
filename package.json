@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "build:css": "npx tailwindcss -i core/ui/views/admin/assets/css/config.css -o core/assets/css/global.css",
+    "build:css": "npx tailwindcss -i core/assets/css/config.css -o core/assets/css/global.css",
     "watch:css": "npm run build:css -- -w"
   },
   "devDependencies": {

@@ -161,6 +161,6 @@
   "admin.session.expired.title": "Session expired",
   "admin.session.expired.message": "Your session has expired. Please login again.",
   "live-editor.entries.new.toast.error": "Errror while creating the entry",
-  "live-editor.entries.new.toast.entry_set_error": "An error has occurred while creating the entry"
-
+  "live-editor.entries.new.toast.entry_set_error": "An error has occurred while creating the entry",
+  "admin.panel.configuration.new": "New configuration variable"
 }

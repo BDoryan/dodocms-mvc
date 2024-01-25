@@ -5,6 +5,11 @@ Autoloader::require("core/ui/components/Component.php");
 abstract class ButtonComponent extends Component
 {
 
+    const BUTTON_GREEN = 'dodocms-bg-green-700 hover:dodocms-bg-green-800 dodocms-text-white focus:dodocms-outline-none focus:dodocms-shadow-outline-green active:dodocms-bg-green-800';
+    const BUTTON_GRAY = 'dodocms-bg-gray-700 hover:dodocms-bg-gray-800 dodocms-text-white focus:dodocms-outline-none focus:dodocms-shadow-outline-gray active:dodocms-bg-gray-800';
+    const BUTTON_RED = 'dodocms-bg-red-700 hover:dodocms-bg-red-800 dodocms-text-white focus:dodocms-outline-none focus:dodocms-shadow-outline-red active:dodocms-bg-red-800';
+    const BUTTON_BLUE = 'dodocms-bg-blue-600 hover:dodocms-bg-blue-700 dodocms-text-white focus:dodocms-outline-none focus:dodocms-shadow-outline-blue active:dodocms-bg-blue-800';
+
     protected string $text;
     protected string $class;
     protected string $customClass = '';
@@ -13,15 +18,12 @@ abstract class ButtonComponent extends Component
     {
         parent::__construct('core/ui/views/components/button');
         $this->text = $text;
-        $this->style('gray', 'white');
+        $this->gray();
     }
 
-    public function style(string $background_color, string $text_color, int $background_level = 700, $outline = false): ButtonComponent
-    {
-        $backgroundClass = $outline ? "dodocms-border-$background_color-500" : "dodocms-bg-$background_color-$background_level hover:dodocms-bg-$background_color-" . ($background_level + 100);
-        $textClass = $outline ? "dodocms-text-$background_color-400 hover:dodocms-text-$background_color-500" : "dodocms-text-$text_color";
-
-        $this->class = "$backgroundClass $textClass dodocms-text-center dodocms-px-3 dodocms-py-2 dodocms-rounded-lg dodocms-shadow-sm dodocms-font-semibold dodocms-uppercase" . $this->customClass;
+    public function style($class): ButtonComponent {
+        $this->class = "dodocms-text-center dodocms-px-3 dodocms-py-[6px] dodocms-rounded-lg dodocms-shadow-sm dodocms-font-semibold dodocms-uppercase $class";
+        $this->class .= $this->customClass;
         return $this;
     }
 
@@ -41,27 +43,27 @@ abstract class ButtonComponent extends Component
         return $this;
     }
 
-    public function green(int $background_level = 700, $outline = false): ButtonComponent
+    public function green(): ButtonComponent
     {
-        $this->style('green', 'white', $background_level, $outline);
+        $this->style(self::BUTTON_GREEN);
         return $this;
     }
 
-    public function gray(int $background_level = 700, $outline = false): ButtonComponent
+    public function gray(): ButtonComponent
     {
-        $this->style('gray', 'white', $background_level, $outline);
+        $this->style(self::BUTTON_GRAY);
         return $this;
     }
 
-    public function red(int $background_level = 700, $outline = false): ButtonComponent
+    public function red(): ButtonComponent
     {
-        $this->style('red', 'white', $background_level, $outline);
+        $this->style(self::BUTTON_RED);
         return $this;
     }
 
-    public function blue(int $background_level = 600, $outline = false): ButtonComponent
+    public function blue(): ButtonComponent
     {
-        $this->style('blue', 'white', $background_level, $outline);
+        $this->style(self::BUTTON_BLUE);
         return $this;
     }
 

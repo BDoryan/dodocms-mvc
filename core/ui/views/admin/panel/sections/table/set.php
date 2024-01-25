@@ -22,7 +22,7 @@ Header::create()
 ?>
 <div class="dodocms-flex dodocms-flex-row dodocms-flex-wrap -dodocms-mx-2">
     <div class="dodocms-w-5/12 dodocms-px-2 dodocms-flex dodocms-flex-col dodocms-gap-y-5">
-        <div class=" dodocms-bg-gray-800 dodocms-shadow-lg dodocms-rounded-xl dodocms-flex dodocms-flex-row dodocms-flex-wrap dodocms-py-5 dodocms-px-3 dodocms-p-2">
+        <div class=" dodocms-bg-gray-800 dodocms-shadow-lg dodocms-rounded-lg dodocms-flex dodocms-flex-row dodocms-flex-wrap dodocms-py-5 dodocms-px-3 dodocms-p-2">
             <form class="dodocms-flex dodocms-flex-wrap dodocms-w-full dodocms-gap-y-5" action="" method="POST" id="table-form" novalidate>
                 <div class="dodocms-w-full dodocms-px-2">
                     <?php Text::create()
@@ -65,7 +65,7 @@ Header::create()
                 </div>
             </form>
         </div>
-        <div class=" dodocms-bg-gray-800 dodocms-shadow-lg dodocms-rounded-xl dodocms-flex dodocms-flex-row dodocms-flex-wrap dodocms-py-5 dodocms-px-3 dodocms-p-2 <?= empty($table_name) ? "dodocms-hidden" : "" ?>">
+        <div class=" dodocms-bg-gray-800 dodocms-shadow-lg dodocms-rounded-lg dodocms-flex dodocms-flex-row dodocms-flex-wrap dodocms-py-5 dodocms-px-3 dodocms-p-2 <?= empty($table_name) ? "dodocms-hidden" : "" ?>">
             <form class="dodocms-flex dodocms-flex-col dodocms-w-full dodocms-gap-y-2 dodocms-text-center" action="<?= DefaultRoutes::route(DefaultRoutes::ADMIN_TABLES_DELETE, ["table" => $table_name ?? '']) ?>" id="table-form-delete" method="POST">
                 <h3 class="dodocms-text-4xl dodocms-text-orange-300 dodocms-font-semibold dodocms-mb-2"><i class="dodocms-me-2 fa-solid fa-warning"></i><?= __('admin.panel.tables.table.delete.warning.title') ?><i
                             class="ms-2 fa-solid fa-warning"></i></h3>
@@ -77,7 +77,7 @@ Header::create()
                 </button>
             </form>
         </div>
-        <form id="confirm" class="dodocms-bg-gray-800 dodocms-shadow-lg dodocms-rounded-xl dodocms-flex-col dodocms-flex-wrap dodocms-p-5 dodocms-gap-2 dodocms-hidden" action=""
+        <form id="confirm" class="dodocms-bg-gray-800 dodocms-shadow-lg dodocms-rounded-lg dodocms-flex-col dodocms-flex-wrap dodocms-p-5 dodocms-gap-2 dodocms-hidden" action=""
               method="POST"
               novalidate>
             <h5 class="dodocms-text-lg dodocms-uppercase dodocms-font-bold"><?= __('admin.panel.tables.table.json') ?></h5>

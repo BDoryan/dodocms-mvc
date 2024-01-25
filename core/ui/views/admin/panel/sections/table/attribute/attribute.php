@@ -1,5 +1,5 @@
 <form data-type="attribute" id="attribute-form"
-      class="dodocms-bg-gray-800 dodocms-shadow-lg dodocms-rounded-xl dodocms-flex dodocms-flex-row dodocms-flex-wrap dodocms-p-5 dodocms-p-2 dodocms-relative">
+      class="dodocms-bg-gray-800 dodocms-shadow-lg dodocms-rounded-lg dodocms-flex dodocms-flex-row dodocms-flex-wrap dodocms-p-5 dodocms-p-2 dodocms-relative">
     <div class="dodocms-absolute dodocms-top-0 dodocms-right-0 transform translate-x-1/2 -translate-y-1/2">
         <button type="button" id="remove-attribute"
                 class="dodocms-h-10 dodocms-w-10 dodocms-bg-red-700 hover:dodocms-bg-red-800 hover:dodocms-border hover:dodocms-border-red-700 dodocms-text-xl dodocms-rounded-full dodocms-flex dodocms-items-center dodocms-justify-center dodocms-text-white">

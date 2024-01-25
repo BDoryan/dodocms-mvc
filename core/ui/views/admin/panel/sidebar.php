@@ -26,7 +26,7 @@ if (!isset($sidebar)) {
                 foreach ($category->getSections() as $section):
                     ?>
                     <a href="<?= Application::get()->toURL($section->getHref()) ?>"
-                       class="dodocms-gap-1 dodocms-flex dodocms-p-2 dodocms-items-center dodocms-py-2 dodocms-px-4 dodocms-text-gray-300 <?= $section->isActive() ? "dodocms-bg-gray-700 dodocms-shadow-xl" : "" ?> hover:dodocms-bg-gray-700 hover:dodocms-shadow-2xl hover:dodocms-text-white dodocms-font-semibold dodocms-text-base">
+                       class="dodocms-mx-3 dodocms-my-[3px] dodocms-rounded-lg dodocms-gap-1 dodocms-flex dodocms-p-2 dodocms-items-center dodocms-py-2 dodocms-px-4 dodocms-text-gray-300 <?= $section->isActive() ? "dodocms-bg-gray-700 dodocms-shadow-xl" : "" ?> hover:dodocms-bg-gray-700 hover:dodocms-shadow-2xl hover:dodocms-text-white dodocms-font-semibold dodocms-text-base">
                         <i style="width: 20px;"
                            class="dodocms-flex dodocms-justify-center dodocms-items-center <?= $section->getIcon() ?>"></i>
                         <?= $section->getLabel() ?>
@@ -38,7 +38,7 @@ if (!isset($sidebar)) {
         ButtonHypertext::create()
             ->href(Application::get()->toURL("/?editor=true"))
             ->addClass("dodocms-mx-2 dodocms-mb-[10px]")
-                ->green()
+            ->green()
             ->target('_blank')
             ->text('<i class="dodocms-me-1 fa-solid fa-arrow-right"></i> ' . __("admin.panel.go_to_website"))
             ->render();

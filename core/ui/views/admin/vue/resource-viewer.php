@@ -1,5 +1,5 @@
 <script type="text/x-template" id="resource-viewer-template">
-    <div class="dodocms-relative dodocms-group dodocms-w-full dodocms-bg-gray-700 dodocms-rounded-xl dodocms-border-[1px] dodocms-border-gray-500 dodocms-shadow-lg dodocms-text-white dodocms-outline-none focus:dodocms-border-gray-400 dodocms-mb-1 dodocms-min-h-[400px] dodocms-flex dodocms-flex-col dodocms-overflow-hidden"
+    <div class="dodocms-relative dodocms-group dodocms-w-full dodocms-bg-gray-700 dodocms-rounded-lg dodocms-border-[1px] dodocms-border-gray-500 dodocms-shadow-lg dodocms-text-white dodocms-outline-none focus:dodocms-border-gray-400 dodocms-mb-1 dodocms-min-h-[400px] dodocms-flex dodocms-flex-col dodocms-overflow-hidden"
          :class="{'dodocms-max-h-[400px]': scrollable}">
         <input type="hidden" :name="name" :value="ids()">
         <div class="dodocms-px-4 dodocms-py-2 dodocms-bg-gray-800 dodocms-localItems-center dodocms-border-b-[1px] dodocms-border-gray-500 dodocms-text-lg dodocms-flex dodocms-flex-row">

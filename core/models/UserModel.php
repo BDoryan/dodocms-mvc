@@ -28,7 +28,7 @@ class UserModel extends Model
 
     public function fetch(): ?UserModel
     {
-        $this->tokens = UserSessionModel::findAll("*", ["user_id" => $this->getId()]) ?? [];
+        $this->tokens = UserSessionModel::findAll("*", ["user_id" => $this->getId(), "expire_at" => date('Y-m-d H:i:s')]) ?? [];
         return parent::fetch();
     }
 
