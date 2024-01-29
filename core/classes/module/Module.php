@@ -49,13 +49,8 @@ abstract class Module
 
     public function loadTranslations(): void
     {
-        $translations = [];
-        $files = glob($this->toRoot('/translations/*.json'));
-        foreach ($files as $file) {
-            $translations = array_merge($translations, json_decode(file_get_contents($file), true));
-        }
-
-        // Here add translations to the translator application
+        $translations = json_decode(file_get_contents($this->toRoot('/translations/'.Application::get()->getInternationalization()->getLanguage().'.json')), true);
+        Application::get()->getInternationalization()->addTranslations($translations);
     }
 
     public function loadRoutes(): void {

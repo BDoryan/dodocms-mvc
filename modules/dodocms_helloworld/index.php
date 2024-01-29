@@ -26,7 +26,7 @@ class HelloWorldModule extends Module
 
     public function getSidebarSection(): SidebarSection
     {
-        return new SidebarSection("dodocms-me-1 fa-solid ".$this->getIcon(), $this->getName(), '');
+        return new SidebarSection("dodocms-me-1 fa-solid ".$this->getIcon(), $this->getName(), DefaultRoutes::ADMIN_PANEL.'/test');
     }
 
     public function installModule(): void

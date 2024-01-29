@@ -28,6 +28,13 @@ class Internationalization
         $this->translations = json_decode($file, true);
     }
 
+    public function addTranslations(array $translations = []) {
+        if(empty($translations))
+            return;
+
+        $this->translations = array_merge($this->translations, $translations);
+    }
+
     public function addTranslation(string $key, string $value): void
     {
         $this->translations[$key] = $value;
