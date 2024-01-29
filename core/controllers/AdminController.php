@@ -133,11 +133,12 @@ abstract class AdminController extends DOMController
             $this->redirect(DefaultRoutes::ADMIN_PANEL);
             return;
         }
+
         $this->title = __('admin.login.form.title');
         $this->view('login');
     }
 
-    public function view($view, $data = []): void
+    public function view(string $view, array $data = []): void
     {
         $toasts = $this->getToasts();
         Application::get()->getLogger()->debug("getToasts() = " . var_export($this->getToasts(), true));

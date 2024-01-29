@@ -2,6 +2,7 @@
 abstract class Module
 {
 
+    private string $root;
     private string $name;
     private string $description;
     private string $version;
@@ -11,6 +12,7 @@ abstract class Module
     private string $icon;
 
     /**
+     * @param string $root
      * @param string $name
      * @param string $description
      * @param string $version
@@ -19,8 +21,9 @@ abstract class Module
      * @param string $license
      * @param string $icon
      */
-    public function __construct(string $name, string $description, string $version, string $author, string $website, string $license, string $icon)
+    public function __construct(string $root, string $name, string $description, string $version, string $author, string $website, string $license, string $icon)
     {
+        $this->root = $root;
         $this->name = $name;
         $this->description = $description;
         $this->version = $version;
@@ -31,25 +34,79 @@ abstract class Module
     }
 
     /**
+     * List of routes classes to load
+     *
+     * @return array
+     */
+    public abstract function getRoutes(): array;
+
+    /**
+     * List of controllers classes to load
+     *
+     * @return SidebarSection
+     */
+    public abstract function getSidebarSection(): SidebarSection;
+
+    public function loadTranslations(): void
+    {
+        $translations = [];
+        $files = glob($this->toRoot('/translations/*.json'));
+        foreach ($files as $file) {
+            $translations = array_merge($translations, json_decode(file_get_contents($file), true));
+        }
+
+        // Here add translations to the translator application
+    }
+
+    public function loadRoutes(): void {
+        $routes = $this->getRoutes();
+        /** @var Routes $route */
+        foreach ($routes as $route) {
+            $route->routes(Application::get()->getRouter());
+        }
+        Application::get()->getLogger()->debug('Routes loaded ' . $this->getName());
+    }
+
+    /**
      * Method called when the module is installed
      *
      * @return void
      */
-    public abstract function install(): void;
+    public abstract function installModule(): void;
 
     /**
      * Method called when the module is loaded
      *
      * @return void
      */
-    public abstract function load(): void;
+    public function loadModule(): void {
+        $this->loadTranslations();
+        $this->loadRoutes();
+    }
 
     /**
      * Method called when the module is uninstalled
      *
      * @return void
      */
-    public abstract function uninstall(): void;
+    public abstract function uninstallModule(): void;
+
+    public function toRoot(string $path): string
+    {
+        if (substr($path, 0, 1) !== '/')
+            $path = '/' . $path;
+        return $this->getRoot() . $path;
+    }
+
+    /**
+     * Return the root of the module
+     *
+     * @return string
+     */
+    public function getRoot(): string
+    {
+        return $this->root;
+    }
 
     public function getName(): string
     {

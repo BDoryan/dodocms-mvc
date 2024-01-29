@@ -74,12 +74,10 @@ class Tools
 
     public static function underscoreToCamelCase($string, $capitalizeFirstCharacter = true)
     {
-        Application::get()->getLogger()->info($string);
         $str = str_replace('_', '', ucwords($string, '_'));
         if (!$capitalizeFirstCharacter) {
             $str = lcfirst($str);
         }
-        Application::get()->getLogger()->info($str);
         return $str;
     }
 

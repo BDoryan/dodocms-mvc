@@ -1,7 +1,7 @@
 # Ce qu'il manque à ce projet :
-- [ ] Créer le système de mise à jour
-- [ ] Créer les sections du panel d'administration
 - [ ] Créer une section pour simplifier les traductions
+- [ ] Créer les sections du panel d'administration
+- [ ] Créer le système de mise à jour
 - [ ] Créer l'optimisation des images
 - [ ] Créer le système de migration avec la base de données
 - [ ] Créer le système de module

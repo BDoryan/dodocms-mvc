@@ -224,6 +224,9 @@ class Application
             $this->logger->debug("Application->init();");
             $this->init();
 
+            $this->logger->debug("Application->loadModules();");
+            ModulesManager::loadModules();
+
             $this->logger->debug("Application->loadAdminPanel();");
             $this->loadAdminPanel();
 
