@@ -381,3 +381,15 @@ ol li::before {
     color: var(--bs-primary);
     --bs-btn-border-width: 0px;
 }
+
+ul {
+    list-style: initial;
+}
+
+.experience-2 img {
+    border-radius: 50% !important;
+    max-width: 200px;
+    margin: auto;
+    padding: 1.5rem !important;
+    background: white;
+}

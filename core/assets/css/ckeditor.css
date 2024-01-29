@@ -1,0 +1,14 @@
+.ck.ck-editor__main .ck-content {
+    * {
+        color: black;
+    }
+
+    padding: 10px 40px;
+    min-height: 300px;
+}
+
+.cke_contents {
+    textarea {
+        color: black!important;
+    }
+}

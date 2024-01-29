@@ -121,7 +121,7 @@ $(document).on("submit", "#table-form", function (event) {
         name: "active",
         type: "boolean",
         nullable: false,
-        default_value: false
+        default_value: 0 // false
     });
 
     const table = {

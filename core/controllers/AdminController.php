@@ -94,6 +94,7 @@ abstract class AdminController extends DOMController
 
         // Check if the email and password are not empty
         if ($email === null || $password === null) {
+            sleep(3);
             $this->addToast(new Toast(__('admin.login.form.error.empty.title'), __('admin.login.form.error.empty.message'), Toast::TYPE_ERROR));
             $this->redirect(DefaultRoutes::ADMIN_LOGIN);
             return;
@@ -102,6 +103,7 @@ abstract class AdminController extends DOMController
         // Check if the user exists
         $users = UserModel::findAll('*', ['email' => $email]);
         if (empty($users)) {
+            sleep(3);
             $this->addToast(new Toast(__('admin.login.form.error.invalid.title'), __('admin.login.form.error.invalid.message'), Toast::TYPE_ERROR));
             $this->redirect(DefaultRoutes::ADMIN_LOGIN);
             return;

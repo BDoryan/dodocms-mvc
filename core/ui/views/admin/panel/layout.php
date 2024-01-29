@@ -4,7 +4,7 @@
     <div class="dodocms-flex dodocms-h-screen dodocms-bg-gray-200">
         <?= $header ?? '' ?>
         <?php view(__DIR__ . '/sidebar.php', ["sidebar" => $sidebar ?? null]) ?>
-        <div class="dodocms-flex-1 dodocms-flex dodocms-flex-col dodocms-overflow-dodocms-hidden">
+        <div class="dodocms-flex-1 dodocms-flex dodocms-flex-col dodocms-overflow-hidden">
             <header class="dodocms-bg-gray-800 dodocms-text-white dodocms-shadow">
                 <div class="dodocms-flex dodocms-items-center dodocms-justify-between">
                     <span class="dodocms-ps-4 dodocms-text-lg dodocms-font-semibold"><?= __("admin.panel.welcome", ["username" => Session::getUser()->getUsername()]) ?></span>
@@ -14,7 +14,7 @@
                     </a>
                 </div>
             </header>
-            <main class="dodocms-flex-1 dodocms-overflow-x-dodocms-hidden dodocms-overflow-y-auto dodocms-bg-gray-700 dodocms-text-white">
+            <main class="dodocms-flex-1 dodocms-overflow-x-auto dodocms-overflow-y-auto dodocms-bg-gray-700 dodocms-text-white">
                 <div class="dodocms-px-8 dodocms-py-8">
                     <?= $content ?? '' ?>
                 </div>

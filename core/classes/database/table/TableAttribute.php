@@ -45,6 +45,14 @@ class TableAttribute extends CMSObject
         $this->type = strtoupper($type);
         $this->length = $length;
         $this->default_value = $default_value;
+
+        $this->check();
+    }
+
+    public function check() {
+        if($this->type == "VARCHAR" && empty($this->length)) {
+            $this->length = 255;
+        }
     }
 
     public function equals(TableAttribute $attribute): bool

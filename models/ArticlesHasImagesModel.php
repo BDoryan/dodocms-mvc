@@ -6,9 +6,10 @@ class ArticlesHasImagesModel extends Model
 {
     public const TABLE_NAME = "ArticlesHasImages";
 
-    protected $article_id;
-    protected $resource_id;
-    public function __construct($article_id, $resource_id)
+    protected int $article_id;
+    protected int $resource_id;
+
+    public function __construct($article_id = 0, $resource_id = 0)
     {
 
         parent::__construct(self::TABLE_NAME);
@@ -36,15 +37,10 @@ class ArticlesHasImagesModel extends Model
         return $this->resource_id;
     }
 
-    public static function findAll(string $columns, array  $conditions = [], $orderBy = ''): ?array 
-{
-
+    public static function findAll(string $columns, array $conditions = [], $orderBy = ''): ?array
+    {
         return (new ArticlesHasImagesModel())->getAll($columns, $conditions, $orderBy);
-
-        }
-
-/** Warning: if you want create or edit entries you need to create the form with a override of getFields(); */
-
+    }
 }
 
 Table::$models[ArticlesHasImagesModel::TABLE_NAME] = ArticlesHasImagesModel::class;

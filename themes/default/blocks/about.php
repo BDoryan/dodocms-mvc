@@ -1,6 +1,6 @@
 <div id="about-me" class="container py-5 py-md-0">
     <div class="d-flex flex-column text-center">
-        <div animation="animate__fadeInUp" class="animate__animated active animate__fadeInUp">
+        <div animation="animate__fadeInUp" class="animate__animated">
             <h2 editable="title">à propos</h2>
             <p editable="subtitle" class="text-center text-light text-uppercase">ma présentation et mon histoire</p>
         </div>
@@ -9,7 +9,7 @@
     <div class="row my-5">
         <div class="col-12 col-md-4 d-flex">
             <div animation="animate__fadeInUp"
-                 class="d-flex flex-column justify-content-center bg-dark rounded-3 px-4 py-5 w-100 animate__animated active animate__fadeInUp">
+                 class="d-flex flex-column justify-content-center bg-dark rounded-3 px-4 py-5 w-100 animate__animated">
                 <img editable="profil_picture" src="https://www.doryanbessiere.fr/assets/imgs/pp.jpeg" class="ms-auto me-auto logo mb-3" alt="C'est moi">
                 <h4 editable="name" class="lh-1 mb-0"> Doryan BESSIERE</h4>
                 <h4 editable="age" class="text-secondary mb-3">19 ans</h4>
@@ -29,8 +29,8 @@
             </div>
         </div>
         <div class="col-12 pt-4 pt-md-0 col-md-8">
-            <div animation="animate__f  adeInUp" editable="content"
-                 class="h-100 d-flex flex-column justify-content-center p-md-0 px-2 animate__animated active animate__fadeInUp">
+            <div animation="animate__fadeInUp" editable="content"
+                 class="h-100 d-flex flex-column justify-content-center p-md-0 px-2 animate__animated">
                 <p>Je m'appelle Doryan BESSIERE, j'ai 19 ans et je suis étudiant en 1er année de BTS SIO option SLAM.
                     Depuis 2016, j'ai développé mon expérience en tant qu'autodidacte dans le domaine de l'informatique.
                     Je suis un grand passionné d'informatique et j'ai commencé très tôt dans ce domaine, ce qui m'a

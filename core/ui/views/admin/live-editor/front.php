@@ -3,6 +3,7 @@
     <?php
     Button::create()
         ->text(__('live-editor.block.save'))
+        ->addClass("dodocms-shadow-lg")
         ->green()
         ->attribute('liveeditor-action', 'add')
         ->render()

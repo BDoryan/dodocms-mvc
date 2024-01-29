@@ -71,6 +71,8 @@ class Database
         $sql = "INSERT INTO  $table ($columns) VALUES ($placeholders);";
         $prepare = $this->currentConnection()->prepare($sql);
         $attributes = $this->clearBool($attributes);
+
+        Application::get()->getLogger()->debug("Inserting into $table: " . print_r($attributes, true));
         $prepare->execute(array_values($attributes));
     }
 
@@ -88,6 +90,7 @@ class Database
         $prepare = $this->currentConnection()->prepare($sql);
         $merge = array_merge($attributes, $conditions);
         $merge = $this->clearBool($merge);
+        Application::get()->getLogger()->debug("Updating $table: " . print_r($merge, true));
         $prepare->execute($merge);
     }
 
@@ -137,6 +140,8 @@ class Database
             }
 
             $prepare = $this->connection->prepare($query);
+
+            Application::get()->getLogger()->debug("Executing query: $query");
             $prepare->execute($conditions);
             return $prepare;
         } catch (PDOException $e) {

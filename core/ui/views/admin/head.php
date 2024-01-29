@@ -4,4 +4,4 @@
 <?php view(Application::get()->toRoot('/core/ui/views/system/head_required.php')); ?>
 
 <!-- Only in the back-office -->
-<script src="<?= Application::get()->toURL('/core/admin/js/scripts/table.js') ?>"></script>
+<script src="<?= Application::get()->toURL('/core/assets/js/scripts/table.js') ?>"></script>

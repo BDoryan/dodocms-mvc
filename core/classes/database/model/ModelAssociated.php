@@ -219,8 +219,11 @@ abstract class ModelAssociated extends Model
      */
     public function associate(ModelAssociation $association, int $id): void
     {
-        $database = Application::get()->getDatabase();
-        $database->insert($association->getAssociationTable(), [$association->getForeignAssociatedKey() => $this->id, $association->getForeignAssociationKey() => $id]);
+        $model = Model::getModel(Table::getTable($association->getAssociationTable()));
+        $model->hydrate([$association->getForeignAssociatedKey() => $this->id, $association->getForeignAssociationKey() => $id]);
+        $model->create();
+//        $database = Application::get()->getDatabase();
+//        $database->insert($association->getAssociationTable(), [$association->getForeignAssociatedKey() => $this->id, $association->getForeignAssociationKey() => $id]);
     }
 
     public static abstract function findAll(string $columns, array $conditions = [], $orderBy = ''): ?array;

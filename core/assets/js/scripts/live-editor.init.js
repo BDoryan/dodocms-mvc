@@ -52,9 +52,9 @@ const save = (content, block, page_block_structure_id) => {
 
                     let data = {};
 
-                    const elements = $(entry).find("[editable-model-data]");
+                    const elements = $(entry).find("[editable-model]");
                     elements.each((index, element) => {
-                        const name = $(element).attr("editable-model-data");
+                        const name = $(element).attr("editable-model");
                         data[name] = element.innerHTML;
                     });
 
@@ -78,7 +78,7 @@ const save = (content, block, page_block_structure_id) => {
 }
 
 const loadLiveEditor = () => {
-    const editableElements = $("[editable],[editable-model-data]");
+    const editableElements = $("[editable],[editable-model]");
 
     editableElements.each((index, element) => {
         if (element.tagName === "IMG") return;
@@ -278,9 +278,9 @@ $(document).on("click", "[data-block-action]", function () {
             //
             //                 let data = {};
             //
-            //                 const elements = $(entry).find("[editable-model-data]");
+            //                 const elements = $(entry).find("[editable-model]");
             //                 elements.each((index, element) => {
-            //                     const name = $(element).attr("editable-model-data");
+            //                     const name = $(element).attr("editable-model");
             //                     data[name] = element.innerHTML;
             //                 });
             //

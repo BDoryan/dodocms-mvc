@@ -10,6 +10,10 @@ class Table extends CMSObject
 
     public static array $models = [];
 
+    public static function registerModel(string $table, $model): void {
+        self::$models[$table] = $model;
+    }
+
     protected string $name;
     protected array $attributes;
 
@@ -26,6 +30,8 @@ class Table extends CMSObject
         foreach ($data['attributes'] as $attribute) {
             $table_attribute = new TableAttribute();
             $table_attribute->hydrate($attribute);
+            $table_attribute->check();
+
             $this->attributes[] = $table_attribute;
         }
     }
@@ -204,6 +210,7 @@ class Table extends CMSObject
             new TableAttribute("id", false, true, true, "INT", 11, ""),
             new TableAttribute("createdAt", false, false, false, "DATETIME", 19, "CURRENT_TIMESTAMP"),
             new TableAttribute("updatedAt", false, false, false, "DATETIME", 19, "CURRENT_TIMESTAMP"),
+            new TableAttribute("active", false, false, false, "TINYINT", 1, 0),
         ];
     }
 
@@ -368,5 +375,10 @@ class Table extends CMSObject
             $tables[] = self::getTable($table);
         }
         return $tables;
+    }
+
+    public static function getModels(): array
+    {
+        return self::$models;
     }
 }

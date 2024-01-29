@@ -1,7 +1,6 @@
 <?php
 
 
-
 if (!isset($sidebar)) {
     echo "Sidebar not found";
     exit;
@@ -18,21 +17,27 @@ if (!isset($sidebar)) {
         <nav class="dodocms-flex-1 dodocms-overflow-y-auto">
             <?php
             /** @var SidebarCategory $category */
-            foreach ($sidebar->getCategories() as $category):
+            foreach ($sidebar->getCategories() as $category) {
                 ?>
                 <span class="dodocms-px-4 dodocms-flex dodocms-items-center dodocms-mt-4 dodocms-mb-1 dodocms-text-stone-300 dodocms-text-sm"><?= $category->getLabel() ?></span>
                 <?php
                 /** @var SidebarSection $section */
-                foreach ($category->getSections() as $section):
-                    ?>
-                    <a href="<?= Application::get()->toURL($section->getHref()) ?>"
-                       class="dodocms-mx-3 dodocms-my-[3px] dodocms-rounded-lg dodocms-gap-1 dodocms-flex dodocms-p-2 dodocms-items-center dodocms-py-2 dodocms-px-4 dodocms-text-gray-300 <?= $section->isActive() ? "dodocms-bg-gray-700 dodocms-shadow-xl" : "" ?> hover:dodocms-bg-gray-700 hover:dodocms-shadow-2xl hover:dodocms-text-white dodocms-font-semibold dodocms-text-base">
-                        <i style="width: 20px;"
-                           class="dodocms-flex dodocms-justify-center dodocms-items-center <?= $section->getIcon() ?>"></i>
-                        <?= $section->getLabel() ?>
-                    </a>
-                <?php endforeach; ?>
-            <?php endforeach; ?>
+                if (!empty($category->getSections())) {
+                    foreach ($category->getSections() as $section) {
+                        ?>
+                        <a href="<?= Application::get()->toURL($section->getHref()) ?>"
+                           class="dodocms-mx-3 dodocms-my-[3px] dodocms-rounded-lg dodocms-gap-1 dodocms-flex dodocms-p-2 dodocms-items-center dodocms-py-2 dodocms-px-4 dodocms-text-gray-300 <?= $section->isActive() ? "dodocms-bg-gray-700 dodocms-shadow-xl" : "" ?> hover:dodocms-bg-gray-700 hover:dodocms-shadow-2xl hover:dodocms-text-white dodocms-font-semibold dodocms-text-base">
+                            <i style="width: 20px;"
+                               class="dodocms-flex dodocms-justify-center dodocms-items-center <?= $section->getIcon() ?>"></i>
+                            <?= $section->getLabel() ?>
+                        </a>
+                    <?php } ?>
+                <?php } else { ?>
+                    <span class="dodocms-text-xs dodocms-italic dodocms-ml-2 dodocms-px-4 dodocms-flex dodocms-items-center dodocms-mt-4 dodocms-mb-1 dodocms-text-white dodocms-text-opacity-50">
+                        <?= __("admin.panel.category_empty") ?>
+                    </span>
+                <?php } ?>
+            <?php } ?>
         </nav>
         <?php
         ButtonHypertext::create()

@@ -61,7 +61,6 @@ class ArticlesModel extends ModelAssociated
         if (empty($illustration)) {
             $this->illustration = null;
         } else if (is_numeric($illustration)) {
-//            var_dump($illustration);
             $this->illustration = $illustration;
         }
     }

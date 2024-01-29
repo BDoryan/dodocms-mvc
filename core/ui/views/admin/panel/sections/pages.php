@@ -14,4 +14,3 @@ Header::create()
     ->render();
 
 ?>
-<p class="dodocms-gray-200 dodocms-opacity-75 dodocms-italic">En cours de développement...</p>

@@ -1,8 +1,8 @@
-[editable-model-data]:hover, [editable]:hover {
-    border: 2px solid forestgreen;
+[editable-model]:hover, [editable]:hover {
+    /*border: 2px solid forestgreen;*/
 }
 
-[editable-model-data], [editable] {
+[editable-model], [editable] {
     border: 2px solid transparent;
 }
 
@@ -11,7 +11,9 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    padding: 20px 0px;
+    /*padding: 20px 0px;*/
+    max-height: 0px;
+    position: relative;
 }
 
 button[page-structure-action="add"]:before {
@@ -40,13 +42,14 @@ button[page-structure-action="add"]:hover {
 
 [model-name] {
     margin-top: 5px;
-    border: 1px solid forestgreen;
+    /*border: 1px solid forestgreen;*/
     padding: 5px;
 }
 
 [block-name] {
-    margin-top: 5px;
-    border: 1px solid green;
+    border: 1px solid black;
+    /*margin-top: 5px;*/
+    /*border: 1px solid green;*/
 }
 
 [model-action='add']::before, [model-action='new']::before {
@@ -77,6 +80,9 @@ button[data-block-action="add"], button[model-action="new"] {
     position: absolute;
     top: 5px;
     right: 5px;
+
+    --tw-bg-opacity: 1;
+    background-color: rgb(21 128 61 / var(--tw-bg-opacity));
 }
 
 div[entity-action-bar] {
@@ -96,14 +102,14 @@ div[entity-action-bar] {
     width: 15px;
     height: 15px;
 
-    background: url('../imgs/icons/trash-solid.svg');
     background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
+    background: url('../imgs/icons/trash-solid.svg') no-repeat center;
 }
 
 [model-action='delete'] {
     line-height: 1;
+    --tw-bg-opacity: 1;
+    background-color: rgb(185 28 28 / var(--tw-bg-opacity));
     /*background: firebrick;*/
     border: none;
     border-radius: 25px;
@@ -119,14 +125,14 @@ div[entity-action-bar] {
     width: 15px;
     height: 15px;
 
-    background: url('../imgs/icons/pen-to-square-regular.svg');
     background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
+    background: url('../imgs/icons/pen-to-square-regular.svg') no-repeat center;
 }
 
 [model-action='edit'] {
     line-height: 1;
+    --tw-bg-opacity: 1;
+    background-color: rgb(37 99 235 / var(--tw-bg-opacity));
     /*background: royalblue;*/
     border: none;
     border-radius: 25px;
