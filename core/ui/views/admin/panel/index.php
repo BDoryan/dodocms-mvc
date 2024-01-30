@@ -9,7 +9,7 @@ if (empty($section_data)) $section_data = [];
 ?>
 <?php
 if (!empty($alerts)) { ?>
-    <div class="alert-container dodocms-mb-5">
+    <div class="alert-container tw-mb-5">
         <?php
         array_map(function ($alert) {
             echo $alert->render();

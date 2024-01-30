@@ -7,7 +7,7 @@ Header::create()
     ->content(
         ButtonHypertext::create()
             ->green()
-            ->text('<i class="dodocms-me-1 fa-solid fa-plus-circle"></i> ' . __('admin.panel.dashboard.button.new_table'))
+            ->text('<i class="tw-me-1 fa-solid fa-plus-circle"></i> ' . __('admin.panel.dashboard.button.new_table'))
             ->href(DefaultRoutes::route(DefaultRoutes::ADMIN_TABLES_NEW))
             ->html()
     )
@@ -21,47 +21,47 @@ if (empty($tables)) {
     exit;
 }
 ?>
-<div class="dodocms-flex dodocms-flex-row dodocms-flex-wrap dodocms-my-[30px] -dodocms-mx-2 dodocms-gap-y-5 dodocms-justify-center">
+<div class="tw-flex tw-flex-row tw-flex-wrap tw-my-[30px] -tw-mx-2 tw-gap-y-5 tw-justify-center">
     <?php
     foreach ($tables as $table):
         ?>
-        <div class="dodocms-w-auto dodocms-px-2">
-            <div class="dodocms-bg-gray-600 dodocms-p-4 dodocms-rounded-lg dodocms-border-[1px] dodocms-border-gray-500 dodocms-shadow-lg dodocms-flex dodocms-flex-col dodocms-h-full">
-                <h2 class="dodocms-text-lg dodocms-text-center dodocms-font-semibold"><?= $table->getName() ?></h2>
-                <hr class="dodocms-my-4 dodocms-border-t-[1px] dodocms-border-gray-400">
-                <ul class="dodocms-my-auto">
+        <div class="tw-w-auto tw-px-2">
+            <div class="tw-bg-gray-600 tw-p-4 tw-rounded-lg tw-border-[1px] tw-border-gray-500 tw-shadow-lg tw-flex tw-flex-col tw-h-full">
+                <h2 class="tw-text-lg tw-text-center tw-font-semibold"><?= $table->getName() ?></h2>
+                <hr class="tw-my-4 tw-border-t-[1px] tw-border-gray-400">
+                <ul class="tw-my-auto">
                     <?php
                     foreach ($table->getAttributes() as $attribute) {
                         ?>
-                        <li class="dodocms-w-min-full dodocms-flex dodocms-flex-row"><span
+                        <li class="tw-w-min-full tw-flex tw-flex-row"><span
                                     class="<?= $attribute->isPrimaryKey() ? "underline" : "" ?>"><?= $attribute->hasAssociation() ? "#" : "" ?><?= $attribute->getName() ?></span><span
                                     class="ms-1"> : </span><span
-                                    class="dodocms-ms-auto"><?= $attribute->getType() ?></span></li>
+                                    class="tw-ms-auto"><?= $attribute->getType() ?></span></li>
                         <?php
                     }
                     ?>
                 </ul>
-                <div class="dodocms-flex dodocms-flex-row dodocms-gap-3 pt-5">
+                <div class="tw-flex tw-flex-row tw-gap-3 pt-5">
                     <?php
                     ButtonHypertext::create()
-                        ->text('<i class="dodocms-me-1 fa-solid fa-pen-to-square"></i> '. __('admin.panel.tables.table.manage'))
+                        ->text('<i class="tw-me-1 fa-solid fa-pen-to-square"></i> '. __('admin.panel.tables.table.manage'))
                         ->href(DefaultRoutes::route(DefaultRoutes::ADMIN_TABLES_EDIT, ['table' => $table->getName()]))
                         ->green()
                         ->render()
                     ?>
                     <?php
                     ButtonHypertext::create()
-                        ->text('<i class="dodocms-me-1 fa-solid fa-eye"></i>'. __("admin.panel.tables.table.view_content"))
+                        ->text('<i class="tw-me-1 fa-solid fa-eye"></i>'. __("admin.panel.tables.table.view_content"))
                         ->href( DefaultRoutes::route(DefaultRoutes::ADMIN_TABLES_TABLE_ENTRIES, ['table' => $table->getName()]) )
                         ->blue()
                         ->render()
                     ?>
 <!--                    <a href="--><?php //= DefaultRoutes::route(DefaultRoutes::ADMIN_TABLES_EDIT, ['table' => $table->getName()]) ?><!--"-->
-<!--                       class="dodocms-px-3 dodocms-py-1 dodocms-rounded dodocms-bg-green-600 dodocms-text-white dodocms-font-semibold dodocms-uppercase"><i-->
-<!--                                class="dodocms-me-1 fa-solid fa-pen-to-square"></i> --><?php //= __("admin.panel.tables.table.manage") ?><!--</a>-->
+<!--                       class="tw-px-3 tw-py-1 tw-rounded tw-bg-green-600 tw-text-white tw-font-semibold tw-uppercase"><i-->
+<!--                                class="tw-me-1 fa-solid fa-pen-to-square"></i> --><?php //= __("admin.panel.tables.table.manage") ?><!--</a>-->
 <!--                    <a href="--><?php //= DefaultRoutes::route(DefaultRoutes::ADMIN_TABLES_TABLE_ENTRIES, ['table' => $table->getName()]) ?><!--"-->
-<!--                       class="dodocms-ms-auto dodocms-px-3 dodocms-py-1 dodocms-rounded dodocms-bg-blue-500 dodocms-text-white dodocms-font-semibold dodocms-uppercase"><i-->
-<!--                                class="dodocms-me-1 fa-solid fa-eye"></i>--><?php //= __("admin.panel.tables.table.view_content") ?><!--</a>-->
+<!--                       class="tw-ms-auto tw-px-3 tw-py-1 tw-rounded tw-bg-blue-500 tw-text-white tw-font-semibold tw-uppercase"><i-->
+<!--                                class="tw-me-1 fa-solid fa-eye"></i>--><?php //= __("admin.panel.tables.table.view_content") ?><!--</a>-->
                 </div>
             </div>
         </div>

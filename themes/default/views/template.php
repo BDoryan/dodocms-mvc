@@ -26,7 +26,7 @@
     ?>
 
     <div ref="toastContainer"
-         class="dodocms-max-w-[30vw] dodocms-fixed dodocms-right-2 dodocms-bottom-2 dodocms-flex dodocms-flex-col dodocms-gap-3">
+         class="tw-max-w-[30vw] tw-fixed tw-right-2 tw-bottom-2 tw-flex tw-flex-col tw-gap-3">
         <?php array_map(function ($toast) {
             $toast->render();
         }, $toasts ?? []); ?>

@@ -8,48 +8,48 @@ foreach ($this->medias as $media) {
 }
 ?>
 <input type="hidden" name="<?= $this->name ?>" value="<?= $list_id ?>">
-<div class="dodocms-w-full">
-    <div class="dodocms-max-dodocms-w-screen-lg dodocms-mx-auto dodocms-bg-gray-700 dodocms-border dodocms-border-gray-500 dodocms-rounded-md dodocms-text-white dodocms-outline-none focus:dodocms-border-gray-400 dodocms-mb-1">
-        <div id="image-gallery" class="dodocms-relative" x-data="{ imageTarget: null }">
-            <div id="image-slider" class="dodocms-flex dodocms-overflow-x-auto">
+<div class="tw-w-full">
+    <div class="tw-max-tw-w-screen-lg tw-mx-auto tw-bg-gray-700 tw-border tw-border-gray-500 tw-rounded-md tw-text-white tw-outline-none focus:tw-border-gray-400 tw-mb-1">
+        <div id="image-gallery" class="tw-relative" x-data="{ imageTarget: null }">
+            <div id="image-slider" class="tw-flex tw-overflow-x-auto">
                 <?php if(empty($this->medias)) { ?>
-                <div class="media dodocms-relative dodocms-w-full dodocms-h-64 dodocms-rounded-lg dodocms-flex-shrink-0 dodocms-shadow-lg dodocms-flex group image-container hover:cursor-pointer">
-                    <p class="dodocms-text-lg dodocms-m-auto    <">Ajouter du contenu</p>
+                <div class="media tw-relative tw-w-full tw-h-64 tw-rounded-lg tw-flex-shrink-0 tw-shadow-lg tw-flex group image-container hover:cursor-pointer">
+                    <p class="tw-text-lg tw-m-auto    <">Ajouter du contenu</p>
                 </div>
                 <?php } ?>
                 <?php foreach ($this->medias as $media): ?>
-                <div class="media dodocms-relative dodocms-w-full dodocms-h-64 dodocms-rounded-lg dodocms-flex-shrink-0 dodocms-shadow-lg dodocms-flex group image-container hover:cursor-pointer">
-                    <img class="dodocms-h-full object-contain dodocms-mx-auto" src="<?= $media->getSrc() ?>"
+                <div class="media tw-relative tw-w-full tw-h-64 tw-rounded-lg tw-flex-shrink-0 tw-shadow-lg tw-flex group image-container hover:cursor-pointer">
+                    <img class="tw-h-full object-contain tw-mx-auto" src="<?= $media->getSrc() ?>"
                          alt="<?= $media->getAlternativeText() ?>"
                          style="background-size: contain; background: url('<?= Application::toURL("/admin/assets/imgs/transparent.jpg") ?>'); object-fit: contain; object-position: center;">
-                    <div class="dodocms-opacity-0 dodocms-group-p-hover:dodocms-opacity-100 dodocms-absolute dodocms-z-10 dodocms-top-0 dodocms-right-0 dodocms-bottom-0 dodocms-left-0 dodocms-flex dodocms-flex-col">
-                        <div class="dodocms-ms-auto dodocms-me-3 dodocms-mt-3 dodocms-flex dodocms-flex-row dodocms-p-2"
+                    <div class="tw-opacity-0 tw-group-p-hover:tw-opacity-100 tw-absolute tw-z-10 tw-top-0 tw-right-0 tw-bottom-0 tw-left-0 tw-flex tw-flex-col">
+                        <div class="tw-ms-auto tw-me-3 tw-mt-3 tw-flex tw-flex-row tw-p-2"
                              x-show="!(imageTarget != null && imageTarget === '<?= $media->getSrc() ?>')">
                             <a href="<?= Application::toURL($media->getDefaultSrc()) ?>"
-                               class="dodocms-text-white dodocms-bg-blue-500 dodocms-h-8 dodocms-w-8 dodocms-rounded-full hover:dodocms-bg-blue-600 dodocms-flex">
-                                <i class="dodocms-text-sm fa-solid fa-eye dodocms-m-auto"></i>
+                               class="tw-text-white tw-bg-blue-500 tw-h-8 tw-w-8 tw-rounded-full hover:tw-bg-blue-600 tw-flex">
+                                <i class="tw-text-sm fa-solid fa-eye tw-m-auto"></i>
                             </a>
                             <button type="button" v-on:click="imageTarget='<?= $media->getSrc() ?>'"
-                                    class="dodocms-text-white dodocms-bg-blue-500 dodocms-h-8 dodocms-w-8 dodocms-rounded-full hover:dodocms-bg-blue-600">
-                                <i class="dodocms-text-sm fa-solid fa-edit"></i>
+                                    class="tw-text-white tw-bg-blue-500 tw-h-8 tw-w-8 tw-rounded-full hover:tw-bg-blue-600">
+                                <i class="tw-text-sm fa-solid fa-edit"></i>
                             </button>
                             <button type="button"
-                                    class="remove dodocms-text-white dodocms-bg-red-500 dodocms-h-8 dodocms-w-8 dodocms-rounded-full hover:dodocms-bg-red-600">
-                                <i class="dodocms-text-sm fa-solid fa-minus"></i>
+                                    class="remove tw-text-white tw-bg-red-500 tw-h-8 tw-w-8 tw-rounded-full hover:tw-bg-red-600">
+                                <i class="tw-text-sm fa-solid fa-minus"></i>
                             </button>
                         </div>
                     </div>
-                    <div class="dodocms-z-30 dodocms-rounded-lg dodocms-bg-gray-800 dodocms-bg-opacity-75 dodocms-p-3 dodocms-absolute dodocms-top-0 dodocms-bottom-0 dodocms-left-0 dodocms-right-0 dodocms-flex dodocms-flex-col"
-                         x-show="imageTarget === '<?= $media->getSrc() ?>'" class="dodocms-mt-2">
+                    <div class="tw-z-30 tw-rounded-lg tw-bg-gray-800 tw-bg-opacity-75 tw-p-3 tw-absolute tw-top-0 tw-bottom-0 tw-left-0 tw-right-0 tw-flex tw-flex-col"
+                         x-show="imageTarget === '<?= $media->getSrc() ?>'" class="tw-mt-2">
                         <input type="hidden" name="id" value="<?= $media->getId() ?>">
                         <?= Text::create()->label("Texte alternatif")->value($media->getAlternativeText())->name("alternativeText")->render() ?>
-                        <div class="dodocms-mt-auto dodocms-flex dodocms-flex-row">
+                        <div class="tw-mt-auto tw-flex tw-flex-row">
                             <button type="button"
-                                    class="dodocms-bg-gray-700 dodocms-bg-opacity-50 hover:dodocms-bg-opacity-100 dodocms-border-[1px] dodocms-border-gray-300 dodocms-border-opacity-50 hover:dodocms-border-opacity-75 dodocms-py-2 dodocms-px-3 dodocms-rounded-md dodocms-mt-auto"
+                                    class="tw-bg-gray-700 tw-bg-opacity-50 hover:tw-bg-opacity-100 tw-border-[1px] tw-border-gray-300 tw-border-opacity-50 hover:tw-border-opacity-75 tw-py-2 tw-px-3 tw-rounded-md tw-mt-auto"
                                     v-on:click="imageTarget=null">Annuler
                             </button>
                             <button type="button"
-                                    class="save dodocms-bg-blue-700 hover:dodocms-bg-blue-800 dodocms-py-2 dodocms-px-3 dodocms-rounded-md dodocms-mt-auto dodocms-ms-auto"
+                                    class="save tw-bg-blue-700 hover:tw-bg-blue-800 tw-py-2 tw-px-3 tw-rounded-md tw-mt-auto tw-ms-auto"
                                     v-on:click="imageTarget=null">Enregistrer
                             </button>
                         </div>
@@ -58,11 +58,11 @@ foreach ($this->medias as $media) {
                 <?php endforeach; ?>
             </div>
             <button type="button" id="prev-button"
-                    class="hover:dodocms-bg-blue-700 dodocms-z-20 dodocms-text-lg dodocms-h-10 dodocms-w-10 dodocms-bg-blue-600 dodocms-rounded-full dodocms-absolute dodocms-top-1/2 dodocms-left-2 transform -translate-y-1/2 dodocms-text-white hover:dodocms-text-gray-200">
+                    class="hover:tw-bg-blue-700 tw-z-20 tw-text-lg tw-h-10 tw-w-10 tw-bg-blue-600 tw-rounded-full tw-absolute tw-top-1/2 tw-left-2 transform -translate-y-1/2 tw-text-white hover:tw-text-gray-200">
                 &larr;
             </button>
             <button type="button" id="next-button"
-                    class="hover:dodocms-bg-blue-700 dodocms-z-20 dodocms-text-lg dodocms-h-10 dodocms-w-10 dodocms-bg-blue-600 dodocms-rounded-full dodocms-absolute dodocms-top-1/2 dodocms-right-2 transform -translate-y-1/2 dodocms-text-white hover:dodocms-text-gray-200">
+                    class="hover:tw-bg-blue-700 tw-z-20 tw-text-lg tw-h-10 tw-w-10 tw-bg-blue-600 tw-rounded-full tw-absolute tw-top-1/2 tw-right-2 transform -translate-y-1/2 tw-text-white hover:tw-text-gray-200">
                 &rarr;
             </button>
         </div>

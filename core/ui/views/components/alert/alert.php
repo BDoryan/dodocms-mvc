@@ -1,8 +1,8 @@
-<div class="dodocms-my-0 dodocms-bg-<?= self::STYLES[$this->type] ?>-700 dodocms-border dodocms-border-<?= self::STYLES[$this->type] ?>-800 dodocms-text-<?= self::STYLES[$this->type] ?>-50 dodocms-px-3 dodocms-py-3 dodocms-rounded dodocms-relative">
+<div class="tw-my-0 tw-bg-<?= self::STYLES[$this->type] ?>-700 tw-border tw-border-<?= self::STYLES[$this->type] ?>-800 tw-text-<?= self::STYLES[$this->type] ?>-50 tw-px-3 tw-py-3 tw-rounded tw-relative">
     <?php if (!empty($this->title)) { ?>
-        <div class="dodocms-border-b-[1px] dodocms-border-gray-200 dodocms-border-opacity-25 dodocms-mb-4">
-            <h1 class="dodocms-text-lg dodocms-font-bold dodocms-uppercase pb-2"><?= $this->title ?></h1>
+        <div class="tw-border-b-[1px] tw-border-gray-200 tw-border-opacity-25 tw-mb-4">
+            <h1 class="tw-text-lg tw-font-bold tw-uppercase pb-2"><?= $this->title ?></h1>
         </div>
     <?php } ?>
-    <span class='dodocms-block sm:inline'><?= $this->message ?></span>
+    <span class='tw-block sm:inline'><?= $this->message ?></span>
 </div>

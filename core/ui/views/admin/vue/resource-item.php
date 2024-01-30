@@ -1,69 +1,69 @@
 <script type="text/x-template" id="resource-item-template">
-    <div class="dodocms-w-full dodocms-rounded-lg dodocms-border-[1px] dodocms-border-gray-300 dodocms-relative dodocms-overflow-hidden"
+    <div class="tw-w-full tw-rounded-lg tw-border-[1px] tw-border-gray-300 tw-relative tw-overflow-hidden"
          style="height: 200px;"
-         :class="{'dodocms-order-1': selected,'dodocms-order-2': !selected}"
+         :class="{'tw-order-1': selected,'tw-order-2': !selected}"
     >
         <img
-                class="dodocms-w-full dodocms-h-full"
+                class="tw-w-full tw-h-full"
                 :src="src"
                 :alt="alternativeText"
                 style="background-size: contain; background: url('<?= Application::get()->toURL("/core/assets/imgs/transparent.jpg") ?>'); object-fit: contain; object-position: center;"
         />
         <a v-if="href && href.length > 0" target="_blank" :href="href"
-           class="dodocms-absolute dodocms-inset-0 dodocms-flex dodocms-items-center dodocms-justify-center dodocms-opacity-0 hover:dodocms-opacity-100 dodocms-transition dodocms-duration-300 dodocms-ease-in-out dodocms-bg-black dodocms-bg-opacity-25">
-            <i class="fas fa-eye dodocms-text-5xl dodocms-text-white dodocms-text-dodocms-opacity-75 hover:dodocms-text-dodocms-opacity-90 dodocms-transition-colors"></i>
+           class="tw-absolute tw-inset-0 tw-flex tw-items-center tw-justify-center tw-opacity-0 hover:tw-opacity-100 tw-transition tw-duration-300 tw-ease-in-out tw-bg-black tw-bg-opacity-25">
+            <i class="fas fa-eye tw-text-5xl tw-text-white tw-text-tw-opacity-75 hover:tw-text-tw-opacity-90 tw-transition-colors"></i>
         </a>
         <div v-if="(!inEdition && !inUploading())"
-             class="dodocms-absolute dodocms-top-0 dodocms-flex dodocms-flex-row dodocms-space-x-1 dodocms-w-full dodocms-p-2">
-            <div class="dodocms-me-auto">
+             class="tw-absolute tw-top-0 tw-flex tw-flex-row tw-space-x-1 tw-w-full tw-p-2">
+            <div class="tw-me-auto">
                 <button
                         v-if="selectable && isSelected()"
                         v-on:click="deselectItem"
                         type="button"
-                        class="dodocms-border dodocms-border-white dodocms-border-opacity-75 dodocms-h-8 dodocms-w-8 dodocms-rounded-full dodocms-text-white dodocms-bg-gray-800">
-                    <i class="dodocms-text-md fa-solid fa-check"></i>
+                        class="tw-border tw-border-white tw-border-opacity-75 tw-h-8 tw-w-8 tw-rounded-full tw-text-white tw-bg-gray-800">
+                    <i class="tw-text-md fa-solid fa-check"></i>
                 </button>
                 <button v-else-if="selectable && !isSelected()"
                         v-on:click="selectItem"
                         type="button"
-                        class="dodocms-border dodocms-border-white dodocms-border-opacity-60 dodocms-bg-opacity-75 dodocms-text-opacity-75 hover:dodocms-bg-opacity-100 hover:dodocms-text-opacity-100 dodocms-h-8 dodocms-w-8 dodocms-rounded-full dodocms-text-white dodocms-bg-gray-600 hover:dodocms-bg-gray-700">
-                    <i class="dodocms-text-md fa-solid fa-check"></i>
+                        class="tw-border tw-border-white tw-border-opacity-60 tw-bg-opacity-75 tw-text-opacity-75 hover:tw-bg-opacity-100 hover:tw-text-opacity-100 tw-h-8 tw-w-8 tw-rounded-full tw-text-white tw-bg-gray-600 hover:tw-bg-gray-700">
+                    <i class="tw-text-md fa-solid fa-check"></i>
                 </button>
             </div>
             <button v-if="editable"
                     v-on:click="showEdition"
                     type="button"
-                    class="dodocms-text-white dodocms-bg-blue-500 dodocms-h-8 dodocms-w-8 dodocms-rounded-full hover:dodocms-bg-blue-600">
-                <i class="dodocms-text-sm fa-solid fa-edit"></i>
+                    class="tw-text-white tw-bg-blue-500 tw-h-8 tw-w-8 tw-rounded-full hover:tw-bg-blue-600">
+                <i class="tw-text-sm fa-solid fa-edit"></i>
             </button>
             <button v-if="deletable"
                     v-on:click="deleteItem"
                     type="button"
-                    class="dodocms-text-white dodocms-bg-red-500 dodocms-h-8 dodocms-w-8 dodocms-rounded-full hover:dodocms-bg-red-600">
-                <i class="dodocms-text-sm fa-solid fa-trash"></i>
+                    class="tw-text-white tw-bg-red-500 tw-h-8 tw-w-8 tw-rounded-full hover:tw-bg-red-600">
+                <i class="tw-text-sm fa-solid fa-trash"></i>
             </button>
             <button v-if="removable"
                     v-on:click="removeItem"
                     type="button"
-                    class="dodocms-text-white dodocms-bg-red-500 dodocms-h-8 dodocms-w-8 dodocms-rounded-full hover:dodocms-bg-red-600">
-                <i class="dodocms-text-sm fa-solid fa-minus"></i>
+                    class="tw-text-white tw-bg-red-500 tw-h-8 tw-w-8 tw-rounded-full hover:tw-bg-red-600">
+                <i class="tw-text-sm fa-solid fa-minus"></i>
             </button>
         </div>
         <div v-if="(inEdition || inUploading())"
-             class="dodocms-absolute dodocms-top-0 dodocms-h-full dodocms-flex dodocms-w-full dodocms-bg-opacity-50 dodocms-bg-gray-800 dodocms-backdrop-blur-sm">
+             class="tw-absolute tw-top-0 tw-h-full tw-flex tw-w-full tw-bg-opacity-50 tw-bg-gray-800 tw-backdrop-blur-sm">
         </div>
         <div v-if="(inEdition && !inUploading())"
-             class="dodocms-absolute dodocms-top-0 dodocms-h-full dodocms-flex dodocms-w-full dodocms-p-2">
-            <div class="dodocms-flex dodocms-flex-col dodocms-mt-auto dodocms-w-full dodocms-h-full">
+             class="tw-absolute tw-top-0 tw-h-full tw-flex tw-w-full tw-p-2">
+            <div class="tw-flex tw-flex-col tw-mt-auto tw-w-full tw-h-full">
                 <?php Text::create()
                     ->label(__('panel.admin.resource.item.edit.alternativeText') . ' :')
                     ->attribute('v-model', "localAlternativeText")
                     ->name("alternativeText")
                     ->render() ?>
-                <div class="dodocms-mt-auto dodocms-flex dodocms-flex-row dodocms-gap-2">
+                <div class="tw-mt-auto tw-flex tw-flex-row tw-gap-2">
                     <?php
                     Button::create()
-                        ->addClass("dodocms-text-sm")
+                        ->addClass("tw-text-sm")
                         ->gray()
                         ->text(__('panel.admin.resource.item.edit.cancel'))
                         ->attribute("v-on:click", 'cancelEdition')
@@ -71,7 +71,7 @@
                     ?>
                     <?php
                     Button::create()
-                        ->addClass("dodocms-text-sm dodocms-ms-auto")
+                        ->addClass("tw-text-sm tw-ms-auto")
                         ->blue()
                         ->text(__('panel.admin.resource.item.edit.save'))
                         ->attribute("v-on:click", 'applyEdition')
@@ -81,10 +81,10 @@
             </div>
         </div>
         <div v-if="(!inEdition && inUploading())"
-             class="dodocms-absolute dodocms-top-0 dodocms-h-full dodocms-flex dodocms-w-full dodocms-p-2">
-            <div class="dodocms-p-2 dodocms-flex dodocms-flex-col dodocms-absolute dodocms-top-0 dodocms-right-0 dodocms-left-0 dodocms-bottom-0 dodocms-bg-black dodocms-bg-opacity-50 dodocms-rounded-lg">
-                <div class="dodocms-mt-auto dodocms-w-full dodocms-bg-gray-200 dodocms-rounded-full">
-                    <div :style="{ width: uploadProgression + '%' }" class="dodocms-mt-auto dodocms-bg-blue-500 dodocms-rounded-full dodocms-text-xs dodocms-text-center dodocms-text-white">
+             class="tw-absolute tw-top-0 tw-h-full tw-flex tw-w-full tw-p-2">
+            <div class="tw-p-2 tw-flex tw-flex-col tw-absolute tw-top-0 tw-right-0 tw-left-0 tw-bottom-0 tw-bg-black tw-bg-opacity-50 tw-rounded-lg">
+                <div class="tw-mt-auto tw-w-full tw-bg-gray-200 tw-rounded-full">
+                    <div :style="{ width: uploadProgression + '%' }" class="tw-mt-auto tw-bg-blue-500 tw-rounded-full tw-text-xs tw-text-center tw-text-white">
                         <span class="progress-number">{{ uploadProgression }}</span>%
                     </div>
                 </div>

@@ -1,15 +1,15 @@
-<div class="modal-background dodocms-hidden dodocms-fixed dodocms-inset-0 dodocms-bg-black dodocms-opacity-50 dodocms-z-50"></div>
-<div id="file-upload" class="modal-content dodocms-hidden dodocms-fixed dodocms-inset-0 dodocms-flex dodocms-items-center dodocms-justify-center dodocms-z-50">
+<div class="modal-background tw-hidden tw-fixed tw-inset-0 tw-bg-black tw-opacity-50 tw-z-50"></div>
+<div id="file-upload" class="modal-content tw-hidden tw-fixed tw-inset-0 tw-flex tw-items-center tw-justify-center tw-z-50">
     <!-- Modal content -->
-    <div class="dodocms-relative dodocms-bg-white dodocms-rounded-lg dodocms-shadow dark:dodocms-bg-gray-700 dodocms-rounded-lg dodocms-shadow-lg dodocms-w-2/4" tabindex="-1"
+    <div class="tw-relative tw-bg-white tw-rounded-lg tw-shadow dark:tw-bg-gray-700 tw-rounded-lg tw-shadow-lg tw-w-2/4" tabindex="-1"
          aria-hidden="true">
         <!-- Modal header -->
-        <div class="dodocms-flex dodocms-items-center dodocms-justify-between dodocms-p-4 md:dodocms-p-5 dodocms-border-b dodocms-rounded-t dark:dodocms-border-gray-600">
-            <h3 class="dodocms-text-xl dodocms-font-semibold dodocms-text-gray-900 dark:dodocms-text-white">
+        <div class="tw-flex tw-items-center tw-justify-between tw-p-4 md:tw-p-5 tw-border-b tw-rounded-t dark:tw-border-gray-600">
+            <h3 class="tw-text-xl tw-font-semibold tw-text-gray-900 dark:tw-text-white">
                 <?= $title ?? 'Untitled' ?>
             </h3>
-            <button type="button" class="close-upload-modal dodocms-text-gray-400 dodocms-bg-transparent hover:dodocms-bg-gray-200 hover:dodocms-text-gray-900 dodocms-rounded-lg dodocms-text-sm dodocms-w-8 dodocms-h-8 dodocms-ms-auto dodocms-inline-flex dodocms-justify-center dodocms-items-center dark:hover:dodocms-bg-gray-600 dark:hover:dodocms-text-white">
-                <svg class="dodocms-w-3 dodocms-h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+            <button type="button" class="close-upload-modal tw-text-gray-400 tw-bg-transparent hover:tw-bg-gray-200 hover:tw-text-gray-900 tw-rounded-lg tw-text-sm tw-w-8 tw-h-8 tw-ms-auto tw-inline-flex tw-justify-center tw-items-center dark:hover:tw-bg-gray-600 dark:hover:tw-text-white">
+                <svg class="tw-w-3 tw-h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                      viewBox="0 0 14 14">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                           d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>

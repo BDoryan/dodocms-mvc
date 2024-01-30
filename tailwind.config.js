@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-    prefix: 'dodocms-',
+    prefix: 'tw-',
     content: ["./**/*.{html,js,php}"],
     theme: {
         extend: {

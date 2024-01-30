@@ -6,34 +6,34 @@ if (!isset($sidebar)) {
     exit;
 }
 ?>
-<div class="dodocms-flex-shrink-0 dodocms-w-64 dodocms-bg-gray-800">
-    <div class="dodocms-flex dodocms-flex-col dodocms-h-full">
+<div class="tw-flex-shrink-0 tw-w-64 tw-bg-gray-800">
+    <div class="tw-flex tw-flex-col tw-h-full">
 
-        <div class="dodocms-flex dodocms-flex-col dodocms-items-center dodocms-justify-center dodocms-py-3 dodocms-bg-gray-900">
+        <div class="tw-flex tw-flex-col tw-items-center tw-justify-center tw-py-3 tw-bg-gray-900">
             <img width="60" height="60" src="<?= Application::get()->toURL("/core/assets/imgs/logo-animated.png") ?>"
                  alt="<?= __('admin.panel.dashboard') ?>">
-            <span class="dodocms-text-white dodocms-text-xl dodocms-font-semibold"><?= __("admin.panel.dashboard") ?></span>
+            <span class="tw-text-white tw-text-xl tw-font-semibold"><?= __("admin.panel.dashboard") ?></span>
         </div>
-        <nav class="dodocms-flex-1 dodocms-overflow-y-auto">
+        <nav class="tw-flex-1 tw-overflow-y-auto">
             <?php
             /** @var SidebarCategory $category */
             foreach ($sidebar->getCategories() as $category) {
                 ?>
-                <span class="dodocms-px-4 dodocms-flex dodocms-items-center dodocms-mt-4 dodocms-mb-1 dodocms-text-stone-300 dodocms-text-sm"><?= $category->getLabel() ?></span>
+                <span class="tw-px-4 tw-flex tw-items-center tw-mt-4 tw-mb-1 tw-text-stone-300 tw-text-sm"><?= $category->getLabel() ?></span>
                 <?php
                 /** @var SidebarSection $section */
                 if (!empty($category->getSections())) {
                     foreach ($category->getSections() as $section) {
                         ?>
                         <a href="<?= Application::get()->toURL($section->getHref()) ?>"
-                           class="dodocms-mx-3 dodocms-my-[3px] dodocms-rounded-lg dodocms-gap-1 dodocms-flex dodocms-p-2 dodocms-items-center dodocms-py-2 dodocms-px-4 dodocms-text-gray-300 <?= $section->isActive() ? "dodocms-bg-gray-700 dodocms-shadow-xl" : "" ?> hover:dodocms-bg-gray-700 hover:dodocms-shadow-2xl hover:dodocms-text-white dodocms-font-semibold dodocms-text-base">
+                           class="tw-mx-3 tw-my-[3px] tw-rounded-lg tw-gap-1 tw-flex tw-p-2 tw-items-center tw-py-2 tw-px-4 tw-text-gray-300 <?= $section->isActive() ? "tw-bg-gray-700 tw-shadow-xl" : "" ?> hover:tw-bg-gray-700 hover:tw-shadow-2xl hover:tw-text-white tw-font-semibold tw-text-base">
                             <i style="width: 20px;"
-                               class="dodocms-flex dodocms-justify-center dodocms-items-center <?= $section->getIcon() ?>"></i>
+                               class="tw-flex tw-justify-center tw-items-center <?= $section->getIcon() ?>"></i>
                             <?= $section->getLabel() ?>
                         </a>
                     <?php } ?>
                 <?php } else { ?>
-                    <span class="dodocms-text-xs dodocms-italic dodocms-ml-2 dodocms-px-4 dodocms-flex dodocms-items-center dodocms-mt-4 dodocms-mb-1 dodocms-text-white dodocms-text-opacity-50">
+                    <span class="tw-text-xs tw-italic tw-ml-2 tw-px-4 tw-flex tw-items-center tw-mt-4 tw-mb-1 tw-text-white tw-text-opacity-50">
                         <?= __("admin.panel.category_empty") ?>
                     </span>
                 <?php } ?>
@@ -42,13 +42,13 @@ if (!isset($sidebar)) {
         <?php
         ButtonHypertext::create()
             ->href(Application::get()->toURL("/?editor=true"))
-            ->addClass("dodocms-mx-2 dodocms-mb-[10px]")
+            ->addClass("tw-mx-2 tw-mb-[10px]")
             ->green()
             ->target('_blank')
-            ->text('<i class="dodocms-me-1 fa-solid fa-arrow-right"></i> ' . __("admin.panel.go_to_website"))
+            ->text('<i class="tw-me-1 fa-solid fa-arrow-right"></i> ' . __("admin.panel.go_to_website"))
             ->render();
         ?>
-        <div class="dodocms-text-white dodocms-px-3 dodocms-text-center italic dodocms-py-2 dodocms-text-md dodocms-font-semibold dodocms-bg-gray-900">
+        <div class="tw-text-white tw-px-3 tw-text-center italic tw-py-2 tw-text-md tw-font-semibold tw-bg-gray-900">
             <?= DodoCMS::VERSION ?>
         </div>
     </div>

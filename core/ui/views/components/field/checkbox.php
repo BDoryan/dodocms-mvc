@@ -1,11 +1,11 @@
-<label class="dodocms-my-auto dodocms-relative dodocms-inline-flex dodocms-items-center dodocms-cursor-pointer  <?= ($this->disabled || $this->readonly) ? "dodocms-dodocms-opacity-50" : "" ?>">
+<label class="tw-my-auto tw-relative tw-inline-flex tw-items-center tw-cursor-pointer  <?= ($this->disabled || $this->readonly) ? "tw-tw-opacity-50" : "" ?>">
     <input type="checkbox" name="<?= $this->name ?>"
-           class="dodocms-sr-only dodocms-peer dodocms-w-full dodocms-h-full" <?= $this->readonly ? "onclick='return false;'" : "" ?> <?= $this->checked ? "checked" : "" ?> <?= $this->disabled ? "disabled" : "" ?>>
-    <div class="dodocms-w-11 dodocms-h-6 dodocms-bg-gray-200 dodocms-rounded-full dodocms-peer <?= (!$this->readonly) ? "peer-focus:ring-4" : "" ?> peer-focus:dodocms-ring-blue-300 dark:dodocms-peer-focus:ring-blue-800 dark:dodocms-bg-gray-700 peer-checked:after:dodocms-translate-x-full peer-checked:after:dodocms-border-white after:dodocms-content-[''] after:dodocms-absolute after:dodocms-top-0.5 after:dodocms-left-[2px] after:dodocms-bg-white after:dodocms-border-gray-300 after:dodocms-border after:dodocms-rounded-full after:dodocms-h-5 after:dodocms-w-5 after:dodocms-transition-all dark:dodocms-border-gray-600 peer-checked:dodocms-bg-blue-600 dodocms-border-[1px] ">
+           class="tw-sr-only tw-peer tw-w-full tw-h-full" <?= $this->readonly ? "onclick='return false;'" : "" ?> <?= $this->checked ? "checked" : "" ?> <?= $this->disabled ? "disabled" : "" ?>>
+    <div class="tw-w-11 tw-h-6 tw-bg-gray-200 tw-rounded-full tw-peer <?= (!$this->readonly) ? "peer-focus:ring-4" : "" ?> peer-focus:tw-ring-blue-300 dark:tw-peer-focus:ring-blue-800 dark:tw-bg-gray-700 peer-checked:after:tw-translate-x-full peer-checked:after:tw-border-white after:tw-content-[''] after:tw-absolute after:tw-top-0.5 after:tw-left-[2px] after:tw-bg-white after:tw-border-gray-300 after:tw-border after:tw-rounded-full after:tw-h-5 after:tw-w-5 after:tw-transition-all dark:tw-border-gray-600 peer-checked:tw-bg-blue-600 tw-border-[1px] ">
     </div>
     <?php
     if (!empty($this->placeholder)) {
-        echo('<span class="dodocms-ml-3 dodocms-text-sm dodocms-font-medium dodocms-text-gray-900 dark:dodocms-text-gray-300">' . $this->placeholder . '</span>');
+        echo('<span class="tw-ml-3 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-gray-300">' . $this->placeholder . '</span>');
     }
     ?>
 </label>

@@ -28,7 +28,7 @@ $(document).on("submit", "#table-form-delete", function (event) {
 });
 
 $(document).on("submit", "#table-form", function (event) {
-    $("#confirm").addClass("dodocms-hidden");
+    $("#confirm").addClass("tw-hidden");
 
     event.preventDefault();
     const container = $("#attributes-container");
@@ -131,6 +131,6 @@ $(document).on("submit", "#table-form", function (event) {
 
     $("#confirm").find("input[name=table_json]").val(JSON.stringify(table, null, 4));
 
-    $("#confirm").removeClass("dodocms-hidden");
+    $("#confirm").removeClass("tw-hidden");
     $("#json-content").val(JSON.stringify(table, null, 4));
 });

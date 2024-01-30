@@ -95,7 +95,7 @@
 <script type="text/x-template" id="set-entry-modal-template">
     <modal name="set-entry-modal">
         <template v-slot:title>
-                <i :class="{ 'fa-plus-circle': entry_id == null, 'fa-pen-to-square': entry_id != null }" class='fa-solid dodocms-me-1'></i> {{ entry_id != null ? $root.translate('live-editor.entries.edit.title') :  $root.translate('live-editor.entries.new.title') }}
+                <i :class="{ 'fa-plus-circle': entry_id == null, 'fa-pen-to-square': entry_id != null }" class='fa-solid tw-me-1'></i> {{ entry_id != null ? $root.translate('live-editor.entries.edit.title') :  $root.translate('live-editor.entries.new.title') }}
         </template>
         <template v-slot:body>
             <div class="form-content"></div>
@@ -104,11 +104,11 @@
         <template v-slot:footer>
             <button type="button"
                     v-on:click="close"
-                    class="close-upload-modal dodocms-me-auto dodocms-text-gray-500 dodocms-bg-white hover:dodocms-bg-gray-100 focus:ring-4 focus:dodocms-outline-none focus:ring-blue-300 dodocms-rounded-lg dodocms-border dodocms-border-gray-200 dodocms-text-sm dodocms-font-medium dodocms-px-5 dodocms-py-2.5 hover:dodocms-text-gray-900 focus:dodocms-z-10 dark:dodocms-bg-gray-700 dark:dodocms-text-gray-300 dark:dodocms-border-gray-500 dark:hover:dodocms-text-white dark:hover:dodocms-bg-gray-600 dark:focus:ring-gray-600">
+                    class="close-upload-modal tw-me-auto tw-text-gray-500 tw-bg-white hover:tw-bg-gray-100 focus:ring-4 focus:tw-outline-none focus:ring-blue-300 tw-rounded-lg tw-border tw-border-gray-200 tw-text-sm tw-font-medium tw-px-5 tw-py-2.5 hover:tw-text-gray-900 focus:tw-z-10 dark:tw-bg-gray-700 dark:tw-text-gray-300 dark:tw-border-gray-500 dark:hover:tw-text-white dark:hover:tw-bg-gray-600 dark:focus:ring-gray-600">
                 Cancel
             </button>
             <button v-on:click="submit()"
-                    class="dodocms-text-white dodocms-bg-blue-700 hover:dodocms-bg-blue-800 focus:ring-4 focus:dodocms-outline-none focus:ring-blue-300 dodocms-font-medium dodocms-rounded-lg dodocms-text-sm dodocms-px-5 dodocms-py-2.5 dodocms-text-center dark:dodocms-bg-blue-600 dark:hover:dodocms-bg-blue-700 dark:focus:ring-blue-800">
+                    class="tw-text-white tw-bg-blue-700 hover:tw-bg-blue-800 focus:ring-4 focus:tw-outline-none focus:ring-blue-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-5 tw-py-2.5 tw-text-center dark:tw-bg-blue-600 dark:hover:tw-bg-blue-700 dark:focus:ring-blue-800">
                 {{ entry_id != null ? 'Edit this entry' : 'Create new entry' }}
             </button>
         </template>

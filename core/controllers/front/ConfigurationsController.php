@@ -32,20 +32,20 @@ class ConfigurationsController extends SectionController
             }, $row);
 
 //            $edit = ButtonHypertext::create()
-//                ->text('<i class="dodocms-me-1 fa-solid fa-pen-to-square"></i> ' . __("admin.panel.tables.table.entries.actions.edit"))
+//                ->text('<i class="tw-me-1 fa-solid fa-pen-to-square"></i> ' . __("admin.panel.tables.table.entries.actions.edit"))
 //                ->href(DefaultRoutes::route(DefaultRoutes::ADMIN_TABLE_EDIT_ENTRY, ["table" => $table_name, "id" => $entry['id']]))
-//                ->addClass("dodocms-text-sm dodocms-whitespace-nowrap")
+//                ->addClass("tw-text-sm tw-whitespace-nowrap")
 //                ->blue()
 //                ->html();
 //
 //            $delete = ButtonHypertext::create()
-//                ->text('<i class="dodocms-me-1 fa-solid fa-trash"></i> ' . __("admin.panel.tables.table.entries.actions.delete"))
-//                ->addClass("dodocms-text-sm dodocms-whitespace-nowrap")
+//                ->text('<i class="tw-me-1 fa-solid fa-trash"></i> ' . __("admin.panel.tables.table.entries.actions.delete"))
+//                ->addClass("tw-text-sm tw-whitespace-nowrap")
 //                ->red()
 //                ->href(DefaultRoutes::route(DefaultRoutes::ADMIN_TABLE_DELETE_ENTRY, ["table" => $table_name, "id" => $entry['id']]))
 //                ->html();
 //
-//            $row[] = '<div class="dodocms-flex dodocms-flex-row dodocms-justify-center align-center dodocms-gap-3">' . "$edit $delete" . '</div>';
+//            $row[] = '<div class="tw-flex tw-flex-row tw-justify-center align-center tw-gap-3">' . "$edit $delete" . '</div>';
             $rows[] = $row;
         }
 

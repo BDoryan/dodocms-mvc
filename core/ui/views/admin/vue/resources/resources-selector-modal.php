@@ -60,13 +60,13 @@
 <script type="text/x-template" id="modal-resources-selector">
     <modal name="resources-selector-modal">
         <template v-slot:title>
-            <i class='fa-solid fa-cloud-upload dodocms-me-1'></i>
+            <i class='fa-solid fa-cloud-upload tw-me-1'></i>
             {{ $root.translate("admin.panel.resources.selector.title") }}
         </template>
         <template v-slot:body>
             <div v-if="resources.length > 0"
-                 class="dodocms-py-3 dodocms-pe-3 dodocms-flex dodocms-flex-col dodocms-gap-4">
-                <p class="dodocms-text-gray-300 dodocms-m-auto dodocms-text-center">
+                 class="tw-py-3 tw-pe-3 tw-flex tw-flex-col tw-gap-4">
+                <p class="tw-text-gray-300 tw-m-auto tw-text-center">
                     Retrouvez les ressources que vous avez déjà uploadées sur votre serveur. Les resources cochées
                     seront ajoutées à votre contenu.
                 </p>
@@ -81,13 +81,13 @@
         <template v-slot:footer>
             <button type="button"
                     v-on:click="close"
-                    class="close-upload-modal dodocms-me-auto dodocms-text-gray-500 dodocms-bg-white hover:dodocms-bg-gray-100 focus:ring-4 focus:dodocms-outline-none focus:ring-blue-300 dodocms-rounded-lg dodocms-border dodocms-border-gray-200 dodocms-text-sm dodocms-font-medium dodocms-px-5 dodocms-py-2.5 hover:dodocms-text-gray-900 focus:dodocms-z-10 dark:dodocms-bg-gray-700 dark:dodocms-text-gray-300 dark:dodocms-border-gray-500 dark:hover:dodocms-text-white dark:hover:dodocms-bg-gray-600 dark:focus:ring-gray-600">
+                    class="close-upload-modal tw-me-auto tw-text-gray-500 tw-bg-white hover:tw-bg-gray-100 focus:ring-4 focus:tw-outline-none focus:ring-blue-300 tw-rounded-lg tw-border tw-border-gray-200 tw-text-sm tw-font-medium tw-px-5 tw-py-2.5 hover:tw-text-gray-900 focus:tw-z-10 dark:tw-bg-gray-700 dark:tw-text-gray-300 dark:tw-border-gray-500 dark:hover:tw-text-white dark:hover:tw-bg-gray-600 dark:focus:ring-gray-600">
                 <?= __("admin.panel.resources.upload.close") ?>
             </button>
-            <div class="dodocms-me-auto dodocms-text-white dodocms-opacity-75" id="state">
+            <div class="tw-me-auto tw-text-white tw-opacity-75" id="state">
             </div>
             <button v-on:click="finish"
-                    class="dodocms-text-white dodocms-bg-blue-700 hover:dodocms-bg-blue-800 focus:ring-4 focus:dodocms-outline-none focus:ring-blue-300 dodocms-font-medium dodocms-rounded-lg dodocms-text-sm dodocms-px-5 dodocms-py-2.5 dodocms-text-center dark:dodocms-bg-blue-600 dark:hover:dodocms-bg-blue-700 dark:focus:ring-blue-800">
+                    class="tw-text-white tw-bg-blue-700 hover:tw-bg-blue-800 focus:ring-4 focus:tw-outline-none focus:ring-blue-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-5 tw-py-2.5 tw-text-center dark:tw-bg-blue-600 dark:hover:tw-bg-blue-700 dark:focus:ring-blue-800">
                 {{ $root.translate("admin.panel.resources.selector.finish") }}
             </button>
         </template>

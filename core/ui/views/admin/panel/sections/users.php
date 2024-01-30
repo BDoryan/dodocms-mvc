@@ -6,7 +6,7 @@ Header::create()
     ->content(
         Button::create()
             ->green()
-            ->text('<i class="dodocms-me-1 fa-solid fa-plus-circle"></i> ' . __('admin.panel.configuration.new'))
+            ->text('<i class="tw-me-1 fa-solid fa-plus-circle"></i> ' . __('admin.panel.configuration.new'))
             ->attribute('v-on:click', '')
 //            ->href(DefaultRoutes::route(DefaultRoutes::ADMIN_USERS_MANAGER_NEW))
             ->html()
@@ -20,7 +20,7 @@ TableComponent::create()
 ?>
 <modal name="blocks-modal">
     <template v-slot:title>
-        <i class='fa-solid fa-cloud-upload dodocms-me-1'></i> <?= __('admin.panel.configuration.new') ?>
+        <i class='fa-solid fa-cloud-upload tw-me-1'></i> <?= __('admin.panel.configuration.new') ?>
     </template>
     <template v-slot:body>
         Hello World !

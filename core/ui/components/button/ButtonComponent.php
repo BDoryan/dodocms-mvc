@@ -5,10 +5,10 @@ Autoloader::require("core/ui/components/Component.php");
 abstract class ButtonComponent extends Component
 {
 
-    const BUTTON_GREEN = 'dodocms-bg-green-700 hover:dodocms-bg-green-800 dodocms-text-white focus:dodocms-outline-none focus:dodocms-shadow-outline-green active:dodocms-bg-green-800';
-    const BUTTON_GRAY = 'dodocms-bg-gray-700 hover:dodocms-bg-gray-800 dodocms-text-white focus:dodocms-outline-none focus:dodocms-shadow-outline-gray active:dodocms-bg-gray-800';
-    const BUTTON_RED = 'dodocms-bg-red-700 hover:dodocms-bg-red-800 dodocms-text-white focus:dodocms-outline-none focus:dodocms-shadow-outline-red active:dodocms-bg-red-800';
-    const BUTTON_BLUE = 'dodocms-bg-blue-600 hover:dodocms-bg-blue-700 dodocms-text-white focus:dodocms-outline-none focus:dodocms-shadow-outline-blue active:dodocms-bg-blue-800';
+    const BUTTON_GREEN = 'tw-bg-green-700 hover:tw-bg-green-800 tw-text-white focus:tw-outline-none focus:tw-shadow-outline-green active:tw-bg-green-800';
+    const BUTTON_GRAY = 'tw-bg-gray-700 hover:tw-bg-gray-800 tw-text-white focus:tw-outline-none focus:tw-shadow-outline-gray active:tw-bg-gray-800';
+    const BUTTON_RED = 'tw-bg-red-700 hover:tw-bg-red-800 tw-text-white focus:tw-outline-none focus:tw-shadow-outline-red active:tw-bg-red-800';
+    const BUTTON_BLUE = 'tw-bg-blue-600 hover:tw-bg-blue-700 tw-text-white focus:tw-outline-none focus:tw-shadow-outline-blue active:tw-bg-blue-800';
 
     protected string $text;
     protected string $class;
@@ -22,7 +22,7 @@ abstract class ButtonComponent extends Component
     }
 
     public function style($class): ButtonComponent {
-        $this->class = "dodocms-text-center dodocms-px-3 dodocms-py-[6px] dodocms-rounded-lg dodocms-shadow-sm dodocms-font-semibold dodocms-uppercase $class";
+        $this->class = "tw-text-center tw-px-3 tw-py-[6px] tw-rounded-lg tw-shadow-sm tw-font-semibold tw-uppercase $class";
         $this->class .= $this->customClass;
         return $this;
     }

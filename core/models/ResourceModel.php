@@ -125,15 +125,15 @@ class ResourceModel extends Model implements JsonSerializable
     {
         $fields = parent::getFields();
         $fields["name"] = [
-            "size" => "dodocms-w-4/12",
+            "size" => "tw-w-4/12",
             "field" => Text::create()->name("name")->label("Nom de l'image")->value($this->getName() ?? "")->required(),
         ];
         $fields["src"] = [
-            "size" => "dodocms-w-4/12",
+            "size" => "tw-w-4/12",
             "field" => Text::create()->name("src")->label("Chemin de l'image")->value($this->getDefaultSrc() ?? "")->required(),
         ];
         $fields["alternativeText"] = [
-            "size" => "dodocms-w-4/12",
+            "size" => "tw-w-4/12",
             "field" => Text::create()->name("alternativeText")->label("Texte alternatif de l'image")->value($this->getAlternativeText() ?? "")->required(),
         ];
         return $fields;

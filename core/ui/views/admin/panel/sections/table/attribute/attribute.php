@@ -1,13 +1,13 @@
 <form data-type="attribute" id="attribute-form"
-      class="dodocms-bg-gray-800 dodocms-shadow-lg dodocms-rounded-lg dodocms-flex dodocms-flex-row dodocms-flex-wrap dodocms-p-5 dodocms-p-2 dodocms-relative">
-    <div class="dodocms-absolute dodocms-top-0 dodocms-right-0 transform translate-x-1/2 -translate-y-1/2">
+      class="tw-bg-gray-800 tw-shadow-lg tw-rounded-lg tw-flex tw-flex-row tw-flex-wrap tw-p-5 tw-p-2 tw-relative">
+    <div class="tw-absolute tw-top-0 tw-right-0 transform translate-x-1/2 -translate-y-1/2">
         <button type="button" id="remove-attribute"
-                class="dodocms-h-10 dodocms-w-10 dodocms-bg-red-700 hover:dodocms-bg-red-800 hover:dodocms-border hover:dodocms-border-red-700 dodocms-text-xl dodocms-rounded-full dodocms-flex dodocms-items-center dodocms-justify-center dodocms-text-white">
+                class="tw-h-10 tw-w-10 tw-bg-red-700 hover:tw-bg-red-800 hover:tw-border hover:tw-border-red-700 tw-text-xl tw-rounded-full tw-flex tw-items-center tw-justify-center tw-text-white">
             <i class="fa-solid fa-trash"></i>
         </button>
     </div>
-    <div class="dodocms-flex dodocms-flex-wrap dodocms-gap-y-3 -dodocms-mx-2 dodocms-w-full">
-        <div class="dodocms-w-4/12 dodocms-px-2">
+    <div class="tw-flex tw-flex-wrap tw-gap-y-3 -tw-mx-2 tw-w-full">
+        <div class="tw-w-4/12 tw-px-2">
             <?php
 
             Text::create()
@@ -20,7 +20,7 @@
                 ->placeholder("name")
                 ->render(); ?>
         </div>
-        <div class="dodocms-w-4/12 dodocms-px-2">
+        <div class="tw-w-4/12 tw-px-2">
             <?php Select::create()
                 ->placeholder(__('admin.panel.tables.table.attribute.type_attribut'))
                 ->selected(!empty($attribute) ? $attribute->getType() : "VARCHAR")
@@ -30,7 +30,7 @@
                 ->options(Select::toCombine(TableAttribute::TYPES, function ($type) { return $type; } ))
                 ->render() ?>
         </div>
-        <div class="dodocms-w-4/12 dodocms-px-2">
+        <div class="tw-w-4/12 tw-px-2">
             <?php Text::create()
                 ->label(__('admin.panel.tables.table.attribute.length'))
                 ->type("number")
@@ -40,7 +40,7 @@
                 ->placeholder("255")
                 ->render(); ?>
         </div>
-        <div class="dodocms-w-6/12 dodocms-px-2">
+        <div class="tw-w-6/12 tw-px-2">
             <?php CheckBox::create()
                 ->label(__('admin.panel.tables.table.attribute.allow_undefined_values'))
                 ->checked(!empty($attribute) ? $attribute->isNullable() : false)
@@ -48,7 +48,7 @@
                 ->placeholder("Activer les valeurs non définies")
                 ->render() ?>
         </div>
-        <div class="dodocms-w-6/12 dodocms-px-2">
+        <div class="tw-w-6/12 tw-px-2">
             <?php CheckBox::create()
                 ->label(__('admin.panel.tables.table.attribute.is_this_attribute_a_primary_key'))
                 ->readonly(!empty($table_name) && !empty($table))
@@ -57,7 +57,7 @@
                 ->placeholder("Utiliser en tant que clé primaire")
                 ->render() ?>
         </div>
-        <div class="dodocms-w-6/12 dodocms-px-2">
+        <div class="tw-w-6/12 tw-px-2">
             <?php CheckBox::create()
                 ->label(__('admin.panel.tables.table.attribute.do_you_want_to_use_auto_increment'))
                 ->readonly(!empty($attribute) && !$attribute->isPrimaryKey())
@@ -66,7 +66,7 @@
                 ->placeholder("Activer l'auto-incrémentation")
                 ->render() ?>
         </div>
-        <div class="dodocms-w-6/12 dodocms-px-2">
+        <div class="tw-w-6/12 tw-px-2">
             <?php Text::create()
                 ->label(__('admin.panel.tables.table.attribute.default_value'))
                 ->type("text")
@@ -76,7 +76,7 @@
                 ->placeholder("CURRENT_TIMESTAMP")
                 ->render(); ?>
         </div>
-        <div class="dodocms-w-full dodocms-px-2">
+        <div class="tw-w-full tw-px-2">
             <?php Select::create()
                 ->placeholder(__('admin.panel.tables.table.attribute.select_a_table'))
                 ->disabled(!empty($table_name) && !empty($table) && !empty($attribute->getAssociation()))

@@ -7,10 +7,10 @@
         rows="<?= $this->rows ?? "3" ?>"
         <?= $this->required ? "required" : "" ?>
         placeholder="<?= $this->placeholder ?? "" ?> "
-        class="dodocms-w-full dodocms-bg-gray-700 dodocms-px-3 dodocms-py-2 dodocms-border dodocms-border-gray-500 dodocms-rounded-md dodocms-text-white dodocms-outline-none focus:dodocms-border-gray-400 dodocms-mb-1"
+        class="tw-w-full tw-bg-gray-700 tw-px-3 tw-py-2 tw-border tw-border-gray-500 tw-rounded-md tw-text-white tw-outline-none focus:tw-border-gray-400 tw-mb-1"
 >
 <?= $this->value ?? "" ?>
 </textarea>
 <?php if ($this->useValidator): ?>
-    <span class="dodocms-text-red-700 dodocms-hidden" id="validation-message"></span>
+    <span class="tw-text-red-700 tw-hidden" id="validation-message"></span>
 <?php endif; ?>

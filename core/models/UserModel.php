@@ -157,15 +157,15 @@ class UserModel extends Model
     {
         $fields = parent::getFields();
         $fields["username"] = [
-            "size" => "dodocms-w-5/12",
+            "size" => "tw-w-5/12",
             "field" => Text::create()->name("username")->label(__('admin.panel.users.username'))->value($this->getUsername() ?? "")->required(),
         ];
         $fields["email"] = [
-            "size" => "dodocms-w-7/12",
+            "size" => "tw-w-7/12",
             "field" => Text::create()->name("email")->label(__('admin.panel.users.email'))->value($this->getEmail() ?? "")->required(),
         ];
         $fields["password"] = [
-            "size" => "dodocms-w-full",
+            "size" => "tw-w-full",
             "field" => Text::create()->type('password')->name("password")->placeholder("Laisser vide pour maintenir l'ancien mot de passe.")->label(__('admin.panel.users.password'))->value(""),
         ];
         return $fields;

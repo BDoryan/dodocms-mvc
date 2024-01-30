@@ -1,5 +1,5 @@
 <label
         for="<?= $this->id ?>"
-        class="dodocms-block dodocms-text-gray-700 dodocms-text-sm dodocms-font-semibold dodocms-mb-2">
-    <?= $this->label ?> <span class="dodocms-text-red-700 dodocms-text-base"> <?= $this->required ? '*' : "" ?></span>
+        class="tw-block tw-text-gray-700 tw-text-sm tw-font-semibold tw-mb-2">
+    <?= $this->label ?> <span class="tw-text-red-700 tw-text-base"> <?= $this->required ? '*' : "" ?></span>
 </label>

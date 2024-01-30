@@ -20,32 +20,32 @@
     });
 </script>
 <script type="text/x-template" id="modal-template">
-    <div v-if="isOpen()" class="dodocms-z-50 dodocms-fixed dodocms-top-0 dodocms-bottom-0 dodocms-right-0 dodocms-left-0 dodocms-bg-black dodocms-bg-opacity-40 dodocms-backdrop-blur-sm dodocms-flex dodocms-flex-col">
-        <div class="dodocms-m-auto dodocms-w-2/4">
-            <div class="dodocms-bg-gray-700 dodocms-rounded-lg dodocms-shadow-lg">
+    <div v-if="isOpen()" class="tw-z-50 tw-fixed tw-top-0 tw-bottom-0 tw-right-0 tw-left-0 tw-bg-black tw-bg-opacity-40 tw-backdrop-blur-sm tw-flex tw-flex-col">
+        <div class="tw-m-auto tw-w-2/4">
+            <div class="tw-bg-gray-700 tw-rounded-lg tw-shadow-lg">
                 <!-- Modal header -->
-                <div class="dodocms-flex dodocms-items-center dodocms-justify-between dodocms-p-4 md:dodocms-p-5 dodocms-border-b dodocms-rounded-t dark:dodocms-border-gray-600">
-                    <h3 class="dodocms-text-xl dodocms-font-semibold dodocms-text-gray-900 dark:dodocms-text-white">
+                <div class="tw-flex tw-items-center tw-justify-between tw-p-4 md:tw-p-5 tw-border-b tw-rounded-t dark:tw-border-gray-600">
+                    <h3 class="tw-text-xl tw-font-semibold tw-text-gray-900 dark:tw-text-white">
                         <slot name="title"></slot>
                     </h3>
                     <button type="button"
                             v-on:click="close()"
-                            class="dodocms-text-gray-400 dodocms-bg-transparent hover:dodocms-bg-gray-200 hover:dodocms-text-gray-900 dodocms-rounded-lg dodocms-text-sm dodocms-w-8 dodocms-h-8 dodocms-ms-auto dodocms-inline-flex dodocms-justify-center dodocms-items-center dark:hover:dodocms-bg-gray-600 dark:hover:dodocms-text-white">
-                        <svg class="dodocms-w-3 dodocms-h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                            class="tw-text-gray-400 tw-bg-transparent hover:tw-bg-gray-200 hover:tw-text-gray-900 tw-rounded-lg tw-text-sm tw-w-8 tw-h-8 tw-ms-auto tw-inline-flex tw-justify-center tw-items-center dark:hover:tw-bg-gray-600 dark:hover:tw-text-white">
+                        <svg class="tw-w-3 tw-h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                              fill="none"
                              viewBox="0 0 14 14">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                   d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                         </svg>
-                        <span class="dodocms-sr-only">Close modal</span>
+                        <span class="tw-sr-only">Close modal</span>
                     </button>
                 </div>
                 <!-- Modal body -->
-                <div class="dodocms-p-4 md:dodocms-p-5 space-y-4 dodocms-max-h-[74vh] dodocms-overflow-y-auto">
+                <div class="tw-p-4 md:tw-p-5 space-y-4 tw-max-h-[74vh] tw-overflow-y-auto">
                     <slot name="body"></slot>
                 </div>
                 <!-- Modal footer -->
-                <div class="dodocms-flex dodocms-items-center dodocms-p-4 md:dodocms-p-5 dodocms-border-t dodocms-border-gray-200 dodocms-rounded-b dark:dodocms-border-gray-600">
+                <div class="tw-flex tw-items-center tw-p-4 md:tw-p-5 tw-border-t tw-border-gray-200 tw-rounded-b dark:tw-border-gray-600">
                     <slot name="footer"></slot>
                 </div>
             </div>

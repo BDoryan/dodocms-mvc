@@ -102,32 +102,32 @@
 <script type="text/x-template" id="modal-upload-template">
     <modal name="upload-modal">
         <template v-slot:title>
-            <i class='fa-solid fa-cloud-upload dodocms-me-1'></i> Upload a new resources
+            <i class='fa-solid fa-cloud-upload tw-me-1'></i> Upload a new resources
         </template>
         <template v-slot:body>
-            <div class="dodocms-flex dodocms-items-center dodocms-justify-center dodocms-w-full">
+            <div class="tw-flex tw-items-center tw-justify-center tw-w-full">
                 <label for="dropzone-file"
-                       class="dodocms-relative dodocms-flex dodocms-flex-col dodocms-items-center dodocms-justify-center dodocms-w-full dodocms-h-64 dodocms-border-2 dodocms-border-gray-300 dodocms-border-dashed dodocms-rounded-lg cursor-pointer dodocms-bg-gray-50 dark:hover:dodocms-bg-bray-800 dark:dodocms-bg-gray-700 hover:dodocms-bg-gray-100 dark:dodocms-border-gray-600 dark:hover:dodocms-border-gray-500 dark:hover:dodocms-bg-gray-600">
-                    <div class="dodocms-flex dodocms-flex-col dodocms-items-center dodocms-justify-center pt-5 pb-6">
-                        <svg class="dodocms-w-8 dodocms-h-8 dodocms-mb-4 dodocms-text-gray-500 dark:dodocms-text-gray-400"
+                       class="tw-relative tw-flex tw-flex-col tw-items-center tw-justify-center tw-w-full tw-h-64 tw-border-2 tw-border-gray-300 tw-border-dashed tw-rounded-lg cursor-pointer tw-bg-gray-50 dark:hover:tw-bg-bray-800 dark:tw-bg-gray-700 hover:tw-bg-gray-100 dark:tw-border-gray-600 dark:hover:tw-border-gray-500 dark:hover:tw-bg-gray-600">
+                    <div class="tw-flex tw-flex-col tw-items-center tw-justify-center pt-5 pb-6">
+                        <svg class="tw-w-8 tw-h-8 tw-mb-4 tw-text-gray-500 dark:tw-text-gray-400"
                              aria-hidden="true"
                              xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                   stroke-width="2"
                                   d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
                         </svg>
-                        <p class="dodocms-mb-2 dodocms-text-sm dodocms-text-gray-500 dark:dodocms-text-gray-400"><span
-                                    class="dodocms-font-semibold"><?= __("admin.panel.resources.upload.click_to_upload") ?></span>
+                        <p class="tw-mb-2 tw-text-sm tw-text-gray-500 dark:tw-text-gray-400"><span
+                                    class="tw-font-semibold"><?= __("admin.panel.resources.upload.click_to_upload") ?></span>
                             <?= __("admin.panel.resources.upload.drag_and_drop") ?></p>
-                        <p class="dodocms-text-xs dodocms-text-gray-500 dark:dodocms-text-gray-400">PDF, JPEG, PNG or
+                        <p class="tw-text-xs tw-text-gray-500 dark:tw-text-gray-400">PDF, JPEG, PNG or
                             JPG</p>
                     </div>
                     <input @change="selectFiles" :multiple="multiple" name="files[]" id="dropzone-file" type="file"
-                           class="dodocms-absolute dodocms-w-full dodocms-h-full dodocms-opacity-0"/>
+                           class="tw-absolute tw-w-full tw-h-full tw-opacity-0"/>
                 </label>
             </div>
             <div v-if="files.length > 0"
-                 class="dodocms-py-3 dodocms-pe-3 dodocms-grid dodocms-grid-cols-3 dodocms-gap-4"
+                 class="tw-py-3 tw-pe-3 tw-grid tw-grid-cols-3 tw-gap-4"
                  style="max-height: 300px; overflow-y: auto;">
                 <resource-item v-for="(file, index) in files"
                                :ref="`resourceItem_${index}`"
@@ -144,13 +144,13 @@
         <template v-slot:footer>
             <button type="button"
                     v-on:click="close"
-                    class="close-upload-modal dodocms-me-auto dodocms-text-gray-500 dodocms-bg-white hover:dodocms-bg-gray-100 focus:ring-4 focus:dodocms-outline-none focus:ring-blue-300 dodocms-rounded-lg dodocms-border dodocms-border-gray-200 dodocms-text-sm dodocms-font-medium dodocms-px-5 dodocms-py-2.5 hover:dodocms-text-gray-900 focus:dodocms-z-10 dark:dodocms-bg-gray-700 dark:dodocms-text-gray-300 dark:dodocms-border-gray-500 dark:hover:dodocms-text-white dark:hover:dodocms-bg-gray-600 dark:focus:ring-gray-600">
+                    class="close-upload-modal tw-me-auto tw-text-gray-500 tw-bg-white hover:tw-bg-gray-100 focus:ring-4 focus:tw-outline-none focus:ring-blue-300 tw-rounded-lg tw-border tw-border-gray-200 tw-text-sm tw-font-medium tw-px-5 tw-py-2.5 hover:tw-text-gray-900 focus:tw-z-10 dark:tw-bg-gray-700 dark:tw-text-gray-300 dark:tw-border-gray-500 dark:hover:tw-text-white dark:hover:tw-bg-gray-600 dark:focus:ring-gray-600">
                 <?= __("admin.panel.resources.upload.close") ?>
             </button>
-            <div class="dodocms-me-auto dodocms-text-white dodocms-opacity-75" id="state">
+            <div class="tw-me-auto tw-text-white tw-opacity-75" id="state">
             </div>
             <button v-on:click="startUpload"
-                    class="dodocms-text-white dodocms-bg-blue-700 hover:dodocms-bg-blue-800 focus:ring-4 focus:dodocms-outline-none focus:ring-blue-300 dodocms-font-medium dodocms-rounded-lg dodocms-text-sm dodocms-px-5 dodocms-py-2.5 dodocms-text-center dark:dodocms-bg-blue-600 dark:hover:dodocms-bg-blue-700 dark:focus:ring-blue-800">
+                    class="tw-text-white tw-bg-blue-700 hover:tw-bg-blue-800 focus:ring-4 focus:tw-outline-none focus:ring-blue-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-5 tw-py-2.5 tw-text-center dark:tw-bg-blue-600 dark:hover:tw-bg-blue-700 dark:focus:ring-blue-800">
                 <?= __("admin.panel.resources.upload.submit") ?>
             </button>
         </template>

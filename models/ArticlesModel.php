@@ -74,19 +74,19 @@ class ArticlesModel extends ModelAssociated
     {
         $fields = parent::getFields();
         $fields['title'] = [
-            'size' => 'dodocms-w-1/2',
+            'size' => 'tw-w-1/2',
             "field" => Text::create()->name("title")->label(__('admin.panel.articles.fields.label.title'))->value($this->title)
         ];
         $fields['subtitle'] = [
-            'size' => 'dodocms-w-1/2',
+            'size' => 'tw-w-1/2',
             "field" => Text::create()->name("subtitle")->label(__('admin.panel.articles.fields.label.path'))->value($this->subtitle)
         ];
         $fields['illustration'] = [
-            'size' => 'dodocms-w-full',
+            'size' => 'tw-w-full',
             "field" => ResourceViewer::create()->name("illustration")->label(__('admin.panel.articles.fields.label.illustration'))->resources($this->getIllustrationResource() !== null ? [$this->getIllustrationResource()] : [])
         ];
         $fields['images'] = [
-            'size' => 'dodocms-w-full',
+            'size' => 'tw-w-full',
             "field" => ResourceViewer::create()->multiple()->name("images")->label(__('admin.panel.articles.fields.label.images'))->resources($this->getImages())
         ];
         return $fields;

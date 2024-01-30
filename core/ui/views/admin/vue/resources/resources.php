@@ -31,11 +31,11 @@
             ->title(__('admin.panel.resources.title'))
             ->description(__('admin.panel.resources.description'))
             ->content(
-                '<div class="dodocms-flex dodocms-flex-row">' .
+                '<div class="tw-flex tw-flex-row">' .
                 Button::create()
                     ->blue()
                     ->attribute('v-on:click', "openModal")
-                    ->text('<i class="fa-solid fa-cloud-upload dodocms-me-1"></i> ' . __('admin.panel.dashboard.button.upload_file'))
+                    ->text('<i class="fa-solid fa-cloud-upload tw-me-1"></i> ' . __('admin.panel.dashboard.button.upload_file'))
                     ->html()
                 . '</div>'
             )

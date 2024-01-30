@@ -17,7 +17,7 @@ class PanelController extends AdminController
     {
         $tablesSection = [];
         foreach (Table::getModels() as $table => $model) {
-            $tablesSection[] = new SidebarSection("dodocms-me-1 fa-solid fa-table-list", $table, DefaultRoutes::getRoute(DefaultRoutes::ADMIN_TABLES_TABLE_ENTRIES, ['table' => $table]));
+            $tablesSection[] = new SidebarSection("tw-me-1 fa-solid fa-table-list", $table, DefaultRoutes::getRoute(DefaultRoutes::ADMIN_TABLES_TABLE_ENTRIES, ['table' => $table]));
         }
 
         $modulesSection = [];
@@ -28,17 +28,17 @@ class PanelController extends AdminController
 
         $this->sidebar = new Sidebar([
             new SidebarCategory(__("admin.panel.content_manager"), [
-                new SidebarSection("dodocms-me-1 fa-solid fa-images", __('admin.panel.resources.title'), DefaultRoutes::ADMIN_RESOURCES_MANAGER),
-                new SidebarSection("dodocms-me-1 fa-solid fa-file-lines", __('admin.panel.pages.title'), DefaultRoutes::getRoute(DefaultRoutes::ADMIN_PAGES_MANAGER, ['table' => 'Page'])),
+                new SidebarSection("tw-me-1 fa-solid fa-images", __('admin.panel.resources.title'), DefaultRoutes::ADMIN_RESOURCES_MANAGER),
+                new SidebarSection("tw-me-1 fa-solid fa-file-lines", __('admin.panel.pages.title'), DefaultRoutes::getRoute(DefaultRoutes::ADMIN_PAGES_MANAGER, ['table' => 'Page'])),
             ]),
             new SidebarCategory(__("admin.panel.admin_center"), [
-                new SidebarSection("dodocms-me-1 fa-solid fa-users", __('admin.panel.users.title'), DefaultRoutes::getRoute(DefaultRoutes::ADMIN_USERS, ['table' => 'Page'])),
-                new SidebarSection("dodocms-me-1 fa-solid fa-gear", __('admin.panel.configuration.title'), DefaultRoutes::getRoute(DefaultRoutes::ADMIN_CONFIGURATION, ['table' => 'Page'])),
+                new SidebarSection("tw-me-1 fa-solid fa-users", __('admin.panel.users.title'), DefaultRoutes::getRoute(DefaultRoutes::ADMIN_USERS, ['table' => 'Page'])),
+                new SidebarSection("tw-me-1 fa-solid fa-gear", __('admin.panel.configuration.title'), DefaultRoutes::getRoute(DefaultRoutes::ADMIN_CONFIGURATION, ['table' => 'Page'])),
             ]),
             new SidebarCategory(__("admin.panel.modules"), $modulesSection),
             new SidebarCategory(__("admin.panel.developer_center"), [
-                new SidebarSection("dodocms-me-1 fa-solid fa-cube", __('admin.panel.block_manager'), DefaultRoutes::ADMIN_BLOCKS_MANAGER),
-                new SidebarSection("dodocms-me-1 fa-solid fa-database", __('admin.panel.table_management'), DefaultRoutes::ADMIN_TABLES),
+                new SidebarSection("tw-me-1 fa-solid fa-cube", __('admin.panel.block_manager'), DefaultRoutes::ADMIN_BLOCKS_MANAGER),
+                new SidebarSection("tw-me-1 fa-solid fa-database", __('admin.panel.table_management'), DefaultRoutes::ADMIN_TABLES),
             ]),
             new SidebarCategory(__("admin.panel.models"),
                 $tablesSection
