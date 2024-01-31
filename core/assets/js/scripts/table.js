@@ -116,7 +116,7 @@ $(document).on("submit", "#table-form", function (event) {
             default_value: "CURRENT_TIMESTAMP"
         });
     }
-    
+
     attributes.push({
         name: "active",
         type: "boolean",

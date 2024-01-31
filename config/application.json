@@ -1,15 +1,13 @@
 {
-  "installed": true,
-  "password_policy": "/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()-_=+{};:,<.>]).{8,}$/",
-  "jwt": {
-    "secret": "rL8T#r^R9K@trL8T#r^R9K@trd&rL8T#r^R9K@trd&egZ*egZ*rd&egZ*",
-    "expiresIn": 3600
-  },
-  "mysql": {
-    "installed": true,
-    "hostname": "localhost",
-    "database": "dodocms",
-    "username": "root",
-    "password": "N!6JsMnki!NG"
-  }
+    "password_policy": "\/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()-_=+{};:,<.>]).{8,}$\/",
+    "jwt": {
+        "secret": "",
+        "expiresIn": 3600
+    },
+    "mysql": {
+        "hostname": "localhost",
+        "username": "root",
+        "database": "dodocms_installation_test",
+        "password": "N!6JsMnki!NG"
+    }
 }

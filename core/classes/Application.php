@@ -108,7 +108,7 @@ class Application
         $this->logger->info("Session loaded !");
     }
 
-    private function loadDatabase()
+    public function connectDatabase()
     {
         $this->database = Database::withConfiguration($this->getConfiguration());
         $this->database->connection();
@@ -200,6 +200,10 @@ class Application
         ]);
     }
 
+    public function needSetup(): bool {
+        return file_exists($this->toRoot("/setup"));
+    }
+
     public function run()
     {
         if (isset($_GET["debug"])) {
@@ -212,17 +216,23 @@ class Application
             $this->logger->debug("Application->loadConfiguration();");
             $this->loadConfiguration();
 
-            $this->logger->debug("Application->loadJWTManager()");
-            $this->jwtManager = new JsonWebTokenManager($this->getConfiguration()["jwt"]["secret"], $this->getConfiguration()["jwt"]["expiresIn"]);
-
-            $this->logger->debug("Application->loadDatabase();");
-            $this->loadDatabase();
-
             $this->logger->debug("Application->loadSession();");
             $this->loadSession();
 
             $this->logger->debug("Application->init();");
             $this->init();
+
+            if($this->needSetup()) {
+                Autoloader::require($this->toRoot('/setup'));
+                Setup::run();
+                return;
+            }
+
+            $this->logger->debug("Application->loadJWTManager()");
+            $this->jwtManager = new JsonWebTokenManager($this->getConfiguration()["jwt"]["secret"], $this->getConfiguration()["jwt"]["expiresIn"]);
+
+            $this->logger->debug("Application->connectDatabase();");
+            $this->connectDatabase();
 
             $this->logger->debug("Application->loadModules();");
             ModulesManager::loadModules();
@@ -405,6 +415,10 @@ class Application
     public function setTheme(Theme $theme): void
     {
         $this->theme = $theme;
+    }
+
+    public function getConfigurationInstance(): Configuration {
+        return $this->configuration;
     }
 
     public function getConfiguration(): array

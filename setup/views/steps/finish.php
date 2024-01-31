@@ -1,0 +1,1 @@
+<p class="text-center text-base text-green-700 font-semibold pb-5"><?= __('setup.finish.message') ?></p>

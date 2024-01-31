@@ -9,7 +9,6 @@
     <div class="tw-flex tw-flex-wrap tw-gap-y-3 -tw-mx-2 tw-w-full">
         <div class="tw-w-4/12 tw-px-2">
             <?php
-
             Text::create()
                 ->label(__('admin.panel.tables.table.attribute.name'))
                 ->readonly(!empty($table_name))
@@ -18,7 +17,8 @@
                 ->required(true)
                 ->name("attribute_name")
                 ->placeholder("name")
-                ->render(); ?>
+                ->render();
+            ?>
         </div>
         <div class="tw-w-4/12 tw-px-2">
             <?php Select::create()
@@ -27,7 +27,9 @@
                 ->label(__('admin.panel.tables.table.attribute.type_attribut'))
                 ->name("attribute_type")
                 ->required(true)
-                ->options(Select::toCombine(TableAttribute::TYPES, function ($type) { return $type; } ))
+                ->options(Select::toCombine(TableAttribute::TYPES, function ($type) {
+                    return $type;
+                }))
                 ->render() ?>
         </div>
         <div class="tw-w-4/12 tw-px-2">
@@ -85,7 +87,9 @@
                 ->label(__('admin.panel.tables.table.attribute.choose_an_association_to_another_table'))
                 ->name("attribute_association")
                 ->required(true)
-                ->options(Select::toCombine(Table::listTablesName(), function ($option) { return $option."(id)"; }))
+                ->options(Select::toCombine(Table::listTablesName(), function ($option) {
+                    return $option . "(id)";
+                }))
                 ->render() ?>
         </div>
     </div>

@@ -1,6 +1,6 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    RewriteBase /dodocms-mvc
+    RewriteBase /
 
     # Empêcher l'accès direct aux répertoires
     # RewriteCond %{REQUEST_FILENAME} -d

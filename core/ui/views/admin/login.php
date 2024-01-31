@@ -6,8 +6,8 @@
             <h1 class="tw-text-3xl tw-font-semibold tw-text-center tw-mt-3 tw-mb-0"><?= __('admin.login.form.title') ?></h1>
 
             <form class="tw-text-start tw-flex tw-flex-wrap tw-mt-1"
-                  action="<?= Tools::getCurrentURI(); ?>" method="POST"><h2
-                        class="tw-px-2 mb-[40px] tw-text-center tw-text-base italic tw-mx-auto"><?= __('admin.login.form.subtitle') ?></h2>
+                  action="<?= Tools::getCurrentURI(); ?>" method="POST">
+                <h2 class="tw-px-2 mb-[40px] tw-text-center tw-text-base tw-italic tw-mx-auto tw-mb-6"><?= __('admin.login.form.subtitle') ?></h2>
                 <div class="tw-mb-4 tw-w-full tw-px-2">
                     <?php
                     Text::create()->template('/core/ui/views/admin/components/field/')->label(__('admin.login.form.username'))->name("email")->placeholder(__('admin.login.form.your_username'))->required()->render()

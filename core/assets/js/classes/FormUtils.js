@@ -1,7 +1,7 @@
 class FormUtils {
 
     static validationMessage(input, message) {
-        const validationMessage = $(input).parent().find('#validation-message');
+        const validationMessage = $(input).parent().find('.dodocms-validation-message');
         if (validationMessage.length > 0) {
             validationMessage.text(message);
             validationMessage.show();
@@ -11,7 +11,7 @@ class FormUtils {
     }
 
     static clearValidationMessage(input) {
-        const validationMessage = $(input).parent().find('#validation-message');
+        const validationMessage = $(input).parent().find('.dodocms-validation-message');
         validationMessage.hide();
         $(input).removeClass("tw-border-red-700")
     }
@@ -24,7 +24,7 @@ class FormUtils {
         let success = true;
         $(form).find('input').each(function () {
             const input = $(this)[0];
-            const validationMessage = $(input).parent().find('#validation-message');
+            const validationMessage = $(input).parent().find('.dodocms-validation-message');
 
             if (!input.checkValidity()) {
                 if (validationMessage.length > 0) {

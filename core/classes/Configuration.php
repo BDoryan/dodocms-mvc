@@ -8,7 +8,7 @@ class Configuration
 
     public function __construct(string $path)
     {
-        if(!Tools::endsWith($path, ".json"))
+        if (!Tools::endsWith($path, ".json"))
             $path .= ".json";
 
         $this->path = $path;
@@ -17,8 +17,7 @@ class Configuration
     /**
      * @throws Exception
      */
-    public
-    function load(): void
+    public function load(): void
     {
         if (file_exists($this->path)) {
             $this->configurations = json_decode(file_get_contents($this->path), true);
@@ -33,19 +32,17 @@ class Configuration
             $this->load();
         }
 
-        if($key == null)
+        if ($key == null)
             return $this->configurations;
         return $this->configurations[$key] ?? null;
     }
 
-    public
-    function set(string $key, $value): void
+    public function set(string $key, $value): void
     {
         $this->configurations[$key] = $value;
     }
 
-    public
-    function save(): void
+    public function save(): void
     {
         if (file_exists($this->path)) {
             file_put_contents($this->path, json_encode($this->configurations, JSON_PRETTY_PRINT));

@@ -135,6 +135,47 @@ class Tools
         return ["type" => $columnType];
     }
 
+    public static function deleteDirectory($dirPath): bool
+    {
+        if (!is_dir($dirPath)) {
+            return false;
+        }
+        if (substr($dirPath, strlen($dirPath) - 1, 1) != '/') {
+            $dirPath .= '/';
+        }
+        $files = glob($dirPath . '*', GLOB_MARK);
+        foreach ($files as $file) {
+            if (is_dir($file)) {
+                self::deleteDirectory($file);
+            } else {
+                unlink($file);
+            }
+        }
+        rmdir($dirPath);
+        return true;
+    }
+
+    public static function getDirectorySize($path): int
+    {
+        $bytestotal = 0;
+        $path = realpath($path);
+        if ($path !== false && $path != '' && file_exists($path)) {
+            foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path, FilesystemIterator::SKIP_DOTS)) as $object) {
+                $bytestotal += $object->getSize();
+            }
+        }
+        return $bytestotal;
+    }
+
+    /**
+     * Return timestamp in milliseconds
+     *
+     * @return float
+     */
+    public static function timestamp() {
+        return round(microtime(true) * 1000);
+    }
+
     public static function uuid(): string
     {
         return sprintf(

@@ -17,17 +17,14 @@ class Validator
      * @param $array
      * @return array
      */
-    public static function sanitize($only, $array)
+    public static function sanitize($only, $array): array
     {
         $flippedOnly = array_flip($only);
         return array_intersect_key($array, $flippedOnly);
     }
 
-    public static function validatePassword($password)
+    public static function validatePassword($password): bool
     {
-        /** @var ConfigurationFile $CMS_CONFIGURATION */
-        global $CMS_CONFIGURATION;
-
-        return (bool)preg_match($CMS_CONFIGURATION->get("password_policy"), $password);
+        return (bool)preg_match(Application::get()->getConfiguration()["password_policy"], $password);
     }
 }

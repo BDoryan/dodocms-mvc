@@ -26,6 +26,10 @@ abstract class Model extends CMSObjectHydration
     }
 
     /**
+     * Method called when the data of the model is fetched from the database
+     * and in this method you can add more data to the model
+     *
+     * @return UserModel|null
      * @throws Exception
      */
     public function fetch(): ?Model
@@ -40,12 +44,24 @@ abstract class Model extends CMSObjectHydration
         return $this;
     }
 
+    /**
+     * Method create the data in the database and fetch the data set in database
+     * to this model (instance)
+     *
+     * @return $this|null
+     * @throws Exception
+     */
     public function createAndFetch(): ?Model
     {
         $this->create();
         return $this->fetch();
     }
 
+    /**
+     * Method create the data in the database (without fetch the data set in database)
+     *
+     * @return bool
+     */
     public function create(): bool
     {
         $database = Application::get()->getDatabase();
@@ -55,7 +71,7 @@ abstract class Model extends CMSObjectHydration
     }
 
     /**
-     * Warning: Its important to know that when we update the model the id can't be modified and the creation date too
+     * Method update the data of this model in the database
      *
      * @return bool
      */
@@ -78,6 +94,11 @@ abstract class Model extends CMSObjectHydration
         return ["table_name" => ""];
     }
 
+    /**
+     * Method delete the data of this model in the database
+     *
+     * @return bool
+     */
     public function delete(): bool
     {
         $database = Application::get()->getDatabase();
@@ -85,11 +106,21 @@ abstract class Model extends CMSObjectHydration
         return true;
     }
 
+    /**
+     * Return the model to array
+     *
+     * @return array
+     */
     public function toArray(): array
     {
         return $this->getAttributes();
     }
 
+    /**
+     * Return all attributes of the model (without filtered attributes)
+     *
+     * @return array
+     */
     public function getAttributes(): array
     {
         $vars = get_object_vars($this);
@@ -107,6 +138,12 @@ abstract class Model extends CMSObjectHydration
         return array_diff_key(array_merge($parentVars, $childVars), $this->filteredAttributes());
     }
 
+    /**
+     * Set the id of the model (if the id is null the model will be created in the database)
+     * and return the instance of the model
+     *
+     * @return false|string
+     */
     public function id(?int $id): Model
     {
         $this->setId($id);
@@ -114,6 +151,8 @@ abstract class Model extends CMSObjectHydration
     }
 
     /**
+     * Set the id of the model (if the id is null the model will be created in the database)
+     *
      * @param int $id
      */
     public function setId(int $id): void
@@ -121,12 +160,19 @@ abstract class Model extends CMSObjectHydration
         $this->id = $id;
     }
 
+    /**
+     * Return the id of the model
+     *
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
     /**
+     * Set activation of the model
+     *
      * @param bool $active
      */
     public function setActive(bool $active): void
@@ -134,17 +180,29 @@ abstract class Model extends CMSObjectHydration
         $this->active = $active;
     }
 
+    /**
+     * Return if the model is active
+     *
+     * @return bool
+     */
     public function isActive(): bool
     {
         return $this->active;
     }
 
+    /**
+     * Return if the model has an id
+     *
+     * @return bool
+     */
     public function hasId(): bool
     {
         return isset($this->id);
     }
 
     /**
+     * Set the creation date of the model (in instance, if you want update in database use update() method)
+     *
      * @param string $createdAt
      */
     public function setCreatedAt(string $createdAt): void
@@ -153,6 +211,8 @@ abstract class Model extends CMSObjectHydration
     }
 
     /**
+     * Set the update date of the model (in instance, if you want update in database use update() method)
+     *
      * @param string $updatedAt
      */
     public function setUpdatedAt(string $updatedAt): void
@@ -161,6 +221,8 @@ abstract class Model extends CMSObjectHydration
     }
 
     /**
+     * Set the language of the model (in instance, if you want update in database use update() method)
+     *
      * @param string|null $language
      */
     public function setLanguage(?string $language): void
@@ -169,6 +231,8 @@ abstract class Model extends CMSObjectHydration
     }
 
     /**
+     * Return the creation date of the model
+     *
      * @return string
      */
     public function getCreatedAt(): string
@@ -177,6 +241,8 @@ abstract class Model extends CMSObjectHydration
     }
 
     /**
+     * Return the language of the model
+     *
      * @return string
      */
     public function getLanguage(): string
@@ -185,6 +251,8 @@ abstract class Model extends CMSObjectHydration
     }
 
     /**
+     * Return the update date of the model
+     *
      * @return string
      */
     public function getUpdatedAt(): string
@@ -196,14 +264,18 @@ abstract class Model extends CMSObjectHydration
      * TODO: Il faut savoir qu'il est important de pouvoir mettre en place des vues dédiées à la création du formulaire d'ajout ou de modification
      */
 
+    /**
+     * Return if the model has a language attribute (column) in the database
+     *
+     * @return bool
+     */
     public function hasLanguageAttribute() {
         return Table::getTable($this->table_name)->hasAttributeName('language');
     }
 
     /**
-     * Add default fields
-     * - language
-     * - active
+     * Return the fields of the model for create a form (with the template of the field)
+     * If you want edit the form of this model you can override this method
      *
      * @return array
      */
@@ -224,6 +296,8 @@ abstract class Model extends CMSObjectHydration
     }
 
     /**
+     * Return the name of the table of the model
+     *
      * @return string
      */
     public function getTableName(): string

@@ -26,10 +26,32 @@ class UserModel extends Model
         $this->language = $language;
     }
 
+    /**
+     * Method called when the data of the model is fetched from the database
+     * and in this method you can add more data to the model
+     *
+     * @return UserModel|null
+     * @throws Exception
+     */
     public function fetch(): ?UserModel
     {
         $this->tokens = UserSessionModel::findAll("*", ["user_id" => $this->getId(), "expire_at" => date('Y-m-d H:i:s')]) ?? [];
         return parent::fetch();
+    }
+
+    public function create(): bool
+    {
+        // check if email are not already used
+        if(!UserModel::emailAvailable($this->getEmail())){
+            throw new Exception("Email already used");
+        }
+
+        // check if password is valid
+        if(!UserModel::checkValidationOfPassword($this->getPassword())){
+            throw new Exception("Password is not valid");
+        }
+
+        return parent::create();
     }
 
     /**
@@ -54,13 +76,9 @@ class UserModel extends Model
      * Set the email of the user
      *
      * @param string $email
-     * @throws Exception
      */
     public function setEmail(string $email): void
     {
-//        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-//            throw new Exception("Invalid email");
-//        }
         $this->email = $email;
     }
 
@@ -95,7 +113,7 @@ class UserModel extends Model
     }
 
     /**
-     * Return password hash
+     * Return password hashed
      *
      * @return string
      */
@@ -120,7 +138,8 @@ class UserModel extends Model
      * Return the user session if the password is correct
      *
      * @param string $password
-     * @return bool
+     * @return UserSessionModel|null
+     * @throws Exception
      */
     public function createToken(string $password): ?UserSessionModel
     {
@@ -143,6 +162,12 @@ class UserModel extends Model
         return null;
     }
 
+    /**
+     * Verify if the password is correct with the hash
+     *
+     * @param string $password
+     * @return bool
+     */
     public function checkPassword(string $password): bool
     {
         return password_verify($password, $this->getPassword());
@@ -169,6 +194,17 @@ class UserModel extends Model
             "field" => Text::create()->type('password')->name("password")->placeholder("Laisser vide pour maintenir l'ancien mot de passe.")->label(__('admin.panel.users.password'))->value(""),
         ];
         return $fields;
+    }
+
+    public static function checkValidationOfPassword(string $password): bool
+    {
+        return Validator::validatePassword($password);
+    }
+
+    public static function emailAvailable(string $email): bool
+    {
+        $users = UserModel::findAll("*", ["email" => $email]);
+        return empty($users);
     }
 
     public static function findAll(string $columns = '*', array $conditions = [], $orderBy = ''): ?array

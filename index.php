@@ -15,7 +15,7 @@ include 'autoloader.php';
 /**
  * Run the application
  */
-$application = new Application(__DIR__, "/dodocms-mvc");
+$application = new Application(__DIR__, "/");
 
 /**
  * Here you override the default routes
