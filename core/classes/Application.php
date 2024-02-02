@@ -112,7 +112,7 @@ class Application
     {
         $this->database = Database::withConfiguration($this->getConfiguration());
         $this->database->connection();
-        $this->logger->info("Connection to database success !");
+        $this->logger->info("Connection to database success ! (".$this->getDatabase()->getName().")");
     }
 
     private function init()

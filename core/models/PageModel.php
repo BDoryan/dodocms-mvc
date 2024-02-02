@@ -172,6 +172,17 @@ class PageModel extends ModelAssociated
         return (new PageModel())->getAll($columns, $conditions, $orderBy);
     }
 
+    public static function renderForm(): void
+    {
+        $model = new PageModel();
+        $data = [];
+        $data['table'] = PageModel::TABLE_NAME;
+        $data['table_name'] = PageModel::TABLE_NAME;
+        $data['model'] = $model;
+        $data['entry_id'] = null;
+        view(Application::get()->toRoot('/core/ui/views/admin/panel/sections/table/entry/set_form.php'), $data);
+    }
+
     public function associates(): ?array
     {
         return [
@@ -185,4 +196,4 @@ class PageModel extends ModelAssociated
     }
 }
 
-Table::$models[PageModel::TABLE_NAME] = PageModel::class;
+Table::registerModel(PageModel::TABLE_NAME, PageModel::class);

@@ -10,7 +10,7 @@
                 <h2 class="tw-px-2 mb-[40px] tw-text-center tw-text-base tw-italic tw-mx-auto tw-mb-6"><?= __('admin.login.form.subtitle') ?></h2>
                 <div class="tw-mb-4 tw-w-full tw-px-2">
                     <?php
-                    Text::create()->template('/core/ui/views/admin/components/field/')->label(__('admin.login.form.username'))->name("email")->placeholder(__('admin.login.form.your_username'))->required()->render()
+                    Text::create()->template('/core/ui/views/admin/components/field/')->label(__('admin.login.form.email'))->name("email")->placeholder(__('admin.login.form.your_email'))->required()->render()
                     ?>
                 </div>
                 <div class="tw-mb-4 tw-w-full tw-px-2">

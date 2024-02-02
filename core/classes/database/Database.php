@@ -22,6 +22,7 @@ class Database
 
             return $pdo;
         } catch (Exception $e) {
+            Application::get()->getLogger()->printException($e);
             throw new Exception("Cannot connect to database");
         }
     }

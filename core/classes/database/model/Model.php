@@ -12,6 +12,9 @@ Autoloader::require("core/classes/object/CMSObjectHydration.php");
 abstract class Model extends CMSObjectHydration
 {
 
+    public const MODEL_TYPE_CMS = 'cms';
+    public const MODEL_TYPE_CUSTOM = 'custom';
+
     private string $table_name;
 
     protected ?int $id;
@@ -323,6 +326,9 @@ abstract class Model extends CMSObjectHydration
 
     public static abstract function findAll(string $columns, array $conditions = [], $orderBy = ''): ?array;
 
+    public static function renderForm() {
+        echo "If you see this message, you need to override the renderForm method in your model class";
+    }
 
     public static function getModel(Table $table): ?Model
     {

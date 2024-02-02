@@ -62,11 +62,13 @@ class ResourceModel extends Model implements JsonSerializable
         return true;
     }
 
-    public function getPath(): string {
+    public function getPath(): string
+    {
         return Application::get()->toRoot($this->src);
     }
 
-    public function getURL(): string {
+    public function getURL(): string
+    {
         return Application::get()->toURL($this->src);
     }
 
@@ -144,10 +146,11 @@ class ResourceModel extends Model implements JsonSerializable
         return (new ResourceModel())->getAll($columns, $conditions, $orderBy);
     }
 
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return $this->toArray();
     }
 }
 
-Table::$models[ResourceModel::TABLE_NAME] = ResourceModel::class;
+Table::registerModel(ResourceModel::TABLE_NAME, ResourceModel::class);

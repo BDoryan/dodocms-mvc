@@ -222,6 +222,27 @@ class Setup
      */
     public static function run(): void
     {
+        $loadedExtensions = get_loaded_extensions();
+
+        if (!in_array('pdo_mysql', $loadedExtensions)) {
+            view(Application::get()->toRoot('/core/ui/views/admin/panel/document'), [
+                'head' => fetch(Application::get()->toRoot('/setup/views/head'), [
+                    'title' => 'Required'
+                ]),
+                'content' => fetch(Application::get()->toRoot('/setup/views/layout'), [
+                    'title' => 'Required',
+                    'alerts' => self::getAlerts(),
+                    'content' => fetch(Application::get()->toRoot('/setup/views/required'), [
+                        'driver_need_install' => true
+                    ]),
+                    'step' => $step['step'] ?? 2,
+                    'can_next' => $step['can_next'] ?? false,
+                    'total_steps' => 3,
+                    'can_previous' => $step['can_previous'] ?? false
+                ])
+            ]);
+            exit;
+        }
         $step = self::getStepView(self::getStep());
 
         view(Application::get()->toRoot('/core/ui/views/admin/panel/document'), [

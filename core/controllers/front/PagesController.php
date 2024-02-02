@@ -1,5 +1,7 @@
 <?php
 
+use HeadlessChromium\BrowserFactory;
+
 Autoloader::require('core/classes/controller/DOMController.php');
 Autoloader::require('core/controllers/AdminController.php');
 
@@ -13,7 +15,45 @@ class PagesController extends SectionController
 
     public function index()
     {
-        $this->viewSection("pages");
+        $pages = PageModel::findAll("*", [], "createdAt DESC");
+
+        $attributes = ['name', 'seo_title', 'seo_description', 'keywords', 'slug', 'updatedAt'];
+
+        $columns = [...$attributes, __("admin.panel.tables.table.entries.actions")];
+        $rows = [];
+
+        foreach ($pages as $entry) {
+            $row = $entry->toArray();
+            $row = array_map(function ($value) {
+                $value = htmlspecialchars($value);
+                if (strlen($value) > 50) {
+                    $value = substr($value, 0, 50) . "...";
+                }
+                return $value;
+            }, $row);
+
+            $edit = ButtonHypertext::create()
+                ->text('<i class="tw-me-1 fa-solid fa-pen-to-square"></i> ' . __("admin.panel.tables.table.entries.actions.edit"))
+                ->href(DefaultRoutes::route(DefaultRoutes::ADMIN_TABLE_EDIT_ENTRY, ["table" => $table_name, "id" => $entry['id']]))
+                ->addClass("tw-text-sm tw-whitespace-nowrap")
+                ->blue()
+                ->html();
+
+            $delete = ButtonHypertext::create()
+                ->text('<i class="tw-me-1 fa-solid fa-trash"></i> ' . __("admin.panel.tables.table.entries.actions.delete"))
+                ->addClass("tw-text-sm tw-whitespace-nowrap")
+                ->red()
+                ->href(DefaultRoutes::route(DefaultRoutes::ADMIN_TABLE_DELETE_ENTRY, ["table" => $table_name, "id" => $entry['id']]))
+                ->html();
+
+            $row[] = '<div class="tw-flex tw-flex-row tw-justify-center align-center tw-gap-3">' . "$edit $delete" . '</div>';
+            $rows[] = $row;
+        }
+
+        $this->viewSection("pages", [
+            'columns' => $columns,
+            'rows' => $rows
+        ]);
     }
 
     public function getResource(array $params = [])

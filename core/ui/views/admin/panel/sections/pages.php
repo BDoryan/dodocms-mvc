@@ -13,4 +13,15 @@ Header::create()
     )
     ->render();
 
+TableComponent::create()
+    ->columns($columns ?? [])
+    ->rows($rows ?? [])
+    ->render();
 ?>
+<div class="tw-flex tw-wrap tw-mt-5">
+    <div class="tw-w-1/2 tw-bg-gray-800 tw-rounded-lg tw-p-4">
+        <?php
+        PageModel::renderForm()
+        ?>
+    </div>
+</div>

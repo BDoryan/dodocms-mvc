@@ -42,12 +42,12 @@ class UserModel extends Model
     public function create(): bool
     {
         // check if email are not already used
-        if(!UserModel::emailAvailable($this->getEmail())){
+        if (!UserModel::emailAvailable($this->getEmail())) {
             throw new Exception("Email already used");
         }
 
         // check if password is valid
-        if(!UserModel::checkValidationOfPassword($this->getPassword())){
+        if (!UserModel::checkValidationOfPassword($this->getPassword())) {
             throw new Exception("Password is not valid");
         }
 
@@ -108,7 +108,7 @@ class UserModel extends Model
      */
     public function setPassword(string $password): void
     {
-        if(empty($password))return;
+        if (empty($password)) return;
         $this->password = password_get_info($password)['algo'] ? $password : password_hash($password, PASSWORD_BCRYPT);
     }
 
@@ -130,7 +130,7 @@ class UserModel extends Model
     public function checkToken(string $token): bool
     {
         $jwtManager = Application::get()->getJwtManager();
-        if($jwtManager->verifyToken($token) === null) return false;
+        if ($jwtManager->verifyToken($token) === null) return false;
         return in_array($token, $this->tokens);
     }
 
@@ -213,4 +213,4 @@ class UserModel extends Model
     }
 }
 
-Table::$models[UserModel::TABLE_NAME] = UserModel::class;
+Table::registerModel(UserModel::TABLE_NAME, UserModel::class);

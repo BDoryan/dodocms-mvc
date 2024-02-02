@@ -47,4 +47,4 @@ class ConfigurationsModel extends Model
 
 }
 
-Table::$models[ConfigurationsModel::TABLE_NAME] = ConfigurationsModel::class;
+Table::registerModel(ConfigurationsModel::TABLE_NAME, ConfigurationsModel::class);

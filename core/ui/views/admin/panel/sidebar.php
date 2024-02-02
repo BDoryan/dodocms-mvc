@@ -1,18 +1,15 @@
 <?php
-
-
-if (!isset($sidebar)) {
-    echo "Sidebar not found";
-    exit;
-}
+    if (!isset($sidebar)) {
+        echo "Sidebar not found";
+        exit;
+    }
 ?>
-<div class="tw-flex-shrink-0 tw-w-64 tw-bg-gray-800">
+<div class="tw-flex-shrink-0 tw-w-64 tw-bg-gray-800 tw-rounded-2xl tw-overflow-hidden  tw-shadow-lg">
     <div class="tw-flex tw-flex-col tw-h-full">
-
-        <div class="tw-flex tw-flex-col tw-items-center tw-justify-center tw-py-3 tw-bg-gray-900">
+        <div class="tw-px-6 tw-flex tw-items-center tw-justify-between tw-py-3 tw-bg-gray-900">
             <img width="60" height="60" src="<?= Application::get()->toURL("/core/assets/imgs/logo-animated.png") ?>"
-                 alt="<?= __('admin.panel.dashboard') ?>">
-            <span class="tw-text-white tw-text-xl tw-font-semibold"><?= __("admin.panel.dashboard") ?></span>
+                 alt="<?= __('admin.panel.title') ?>">
+            <div class="tw-text-white tw-text-lg tw-flex tw-flex-col"><span class="tw-text-2xl tw-font-bold">DodoCMS</span><?= __("admin.panel.title") ?></div>
         </div>
         <nav class="tw-flex-1 tw-overflow-y-auto">
             <?php

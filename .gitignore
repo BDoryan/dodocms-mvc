@@ -2,3 +2,5 @@
 /controllers/*
 /models/*
 package-lock.json
+
+/vendor/

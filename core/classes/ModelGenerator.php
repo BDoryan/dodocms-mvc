@@ -59,7 +59,7 @@ class ModelGenerator
             $classContent .= "/** Warning: if you want create or edit entries you need to create the form with a override of getFields(); */\n\n";
 
             $classContent .= "}\n\n";
-            $classContent .= 'Table::$models[' . $className . '::TABLE_NAME] = ' . $className . '::class;';
+            $classContent .= 'Table::registerModel(' . $className . '::TABLE_NAME,  ' . $className . '::class, Model::MODEL_TYPE_CMS);';
 
             file_put_contents($fileName, $classContent);
         }

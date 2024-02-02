@@ -18,13 +18,3 @@ TableComponent::create()
     ->rows($rows ?? [])
     ->render();
 ?>
-<modal name="blocks-modal">
-    <template v-slot:title>
-        <i class='fa-solid fa-cloud-upload tw-me-1'></i> <?= __('admin.panel.configuration.new') ?>
-    </template>
-    <template v-slot:body>
-        Hello World !
-    </template>
-    <template v-slot:footer>
-    </template>
-</modal>

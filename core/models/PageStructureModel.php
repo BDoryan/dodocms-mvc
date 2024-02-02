@@ -38,7 +38,7 @@ class PageStructureModel extends Model
 
     public function getCustom()
     {
-        if(empty($this->block_json))
+        if (empty($this->block_json))
             return null;
         return json_decode($this->block_json, true);
     }
@@ -103,4 +103,4 @@ class PageStructureModel extends Model
     }
 }
 
-Table::$models[BlockModel::TABLE_NAME] = BlockModel::class;
+Table::registerModel(BlockModel::TABLE_NAME, BlockModel::class);

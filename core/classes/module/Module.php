@@ -49,7 +49,10 @@ abstract class Module
 
     public function loadTranslations(): void
     {
-        $translations = json_decode(file_get_contents($this->toRoot('/translations/'.Application::get()->getInternationalization()->getLanguage().'.json')), true);
+        $language_file = $this->getRoot() . '/translations/' . Application::get()->getInternationalization()->getLanguage() . '.json';
+        if (!file_exists($language_file))
+            $language_file = $this->getRoot() . '/translations/en.json';
+        $translations = json_decode(file_get_contents($language_file), true);
         Application::get()->getInternationalization()->addTranslations($translations);
     }
 

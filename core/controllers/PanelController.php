@@ -16,7 +16,7 @@ class PanelController extends AdminController
     public function initSidebar()
     {
         $tablesSection = [];
-        foreach (Table::getModels() as $table => $model) {
+        foreach (Table::searchModels(Model::MODEL_TYPE_CUSTOM) as $table => $model) {
             $tablesSection[] = new SidebarSection("tw-me-1 fa-solid fa-table-list", $table, DefaultRoutes::getRoute(DefaultRoutes::ADMIN_TABLES_TABLE_ENTRIES, ['table' => $table]));
         }
 

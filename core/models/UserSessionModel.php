@@ -63,9 +63,10 @@ class UserSessionModel extends Model
      *
      * @return mixed|null
      */
-    public function getUser() {
+    public function getUser()
+    {
         $user = UserModel::findAll('*', ['id' => $this->user_id]);
-        if(!empty($user))
+        if (!empty($user))
             return $user[0];
         return null;
     }
@@ -86,4 +87,4 @@ class UserSessionModel extends Model
     }
 }
 
-Table::$models[UserSessionModel::TABLE_NAME] = UserSessionModel::class;
+Table::registerModel(UserSessionModel::TABLE_NAME, UserSessionModel::class);

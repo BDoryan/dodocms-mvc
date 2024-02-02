@@ -8,10 +8,51 @@ Autoloader::require("core/classes/object/CMSObject.php");
 class Table extends CMSObject
 {
 
-    public static array $models = [];
+    private static array $models = [];
 
-    public static function registerModel(string $table, $model): void {
-        self::$models[$table] = $model;
+    public static function registerModel(string $table, $model, ?string $type = null): void
+    {
+        if ($type == null)
+            $type = Model::MODEL_TYPE_CMS;
+        self::$models[$type][$table] = $model;
+    }
+
+    /**
+     * Return the model associated to the table
+     *
+     * @param string $table the name of the table
+     * @param string|null $type if is null search in all models else search by the type
+     *
+     * @return Model|null the model associated to the table or null if not found
+     */
+    public static function searchModel(string $table, ?string $type = null): ?Model
+    {
+        if ($type == null) {
+            foreach (self::$models as $type => $models)
+                if (isset($models[$table]))
+                    return new $models[$table];
+        } else {
+            if (isset(self::$models[$type][$table]))
+                return new self::$models[$type][$table];
+        }
+        return null;
+    }
+
+    /**
+     * Return the model associated to the table
+     *
+     * @param string|null $type if is null search in all models else search by the type
+     *
+     * @return array the model associated to the table or null if not found
+     */
+    public static function searchModels(?string $type = null): array
+    {
+        if ($type == null) {
+            return self::getModels();
+        } else {
+            return self::$models[$type] ?? [];
+        }
+        return [];
     }
 
     protected string $name;
@@ -38,8 +79,9 @@ class Table extends CMSObject
 
     public function getModel(): ?Model
     {
-        if (isset(self::$models[$this->getName()]))
-            return new self::$models[$this->getName()];
+        $model = self::searchModel($this->getName());
+        if (!empty($model))
+            return new $model;
         return null;
     }
 
@@ -71,7 +113,7 @@ class Table extends CMSObject
                     $sql .= "ALTER TABLE " . $this->getName() . " DROP PRIMARY KEY;\n";
                 }
                 if (!empty($attribute->getAssociation())) {
-                    $sql .= "ALTER TABLE " . $this->getName() . " DROP FOREIGN KEY ".($this->getConstraintNameByColumn($attribute->getName()))."\n";
+                    $sql .= "ALTER TABLE " . $this->getName() . " DROP FOREIGN KEY " . ($this->getConstraintNameByColumn($attribute->getName())) . "\n";
                 }
                 $sql .= "ALTER TABLE " . $this->getName() . " DROP COLUMN " . $attribute->getName() . ";\n";
             }
@@ -363,7 +405,7 @@ class Table extends CMSObject
     public static function listTablesName(): array
     {
         $database = Application::get()->getDatabase();
-        return $database->showTables();;
+        return $database->showTables();
     }
 
     public static function getTables(): array
@@ -379,6 +421,11 @@ class Table extends CMSObject
 
     public static function getModels(): array
     {
+//        // get all array stored in values for create one array
+//        $models = [];
+//        foreach (self::$models as $type => $models_)
+//            foreach ($models_ as $table => $model)
+//                $models[$table] = $model;
         return self::$models;
     }
 }

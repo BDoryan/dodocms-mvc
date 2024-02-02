@@ -76,4 +76,4 @@ class BlockModel extends Model
     }
 }
 
-Table::$models[BlockModel::TABLE_NAME] = BlockModel::class;
+Table::registerModel(BlockModel::TABLE_NAME, BlockModel::class);
