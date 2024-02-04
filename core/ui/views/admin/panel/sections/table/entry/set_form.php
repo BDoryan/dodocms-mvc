@@ -1,4 +1,5 @@
 <form class="tw-flex tw-flex-row tw-flex-wrap -tw-mx-2 tw-gap-y-2" method="post" action="<?= $action ?? '' ?>"
+      novalidate
       enctype="multipart/form-data">
     <?php
 

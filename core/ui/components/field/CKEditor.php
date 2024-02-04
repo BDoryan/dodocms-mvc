@@ -21,7 +21,7 @@ class CKEditor extends Field
         $this->rows = $rows;
     }
 
-    public function validator(bool $useValidator): CKEditor
+    public function validator(bool $useValidator = true): CKEditor
     {
         $this->useValidator = $useValidator;
         return $this;

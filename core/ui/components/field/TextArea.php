@@ -21,7 +21,7 @@ class TextArea extends Field
         $this->rows = $rows;
     }
 
-    public function validator(bool $useValidator): TextArea
+    public function validator(bool $useValidator = true): TextArea
     {
         $this->useValidator = $useValidator;
         return $this;

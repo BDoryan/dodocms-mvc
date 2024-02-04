@@ -142,7 +142,7 @@ class PageModel extends ModelAssociated
         $fields = parent::getFields();
         $fields["name"] = [
             "size" => "tw-w-full",
-            "field" => Text::create()->name("name")->label(__('admin.panel.pages.fields.label.name'))->value($this->name)
+            "field" => Text::create()->validator()->required()->name("name")->label(__('admin.panel.pages.fields.label.name'))->value($this->name)
         ];
         $fields["seo_title"] = [
             "size" => "tw-w-full",
@@ -168,7 +168,7 @@ class PageModel extends ModelAssociated
         ];
         $fields["slug"] = [
             "size" => "tw-w-full",
-            "field" => Text::create()->name("slug")->label(__('admin.panel.pages.fields.label.slug'))->value($this->slug)
+            "field" => Text::create()->validator()->required()->name("slug")->label(__('admin.panel.pages.fields.label.slug'))->value($this->slug)
         ];
 //        $fields["favicon"] = [
 //            "size" => "tw-w-full",

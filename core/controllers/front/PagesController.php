@@ -27,7 +27,7 @@ class PagesController extends SectionController
         foreach ($pages as $entry) {
             $row = $entry->toArray();
             $row = array_map(function ($value) {
-                $value = htmlspecialchars($value);
+                $value = htmlspecialchars($value ?? '');
                 if (strlen($value) > 50) {
                     $value = substr($value, 0, 50) . "...";
                 }

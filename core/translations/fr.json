@@ -166,7 +166,7 @@
   "admin.panel.pages.new": "Créer une nouvelle page",
   "admin.panel.pages.fields.label.name": "Nom",
   "admin.panel.pages.fields.label.title": "Titre",
-  "admin.panel.pages.fields.label.slug": "Limace",
+  "admin.panel.pages.fields.label.slug": "Chemin depuis url (si racine '/')",
   "admin.panel.pages.fields.label.seo_title": "Titre SEO",
   "admin.panel.pages.fields.label.seo_description": "Descriptif SEO",
   "admin.panel.pages.fields.label.seo_keywords": "Mots-clés SEO",

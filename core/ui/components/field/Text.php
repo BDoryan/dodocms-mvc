@@ -19,7 +19,7 @@ class Text extends Field
         $this->placeholder = $placeholder;
     }
 
-    public function validator(bool $useValidator): Text
+    public function validator(bool $useValidator = true): Text
     {
         $this->useValidator = $useValidator;
         return $this;
