@@ -1,3 +1,1 @@
-<modal-upload>
-
-</modal-upload>
+<modal-upload></modal-upload>

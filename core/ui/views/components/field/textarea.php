@@ -7,7 +7,7 @@
         rows="<?= $this->rows ?? "3" ?>"
         <?= $this->required ? "required" : "" ?>
         placeholder="<?= $this->placeholder ?? "" ?> "
-        class="tw-w-full tw-bg-gray-700 tw-px-3 tw-py-2 tw-border tw-border-gray-500 tw-rounded-md tw-text-white tw-outline-none focus:tw-border-gray-400 tw-mb-1"
+        class="tw-w-full tw-bg-white tw-px-3 tw-py-2 tw-border tw-border-gray-300 tw-rounded-md tw-text-gray-800 tw-outline-none focus:tw-border-gray-400 tw-mb-1"
 >
 <?= $this->value ?? "" ?>
 </textarea>

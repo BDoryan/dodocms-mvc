@@ -48,10 +48,10 @@
 <script type="text/x-template" id="set-resource-modal-template">
     <modal name="set-resource-modal">
         <template v-slot:title>
-            <i class='fa-solid fa-file-alt tw-me-1'></i> Définir une ressource à cet élément
+            <i class='fa-solid fa-file-alt tw-me-1'></i> <?= __('admin.panel.set.resource.title') ?>
         </template>
         <template v-slot:body>
-            <p>Visualisez la resource actuellement appliqué, si rien de défini c'est celle par défaut qui est utilisé.</p>
+            <p><?= __('admin.panel.resources.set.resource.text') ?></p>
             <resource-viewer :ref="`ref_ResourceViewerOfSetResource`" :items="resources"
                              :itemsSelected="resourcesSelected"
                              :selectable="false"
@@ -68,10 +68,10 @@
             <button type="button"
                     v-on:click="close"
                     class="close-upload-modal tw-me-auto tw-text-gray-500 tw-bg-white hover:tw-bg-gray-100 focus:ring-4 focus:tw-outline-none focus:ring-blue-300 tw-rounded-lg tw-border tw-border-gray-200 tw-text-sm tw-font-medium tw-px-5 tw-py-2.5 hover:tw-text-gray-900 focus:tw-z-10 dark:tw-bg-gray-700 dark:tw-text-gray-300 dark:tw-border-gray-500 dark:hover:tw-text-white dark:hover:tw-bg-gray-600 dark:focus:ring-gray-600">
-                Cancel
+                <?= __('admin.panel.set.resource.cancel') ?>
             </button>
             <button v-on:click="submit()" class="tw-text-white tw-bg-blue-700 hover:tw-bg-blue-800 focus:ring-4 focus:tw-outline-none focus:ring-blue-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-5 tw-py-2.5 tw-text-center dark:tw-bg-blue-600 dark:hover:tw-bg-blue-700 dark:focus:ring-blue-800">
-                Apply this resource
+                <?= __('admin.panel.set.resource.apply') ?>
             </button>
         </template>
     </modal>

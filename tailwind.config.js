@@ -9,25 +9,29 @@ module.exports = {
                     backgroundColor: 'gray',
                     backgroundShade: 600,
                     borderColor: 'gray',
-                    borderShade: 500
+                    borderShade: 500,
+                    textColor: 'white'
                 },
                 error: {
                     backgroundColor: 'red',
                     backgroundShade: 800,
                     borderColor: 'gray',
-                    borderShade: 700
+                    borderShade: 700,
+                    textColor: 'white'
                 },
                 warning: {
                     backgroundColor: 'orange',
                     backgroundShade: 800,
                     borderColor: 'gray',
-                    borderShade: 700
+                    borderShade: 700,
+                    textColor: 'white'
                 },
                 success: {
                     backgroundColor: 'green',
                     backgroundShade: 800,
                     borderColor: 'gray',
-                    borderShade: 700
+                    borderShade: 700,
+                    textColor: 'white'
                 }
             }
         },
@@ -50,6 +54,7 @@ module.exports = {
                     backgroundColor: colors[value.backgroundColor][value.backgroundShade],
                     border: '1px solid ',
                     borderColor: colors[value.borderColor][value.borderShade],
+                    color: colors[value.textColor]
                 };
             });
             console.log(utilities)

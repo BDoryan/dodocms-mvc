@@ -48,6 +48,7 @@
   "admin.panel.modules": "Modules",
   "admin.panel.category_empty": "No sections found.",
   "admin.panel.developer_center": "Developer center",
+  "admin.panel.pages.view": "View",
   "admin.panel.dashboard": "Dashboard",
   "admin.panel.title": "Admin panel",
   "admin.panel.dashboard.description": "Welcome to DodoCMS admin panel.",

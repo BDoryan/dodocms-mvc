@@ -154,6 +154,8 @@ class TablesController extends SectionController
         $table = $this->getTable($table_name);
         $model = $this->getModel($table);
 
+        $redirection = $_GET['redirection'] ?? '';
+
         try {
             if ($model->id($entry_id)->fetch() == null) {
                 $this->addToast(new Toast(__("admin.panel.toast.error"), __("admin.panel.tables.table.entries.entry_not_found", ["table" => $table_name, "entry_id" => $entry_id]), Toast::TYPE_ERROR));
@@ -164,13 +166,17 @@ class TablesController extends SectionController
                     Application::get()->getLogger()->error("Error while deleting entry");
                     $this->addAlert(new Alert(__("admin.panel.toast.error"), __("admin.panel.tables.table.entries.delete_entry.error"), Toast::TYPE_ERROR));
                 }
+                if(!empty($redirection)) {
+                    Application::get()->redirect(urldecode($redirection));
+                    exit;
+                }
             }
         } catch (Exception $e) {
             Application::get()->getLogger()->error("Error while deleting entry");
             Application::get()->getLogger()->printException($e);
             $this->addAlert(new Alert(__("admin.panel.toast.error"), __("admin.panel.tables.table.entries.delete_entry.error"), Toast::TYPE_ERROR));
         }
-        header('Location: ' . DefaultRoutes::route(DefaultRoutes::ADMIN_TABLES_TABLE_ENTRIES, ["table" => $table_name]));
+        Application::get()->redirect(DefaultRoutes::route(DefaultRoutes::ADMIN_TABLES_TABLE_ENTRIES, ["table" => $table_name]));
     }
 
     public function newEntry(array $params): void
@@ -202,6 +208,7 @@ class TablesController extends SectionController
                 }
             }
 
+            $redirection = $_GET['redirection'] ?? '';
             $post_data = array_slice($_POST, 0);
 
             if (!empty($post_data)) {
@@ -211,22 +218,25 @@ class TablesController extends SectionController
                 $model->hydrate($post_data);
                 if (isset($entry_id) ? $model->update() : $model->create()) {
                     $this->addToast(new Toast(__("admin.panel.toast.success"), isset($entry_id) ? __("admin.panel.tables.table.entries.edit_entry.success") : __("admin.panel.tables.table.entries.create_entry.success"), Toast::TYPE_SUCCESS));
-                    if (!isset($entry_id)) {
-                        Application::get()->redirect(DefaultRoutes::getRoute(DefaultRoutes::ADMIN_TABLES_TABLE_ENTRIES, ["table" => $table_name]));
-                        exit;
+                    if(empty($redirection)) {
+                        $redirection =
+                            isset($entry_id)
+                                ? DefaultRoutes::getRoute(DefaultRoutes::ADMIN_TABLES_TABLE_ENTRIES, ["table" => $table_name])
+                                : DefaultRoutes::getRoute(DefaultRoutes::ADMIN_TABLE_EDIT_ENTRY, ["table" => $table_name, "id" => $entry_id]);
                     } else {
-                        Application::get()->redirect(DefaultRoutes::getRoute(DefaultRoutes::ADMIN_TABLE_EDIT_ENTRY, ["table" => $table_name, "id" => $entry_id]));
-                        exit;
+                        $redirection = urldecode($redirection);
                     }
+                    Application::get()->redirect($redirection);
+                    exit;
                 } else {
                     Application::get()->getLogger()->error("Error while setting entry");
-                    $this->addAlert(new Alert(__("admin.panel.toast.error"), isset($entry_id) ?     __("admin.panel.tables.table.entries.edit_entry.error") : __("admin.panel.tables.table.entries.create_entry.error"), Toast::TYPE_ERROR));
+                    $this->addAlert(new Alert(__("admin.panel.toast.error"), isset($entry_id) ? __("admin.panel.tables.table.entries.edit_entry.error") : __("admin.panel.tables.table.entries.create_entry.error"), Toast::TYPE_ERROR));
                 }
             }
         } catch (Exception $e) {
             Application::get()->getLogger()->error("Error while setting entry");
-            Application::get()->getLogger()->error('params => '. print_r($params, true));
-            Application::get()->getLogger()->error('data => '. print_r($_POST, true));
+            Application::get()->getLogger()->error('params => ' . print_r($params, true));
+            Application::get()->getLogger()->error('data => ' . print_r($_POST, true));
             Application::get()->getLogger()->printException($e);
             $this->addAlert(new Alert(__("admin.panel.toast.error"), isset($entry_id) ? __("admin.panel.tables.table.entries.edit_entry.error") : __("admin.panel.tables.table.entries.create_entry.error"), Toast::TYPE_ERROR));
         }
@@ -236,6 +246,10 @@ class TablesController extends SectionController
         $data['table_name'] = $table_name;
         $data['model'] = $model;
         $data['entry_id'] = $entry_id;
+        $data['buttons'] = fetch(Application::get()->toRoot("/core/ui/views/admin/panel/sections/table/entry/set_form_buttons.php"), [
+            'table_name' => $table_name ?? '',
+            'entry_id' => $entry_id ?? null,
+        ]);
 
         $this->viewSection('table/entry/set', $data);
     }

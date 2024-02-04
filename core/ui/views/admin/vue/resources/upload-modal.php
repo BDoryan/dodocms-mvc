@@ -102,12 +102,12 @@
 <script type="text/x-template" id="modal-upload-template">
     <modal name="upload-modal">
         <template v-slot:title>
-            <i class='fa-solid fa-cloud-upload tw-me-1'></i> Upload a new resources
+            <i class='fa-solid fa-cloud-upload tw-me-1'></i> <?= __("admin.panel.resources.upload.title") ?>
         </template>
         <template v-slot:body>
             <div class="tw-flex tw-items-center tw-justify-center tw-w-full">
                 <label for="dropzone-file"
-                       class="tw-relative tw-flex tw-flex-col tw-items-center tw-justify-center tw-w-full tw-h-64 tw-border-2 tw-border-gray-300 tw-border-dashed tw-rounded-lg cursor-pointer tw-bg-gray-50 dark:hover:tw-bg-bray-800 dark:tw-bg-gray-700 hover:tw-bg-gray-100 dark:tw-border-gray-600 dark:hover:tw-border-gray-500 dark:hover:tw-bg-gray-600">
+                       class="tw-relative tw-flex tw-flex-col tw-items-center tw-justify-center tw-w-full tw-h-64 tw-border-2 tw-border-dashed tw-rounded-lg cursor-pointer hover:tw-bg-bray-800 tw-bg-gray-300 tw-bg-opacity-50 tw-border-gray-300 hover:tw-bg-opacity-70 hover:tw-border-gray-400 hover:tw-border-opacity-70">
                     <div class="tw-flex tw-flex-col tw-items-center tw-justify-center pt-5 pb-6">
                         <svg class="tw-w-8 tw-h-8 tw-mb-4 tw-text-gray-500 dark:tw-text-gray-400"
                              aria-hidden="true"

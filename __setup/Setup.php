@@ -5,7 +5,7 @@ class Setup
 
     /**
      * All steps for installation
-     * - Connection to mysql and create database and insert all tables
+     * - Connection to mysql and create database and all tables
      * - Create admin user
      */
 

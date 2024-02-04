@@ -22,15 +22,15 @@
 <script type="text/x-template" id="modal-template">
     <div v-if="isOpen()" class="tw-z-50 tw-fixed tw-top-0 tw-bottom-0 tw-right-0 tw-left-0 tw-bg-black tw-bg-opacity-40 tw-backdrop-blur-sm tw-flex tw-flex-col">
         <div class="tw-m-auto tw-w-2/4">
-            <div class="tw-bg-gray-700 tw-rounded-lg tw-shadow-lg">
+            <div class="tw-backdrop-filter tw-backdrop-blur-lg tw-bg-opacity-90 tw-border tw-border-black tw-border-opacity-20 tw-bg-white  tw-rounded-lg tw-shadow-lg">
                 <!-- Modal header -->
-                <div class="tw-flex tw-items-center tw-justify-between tw-p-4 md:tw-p-5 tw-border-b tw-rounded-t dark:tw-border-gray-600">
-                    <h3 class="tw-text-xl tw-font-semibold tw-text-gray-900 dark:tw-text-white">
+                <div class="tw-flex tw-items-center tw-justify-between tw-p-4 md:tw-p-5 tw-border-gray-300 tw-border-b tw-rounded-t">
+                    <h3 class="tw-text-xl tw-font-semibold tw-text-gray-900">
                         <slot name="title"></slot>
                     </h3>
                     <button type="button"
                             v-on:click="close()"
-                            class="tw-text-gray-400 tw-bg-transparent hover:tw-bg-gray-200 hover:tw-text-gray-900 tw-rounded-lg tw-text-sm tw-w-8 tw-h-8 tw-ms-auto tw-inline-flex tw-justify-center tw-items-center dark:hover:tw-bg-gray-600 dark:hover:tw-text-white">
+                            class="tw-text-gray-400 tw-bg-transparent hover:tw-bg-gray-200 hover:tw-text-gray-900 tw-rounded-lg tw-text-sm tw-w-8 tw-h-8 tw-ms-auto tw-inline-flex tw-justify-center tw-items-center">
                         <svg class="tw-w-3 tw-h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                              fill="none"
                              viewBox="0 0 14 14">
@@ -45,7 +45,7 @@
                     <slot name="body"></slot>
                 </div>
                 <!-- Modal footer -->
-                <div class="tw-flex tw-items-center tw-p-4 md:tw-p-5 tw-border-t tw-border-gray-200 tw-rounded-b dark:tw-border-gray-600">
+                <div class="tw-flex tw-items-center tw-p-4 md:tw-p-5 tw-border-t tw-border-gray-300 tw-rounded-b ">
                     <slot name="footer"></slot>
                 </div>
             </div>

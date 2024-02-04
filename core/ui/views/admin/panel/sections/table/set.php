@@ -22,7 +22,7 @@ Header::create()
 ?>
 <div class="tw-flex tw-flex-row tw-flex-wrap -tw-mx-2">
     <div class="tw-w-5/12 tw-px-2 tw-flex tw-flex-col tw-gap-y-5">
-        <div class=" tw-bg-gray-800 tw-shadow-lg tw-rounded-lg tw-flex tw-flex-row tw-flex-wrap tw-py-5 tw-px-3 tw-p-2">
+        <div class="tw-border-[1px] tw-border-gray-700 tw-border-opacity-25 tw-text-gray-600 tw-bg-white tw-bg-opacity-70 tw-drop-shadow-md tw-rounded-lg tw-flex tw-flex-row tw-flex-wrap tw-py-5 tw-px-3">
             <form class="tw-flex tw-flex-wrap tw-w-full tw-gap-y-5" action="" method="POST" id="table-form" novalidate>
                 <div class="tw-w-full tw-px-2">
                     <?php Text::create()
@@ -65,9 +65,9 @@ Header::create()
                 </div>
             </form>
         </div>
-        <div class=" tw-bg-gray-800 tw-shadow-lg tw-rounded-lg tw-flex tw-flex-row tw-flex-wrap tw-py-5 tw-px-3 tw-p-2 <?= empty($table_name) ? "tw-hidden" : "" ?>">
+        <div class="tw-border-[1px] tw-border-gray-700 tw-border-opacity-25 tw-drop-shadow-md tw-text-gray-600 tw-bg-white tw-bg-opacity-70 tw-rounded-lg tw-flex tw-flex-row tw-flex-wrap tw-py-5 tw-px-3 tw-p-2 <?= empty($table_name) ? "tw-hidden" : "" ?>">
             <form class="tw-flex tw-flex-col tw-w-full tw-gap-y-2 tw-text-center" action="<?= DefaultRoutes::route(DefaultRoutes::ADMIN_TABLES_DELETE, ["table" => $table_name ?? '']) ?>" id="table-form-delete" method="POST">
-                <h3 class="tw-text-4xl tw-text-orange-300 tw-font-semibold tw-mb-2"><i class="tw-me-2 fa-solid fa-warning"></i><?= __('admin.panel.tables.table.delete.warning.title') ?><i
+                <h3 class="tw-text-4xl tw-text-red-600 tw-font-semibold tw-mb-2"><i class="tw-me-2 fa-solid fa-warning"></i><?= __('admin.panel.tables.table.delete.warning.title') ?> <i
                             class="ms-2 fa-solid fa-warning"></i></h3>
                 <p class="tw-text-md"><?= __('admin.panel.tables.table.delete.warning.message') ?></p>
                 <button type="submit"

@@ -3,7 +3,8 @@
 class Tools
 {
 
-    public static function parseJsonToHtmlAttribute(string $json) {
+    public static function parseJsonToHtmlAttribute(string $json)
+    {
         $json = str_replace("'", "\'", $json);
         return str_replace("\"", "'", $json);
     }
@@ -28,13 +29,27 @@ class Tools
         return false;
     }
 
+    public static function getEncodedCurrentURI(): string
+    {
+        return urlencode(self::getCurrentURI());
+    }
+
     public static function getCurrentURI($withGet = true): string
     {
         $uri = $_SERVER['REQUEST_URI'];
-        if($withGet)
+        if ($withGet)
             return $uri;
 
         return explode('?', $uri)[0];
+    }
+
+    public static function getParametersURI(): string
+    {
+        $uri = $_SERVER['REQUEST_URI'];
+        $parameters = explode('?', $uri)[1];
+        if (!empty($parameters))
+            return "?$parameters";
+        return "";
     }
 
     public static function removeLastSlash(string $path): string
@@ -172,7 +187,8 @@ class Tools
      *
      * @return float
      */
-    public static function timestamp() {
+    public static function timestamp()
+    {
         return round(microtime(true) * 1000);
     }
 

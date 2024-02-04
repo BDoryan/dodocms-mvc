@@ -120,6 +120,8 @@ class Table extends CMSObject
         }
 
         foreach ($collection->attributes as $attribute) {
+            if(Table::isDefaultAttribute($attribute->getName())) continue;
+
             $length = !empty($attribute->getLength()) ? "(" . $attribute->getLength() . ")" : '';
 
             if (!$this->hasAttribute($attribute)) {
@@ -131,9 +133,15 @@ class Table extends CMSObject
             } else {
                 $existingAttribute = $this->getAttribute($attribute);
 
+                if (
+                    $existingAttribute->getDefaultValue() != $attribute->getDefaultValue() ||
+                    $existingAttribute->isNullable() != $attribute->isNullable() ||
+                    $existingAttribute->getType() != $attribute->getType() ||
+                    $existingAttribute->getLength() != $attribute->getLength()
+                ) {
 
-                if ($existingAttribute->isNullable() != $attribute->isNullable()) {
-                    $sql .= "ALTER TABLE " . $this->getName() . " MODIFY COLUMN " . $attribute->getName() . " " . $attribute->getType() . " $length " . ($attribute->isNullable() ? "NULL" : "NOT NULL") . " " . ($attribute->isAutoIncrement() ? "AUTO_INCREMENT" : "") . " " . (!empty($attribute->getDefaultValue()) ? "DEFAULT " . ($attribute->getDefaultValue() === "CURRENT_TIMESTAMP" ? $attribute->getDefaultValue() : "'" . $attribute->getDefaultValue() . "'") : "") . ";\n";
+                    $sql .=
+                        "ALTER TABLE " . $this->getName() . " MODIFY COLUMN " . $attribute->getName() . " " . $attribute->getType() . " $length " . ($attribute->isNullable() ? "NULL" : "NOT NULL") . " " . ($attribute->isAutoIncrement() ? "AUTO_INCREMENT" : "") . " " . (!empty($attribute->getDefaultValue()) ? "DEFAULT " . ($attribute->getDefaultValue() === "CURRENT_TIMESTAMP" ? $attribute->getDefaultValue() : "'" . $attribute->getDefaultValue() . "'") : "") . ";\n";
                 }
 
                 if ($attribute->isPrimaryKey() != $existingAttribute->isPrimaryKey() && $attribute->isPrimaryKey()) {
@@ -386,6 +394,7 @@ class Table extends CMSObject
             $length = $column_datas['length'] ?? null;
             $association = "";
 
+
             $hasAssociation = $database->fetch("SELECT REFERENCED_TABLE_NAME FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE TABLE_NAME = ? AND COLUMN_NAME = ? AND REFERENCED_TABLE_NAME IS NOT NULL", [$table_name, $name]);
             if ($hasAssociation) {
                 $association = $hasAssociation['REFERENCED_TABLE_NAME'];
@@ -397,7 +406,8 @@ class Table extends CMSObject
                 $default_value = $attribute['Default'];
             }
 
-            $collection->addAttribute(new TableAttribute($name, $nullable, $auto_increment, $primary_key, $type, $length, $default_value, $association));
+            $table_attribute = new TableAttribute($name, $nullable, $auto_increment, $primary_key, $type, $length, $default_value, $association);
+            $collection->addAttribute($table_attribute);
         }
         return $collection;
     }

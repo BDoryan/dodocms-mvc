@@ -150,7 +150,7 @@ class PageModel extends ModelAssociated
         ];
         $fields["seo_description"] = [
             "size" => "tw-w-full",
-            "field" => Text::create()->name("seo_description")->label(__('admin.panel.pages.fields.label.seo_description'))->value($this->seo_description)
+            "field" => TextArea::create()->name("seo_description")->label(__('admin.panel.pages.fields.label.seo_description'))->value($this->seo_description)
         ];
         $fields["seo_keywords"] = [
             "size" => "tw-w-full",
@@ -172,14 +172,14 @@ class PageModel extends ModelAssociated
         return (new PageModel())->getAll($columns, $conditions, $orderBy);
     }
 
-    public static function renderForm(): void
+    public static function renderForm(array $data = []): void
     {
         $model = new PageModel();
-        $data = [];
         $data['table'] = PageModel::TABLE_NAME;
         $data['table_name'] = PageModel::TABLE_NAME;
         $data['model'] = $model;
         $data['entry_id'] = null;
+
         view(Application::get()->toRoot('/core/ui/views/admin/panel/sections/table/entry/set_form.php'), $data);
     }
 

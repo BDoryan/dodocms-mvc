@@ -43,7 +43,9 @@ class ApiTablesController extends ApiAdminController
             }
         }
 
-        echo fetch(Application::get()->toRoot("/core/ui/views/admin/panel/sections/table/entry/set_form.php"), ['model' => $model, 'show_buttons' => false]);
+        echo fetch(Application::get()->toRoot("/core/ui/views/admin/panel/sections/table/entry/set_form.php"), [
+            'model' => $model,
+        ]);
     }
 
     public function deleteEntry($params)

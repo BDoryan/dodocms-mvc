@@ -26,7 +26,7 @@ if (empty($tables)) {
     foreach ($tables as $table):
         ?>
         <div class="tw-w-auto tw-px-2">
-            <div class="tw-bg-gray-600 tw-p-4 tw-rounded-lg tw-border-[1px] tw-border-gray-500 tw-shadow-lg tw-flex tw-flex-col tw-h-full">
+            <div class="tw-border-[1px] tw-border-gray-700 tw-border-opacity-25  tw-drop-shadow-md tw-text-gray-600 tw-bg-white tw-bg-opacity-70 tw-p-4 tw-rounded-lg tw-flex tw-flex-col tw-h-full">
                 <h2 class="tw-text-lg tw-text-center tw-font-semibold"><?= $table->getName() ?></h2>
                 <hr class="tw-my-4 tw-border-t-[1px] tw-border-gray-400">
                 <ul class="tw-my-auto">

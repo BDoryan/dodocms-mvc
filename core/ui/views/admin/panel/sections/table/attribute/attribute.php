@@ -1,5 +1,5 @@
 <form data-type="attribute" id="attribute-form"
-      class="tw-bg-gray-800 tw-shadow-lg tw-rounded-lg tw-flex tw-flex-row tw-flex-wrap tw-p-5 tw-p-2 tw-relative">
+      class="tw-border-[1px] tw-border-gray-700 tw-border-opacity-20 tw-text-gray-600 tw-bg-white tw-bg-opacity-50 tw-shadow-lg tw-rounded-lg tw-flex tw-flex-row tw-flex-wrap tw-p-5 tw-p-2 tw-relative">
     <div class="tw-absolute tw-top-0 tw-right-0 transform translate-x-1/2 -translate-y-1/2">
         <button type="button" id="remove-attribute"
                 class="tw-h-10 tw-w-10 tw-bg-red-700 hover:tw-bg-red-800 hover:tw-border hover:tw-border-red-700 tw-text-xl tw-rounded-full tw-flex tw-items-center tw-justify-center tw-text-white">
@@ -36,7 +36,7 @@
             <?php Text::create()
                 ->label(__('admin.panel.tables.table.attribute.length'))
                 ->type("number")
-                ->value(!empty($attribute) ? $attribute->getLength() . "attribute.php" : "")
+                ->value(!empty($attribute) ? $attribute->getLength()."" : "")
                 ->validator(true)
                 ->name("attribute_length")
                 ->placeholder("255")
