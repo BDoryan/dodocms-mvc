@@ -288,13 +288,13 @@ abstract class Model extends CMSObjectHydration
         $fields = [];
         if ($this->hasLanguageAttribute()) {
             $fields["language"] = [
-                "size" => "tw-w-4/12 tw-order-1",
-                "field" => Text::create()->name("language")->label("Langue")->value($this->language ?? "en")
+                "size" => "tw-w-6/12 tw-order-1",
+                "field" => Text::create()->name("language")->label(__('admin.panel.model.language'))->value($this->language ?? "en")
             ];
         }
         $fields['active'] = [
-            "size" => "tw-w-4/12 tw-order-1",
-            "field" => Checkbox::create()->name("active")->placeholder("Activation de cet élément")->label("Voulez-vous activer cet élément ?")->value($this->active ?? false)
+            "size" => "tw-w-6/12 tw-order-1",
+            "field" => Checkbox::create()->name("active")->placeholder(__('admin.panel.model.active.placeholder'))->label(__('admin.panel.model.active.label'))->value($this->active ?? false)
         ];
         return $fields;
     }

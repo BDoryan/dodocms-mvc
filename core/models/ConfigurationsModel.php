@@ -8,6 +8,7 @@ class ConfigurationsModel extends Model
 
     protected string $name;
     protected string $value;
+
     public function __construct(string $name = '', string $value = '')
     {
 

@@ -37,14 +37,7 @@ class PagesController extends SectionController
             $edit = ButtonHypertext::create()
                 ->text('<i class="tw-me-1 fa-solid fa-pen-to-square"></i> ' . __("admin.panel.tables.table.entries.actions.edit"))
                 ->href(
-                    DefaultRoutes::
-                    route(
-//                        DefaultRoutes::ADMIN_TABLE_EDIT_ENTRY,
-//                        ["table" => PageModel::TABLE_NAME,
-//                            "id" => $entry->getId()
-//                        ]
-                        Tools::getCurrentURI(false)."?entry_id=".$entry->getId()
-                    ).'?redirection='.Tools::getEncodedCurrentURI()
+                    Tools::getCurrentURI(false) . "?entry_id=" . $entry->getId()
                 )
                 ->addClass("tw-text-sm tw-whitespace-nowrap")
                 ->blue()
@@ -70,18 +63,13 @@ class PagesController extends SectionController
                             "table" => PageModel::TABLE_NAME,
                             "id" => $entry->getId()
                         ]
-                    ).'?redirection='.Tools::getEncodedCurrentURI()
+                    ) . '?redirection=' . Tools::getEncodedCurrentURI()
                 )
                 ->html();
 
             $row['admin.panel.tables.table.entries.actions'] = '<div class="tw-flex tw-flex-row tw-justify-center align-center tw-gap-3">' . "$view $edit $delete" . '</div>';
             $rows[] = $row;
         }
-
-        $data = [
-            'columns' => $columns,
-            'rows' => $rows
-        ];
 
         $model = new PageModel();
         $entry_id = $_GET['entry_id'] ?? null;
@@ -96,9 +84,5 @@ class PagesController extends SectionController
             'rows' => $rows,
             'model' => $model
         ]);
-    }
-
-    public function getResource(array $params = [])
-    {
     }
 }

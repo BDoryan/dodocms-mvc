@@ -62,7 +62,7 @@ class PanelController extends AdminController
         Application::get()->getLogger()->debug("PanelController->initSidebar()");
         $this->initSidebar();
 
-        $this->title = 'DodoCMS - ' . __('admin.panel.dashboard');
+        $this->title = 'DodoCMS - ' . __('admin.panel.title');
 
         $alerts =  $this->getAlerts();
         Application::get()->getLogger()->debug("AdminController->getAlerts() : " . (var_export($alerts, true)));

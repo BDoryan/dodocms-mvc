@@ -1,1 +1,2 @@
-<h1>Dashboard section </h1>
+<h1>Dashboard here</h1>
+<p>Soon</p>

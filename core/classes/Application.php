@@ -234,8 +234,12 @@ class Application
             $this->logger->debug("Application->connectDatabase();");
             $this->connectDatabase();
 
-            $this->logger->debug("Application->loadModules();");
-            ModulesManager::loadModules();
+            if($this->getConfiguration()['modules']['enabled'] ?? false) {
+                $this->logger->debug("Application->loadModules();");
+                ModulesManager::loadModules();   
+            } else {
+                $this->logger->debug("(disabled) Application->loadModules();");
+            }
 
             $this->logger->debug("Application->loadAdminPanel();");
             $this->loadAdminPanel();

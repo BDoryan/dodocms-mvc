@@ -2,7 +2,7 @@
     <div class="tw-relative tw-group tw-w-full tw-border-[1px] tw-border-gray-700 tw-border-opacity-25 tw-text-gray-600 tw-bg-white tw-bg-opacity-70 tw-rounded-lg tw-shadow-sm tw-outline-none focus:tw-border-gray-400 tw-mb-1 tw-min-h-[400px] tw-flex tw-flex-col tw-overflow-hidden"
          :class="{'tw-max-h-[400px]': scrollable}">
         <input type="hidden" :name="name" :value="ids()">
-        <div class="tw-px-4 tw-py-2 tw-localItems-center tw-border-b-[1px] tw-border-gray-300 tw-text-lg tw-flex tw-flex-row">
+        <div class="tw-bg-gray-900 tw-bg-opacity-5 tw-px-4 tw-py-2 tw-localItems-center tw-border-b-[1px] tw-border-gray-300 tw-text-lg tw-flex tw-flex-row">
             {{ getTitle() }} <span v-show="selectable"
                     class="tw-my-auto tw-ps-2 tw-text-sm">({{ isMultiple() ? "vous pouvez en sélectionner plusieurs" : "vous pouvez en sélectionner uniquement une seule"}})</span>
             <div class="tw-ms-auto">
@@ -42,7 +42,7 @@
         </div>
         <!-- Multi Items -->
         <div v-if="localItems.length > 1"
-             class="tw-bg-gray-900 tw-bg-opacity-5 tw-p-4 tw-h-full tw-w-full tw-grid tw-grid-cols-3 tw-gap-4"
+             class="tw-p-4 tw-h-full tw-w-full tw-grid tw-grid-cols-3 tw-gap-4"
              :class="{ 'tw-overflow-y-auto': scrollable }">
             <resource-item
                     v-for="item in localItems"

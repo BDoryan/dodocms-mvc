@@ -23,14 +23,14 @@
                     foreach ($category->getSections() as $section) {
                         ?>
                         <a href="<?= Application::get()->toURL($section->getHref()) ?>"
-                           class="tw-mt-2 tw-mx-3 tw-my-[3px] tw-rounded-lg tw-gap-1 tw-flex tw-p-2 tw-items-center tw-py-2 tw-px-4 tw-bg-white tw-text-gray-700 tw-shadow-sm tw-border-[1px] tw-border-gray-200 <?= $section->isActive() ? "tw-bg-opacity-75" : "tw-bg-opacity-50" ?> hover:tw-bg-opacity-85 hover:tw-border-gray-300 hover:tw-text-gray-800 tw-font-semibold tw-text-base">
+                           class="tw-mt-2 tw-mx-3 tw-my-[3px] tw-rounded-lg tw-gap-1 tw-flex tw-p-2 tw-items-center tw-py-2 tw-px-4 tw-bg-white tw-text-gray-700 tw-shadow-sm tw-border-[1px] <?= $section->isActive() ? "tw-bg-opacity-100 tw-border-gray-300" : "tw-bg-opacity-55 tw-border-gray-200" ?> hover:tw-bg-opacity-100 hover:tw-border-gray-300 hover:tw-text-gray-800 tw-font-semibold tw-text-base">
                             <i style="width: 20px;"
                                class="tw-flex tw-justify-center tw-items-center <?= $section->getIcon() ?>"></i>
                             <?= $section->getLabel() ?>
                         </a>
                     <?php } ?>
                 <?php } else { ?>
-                    <span class="tw-text-xs tw-italic tw-ml-2 tw-px-4 tw-flex tw-items-center tw-mt-4 tw-mb-1 tw-text-white tw-text-opacity-50">
+                    <span class="tw-text-xs tw-italic tw-ml-2 tw-px-4 tw-flex tw-items-center tw-mt-4 tw-mb-1 tw-text-gray-600 tw-text-opacity-50">
                         <?= __("admin.panel.category_empty") ?>
                     </span>
                 <?php } ?>
