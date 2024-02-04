@@ -48,7 +48,7 @@ class PagesController extends SectionController
                 ->addClass("tw-text-sm tw-whitespace-nowrap")
                 ->green()
                 ->href(
-                    $entry->getSlug()
+                    $entry->getSlug().'?editor=true'
                 )
                 ->target("_blank")
                 ->html();

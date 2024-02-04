@@ -103,4 +103,4 @@ class PageStructureModel extends Model
     }
 }
 
-Table::registerModel(BlockModel::TABLE_NAME, BlockModel::class);
+Table::registerModel(PageStructureModel::TABLE_NAME, PageStructureModel::class);

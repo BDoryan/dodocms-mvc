@@ -887,6 +887,10 @@ video {
   height: 100vh;
 }
 
+.tw-h-4 {
+  height: 1rem;
+}
+
 .tw-max-h-\[30vh\] {
   max-height: 30vh;
 }
@@ -973,6 +977,10 @@ video {
 
 .tw-w-full {
   width: 100%;
+}
+
+.tw-w-4 {
+  width: 1rem;
 }
 
 .tw-min-w-full {
@@ -1597,6 +1605,10 @@ video {
 
 .tw-pt-4 {
   padding-top: 1rem;
+}
+
+.tw-pt-2 {
+  padding-top: 0.5rem;
 }
 
 .tw-text-left {

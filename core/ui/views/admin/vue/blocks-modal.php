@@ -23,21 +23,25 @@
                     /** @var BlockModel $block */
                     foreach (BlockModel::findAll('*') as $block) {
                 ?>
-                    <button v-on:click="$root.addBlock(<?= $block->getId() ?>)" class="w-4/12 tw-p-3 tw-flex tw-flex-col tw-justify-center tw-rounded-lg tw-bg-gray-800 tw-border-1 tw-border-gray-700 hover:tw-bg-blue-600">
+                    <button v-on:click="$root.addBlock(<?= $block->getId() ?>)" class="w-4/12 tw-p-3 tw-flex tw-flex-col tw-justify-center tw-rounded-lg tw-bg-white tw-border-1 tw-text-gray-700 tw-border-gray-400 hover:tw-bg-blue-600 hover:tw-text-white">
                         <span class="tw-text-2xl"><?= $block->getName() ?></span>
-                        <span class="text-gray-200 tw-text-opacity-25 tw-italic"><?= $block->getPath() ?>.php</span>
+                        <span class="text-gray-200 tw-text-opacity-25 tw-italic"><?= $block->getPath() ?></span>
                     </button>
                 <?php } ?>
             </div>
         </template>
         <template v-slot:footer>
-            <button type="button"
-                    v-on:click="close"
-                    class="close-upload-modal tw-me-auto tw-text-gray-500 tw-bg-white hover:tw-bg-gray-100 focus:ring-4 focus:tw-outline-none focus:ring-blue-300 tw-rounded-lg tw-border tw-border-gray-200 tw-text-sm tw-font-medium tw-px-5 tw-py-2.5 hover:tw-text-gray-900 focus:tw-z-10 dark:tw-bg-gray-700 dark:tw-text-gray-300 dark:tw-border-gray-500 dark:hover:tw-text-white dark:hover:tw-bg-gray-600 dark:focus:ring-gray-600">
-                <?= __("admin.panel.resources.upload.close") ?>
-            </button>
-<!--            <button class="tw-text-white tw-bg-blue-700 hover:tw-bg-blue-800 focus:ring-4 focus:tw-outline-none focus:ring-blue-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-5 tw-py-2.5 tw-text-center dark:tw-bg-blue-600 dark:hover:tw-bg-blue-700 dark:focus:ring-blue-800">-->
-<!--                --><?php //= __("live-editor.page.structure.blocks.finish") ?>
+            <?php
+                Button::create()
+                    ->type('button')
+                    ->text(__('live-editor.page.structure.blocks.modal.close'))
+                    ->attribute('v-on:click', 'close')
+            ->render();
+            ?>
+<!--            <button type="button"-->
+<!--                    v-on:click="close"-->
+<!--                    class="close-upload-modal tw-me-auto tw-text-gray-500 tw-bg-white hover:tw-bg-gray-100 focus:ring-4 focus:tw-outline-none focus:ring-blue-300 tw-rounded-lg tw-border tw-border-gray-200 tw-text-sm tw-font-medium tw-px-5 tw-py-2.5 hover:tw-text-gray-900 focus:tw-z-10 dark:tw-bg-gray-700 dark:tw-text-gray-300 dark:tw-border-gray-500 dark:hover:tw-text-white dark:hover:tw-bg-gray-600 dark:focus:ring-gray-600">-->
+<!--                --><?php //= __("admin.panel.resources.upload.close") ?>
 <!--            </button>-->
         </template>
     </modal>

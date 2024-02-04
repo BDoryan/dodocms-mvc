@@ -16,13 +16,15 @@ class BlocksController extends SectionController
      */
     public function index()
     {
-        $pages = BlockModel::findAll("*", [], "createdAt DESC");
+        $blocks = BlockModel::findAll("*", [], "createdAt DESC");
 
-        $attributes = ['name', 'seo_title', 'seo_description', 'keywords', 'slug', 'updatedAt'];
+        $attributes = ['name', 'path', 'updatedAt'];
         $columns = [...$attributes, 'admin.panel.tables.table.entries.actions'];
         $rows = [];
 
-        foreach ($pages as $entry) {
+        $model = new BlockModel();
+
+        foreach ($blocks as $entry) {
             $row = $entry->toArray();
             $row = array_map(function ($value) {
                 $value = htmlspecialchars($value);
@@ -41,16 +43,6 @@ class BlocksController extends SectionController
                 ->blue()
                 ->html();
 
-            $view = ButtonHypertext::create()
-                ->text('<i class="tw-me-1 fa-solid fa-eye"></i> ' . __("admin.panel.pages.view"))
-                ->addClass("tw-text-sm tw-whitespace-nowrap")
-                ->green()
-                ->href(
-                    $entry->getSlug()
-                )
-                ->target("_blank")
-                ->html();
-
             $delete = ButtonHypertext::create()
                 ->text('<i class="tw-me-1 fa-solid fa-trash"></i> ' . __("admin.panel.tables.table.entries.actions.delete"))
                 ->addClass("tw-text-sm tw-whitespace-nowrap")
@@ -58,7 +50,7 @@ class BlocksController extends SectionController
                 ->href(
                     DefaultRoutes::route(
                         DefaultRoutes::ADMIN_TABLE_DELETE_ENTRY, [
-                            "table" => PageModel::TABLE_NAME,
+                            "table" => $model->getTableName(),
                             "id" => $entry->getId()
                         ]
                     ) . '?redirection=' . Tools::getEncodedCurrentURI()
@@ -69,7 +61,6 @@ class BlocksController extends SectionController
             $rows[] = $row;
         }
 
-        $model = new BlockModel();
         $entry_id = $_GET['entry_id'] ?? null;
         if ($entry_id != null) {
             $model->id(intval($entry_id));

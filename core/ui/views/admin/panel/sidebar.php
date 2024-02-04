@@ -1,15 +1,19 @@
 <?php
-    if (!isset($sidebar)) {
-        echo "Sidebar not found";
-        exit;
-    }
+if (!isset($sidebar)) {
+    echo "Sidebar not found";
+    exit;
+}
 ?>
 <div class="tw-flex-shrink-0 tw-w-64 tw-backdrop-filter tw-backdrop-blur-lg tw-bg-opacity-50 tw-border tw-border-black tw-border-opacity-20 tw-bg-white tw-rounded-2xl tw-overflow-hidden  tw-shadow-sm">
     <div class="tw-flex tw-flex-col tw-h-full">
-        <div class="tw-px-6 tw-flex tw-items-center tw-justify-between tw-py-3 tw-bg-white tw-bg-opacity-50 tw-shadow-sm tw-text-gray-700">
-            <img width="60" height="60" src="<?= Application::get()->toURL("/core/assets/imgs/logo-animated.png") ?>"
-                 alt="<?= __('admin.panel.title') ?>">
-            <div class="tw-text-lg tw-flex tw-flex-col"><span class="tw-text-2xl tw-font-bold">DodoCMS</span><?= __("admin.panel.title") ?></div>
+        <div class="tw-px-6 tw-flex tw-flex-col tw-py-3 tw-bg-white tw-bg-opacity-50 tw-shadow-sm tw-text-gray-700">
+            <div class="tw-flex tw-items-center tw-justify-between tw-mb-2">
+                <img width="60" height="60"
+                     src="<?= Application::get()->toURL("/core/assets/imgs/logo-animated.png") ?>"
+                     alt="<?= __('admin.panel.title') ?>">
+                <span class="tw-text-2xl tw-font-bold">DodoCMS</span>
+            </div>
+            <p><?= __("admin.panel.title") ?></p>
         </div>
         <nav class="tw-flex-1 tw-overflow-y-auto">
             <?php

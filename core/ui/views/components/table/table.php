@@ -1,4 +1,4 @@
-<div class="tw-border-gray-500 tw-border-opacity-25 tw-rounded-lg tw-border-[1px] tw-overflow-x-auto tw-shadow-sm tw-text-gray-600 tw-bg-white tw-bg-opacity-70 ">
+<div class="tw-border-gray-500 tw-border-opacity-25 tw-rounded-lg tw-border-[1px] tw-overflow-x-auto tw-shadow-sm tw-text-gray-600 tw-bg-white ">
     <table class="tw-w-full tw-rounded-lg tw-overflow-tw-hidden tw-text-sm">
         <thead class="tw-rounded-md tw-border-gray-500 tw-border-opacity-25 tw-border-b">
         <tr class="tw-rounded-md tw-border-gray-500 tw-border-opacity-25 tw-border-b">
