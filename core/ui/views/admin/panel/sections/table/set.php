@@ -77,11 +77,11 @@ Header::create()
                 </button>
             </form>
         </div>
-        <form id="confirm" class="tw-bg-gray-800 tw-shadow-lg tw-rounded-lg tw-flex-col tw-flex-wrap tw-p-5 tw-gap-2 tw-hidden" action=""
+        <form id="confirm" class="tw-border-[1px] tw-border-gray-700 tw-border-opacity-25 tw-drop-shadow-md tw-text-gray-600 tw-bg-white tw-bg-opacity-70 tw-shadow-lg tw-rounded-lg tw-flex-col tw-flex-wrap tw-p-5 tw-gap-2 tw-hidden" action=""
               method="POST"
               novalidate>
             <h5 class="tw-text-lg tw-uppercase tw-font-bold"><?= __('admin.panel.tables.table.json') ?></h5>
-            <textarea id="json-content" disabled rows="15" class="tw-text-white tw-w-full tw-bg-gray-800 tw-border-[0px]"
+            <textarea id="json-content" disabled rows="15" class="tw-bg-transparent tw-text-black tw-w-full tw-border-[0px]"
                       style="white-space: pre; font-family: monospace;">
             </textarea>
             <input type="hidden" name="table_json" value="<?= $post_table_json ?? '{}' ?>">

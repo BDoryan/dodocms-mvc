@@ -26,9 +26,7 @@ Vue.component('resource-viewer', {
             this.$root.$emit('resources-selector-modal-open', this);
         },
         setItems(items) {
-            console.log("before", this.localItems)
             this.localItems = items;
-            console.log("after", this.localItems)
         },
         getItems() {
             return this.localItems;
@@ -54,7 +52,6 @@ Vue.component('resource-viewer', {
             }
         },
         editItem(item) {
-            console.log('edit', item)
         },
         getStatus() {
             return "Aucun status défini";
@@ -62,11 +59,14 @@ Vue.component('resource-viewer', {
         getTitle() {
             return this.$root.translate('admin.panel.resources.count', {'count': this.localItems.length});
         },
-        addItem(item) {
+        addItem(item, prepend = false) {
             if (!this.multiple)
                 this.localItems = [];
 
-            this.localItems = [...this.localItems, item];
+            if(prepend)
+                this.localItems = [...this.localItems, item];
+            else
+                this.localItems = [item, ...this.localItems];
         },
         deleteItem(id) {
             const index = this.localItems.findIndex((el) => el.id === id);

@@ -76,10 +76,10 @@
                         const file = this.files[index];
                         const resource = await this.uploadFile(file, index);
                         this.$root.$emit('resourceUploaded', resource.data);
+                        this.$emit('resourceUploaded', resource.data);
                         uploadedFiles.push(file);
                         resourcesFiles.push(resource.data);
                     }
-                    console.log(this.$root)
                     this.$root.$emit('resources-uploaded', resourcesFiles);
                 } catch (error) {
                     console.error('Upload failed:', error);

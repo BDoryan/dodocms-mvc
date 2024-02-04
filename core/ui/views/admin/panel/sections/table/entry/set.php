@@ -15,7 +15,7 @@ if(($entry_id ?? null) != null) {
     $data['entry_id'] = $entry_id;
 }
 ?>
-<div class="entity-set tw-border tw-text-gray-700 tw-bg-white tw-bg-opacity-70 tw-rounded-lg tw-p-3 tw-text-base tw-w-8/12 tw-mx-auto">
+<div class="entity-set tw-text-gray-700 tw-rounded-lg tw-p-3 tw-text-base tw-w-8/12 tw-mx-auto">
     <h1 class="tw-text-2xl pb-5 tw-font-bold tw-text-center tw-uppercase"><?= $table_name ?? '' ?></h1>
     <?= fetch(Application::get()->toRoot('/core/ui/views/admin/panel/sections/table/entry/set_form.php'), $data) ?>
 </div>

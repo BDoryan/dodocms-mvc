@@ -272,7 +272,8 @@ abstract class Model extends CMSObjectHydration
      *
      * @return bool
      */
-    public function hasLanguageAttribute() {
+    public function hasLanguageAttribute()
+    {
         return Table::getTable($this->table_name)->hasAttributeName('language');
     }
 
@@ -326,8 +327,18 @@ abstract class Model extends CMSObjectHydration
 
     public static abstract function findAll(string $columns, array $conditions = [], $orderBy = ''): ?array;
 
-    public static function renderForm() {
-        echo "If you see this message, you need to override the renderForm method in your model class";
+//    public static function renderForm() {
+//        echo "If you see this message, you need to override the renderForm method in your model class";
+//    }
+
+    public static function renderForm(Model $model, array $data = []): void
+    {
+        $data['table'] = $model->getTableName();
+        $data['table_name'] = $model->getTableName();
+        $data['model'] = $model;
+        $data['entry_id'] = null;
+
+        view(Application::get()->toRoot('/core/ui/views/admin/panel/sections/table/entry/set_form.php'), $data);
     }
 
     public static function getModel(Table $table): ?Model

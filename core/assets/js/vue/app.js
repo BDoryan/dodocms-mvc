@@ -104,6 +104,9 @@ const loadApplication = () => {
                 });
 
                 component.$on('resources-uploaded', function (resources) {
+                    if(this.currentResourceViewer == null)
+                        return;
+
                     resources.forEach((resource) => {
                         resource.src = window.toRoot(resource.src);
                         this.currentResourceViewer.addItem(resource)

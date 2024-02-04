@@ -13,13 +13,14 @@ class PagesController extends SectionController
         parent::__construct();
     }
 
+    /**
+     * @throws Exception
+     */
     public function index()
     {
         $pages = PageModel::findAll("*", [], "createdAt DESC");
 
         $attributes = ['name', 'seo_title', 'seo_description', 'keywords', 'slug', 'updatedAt'];
-//        $translations = ['admin.panel.name']
-
         $columns = [...$attributes, 'admin.panel.tables.table.entries.actions'];
         $rows = [];
 
@@ -38,10 +39,11 @@ class PagesController extends SectionController
                 ->href(
                     DefaultRoutes::
                     route(
-                        DefaultRoutes::ADMIN_TABLE_EDIT_ENTRY,
-                        ["table" => PageModel::TABLE_NAME,
-                            "id" => $entry->getId()
-                        ]
+//                        DefaultRoutes::ADMIN_TABLE_EDIT_ENTRY,
+//                        ["table" => PageModel::TABLE_NAME,
+//                            "id" => $entry->getId()
+//                        ]
+                        Tools::getCurrentURI(false)."?entry_id=".$entry->getId()
                     ).'?redirection='.Tools::getEncodedCurrentURI()
                 )
                 ->addClass("tw-text-sm tw-whitespace-nowrap")
@@ -76,9 +78,23 @@ class PagesController extends SectionController
             $rows[] = $row;
         }
 
-        $this->viewSection("pages", [
+        $data = [
             'columns' => $columns,
             'rows' => $rows
+        ];
+
+        $model = new PageModel();
+        $entry_id = $_GET['entry_id'] ?? null;
+        if ($entry_id != null) {
+            $model->id(intval($entry_id));
+            if (!$model->fetch())
+                throw new Exception('Entry not found');
+        }
+
+        $this->viewSection("pages", [
+            'columns' => $columns,
+            'rows' => $rows,
+            'model' => $model
         ]);
     }
 

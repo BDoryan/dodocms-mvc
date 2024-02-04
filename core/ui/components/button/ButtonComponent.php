@@ -5,6 +5,7 @@ Autoloader::require("core/ui/components/Component.php");
 abstract class ButtonComponent extends Component
 {
 
+    const BUTTON_DEFAULT = 'tw-bg-white tw-text-gray-700 tw-border-[1px] tw-border-gray-300 tw-bg-opacity-75 hover:tw-bg-opacity-100 hover:tw-border-stone-300 hover:tw-text-gray-800';
     const BUTTON_GREEN = 'tw-bg-green-700 hover:tw-bg-green-800 tw-text-white focus:tw-outline-none focus:tw-shadow-outline-green active:tw-bg-green-800';
     const BUTTON_GRAY = 'tw-bg-gray-700 hover:tw-bg-gray-800 tw-text-white focus:tw-outline-none focus:tw-shadow-outline-gray active:tw-bg-gray-800';
     const BUTTON_RED = 'tw-bg-red-700 hover:tw-bg-red-800 tw-text-white focus:tw-outline-none focus:tw-shadow-outline-red active:tw-bg-red-800';
@@ -18,11 +19,11 @@ abstract class ButtonComponent extends Component
     {
         parent::__construct('core/ui/views/components/button');
         $this->text = $text;
-        $this->gray();
+        $this->default();
     }
 
     public function style($class): ButtonComponent {
-        $this->class = "tw-text-center tw-px-3 tw-py-[6px] tw-rounded-lg tw-shadow-sm tw-font-semibold tw-uppercase $class";
+        $this->class = "tw-text-center tw-px-3 tw-py-[4px] tw-rounded-lg tw-shadow-sm tw-font-semibold $class";
         $this->class .= $this->customClass;
         return $this;
     }
@@ -52,6 +53,12 @@ abstract class ButtonComponent extends Component
     public function gray(): ButtonComponent
     {
         $this->style(self::BUTTON_GRAY);
+        return $this;
+    }
+
+    public function default(): ButtonComponent
+    {
+        $this->style(self::BUTTON_DEFAULT);
         return $this;
     }
 

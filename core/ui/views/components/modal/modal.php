@@ -1,7 +1,7 @@
 <div class="modal-background tw-hidden tw-fixed tw-inset-0 tw-bg-black tw-opacity-50 tw-z-50"></div>
-<div id="file-upload" class="modal-content tw-hidden tw-fixed tw-inset-0 tw-flex tw-items-center tw-justify-center tw-z-50">
+<div id="file-upload" class="modal-content tw-hidden tw-fixed tw-inset-0 tw-items-center tw-justify-center tw-z-50">
     <!-- Modal content -->
-    <div class="tw-relative tw-bg-white tw-rounded-lg tw-shadow dark:tw-bg-gray-700 tw-rounded-lg tw-shadow-lg tw-w-2/4" tabindex="-1"
+    <div class="tw-relative tw-bg-white tw-bg-opacity-80 dark:tw-bg-gray-700 tw-rounded-lg tw-shadow-lg tw-w-2/4" tabindex="-1"
          aria-hidden="true">
         <!-- Modal header -->
         <div class="tw-flex tw-items-center tw-justify-between tw-p-4 md:tw-p-5 tw-border-b tw-rounded-t dark:tw-border-gray-600">
