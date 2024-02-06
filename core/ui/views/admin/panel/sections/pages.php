@@ -18,10 +18,13 @@ TableComponent::create()
         <?php
         Model::renderForm($model ?? null, [
             'action' => DefaultRoutes::route(DefaultRoutes::ADMIN_TABLE_NEW_ENTRY, ['table' => $model->getTableName()]) . '?redirection=' . Tools::getEncodedCurrentURI(),
-            'buttons' => ($model->hasId() ? fetch(Application::get()->toRoot('/core/ui/views/admin/panel/sections/table/entry/set_form_button_back')) : '')
+            'buttons' => ($model->hasId() ?
+                    fetch(Application::get()->toRoot('/core/ui/views/admin/panel/sections/table/entry/set_form_button_back')) : '')
                 . fetch(Application::get()->toRoot('/core/ui/views/admin/panel/sections/table/entry/set_form_button_submit'), [
-                    'entry_id' => $model->hasId() ? $model->getId() : null
-                ])
+                        'model' => $model ?? null,
+                        'entry_id' => $model->hasId() ? $model->getId() : null
+                    ]
+                )
         ])
         ?>
     </div>
@@ -33,19 +36,18 @@ TableComponent::create()
             /** @var PageStructureModel $block */
             foreach ($blocks_in_structure as $block) {
                 ?>
-                    <div class="tw-flex tw-bg-white tw-border-[1px] tw-border-gray-300 tw-p-3 tw-rounded-lg">
-                        <?=
-                        $block->getBlock()->getName() ?>
-                        <div class="tw-ms-auto">
-                            <?php
-                                ButtonHypertext::create()
-                                ->href(DefaultRoutes::route(DefaultRoutes::ADMIN_TABLE_DELETE_ENTRY, ['table' => $block->getTableName(), 'id' => $block->getId()]).'?redirection='.Tools::getEncodedCurrentURI())
-                                ->text('<i class="tw-me-1 fa-solid fa-trash"></i> ' . __('admin.panel.pages.page.blocks.remove'))
-                                ->red()
-                                ->render();
-                            ?>
-                        </div>
+                <div class="tw-flex tw-bg-white tw-border-[1px] tw-border-gray-300 tw-p-3 tw-rounded-lg">
+                    <?= $block->getBlock()->getName() ?>
+                    <div class="tw-ms-auto">
+                        <?php
+                        ButtonHypertext::create()
+                            ->href(DefaultRoutes::route(DefaultRoutes::ADMIN_TABLE_DELETE_ENTRY, ['table' => $block->getTableName(), 'id' => $block->getId()]) . '?redirection=' . Tools::getEncodedCurrentURI())
+                            ->text('<i class="tw-me-1 fa-solid fa-trash"></i> ' . __('admin.panel.pages.page.blocks.remove'))
+                            ->red()
+                            ->render();
+                        ?>
                     </div>
+                </div>
                 <?php
             }
             ?>

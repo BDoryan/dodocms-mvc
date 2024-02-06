@@ -20,7 +20,7 @@ class PagesController extends SectionController
     {
         $pages = PageModel::findAll("*", [], "createdAt DESC");
 
-        $attributes = ['name', 'seo_title', 'seo_description', 'keywords', 'slug', 'updatedAt'];
+        $attributes = ['name', 'seo_title', 'seo_description', 'slug'];
         $columns = [...$attributes, 'admin.panel.tables.table.entries.actions'];
         $rows = [];
 

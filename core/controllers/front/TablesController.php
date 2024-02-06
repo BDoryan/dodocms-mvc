@@ -246,10 +246,7 @@ class TablesController extends SectionController
         $data['table_name'] = $table_name;
         $data['model'] = $model;
         $data['entry_id'] = $entry_id;
-        $data['buttons'] = fetch(Application::get()->toRoot("/core/ui/views/admin/panel/sections/table/entry/set_form_buttons.php"), [
-            'table_name' => $table_name ?? '',
-            'entry_id' => $entry_id ?? null,
-        ]);
+        $data['buttons'] = fetch(Application::get()->toRoot("/core/ui/views/admin/panel/sections/table/entry/set_form_buttons.php"), $data);
 
         $this->viewSection('table/entry/set', $data);
     }

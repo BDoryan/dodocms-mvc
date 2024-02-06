@@ -12,12 +12,17 @@ class FileManager
         'application/pdf'
     ];
 
+    private string $upload_max_filesize = '5M';
+
     /**
      * @param string $upload_directory
      */
     public function __construct(string $upload_directory = "uploads")
     {
         $this->upload_directory = $upload_directory;
+
+        ini_set('upload_max_filesize', $this->upload_max_filesize);
+        ini_set('post_max_size', $this->upload_max_filesize);
     }
 
     /**

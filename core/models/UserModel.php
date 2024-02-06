@@ -183,15 +183,29 @@ class UserModel extends Model
         $fields = parent::getFields();
         $fields["username"] = [
             "size" => "tw-w-5/12",
-            "field" => Text::create()->name("username")->label(__('admin.panel.users.username'))->value($this->getUsername() ?? "")->required(),
+            "field" => Text::create()
+                ->name("username")
+                ->label(__('admin.panel.users.username'))
+                ->value($this->getUsername() ?? "")
+                ->required(),
         ];
         $fields["email"] = [
             "size" => "tw-w-7/12",
-            "field" => Text::create()->name("email")->label(__('admin.panel.users.email'))->value($this->getEmail() ?? "")->required(),
+            "field" => Text::create()
+                ->type('email')
+                ->name("email")
+                ->label(__('admin.panel.users.email'))
+                ->value($this->getEmail() ?? "")
+                ->required(),
         ];
         $fields["password"] = [
             "size" => "tw-w-full",
-            "field" => Text::create()->type('password')->name("password")->placeholder("Laisser vide pour maintenir l'ancien mot de passe.")->label(__('admin.panel.users.password'))->value(""),
+            "field" => Text::create()
+                ->type('password')
+                ->name("password")
+                ->placeholder(__('admin.panel.users.password.placeholder'))
+                ->label(__('admin.panel.users.password'))
+                ->value(""),
         ];
         return $fields;
     }

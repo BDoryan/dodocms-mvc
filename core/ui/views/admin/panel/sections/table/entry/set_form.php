@@ -8,9 +8,12 @@
             <?= $field["field"]->render() ?>
         </div>
     <?php } ?>
-    <div class="tw-order-2 tw-px-2 tw-flex tw-flex-row tw-w-full tw-gap-5 tw-mt-3">
-        <?=
-            $buttons ?? 'No buttons provided.'
-        ?>
-    </div>
+
+    <?php if (!empty($buttons)) { ?>
+        <div class="tw-order-2 tw-px-2 tw-flex tw-flex-row tw-w-full tw-gap-5 tw-mt-3">
+            <?=
+            $buttons
+            ?>
+        </div>
+    <?php } ?>
 </form>

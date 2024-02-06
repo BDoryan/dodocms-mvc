@@ -3,5 +3,5 @@ view(Application::get()->toRoot("/core/ui/views/admin/panel/sections/table/entry
     'table_name' => $table_name ?? '',
 ]);
 view(Application::get()->toRoot("/core/ui/views/admin/panel/sections/table/entry/set_form_button_submit.php"), [
-    'entry_id' => $entry_id ?? '',
+    'model' => $model ?? null,
 ]);
