@@ -150,24 +150,24 @@ class Tools
         return ["type" => $columnType];
     }
 
-    public static function deleteDirectory($dirPath): bool
-    {
-        if (!is_dir($dirPath)) {
+    public static function deleteDirectory($dir): bool {
+        if (!is_dir($dir)) {
             return false;
         }
-        if (substr($dirPath, strlen($dirPath) - 1, 1) != '/') {
-            $dirPath .= '/';
-        }
-        $files = glob($dirPath . '*', GLOB_MARK);
+
+        $files = array_diff(scandir($dir), array('.', '..'));
+
         foreach ($files as $file) {
-            if (is_dir($file)) {
-                self::deleteDirectory($file);
+            $path = $dir . '/' . $file;
+
+            if (is_dir($path)) {
+                self::deleteDirectory($path);
             } else {
-                unlink($file);
+                unlink($path);
             }
         }
-        rmdir($dirPath);
-        return true;
+
+        return rmdir($dir);
     }
 
     public static function getDirectorySize($path): int

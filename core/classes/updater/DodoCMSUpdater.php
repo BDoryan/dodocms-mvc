@@ -17,7 +17,7 @@ class DodoCMSUpdater extends Updater
         if (substr($destination, -1) === '/')
             $destination = substr($destination, 0, -1);
 
-        include $destination . 'setup/update/update.php';
+        include $destination . '/setup/update/update.php';
 
 //        Tools::deleteDirectory($destination);
     }
