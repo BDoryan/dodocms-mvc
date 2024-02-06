@@ -254,4 +254,11 @@ class Database
     {
         return $this->name;
     }
+
+    public function getVersion(): string {
+        $sql = "SELECT VERSION()";
+        $prepare = $this->connection->prepare($sql);
+        $prepare->execute();
+        return $prepare->fetchColumn();
+    }
 }

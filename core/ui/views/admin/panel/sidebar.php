@@ -13,7 +13,7 @@ if (!isset($sidebar)) {
                      alt="<?= __('admin.panel.title') ?>">
                 <span class="tw-text-2xl tw-font-bold">DodoCMS</span>
             </div>
-            <p><?= __("admin.panel.title") ?></p>
+            <p class="tw-text-center"><?= __("admin.panel.title") ?></p>
         </div>
         <nav class="tw-flex-1 tw-overflow-y-auto">
             <?php
@@ -49,8 +49,9 @@ if (!isset($sidebar)) {
             ->text('<i class="tw-me-1 fa-solid fa-arrow-right"></i> ' . __("admin.panel.go_to_website"))
             ->render();
         ?>
-        <div class="tw-px-3 tw-text-center italic tw-py-2 tw-text-md tw-font-semibold tw-bg-white tw-bg-opacity-50 tw-shadow-sm tw-text-gray-700">
-            <?= DodoCMS::VERSION ?>
+        <div class="tw-px-3 tw-text-center italic tw-py-2 tw-text-md tw-font-semibold tw-bg-white tw-bg-opacity-50 tw-shadow-sm tw-text-gray-700 tw-flex tw-flex-col">
+            <p><?= DodoCMS::VERSION ?></p>
+            <?php if (Application::get()->hasUpdate()) { ?><a href="<?= DefaultRoutes::ADMIN_PANEL ?>" class="tw-my-2 tw-text-red-500 tw-font-bold tw-text-sm tw-italic tw-underline">Nouvelle version disponible</a><?php } ?>
         </div>
     </div>
 </div>

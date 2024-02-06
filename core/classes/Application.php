@@ -17,6 +17,7 @@ class Application
         return self::$application;
     }
 
+    private Updater $updater;
     private Router $router;
     private Internationalization $internationalization;
     private Configuration $configuration;
@@ -201,7 +202,7 @@ class Application
     }
 
     public function needSetup(): bool {
-        return file_exists($this->toRoot("/setup"));
+        return file_exists($this->toRoot("/setup")) && !substr(DodoCMS::VERSION, 0, 11) == "development";
     }
 
     public function run()
@@ -247,6 +248,10 @@ class Application
             $this->logger->debug("Application->initVueComponents();");
             $this->initVueComponents();
 
+            $this->updater = new DodoCMSUpdater();
+            $this->logger->info("Updater initialized !");
+
+            $this->logger->debug("Application->router->dispatch();");
             $this->logger->debug("dispatch();");
             if ($this->router->dispatch()) {
                 $this->logger->debug($this->router->getRequestURI() . " has been dispatched !");
@@ -416,6 +421,15 @@ class Application
         return $this->theme;
     }
 
+    public function hasUpdate(): bool {
+        $hasUpdate = Cache::get('DODOCMS_HAS_UPDATE');
+        if($hasUpdate === null) {
+            $hasUpdate = $this->updater->hasUpdate();
+            Cache::set('DODOCMS_HAS_UPDATE', $hasUpdate);
+        }
+        return $hasUpdate;
+    }
+
     public function setTheme(Theme $theme): void
     {
         $this->theme = $theme;
@@ -433,6 +447,14 @@ class Application
     public function getJwtManager(): JsonWebTokenManager
     {
         return $this->jwtManager;
+    }
+
+    /**
+     * @return Updater
+     */
+    public function getUpdater(): Updater
+    {
+        return $this->updater;
     }
 
     public function isDevelopment(): bool

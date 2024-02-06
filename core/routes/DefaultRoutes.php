@@ -60,6 +60,7 @@ class DefaultRoutes
     const ADMIN_API_TABLE_DELETE_ENTITY = "/admin/api/entries/delete/{model}/{id}";
     const ADMIN_API_TABLE_NEW_ENTITY = "/admin/api/entries/set/{model}";
     const ADMIN_API_TABLE_ENTITY_FORM = "/admin/api/entries/form/{model}";
+    const ADMIN_UPDATE = "/admin/update";
 
     /* Sections */
     const ADMIN_RESOURCES_MANAGER = "/admin/resources/";
@@ -86,6 +87,7 @@ class DefaultRoutes
 
         $router->middleware([$adminController, 'authorization'],
             $router->get(self::ADMIN_PANEL, [$adminController, 'index']),
+            $router->get(self::ADMIN_UPDATE, [$adminController, 'update'])
         );
 
         $pages = PageModel::findAll("*");

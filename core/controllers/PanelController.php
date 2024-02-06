@@ -26,15 +26,17 @@ class PanelController extends AdminController
             $modulesSection[] = $module->getSidebarSection();
         }
 
+        $adminCenterSection = [
+            new SidebarSection("tw-me-1 fa-solid fa-users", __('admin.panel.users.title'), DefaultRoutes::getRoute(DefaultRoutes::ADMIN_USERS, ['table' => 'Page'])),
+            new SidebarSection("tw-me-1 fa-solid fa-gear", __('admin.panel.configuration.title'), DefaultRoutes::getRoute(DefaultRoutes::ADMIN_CONFIGURATION, ['table' => 'Page']))
+        ];
+
         $this->sidebar = new Sidebar([
             new SidebarCategory(__("admin.panel.content_manager"), [
                 new SidebarSection("tw-me-1 fa-solid fa-images", __('admin.panel.resources.title'), DefaultRoutes::ADMIN_RESOURCES_MANAGER),
                 new SidebarSection("tw-me-1 fa-solid fa-file-lines", __('admin.panel.pages.title'), DefaultRoutes::getRoute(DefaultRoutes::ADMIN_PAGES_MANAGER, ['table' => 'Page'])),
             ]),
-            new SidebarCategory(__("admin.panel.admin_center"), [
-                new SidebarSection("tw-me-1 fa-solid fa-users", __('admin.panel.users.title'), DefaultRoutes::getRoute(DefaultRoutes::ADMIN_USERS, ['table' => 'Page'])),
-                new SidebarSection("tw-me-1 fa-solid fa-gear", __('admin.panel.configuration.title'), DefaultRoutes::getRoute(DefaultRoutes::ADMIN_CONFIGURATION, ['table' => 'Page'])),
-            ]),
+            new SidebarCategory(__("admin.panel.admin_center"), $adminCenterSection),
             new SidebarCategory(__("admin.panel.modules"), $modulesSection),
             new SidebarCategory(__("admin.panel.developer_center"), [
                 new SidebarSection("tw-me-1 fa-solid fa-cube", __('admin.panel.block_manager'), DefaultRoutes::ADMIN_BLOCKS_MANAGER),
@@ -57,6 +59,14 @@ class PanelController extends AdminController
         $this->section(["section" => "dashboard"]);
     }
 
+    public function update() {
+        $updater = Application::get()->getUpdater();
+        if ($updater->hasUpdate()) {
+            $updater->update();
+        }
+        $this->section(["section" => "dashboard"]);
+    }
+
     public function viewSection($section, $data = [])
     {
         Application::get()->getLogger()->debug("PanelController->initSidebar()");
@@ -64,7 +74,7 @@ class PanelController extends AdminController
 
         $this->title = 'DodoCMS - ' . __('admin.panel.title');
 
-        $alerts =  $this->getAlerts();
+        $alerts = $this->getAlerts();
         Application::get()->getLogger()->debug("AdminController->getAlerts() : " . (var_export($alerts, true)));
 
         $section = $this->fetch('panel/index', [

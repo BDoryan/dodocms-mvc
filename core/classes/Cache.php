@@ -5,7 +5,7 @@ class Cache {
     private static array $cache = [];
 
     /**
-     * Store a cache data in memory (just during the request)
+     * Store cache data in memory (just during the request)
      *
      * @param string $key
      * @param $value
@@ -16,7 +16,7 @@ class Cache {
     }
 
     /**
-     * Get a cache data from memory (just during the request)
+     * Get cache data from memory (just during the request)
      *
      * @param string $key
      * @return mixed|null
@@ -28,7 +28,7 @@ class Cache {
     }
 
     /**
-     * Remove a cache data from memory (just during the request)
+     * Remove cache data from memory (just during the request)
      *
      * @param string $key
      * @return void
@@ -86,7 +86,7 @@ class Cache {
 
         if (!file_exists($dir))
             mkdir($dir, 0777, true);
-        file_put_contents($dir . '/' . $file, $content);
+        file_put_contents($file, $content);
         return $file;
     }
 }
