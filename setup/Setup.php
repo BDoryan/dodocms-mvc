@@ -60,7 +60,7 @@ class Setup
     }
 
     /**
-     * Setup the database with the sql files in setup/sql
+     * Setup the database with the sql files in setup/migrations
      *
      * @param PDO $connection
      * @param string $database
@@ -73,7 +73,7 @@ class Setup
                 USE `$database`;
             ";
 
-        $files = glob(Application::get()->toRoot("/setup/sql/*.sql"));
+        $files = glob(Application::get()->toRoot("/setup/migrations/*.sql"));
         foreach ($files as $file) {
             $sql .= file_get_contents($file);
         }

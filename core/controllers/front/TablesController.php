@@ -60,7 +60,8 @@ class TablesController extends SectionController
             'table' => $table ?? null,
             'table_name' => $table_name ?? null,
             'title' => __("admin.panel.tables.table.edit.title", ['table' => $table_name]),
-            'description' => __("admin.panel.tables.table.edit.description")
+            'description' => __("admin.panel.tables.table.edit.description"),
+            'migrations' => Migration::getMigrations(Application::get()->toRoot('/migrations/'.$table_name), DodoCMS::VERSION_TIMESTAMP)
         ];
 
         $this->set($data);

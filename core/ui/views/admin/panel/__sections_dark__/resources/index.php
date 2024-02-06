@@ -1,1 +1,0 @@
-<resources :resources="<?= Tools::parseJsonToHtmlAttribute(json_encode($resources ?? [], JSON_HEX_QUOT)) ?>"></resources>

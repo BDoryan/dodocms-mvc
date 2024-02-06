@@ -16,9 +16,9 @@ Header::create()
     ->render();
 ?>
 <?php
-    if(!empty($sql)) {
-        view(Application::get()->toRoot("/core/ui/views/sql.php"), ["sql" => $sql]);
-    }
+if (!empty($sql)) {
+    view(Application::get()->toRoot("/core/ui/views/sql.php"), ["sql" => $sql]);
+}
 ?>
 <div class="tw-flex tw-flex-row tw-flex-wrap -tw-mx-2">
     <div class="tw-w-5/12 tw-px-2 tw-flex tw-flex-col tw-gap-y-5">
@@ -66,8 +66,35 @@ Header::create()
             </form>
         </div>
         <div class="tw-border-[1px] tw-border-gray-700 tw-border-opacity-25 tw-drop-shadow-md tw-text-gray-600 tw-bg-white tw-bg-opacity-70 tw-rounded-lg tw-flex tw-flex-row tw-flex-wrap tw-py-5 tw-px-3 tw-p-2 <?= empty($table_name) ? "tw-hidden" : "" ?>">
-            <form class="tw-flex tw-flex-col tw-w-full tw-gap-y-2 tw-text-center" action="<?= DefaultRoutes::route(DefaultRoutes::ADMIN_TABLES_DELETE, ["table" => $table_name ?? '']) ?>" id="table-form-delete" method="POST">
-                <h3 class="tw-text-4xl tw-text-red-600 tw-font-semibold tw-mb-2"><i class="tw-me-2 fa-solid fa-warning"></i><?= __('admin.panel.tables.table.delete.warning.title') ?> <i
+            <h3 class="tw-text-2xl tw-text-gray-700 tw-font-semibold tw-mb-2"><?= __('admin.panel.tables.table.migrations.title') ?></h3>
+            <p class="tw-leading-1"><?= __('admin.panel.tables.table.migrations.description') ?></p>
+            <div class="tw-w-full tw-border-b tw-border-b-gray-300 tw-my-3"></div>
+            <ul class="tw-flex tw-flex-col tw-w-full">
+                <?php
+                if (!empty($migrations)) {
+                    /** @var Migration $migration */
+                    foreach ($migrations as $migration) { ?>
+                        <li class="tw-flex tw-flex-col tw-bg-white tw-border-[1px] tw-border-gray-300 tw-justify-between tw-items-center tw-py-2 tw-px-3 tw-rounded-md tw-mb-2">
+                            <span class="tw-text-gray-700 tw-font-semibold"><?= $migration->getDestination() ?></span>
+                            <span class="tw-italic tw-ms-3"><?= date('Y-m-d H:i:s', $migration->getLastModification()) ?></span>
+                        </li>
+                        <?php
+                    }
+                } else {
+                    ?>
+                    <li class="tw-text-sm tw-italic tw-text-gray-500"><?= __('admin.panel.tables.table.any_migrations_found') ?></li>
+                    <?php
+                }
+                ?>
+            </ul>
+        </div>
+        <div class="tw-border-[1px] tw-border-gray-700 tw-border-opacity-25 tw-drop-shadow-md tw-text-gray-600 tw-bg-white tw-bg-opacity-70 tw-rounded-lg tw-flex tw-flex-row tw-flex-wrap tw-py-5 tw-px-3 tw-p-2 <?= empty($table_name) ? "tw-hidden" : "" ?>">
+            <form class="tw-flex tw-flex-col tw-w-full tw-gap-y-2 tw-text-center"
+                  action="<?= DefaultRoutes::route(DefaultRoutes::ADMIN_TABLES_DELETE, ["table" => $table_name ?? '']) ?>"
+                  id="table-form-delete" method="POST">
+                <h3 class="tw-text-4xl tw-text-red-600 tw-font-semibold tw-mb-2"><i
+                            class="tw-me-2 fa-solid fa-warning"></i><?= __('admin.panel.tables.table.delete.warning.title') ?>
+                    <i
                             class="ms-2 fa-solid fa-warning"></i></h3>
                 <p class="tw-text-md"><?= __('admin.panel.tables.table.delete.warning.message') ?></p>
                 <button type="submit"
@@ -77,11 +104,14 @@ Header::create()
                 </button>
             </form>
         </div>
-        <form id="confirm" class="tw-border-[1px] tw-border-gray-700 tw-border-opacity-25 tw-drop-shadow-md tw-text-gray-600 tw-bg-white tw-bg-opacity-70 tw-shadow-lg tw-rounded-lg tw-flex-col tw-flex-wrap tw-p-5 tw-gap-2 tw-hidden" action=""
+        <form id="confirm"
+              class="tw-border-[1px] tw-border-gray-700 tw-border-opacity-25 tw-drop-shadow-md tw-text-gray-600 tw-bg-white tw-bg-opacity-70 tw-shadow-lg tw-rounded-lg tw-flex-col tw-flex-wrap tw-p-5 tw-gap-2 tw-hidden"
+              action=""
               method="POST"
               novalidate>
             <h5 class="tw-text-lg tw-uppercase tw-font-bold"><?= __('admin.panel.tables.table.json') ?></h5>
-            <textarea id="json-content" disabled rows="15" class="tw-bg-transparent tw-text-black tw-w-full tw-border-[0px]"
+            <textarea id="json-content" disabled rows="15"
+                      class="tw-bg-transparent tw-text-black tw-w-full tw-border-[0px]"
                       style="white-space: pre; font-family: monospace;">
             </textarea>
             <input type="hidden" name="table_json" value="<?= $post_table_json ?? '{}' ?>">

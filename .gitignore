@@ -1,5 +1,6 @@
 /cache/*
 /controllers/*
+/migrations/*
 /models/*
 package-lock.json
 

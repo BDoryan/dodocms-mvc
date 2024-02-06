@@ -10,11 +10,32 @@ class Table extends CMSObject
 
     private static array $models = [];
 
+    /**
+     * Register a model in the system
+     *
+     * @param string $table
+     * @param $model
+     * @param string|null $type
+     * @return void
+     */
     public static function registerModel(string $table, $model, ?string $type = null): void
     {
         if ($type == null)
             $type = Model::MODEL_TYPE_CMS;
         self::$models[$type][$table] = $model;
+    }
+
+    /**
+     * Return the type of the model (custom, model or cms)
+     *
+     * @param $table
+     * @return string|null
+     */
+    public static function getTypeOfModel($table): ?string {
+        foreach(self::$models as $type => $models)
+            if(isset($models[$table]))
+                return $type;
+        return null;
     }
 
     /**
@@ -87,6 +108,9 @@ class Table extends CMSObject
     {
         $sql = "DROP TABLE " . $this->getName() . ";";
         Application::get()->getDatabase()->execute($sql);
+
+        $migration = Migration::create(Application::get()->toRoot("/migrations/".$this->getName()), $sql);
+        $migration->save();
     }
 
     private function getConstraintNameByColumn($column_name)
@@ -161,9 +185,8 @@ class Table extends CMSObject
             }
         }
 
-        if (empty($sql)) {
+        if (empty($sql))
             return "";
-        }
 
         try {
             $requests = explode("\n", $sql);
@@ -173,6 +196,10 @@ class Table extends CMSObject
                 }
             }
             $this->fetch();
+
+            $migration = Migration::create(Application::get()->toRoot("/migrations/".$this->getName()), $sql);
+            $migration->save();
+
             return implode("<br>", $requests);
         } catch (Exception $e) {
             throw new SQLException($e->getMessage(), $e->getCode(), $sql);
@@ -245,6 +272,9 @@ class Table extends CMSObject
 
             $requests = explode("\n", $sql);
             Application::get()->getDatabase()->execute($sql);
+
+            $migration = Migration::create(Application::get()->toRoot("/migrations/".$this->getName()), $sql);
+            $migration->save();
 
             return implode("<br>", $requests);
         } catch (Exception $e) {

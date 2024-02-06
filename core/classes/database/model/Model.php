@@ -1,7 +1,6 @@
 <?php
 
 Autoloader::require("core/classes/object/CMSObjectHydration.php");
-
 /**
  * For create a model class you need set all attributes of your table in the constructor with a default value
  * 2 : create all getters and setters
@@ -14,6 +13,7 @@ abstract class Model extends CMSObjectHydration
 
     public const MODEL_TYPE_CMS = 'cms';
     public const MODEL_TYPE_CUSTOM = 'custom';
+    public const MODEL_TYPE_MODULE = 'module';
 
     private string $table_name;
 
@@ -29,7 +29,7 @@ abstract class Model extends CMSObjectHydration
     }
 
     /**
-     * Method called when the data of the model is fetched from the database
+     * Method called when the data of the model is fetched from the database,
      * and in this method you can add more data to the model
      *
      * @return UserModel|null
@@ -48,7 +48,7 @@ abstract class Model extends CMSObjectHydration
     }
 
     /**
-     * Method create the data in the database and fetch the data set in database
+     * Method create the data in the database and fetch the data set in a database,
      * to this model (instance)
      *
      * @return $this|null
@@ -61,7 +61,7 @@ abstract class Model extends CMSObjectHydration
     }
 
     /**
-     * Method create the data in the database (without fetch the data set in database)
+     * Method create the data in the database (without fetch the data set in a database)
      *
      * @return bool
      */
