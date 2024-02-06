@@ -202,7 +202,7 @@ class Application
     }
 
     public function needSetup(): bool {
-        return file_exists($this->toRoot("/setup")) && !substr(DodoCMS::VERSION, 0, 11) == "development";
+        return file_exists($this->toRoot("/setup")) && substr(DodoCMS::VERSION, 0, 11) != "development";
     }
 
     public function run()
