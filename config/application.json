@@ -12,5 +12,6 @@
     },
     "modules": {
         "enabled": false
-    }
+    },
+    "theme": "play-tailwind-main"
 }

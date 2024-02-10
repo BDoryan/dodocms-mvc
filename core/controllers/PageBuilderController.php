@@ -173,6 +173,7 @@ class PageBuilderController extends DOMController
 
         $this->header = $this->fetch("partials/header");
         $this->footer = $this->fetch("partials/footer");
+        $this->scripts = $this->fetch("partials/scripts");
 
         $this->title = $page->getSeoTitle();
         $this->description = $page->getSeoDescription();

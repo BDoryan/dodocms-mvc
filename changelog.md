@@ -1,7 +1,6 @@
-# 06.02.2024
+# 07.02.2024
 
 ## Nouveautés
-- Ajout du système de mise à jour 
 
 ## Corrections
 

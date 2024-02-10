@@ -44,7 +44,6 @@ class Application
         $this->logger = new Logger($this->toRoot("/cache/logs/" . "log-" . date("Y-m-d") . ".log"), $this->isDebugMode());
 
         self::$application = $this;
-        $this->theme = new Theme("default");
     }
 
     public function getVueComponents(): array
@@ -229,8 +228,10 @@ class Application
                 return;
             }
 
+            $this->theme = new Theme($this->getConfiguration()['theme'] ?? 'default');
+
             $this->logger->debug("Application->loadJWTManager()");
-            $this->jwtManager = new JsonWebTokenManager($this->getConfiguration()["jwt"]["secret"], $this->getConfiguration()["jwt"]["expiresIn"]);
+            $this->jwtManager = new JsonWebTokenManager($this->getConfiguration()['jwt']['secret'], $this->getConfiguration()['jwt']['expiresIn']);
 
             $this->logger->debug("Application->connectDatabase();");
             $this->connectDatabase();
@@ -455,6 +456,10 @@ class Application
     public function getUpdater(): Updater
     {
         return $this->updater;
+    }
+
+    public static function theme(): Theme {
+        return self::get()->getTheme();
     }
 
     public function isDevelopment(): bool

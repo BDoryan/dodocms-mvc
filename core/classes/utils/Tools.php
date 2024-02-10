@@ -150,7 +150,39 @@ class Tools
         return ["type" => $columnType];
     }
 
-    public static function deleteDirectory($dir): bool {
+    public static function copyDirectory($source, $destination)
+    {
+        $dir = opendir($source);
+        @mkdir($destination);
+        while (($file = readdir($dir)) !== false) {
+            if (($file != '.') && ($file != '..')) {
+                if (is_dir($source . '/' . $file)) {
+                    self::copyDirectory($source . '/' . $file, $destination . '/' . $file);
+                } else {
+                    copy($source . '/' . $file, $destination . '/' . $file);
+                }
+            }
+        }
+        closedir($dir);
+    }
+
+    public static function getFiles(string $dir, bool $subdirectory = false): array
+    {
+        $files = [];
+        foreach (scandir($dir) as $file) {
+            if ($file == '.' || $file == '..')
+                continue;
+
+            if(is_dir($dir . '/' . $file) && $subdirectory)
+                $files = array_merge($files, self::getFiles($dir . '/' . $file, $subdirectory));
+            else if(is_file($dir . '/' . $file))
+                $files[] = $file;
+        }
+        return $files;
+    }
+
+    public static function deleteDirectory($dir): bool
+    {
         if (!is_dir($dir)) {
             return false;
         }

@@ -12,6 +12,7 @@ abstract class DOMController extends Controller
     protected string $head_path = '';
     protected string $header = '';
     protected string $footer = '';
+    protected string $scripts = '';
 
     public function __construct(string $name, string $root, string $asset = '/', $head_path = '', $layout = '')
     {
@@ -31,6 +32,7 @@ abstract class DOMController extends Controller
         ]);
         $data['header'] = $this->header;
         $data['footer'] = $this->footer;
+        $data['scripts'] = $this->scripts;
 
         parent::view($view, $data);
     }

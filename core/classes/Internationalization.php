@@ -5,7 +5,7 @@ Autoloader::require('core/classes/Cache.php');
 class Internationalization
 {
 
-    const DEFAULT_LANGUAGE = "en";
+    const DEFAULT_LANGUAGE = "fr";
 
     private string $language;
     private string $root;

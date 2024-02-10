@@ -195,6 +195,7 @@
   "live-editor.block.move.toast.error": "Le bloc n'a pas été déplacé",
   "live-editor.structure.delete.toast.structure_move_success": "L'opération s'est terminée avec succès",
   "live-editor.block.move.toast.structure_move_success": "L'opération s'est terminée avec succès",
+  "live-editor.block.move.toast.structure_move_failed": "Impossible de déplacer le bloc",
   "live-editor.block.update.toast.success": "Le bloc a été mis à jour",
   "live-editor.block.update.toast.structure_edit_success": "L'opération s'est terminée avec succès",
   "admin.panel.users.title": "Utilisateurs",

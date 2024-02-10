@@ -224,7 +224,7 @@ class Setup
     {
         $loadedExtensions = get_loaded_extensions();
 
-        if (!in_array('pdo_mysql', $loadedExtensions)) {
+        if (!in_array('pdo_mysql', $loadedExtensions) &&!in_array('curl', $loadedExtensions) || !in_array('xml', $loadedExtensions)) {
             view(Application::get()->toRoot('/core/ui/views/admin/panel/document'), [
                 'head' => fetch(Application::get()->toRoot('/setup/views/head'), [
                     'title' => 'Required'
