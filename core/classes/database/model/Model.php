@@ -1,6 +1,7 @@
 <?php
 
 Autoloader::require("core/classes/object/CMSObjectHydration.php");
+
 /**
  * For create a model class you need set all attributes of your table in the constructor with a default value
  * 2 : create all getters and setters
@@ -260,7 +261,7 @@ abstract class Model extends CMSObjectHydration
      */
     public function getUpdatedAt(): string
     {
-        return $this->updated_at;
+        return $this->updatedAt;
     }
 
     /**
@@ -272,7 +273,7 @@ abstract class Model extends CMSObjectHydration
      *
      * @return bool
      */
-    public function hasLanguageAttribute()
+    public function hasLanguageAttribute(): bool
     {
         return Table::getTable($this->table_name)->hasAttributeName('language');
     }
@@ -327,13 +328,10 @@ abstract class Model extends CMSObjectHydration
 
     public static abstract function findAll(string $columns, array $conditions = [], $orderBy = ''): ?array;
 
-//    public static function renderForm() {
-//        echo "If you see this message, you need to override the renderForm method in your model class";
-//    }
-
-    public function viewForm() {
+    public function viewForm()
+    {
         self::renderForm($this, [
-            'action' => ($this->hasId() ? DefaultRoutes::route(DefaultRoutes::ADMIN_TABLE_EDIT_ENTRY, ['id' => $this->getId(), 'table' => $this->getTableName()]) : DefaultRoutes::route(DefaultRoutes::ADMIN_TABLE_NEW_ENTRY, ['table' => $this->getTableName()])) . '?redirection=' . Tools::getEncodedCurrentURI()   ,
+            'action' => ($this->hasId() ? DefaultRoutes::route(DefaultRoutes::ADMIN_TABLE_EDIT_ENTRY, ['id' => $this->getId(), 'table' => $this->getTableName()]) : DefaultRoutes::route(DefaultRoutes::ADMIN_TABLE_NEW_ENTRY, ['table' => $this->getTableName()])) . '?redirection=' . Tools::getEncodedCurrentURI(),
             'buttons' => ($this->hasId() ? fetch(Application::get()->toRoot('/core/ui/views/admin/panel/sections/table/entry/set_form_button_back')) : '')
                 . fetch(Application::get()->toRoot('/core/ui/views/admin/panel/sections/table/entry/set_form_button_submit'), [
                     'entry_id' => $this->hasId() ? $this->getId() : null

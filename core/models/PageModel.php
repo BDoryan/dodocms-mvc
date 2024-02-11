@@ -13,13 +13,18 @@ class PageModel extends ModelAssociated
     protected string $slug;
     protected array $blocks;
 
-//    protected ?ResourceModel $favicon;
+    protected ?int $favicon;
 
     /**
-     * @param string $name
-     * @param string $seo_title
-     * @param string $seo_description
-     * @param ?int $favicon
+     * Page constructor.
+     *
+     * @param string $name the name of the page
+     * @param string $seo_title the SEO title of the page
+     * @param string $seo_description the SEO description of the page
+     * @param string $seo_keywords the SEO keywords of the page
+     * @param string $slug the slug of the page
+     * @param array $blocks the blocks of the page
+     * @param ResourceModel|null $favicon
      */
     public function __construct(string $name = "", string $seo_title = "", string $seo_description = "", string $seo_keywords = "", string $slug = "", array $blocks = [], ?ResourceModel $favicon = null)
     {
@@ -33,108 +38,193 @@ class PageModel extends ModelAssociated
 //        $this->favicon = $favicon;
     }
 
+    /**
+     * Get the blocks of the page (structure of the page)
+     *
+     * @return array
+     */
     public function getBlocks(): array
     {
         return $this->blocks;
     }
 
+    /**
+     * Set the blocks of the page (structure of the page)
+     *
+     * @param array $blocks
+     * @return void
+     */
     public function setBlocks(array $blocks): void
     {
         $this->blocks = $blocks;
     }
 
+    /**
+     * Return the SEO keywords of the page (meta keywords)
+     *
+     * @return string
+     */
     public function getSeoKeywords(): string
     {
         return $this->seo_keywords;
     }
 
+    /**
+     * Set the SEO keywords of the page
+     *
+     * @param string $seo_keywords
+     * @return void
+     */
     public function setSeoKeywords(string $seo_keywords): void
     {
         $this->seo_keywords = $seo_keywords;
     }
 
+    /**
+     * Return the SEO keywords of the page (meta keywords) as an array (each keyword is separated by a comma
+     *
+     * @return array|null
+     */
     public function getSeoKeywordsList(): ?array
     {
         return explode(",", $this->seo_keywords);
     }
 
+    /**
+     * Return the slug of the page (route of the page)
+     *
+     * @return string
+     */
     public function getSlug(): string
     {
         return $this->slug;
     }
 
+    /**
+     * Set the slug of the page (route of the page)
+     *
+     * @param string $slug
+     * @return void
+     */
     public function setSlug(string $slug): void
     {
         $this->slug = $slug;
     }
 
+    /**
+     * Return the name of the page
+     *
+     * @return string
+     */
     public function getName(): string
     {
         return $this->name;
     }
 
+    /**
+     * Set the name of the page
+     *
+     * @param string $name
+     * @return void
+     */
     public function setName(string $name): void
     {
         $this->name = $name;
     }
 
+    /**
+     * Return the SEO title of the page (title of the page)
+     *
+     * @return string
+     */
     public function getSeoTitle(): string
     {
         return $this->seo_title;
     }
 
+    /**
+     * Set the SEO title of the page (title of the page)
+     *
+     * @param string $seo_title
+     * @return void
+     */
     public function setSeoTitle(string $seo_title): void
     {
         $this->seo_title = $seo_title;
     }
 
+    /**
+     * Return the SEO description (meta description) of the page
+     *
+     * @return string
+     */
     public function getSeoDescription(): string
     {
         return $this->seo_description;
     }
 
+    /**
+     * Get the page structure (blocks of the page)
+     *
+     * @return array|null
+     */
     public function getPageStructures(): ?array
     {
         return PageStructureModel::findAll("*", ["page_id" => $this->id], 'page_order ASC');
     }
 
+    /**
+     * Set the SEO description (meta description) of the page
+     *
+     * @param string $seo_description
+     * @return void
+     */
     public function setSeoDescription(string $seo_description): void
     {
         $this->seo_description = $seo_description;
     }
 
-    public function getFavicon(): ?int
+    public function filteredAttributes(): array
     {
-        return $this->favicon->getId();
+        $filtered =  parent::filteredAttributes();
+        $filtered["favicon_resource"] = "";
+        return $filtered;
     }
 
-    public function getFaviconResourceId(): ?ResourceModel
-    {
-        return $this->favicon ?? null;
-    }
-
-    public function setFaviconResourceModel(?ResourceModel $favicon): void
-    {
-        $this->favicon = $favicon;
-    }
 
     /**
-     * @throws Exception
+     * Set the favicon (resource) with id of the resource
+     *
+     * @param int|null $resource_id
+     * @return void
      */
     public function setFavicon($resource_id): void
     {
-        if(empty($resource_id)){
+        if(empty($resource_id)) {
             $this->favicon = null;
             return;
         }
+        $this->favicon = $resource_id;
+    }
 
-        $resourceModel = Model::getModelByTableName(ResourceModel::TABLE_NAME);
-        $resourceModel->id($resource_id);
-        if($resourceModel->fetch() !== null) {
-            $this->favicon = $resourceModel;
-            return;
-        }
-        throw new Exception("Resource not found : $resource_id");
+    /**
+     * Return the id of the favicon
+     *
+     * @return int|null
+     */
+    public function getFavicon(): ?int {
+        return $this->favicon ?? null;
+    }
+
+    /**
+     * Return the favicon (Resource)
+     *
+     * @return ResourceModel|null
+     */
+    public function getFaviconResource(): ?ResourceModel {
+        if(empty($this->favicon))
+            return null;
+        return ResourceModel::findAll("*", ["id" => $this->favicon])[0];
     }
 
     public function getFields(): array
@@ -162,18 +252,14 @@ class PageModel extends ModelAssociated
                 ->multiple(false)
                 ->name("favicon")
                 ->label(__('admin.panel.pages.fields.label.favicon'))
-                ->resources(empty($this->getFaviconResourceId()) ? [] : [
-                    $this->getFaviconResourceId()
+                ->resources(empty($this->getFaviconResource()) ? [] : [
+                    $this->getFaviconResource()
                 ])
         ];
         $fields["slug"] = [
             "size" => "tw-w-full",
             "field" => Text::create()->validator()->required()->name("slug")->label(__('admin.panel.pages.fields.label.slug'))->value($this->slug)
         ];
-//        $fields["favicon"] = [
-//            "size" => "tw-w-full",
-//            "field" => ResourceSelector::create()->name("favicon")->label(__('admin.panel.pages.fields.label.favicon'))->resources(isset($this->favicon) ? [$this->favicon] : [])
-//        ];
         return $fields;
     }
 

@@ -38,6 +38,7 @@
                 this.$root.$emit("finish-resources-selection", resourcesFiltered);
             },
             toggleSelection(resource, value, component) {
+                console.log('toggleSelection', resource, value, component)
                 if (value) {
                     if (!this.multiple)
                         this.resourcesSelected = [resource.id];
@@ -97,7 +98,7 @@
             <?php
             Button::create()
                 ->type('finish')
-                ->attribute('v-on:click', 'close')
+                ->attribute('v-on:click', 'finish')
                 ->text(__('admin.panel.resources.selector.finish'))
                 ->blue()
                 ->render()

@@ -13,7 +13,7 @@
                         alt="logo"
                         class="header-logo"
                     />
-                    <h1 class="text-3xl my-auto pl-3 font-bold leading-snug text-white lg:leading-[1.2]">DodoCMS</h1>
+                    <span class="text-3xl my-auto pl-3 font-bold leading-snug text-white lg:leading-[1.2]">DodoCMS</span>
                 </a>
             </div>
             <div class="flex w-full items-center justify-between px-4">

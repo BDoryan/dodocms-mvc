@@ -32,7 +32,7 @@
                         :href="localItems[0].src"
                         :alternativeText="localItems[0].alternativeText"
 
-                        @toggle="toggleItem($event)"
+                        @toggleSelection="toggleItem"
                         @edit="editItem($event)"
                         @remove="deleteItem($event)"
                         @delete="deleteItem($event)"

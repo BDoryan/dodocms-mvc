@@ -2037,23 +2037,23 @@ body {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
-.sticky #navbarCollapse li > a{
+.sticky #navbarCollapse li > a, .sticky .navbar-logo span{
   --tw-text-opacity: 1;
   color: rgb(17 25 40 / var(--tw-text-opacity));
 }
 
-.sticky #navbarCollapse li > a:hover{
+.sticky #navbarCollapse li > a:hover, .sticky .navbar-logo span:hover{
   --tw-text-opacity: 1;
   color: rgb(55 88 249 / var(--tw-text-opacity));
   opacity: 1;
 }
 
-:is(.dark .sticky #navbarCollapse li > a){
+:is(.dark .sticky #navbarCollapse li > a),:is(.dark  .sticky .navbar-logo span){
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
-:is(.dark .sticky #navbarCollapse li > a:hover){
+:is(.dark .sticky #navbarCollapse li > a:hover),:is(.dark  .sticky .navbar-logo span:hover){
   --tw-text-opacity: 1;
   color: rgb(55 88 249 / var(--tw-text-opacity));
 }
