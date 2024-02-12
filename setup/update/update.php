@@ -16,11 +16,12 @@ Tools::copyDirectory($core_dir, $local_core);
 Application::get()->getLogger()->debug('Core copied');
 
 // fetch all migrations
-$migrations = Tools::getFiles(__DIR__ . '/../' . 'migrations/', true);
+$migration_dir = __DIR__ . '/../' . 'migrations/';
+$migrations = Tools::getFiles($migration_dir, true);
 foreach ($migrations as $file) {
     try {
         Application::get()->getLogger()->debug('Try to execute migration ' . $file . ' executed');
-        $migration = new Migration(__DIR__ . '/../' . $file);
+        $migration = new Migration($migration_dir . $file);
         $migration->load();
         $migration->execute();
         Application::get()->getLogger()->debug('Migration ' . $file . ' executed');
