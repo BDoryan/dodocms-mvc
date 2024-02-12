@@ -16,7 +16,7 @@ Tools::copyDirectory($core_dir, $local_core);
 Application::get()->getLogger()->debug('Core copied');
 
 // fetch all migrations
-$migrations = Tools::getFiles($dir . 'migrations/', true);
+$migrations = Tools::getFiles(__DIR__ . '/../' . 'migrations/', true);
 foreach ($migrations as $file) {
     try {
         Application::get()->getLogger()->debug('Try to execute migration ' . $file . ' executed');
