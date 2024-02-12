@@ -25,7 +25,7 @@ foreach ($migrations as $file) {
         $migration->load();
         $migration->execute();
         Application::get()->getLogger()->debug('Migration ' . $file . ' executed');
-        DefaultRoutes::route(DefaultRoutes::ADMIN_PANEL);
+        Application::get()->redirect(DefaultRoutes::route(DefaultRoutes::ADMIN_PANEL));
         exit;
     } catch (Exception $e) {
         Application::get()->getLogger()->error('Error on migration ' . $file . ' ' . $e->getMessage());
