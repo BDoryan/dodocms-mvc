@@ -7,6 +7,7 @@
 }
 
 [page-structure-actions] {
+    z-index: 10;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -86,6 +87,7 @@ button[data-block-action="add"], button[model-action="new"] {
 }
 
 div[entity-action-bar] {
+    z-index: 10;
     position: absolute;
     left: 0;
     top: 0;

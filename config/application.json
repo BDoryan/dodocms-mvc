@@ -2,7 +2,7 @@
     "password_policy": "\/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()-_=+{};:,<.>]).{8,}$\/",
     "jwt": {
         "secret": "",
-        "expiresIn": 3600
+        "expiresIn": 14400
     },
     "mysql": {
         "hostname": "localhost",

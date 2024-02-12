@@ -92,7 +92,7 @@ const loadLiveEditor = () => {
     const models = $("[model-name]");
     // add html button to add new entry
     models.each((index, model) => {
-        $(model).addClass("position-relative");
+        $(model).css("position", "relative")
         const model_name = $(model).attr("model-name");
 
         const divNewEntry = document.createElement("div");
@@ -104,7 +104,7 @@ const loadLiveEditor = () => {
         // get all entities
         const entities = $(model).find('[entity-id]');
         entities.each((index, entity) => {
-            $(entity).addClass('position-relative');
+            $(entity).css("position", "relative")
 
             const actionBar = document.createElement("div");
             actionBar.setAttribute("entity-action-bar", "");

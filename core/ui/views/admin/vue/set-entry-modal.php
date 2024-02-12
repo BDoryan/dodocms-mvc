@@ -46,7 +46,7 @@
                 const self = this;
 
                 // get instance of ckeditor 5
-                const instance = $('.form-content form textarea').attr('id');
+                const instance = $('.__ckeditor__ form textarea').attr('id');
                 if(instance != null)
                     CKEDITOR.instances[instance].updateElement();
 

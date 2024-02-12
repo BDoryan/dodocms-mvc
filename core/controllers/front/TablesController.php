@@ -222,8 +222,8 @@ class TablesController extends SectionController
                     if(empty($redirection)) {
                         $redirection =
                             isset($entry_id)
-                                ? DefaultRoutes::getRoute(DefaultRoutes::ADMIN_TABLES_TABLE_ENTRIES, ["table" => $table_name])
-                                : DefaultRoutes::getRoute(DefaultRoutes::ADMIN_TABLE_EDIT_ENTRY, ["table" => $table_name, "id" => $entry_id]);
+                                ? DefaultRoutes::getRoute(DefaultRoutes::ADMIN_TABLE_EDIT_ENTRY, ["table" => $table_name, "id" => $entry_id])
+                                : DefaultRoutes::getRoute(DefaultRoutes::ADMIN_TABLES_TABLE_ENTRIES, ["table" => $table_name]);
                     } else {
                         $redirection = urldecode($redirection);
                     }

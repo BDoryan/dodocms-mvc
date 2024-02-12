@@ -28,6 +28,7 @@
             const currLink = sections[i];
             const val = currLink.getAttribute("href");
             const refElement = document.querySelector(val);
+            if(refElement == null) continue;
             const scrollTopMinus = scrollPos + 73;
             if (
                 refElement.offsetTop <= scrollTopMinus &&

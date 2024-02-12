@@ -9,6 +9,7 @@ abstract class DOMController extends Controller
     protected string $description = '';
     protected string $keywords = '';
     protected string $author = '';
+    protected ?ResourceModel $favicon = null;
     protected string $head_path = '';
     protected string $header = '';
     protected string $footer = '';
@@ -28,7 +29,8 @@ abstract class DOMController extends Controller
             "title" => $this->title,
             "description" => $this->description,
             "keywords" => $this->keywords,
-            "author" => $this->author
+            "author" => $this->author,
+            'favicon' => $this->favicon ?? null
         ]);
         $data['header'] = $this->header;
         $data['footer'] = $this->footer;

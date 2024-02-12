@@ -18,6 +18,17 @@
                     Text::create()->template('/core/ui/views/admin/components/field/')->type("password")->label(__('admin.login.form.password'))->name("password")->placeholder(__('admin.login.form.your_password'))->required()->render()
                     ?>
                 </div>
+
+                <div class="tw-mb-4 tw-w-full tw-px-2">
+                    <?php
+                    Checkbox::create()
+                        ->value(false)
+                        ->label(__('admin.login.form.remember_me'))
+                        ->placeholder(__('admin.login.form.remember_me.placeholder'))
+                        ->name("remember_me")
+                        ->render()
+                    ?>
+                </div>
                 <div class="tw-mb-4 tw-w-full tw-text-center tw-px-2">
                     <button type="submit"
                             class="tw-ml-auto tw-w-auto tw-bg-green-700 tw-text-white tw-py-2 tw-px-4 tw-rounded-md hover:tw-bg-green-800 focus:tw-outline-none focus:tw-shadow-outline-green active:tw-bg-green-800">

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="<?= $language ?? "en" ?>">
+<html lang="<?= $language ?? "en" ?>"  class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"

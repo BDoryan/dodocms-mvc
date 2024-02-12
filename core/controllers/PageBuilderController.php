@@ -25,7 +25,7 @@ class PageBuilderController extends DOMController
         $structures = $page->getPageStructures();
         $utf8 = "<?xml encoding='utf-8' ?>";
 
-        /** @var PagesController $pageController */
+        /** @var PageController $pageController */
         $pageController = ControllerManager::getPageController($page->getId());
 
         ob_start();
@@ -138,7 +138,6 @@ class PageBuilderController extends DOMController
                 $html = str_replace("$utf8", '', $html);
                 $block_content = $html;
 
-
                 if ($editorMode) {
                     view(
                         Application::get()->toRoot('/core/ui/views/admin/live-editor/block-editor.php'), [
@@ -178,6 +177,7 @@ class PageBuilderController extends DOMController
         $this->title = $page->getSeoTitle();
         $this->description = $page->getSeoDescription();
         $this->keywords = $page->getSeoKeywords();
+        $this->favicon = $page->getFaviconResource();
 
         $now = microtime(true);
         $time = $now - $start;

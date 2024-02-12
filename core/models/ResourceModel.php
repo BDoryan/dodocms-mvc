@@ -35,6 +35,14 @@ class ResourceModel extends Model implements JsonSerializable
         return $this->name;
     }
 
+    public function getMimeType(): string
+    {
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $mime_type = finfo_file($finfo, $this->getPath());
+        finfo_close($finfo);
+        return $mime_type;
+    }
+
     public function setName(string $name): void
     {
         $this->name = $name;

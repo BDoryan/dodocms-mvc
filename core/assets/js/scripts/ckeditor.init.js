@@ -11,7 +11,6 @@ function replaceCkEditor() {
     //     });
 
     $('.__ckeditor__').each(function () {
-        $(this).removeClass('__ckeditor__');
         CKEDITOR.replace($(this).attr('id'), {
             extraPlugins: 'uploadimage,image',
             filebrowserUploadUrl: '/votre-url-d-upload',

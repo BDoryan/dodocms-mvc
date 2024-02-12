@@ -91,6 +91,7 @@ abstract class AdminController extends DOMController
 
         $email = $_POST['email'] ?? null;
         $password = $_POST['password'] ?? null;
+        $remember_me = $_POST['remember_me'] == 'on'?? null;
 
         // Check if the email and password are not empty
         if ($email === null || $password === null) {
@@ -113,7 +114,7 @@ abstract class AdminController extends DOMController
         $user = $users[0];
 
         // Check the password and create the session
-        $userSession = $user->createToken($password);
+        $userSession = $user->createToken($password, $remember_me === 'on');
         if ($userSession === null) {
             $this->addToast(new Toast(__('admin.login.form.error.invalid.title'), __('admin.login.form.error.invalid.message'), Toast::TYPE_ERROR));
             $this->redirect(DefaultRoutes::ADMIN_LOGIN);

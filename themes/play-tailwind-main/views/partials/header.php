@@ -169,9 +169,10 @@
                         name="themeSwitcher"
                     >
                         <input
-                            type="checkbox"
+                            type="button"
                             name="themeSwitcher"
                             id="themeSwitcher"
+                            onclick="themeSwitch()"
                             class="sr-only"
                         />
                         <span class="block text-white dark:hidden">

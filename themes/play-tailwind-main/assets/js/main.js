@@ -152,6 +152,8 @@
     themeSwitch();
   });
 
+  window.themeSwitch = themeSwitch;
+
   // invoke theme check on initial load
   themeCheck();
   /* ========  themeSwitcher End ========= */

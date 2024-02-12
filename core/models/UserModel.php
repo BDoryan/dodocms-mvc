@@ -141,12 +141,12 @@ class UserModel extends Model
      * @return UserSessionModel|null
      * @throws Exception
      */
-    public function createToken(string $password): ?UserSessionModel
+    public function createToken(string $password, bool $long_time): ?UserSessionModel
     {
         if ($this->checkPassword($password)) {
             $jwtManager = Application::get()->getJwtManager();
 
-            $expires_in = $jwtManager->getExpiresIn();
+            $expires_in = $long_time ? $jwtManager->getExpiresIn() : 2678400 /* 31 days */;
 
             $now = new DateTime();
             $now = $now->add(new DateInterval('PT' . $expires_in . 'S'));
