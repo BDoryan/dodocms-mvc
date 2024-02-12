@@ -20,7 +20,7 @@ $migrations = Tools::getFiles(__DIR__ . '/../' . 'migrations/', true);
 foreach ($migrations as $file) {
     try {
         Application::get()->getLogger()->debug('Try to execute migration ' . $file . ' executed');
-        $migration = new Migration($file);
+        $migration = new Migration(__DIR__ . '/../' . $file);
         $migration->load();
         $migration->execute();
         Application::get()->getLogger()->debug('Migration ' . $file . ' executed');

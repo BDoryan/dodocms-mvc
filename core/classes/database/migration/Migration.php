@@ -11,8 +11,8 @@ class Migration {
      */
     public function __construct(string $destination, string $sql = '')
     {
-        $this->sql = $sql;
         $this->destination = $destination;
+        $this->sql = $sql;
     }
 
     public function load() {
