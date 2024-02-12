@@ -39,7 +39,7 @@ abstract class Updater
      */
     public function extractLastVersion(): ?string
     {
-        $zip = new ZipArchive;
+        $zip = new ZipArchive();
         $res = $zip->open(Cache::toFileInCache('last-version.zip'));
         if ($res === TRUE) {
             $destination = Cache::toFileInCache('last-version');
