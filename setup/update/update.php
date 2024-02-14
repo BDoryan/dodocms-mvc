@@ -37,13 +37,15 @@ foreach ($filteredMigrations as $file) {
         Application::get()->getLogger()->info('Migration ' . $file . ' executed');
     } catch (Exception $e) {
         Application::get()->getLogger()->error('Error on migration ' . $file . ' ' . $e->getMessage());
-        continue;
+        echo 'Error on migration ' . $file . ' ' . $e->getMessage();
+        die;
     }
 }
-exit;
 
+Application::get()->getLogger()->info('Starting to update core (delete current core directory)');
 Tools::deleteDirectory($local_core);
 Application::get()->getLogger()->info('Local core deleted');
 
+Application::get()->getLogger()->info('Copy new core directory');
 Tools::copyDirectory($core_dir, $local_core);
 Application::get()->getLogger()->info('Core copied');
