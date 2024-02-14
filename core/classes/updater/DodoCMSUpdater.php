@@ -19,5 +19,7 @@ class DodoCMSUpdater extends Updater
 
         include $destination . '/setup/update/update.php';
         Tools::deleteDirectory($destination);
+        echo 'Update done';
+        exit;
     }
 }

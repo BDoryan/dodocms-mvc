@@ -4,6 +4,7 @@
  * Here write the process to update the system
  */
 
+Application::get()->getLogger()->info('Start update');
 $dir = __DIR__ . '/../../';
 $document_root = $_SERVER['DOCUMENT_ROOT'];
 $local_core = $document_root . '/core/';
@@ -34,8 +35,6 @@ foreach ($filteredMigrations as $file) {
         Application::get()->getLogger()->debug('SQL -> '.$migration->getSql());
         $migration->execute();
         Application::get()->getLogger()->info('Migration ' . $file . ' executed');
-        Application::get()->redirect(DefaultRoutes::route(DefaultRoutes::ADMIN_PANEL));
-        exit;
     } catch (Exception $e) {
         Application::get()->getLogger()->error('Error on migration ' . $file . ' ' . $e->getMessage());
         continue;
