@@ -40,6 +40,7 @@ foreach ($filteredMigrations as $file) {
         continue;
     }
 }
+exit;
 
 Tools::deleteDirectory($local_core);
 Application::get()->getLogger()->debug('Local core deleted');
