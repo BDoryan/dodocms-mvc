@@ -49,14 +49,16 @@ abstract class AdminController extends DOMController
     public function authenticated(): bool
     {
         try {
-            if(Session::authenticated())
+            if (Session::authenticated())
                 return true;
         } catch (Exception $e) {
             Application::get()->getLogger()->error("Error while checking if the user is authenticated: " . $e->getMessage());
         }
-        if(Session::hasUserSession()) {
+
+        if (Session::hasAdminSession() || Session::hasAdminToken()) {
             $this->addToast(new Toast(__('admin.session.expired.title'), __('admin.session.expired.message'), Toast::TYPE_ERROR));
-            Session::removeUserSession();
+
+            Session::removeAdminAccess();
         }
         return false;
     }
@@ -76,8 +78,9 @@ abstract class AdminController extends DOMController
         return true;
     }
 
-    public function logout() {
-        Session::removeUserSession();
+    public function logout()
+    {
+        Session::removeAdminSession();
         $this->redirect(DefaultRoutes::ADMIN_LOGIN);
     }
 
@@ -91,7 +94,7 @@ abstract class AdminController extends DOMController
 
         $email = $_POST['email'] ?? null;
         $password = $_POST['password'] ?? null;
-        $remember_me = $_POST['remember_me'] == 'on'?? null;
+        $remember_me = $_POST['remember_me'] == 'on' ?? false;
 
         // Check if the email and password are not empty
         if ($email === null || $password === null) {
@@ -102,7 +105,7 @@ abstract class AdminController extends DOMController
         }
 
         // Check if the user exists
-        $users = UserModel::findAll('*', ['email' => $email]);
+        $users = AdminUserModel::findAll('*', ['email' => $email]);
         if (empty($users)) {
             sleep(3);
             $this->addToast(new Toast(__('admin.login.form.error.invalid.title'), __('admin.login.form.error.invalid.message'), Toast::TYPE_ERROR));
@@ -110,11 +113,12 @@ abstract class AdminController extends DOMController
             return;
         }
 
-        /** @var UserModel $user */
+        /** @var AdminUserModel $user */
         $user = $users[0];
+        $expires_in = $remember_me ? 2678400 : Application::get()->getJwtManager()->getExpiresIn();
 
         // Check the password and create the session
-        $userSession = $user->createToken($password, $remember_me === 'on');
+        $userSession = $user->createToken($password, $expires_in);
         if ($userSession === null) {
             $this->addToast(new Toast(__('admin.login.form.error.invalid.title'), __('admin.login.form.error.invalid.message'), Toast::TYPE_ERROR));
             $this->redirect(DefaultRoutes::ADMIN_LOGIN);
@@ -122,7 +126,10 @@ abstract class AdminController extends DOMController
         }
 
         // Set the user session
-        Session::setUserSession($userSession);
+        Session::setAdminSession($userSession);
+
+        // Set token session
+        Session::setAdminToken($userSession->getToken(), $expires_in);
 
         // Redirect to the admin panel
         $this->redirect(DefaultRoutes::ADMIN_PANEL);

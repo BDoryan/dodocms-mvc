@@ -16,7 +16,7 @@ class UsersController extends SectionController
      */
     public function index()
     {
-        $pages = UserModel::findAll("*", [], "createdAt DESC");
+        $pages = AdminUserModel::findAll("*", [], "createdAt DESC");
 
         $attributes = ['username', 'email', 'language', 'updatedAt', 'createdAt'];
         $columns = [...$attributes, 'admin.panel.tables.table.entries.actions'];
@@ -59,7 +59,7 @@ class UsersController extends SectionController
             $rows[] = $row;
         }
 
-        $model = new UserModel();
+        $model = new AdminUserModel();
         $entry_id = $_GET['entry_id'] ?? null;
         if ($entry_id != null) {
             $model->id(intval($entry_id));

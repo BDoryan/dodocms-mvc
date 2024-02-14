@@ -35,22 +35,22 @@ class Session
     public static function authenticated(): bool
     {
         if (!self::isStarted()) return false;
-        if (self::getUserSession() == null) return false;
+        if (self::getAdminSession() == null) return false;
         return true;
     }
 
     /**
      * @throws Exception
      */
-    public static function getUserSession(): ?UserSessionModel
+    public static function getAdminSession(): ?AdminUserSessionModel
     {
-        $token = $_SESSION['user_session'] ?? null;
+        $token = $_SESSION['dodocms_admin_session'] ?? ($_COOKIE["dodocms_admin_token"] ?? null);
         if ($token === null) return null;
 
         $jwtManager = Application::get()->getJwtManager();
         if ($jwtManager->verifyToken($token) === null) return null;
 
-        $sessions = UserSessionModel::findAll('*', ['token' => $token]);
+        $sessions = AdminUserSessionModel::findAll('*', ['token' => $token]);
         if (empty($sessions)) return null;
 
         return $sessions[0];
@@ -61,17 +61,17 @@ class Session
      *
      * @return bool
      */
-    public static function hasUserSession(): bool
+    public static function hasAdminSession(): bool
     {
-        return isset($_SESSION['user_session']);
+        return isset($_SESSION['dodocms_admin_session']);
     }
 
     /**
      * @throws Exception
      */
-    public static function getUser(): ?UserModel
+    public static function getAdminUser(): ?AdminUserModel
     {
-        $session = self::getUserSession();
+        $session = self::getAdminSession();
         if ($session === null) return null;
 
         if (Cache::get("user") === null)
@@ -80,14 +80,39 @@ class Session
         return Cache::get("user");
     }
 
-    public static function setUserSession(UserSessionModel $session)
+    public static function setAdminSession(AdminUserSessionModel $session)
     {
-        $_SESSION['user_session'] = $session->getToken();
+        $_SESSION['dodocms_admin_session'] = $session->getToken();
     }
 
-    public static function removeUserSession()
+    public static function setAdminToken(string $token, int $duration)
     {
-        unset($_SESSION['user_session']);
+        setcookie("dodocms_admin_token", $token, time() + $duration, "/");
+    }
+
+    public static function hasAdminToken(): bool
+    {
+        return isset($_COOKIE["dodocms_admin_token"]);
+    }
+
+    public static function removeAdminToken()
+    {
+        setcookie("dodocms_admin_token", "", time() - 3600, "/");
+    }
+
+    public static function getTokenSession(): ?string
+    {
+        return $_COOKIE["dodocms_admin_token"] ?? null;
+    }
+
+    public static function removeAdminSession()
+    {
+        unset($_SESSION['dodocms_admin_session']);
+    }
+
+    public static function removeAdminAccess() {
+        self::removeAdminSession();
+        self::removeAdminToken();
     }
 
     public static function setLanguage(string $lang): void

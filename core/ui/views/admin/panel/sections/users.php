@@ -10,7 +10,7 @@ TableComponent::create()
     ->columns($columns ?? [])
     ->rows($rows ?? [])
     ->render();
-/** @var UserModel $model */
+/** @var AdminUserModel $model */
 ?>
 <div class="tw-flex tw-wrap tw-mt-5 tw-gap-3">
     <div class="tw-w-1/2 tw-border-[1px] tw-border-gray-700 tw-border-opacity-25  tw-drop-shadow-md tw-text-gray-600 tw-bg-white tw-bg-opacity-70 tw-rounded-lg tw-p-4">

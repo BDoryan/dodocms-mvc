@@ -1,9 +1,9 @@
 <?php
 
-class UserSessionModel extends Model
+class AdminUserSessionModel extends Model
 {
 
-    public const TABLE_NAME = "UsersHasSessions";
+    public const TABLE_NAME = "AdminUsersHasSessions";
 
     protected ?int $user_id;
     protected string $token;
@@ -65,7 +65,7 @@ class UserSessionModel extends Model
      */
     public function getUser()
     {
-        $user = UserModel::findAll('*', ['id' => $this->user_id]);
+        $user = AdminUserModel::findAll('*', ['id' => $this->user_id]);
         if (!empty($user))
             return $user[0];
         return null;
@@ -83,8 +83,8 @@ class UserSessionModel extends Model
 
     public static function findAll(string $columns = '*', array $conditions = [], $orderBy = '', $operators = []): ?array
     {
-        return (new UserSessionModel())->getAll($columns, $conditions, $orderBy, $operators);
+        return (new AdminUserSessionModel())->getAll($columns, $conditions, $orderBy, $operators);
     }
 }
 
-Table::registerModel(UserSessionModel::TABLE_NAME, UserSessionModel::class);
+Table::registerModel(AdminUserSessionModel::TABLE_NAME, AdminUserSessionModel::class);

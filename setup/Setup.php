@@ -160,7 +160,7 @@ class Setup
             ];
             try {
                 Application::get()->connectDatabase();
-                if(count(UserModel::findAll()) > 0) {
+                if(count(AdminUserModel::findAll()) > 0) {
                     Application::get()->redirect('?step=3');
                     exit;
                 }
@@ -170,17 +170,17 @@ class Setup
                         self::addAlert(new Alert(__("setup.user.root.error"), __("setup.user.root.please_fill_all_fields"), Toast::TYPE_ERROR));
                     } else {
 
-                        if (!UserModel::emailAvailable($email)) {
+                        if (!AdminUserModel::emailAvailable($email)) {
                             self::addAlert(new Alert(__("setup.user.root.error"), __("setup.user.root.email_already_used"), Toast::TYPE_ERROR));
                             return $array;
                         }
 
-                        if (!UserModel::checkValidationOfPassword($password)) {
+                        if (!AdminUserModel::checkValidationOfPassword($password)) {
                             self::addAlert(new Alert(__("setup.user.root.error"), __("setup.user.root.password_not_valid"), Toast::TYPE_ERROR));
                             return $array;
                         }
 
-                        $user = new UserModel();
+                        $user = new AdminUserModel();
                         $user->setUsername($username);
                         $user->setPassword($password);
                         $user->setEmail($email);

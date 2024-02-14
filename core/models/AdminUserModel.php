@@ -1,9 +1,9 @@
 <?php
 
-class UserModel extends Model
+class AdminUserModel extends Model
 {
 
-    public const TABLE_NAME = "Users";
+    public const TABLE_NAME = "AdminUsers";
 
     protected string $username;
     protected string $email;
@@ -30,24 +30,24 @@ class UserModel extends Model
      * Method called when the data of the model is fetched from the database
      * and in this method you can add more data to the model
      *
-     * @return UserModel|null
+     * @return AdminUserModel|null
      * @throws Exception
      */
-    public function fetch(): ?UserModel
+    public function fetch(): ?AdminUserModel
     {
-        $this->tokens = UserSessionModel::findAll("*", ["user_id" => $this->getId(), "expire_at" => date('Y-m-d H:i:s')]) ?? [];
+        $this->tokens = AdminUserSessionModel::findAll("*", ["user_id" => $this->getId(), "expire_at" => date('Y-m-d H:i:s')]) ?? [];
         return parent::fetch();
     }
 
     public function create(): bool
     {
         // check if email are not already used
-        if (!UserModel::emailAvailable($this->getEmail())) {
+        if (!AdminUserModel::emailAvailable($this->getEmail())) {
             throw new Exception("Email already used");
         }
 
         // check if password is valid
-        if (!UserModel::checkValidationOfPassword($this->getPassword())) {
+        if (!AdminUserModel::checkValidationOfPassword($this->getPassword())) {
             throw new Exception("Password is not valid");
         }
 
@@ -138,22 +138,22 @@ class UserModel extends Model
      * Return the user session if the password is correct
      *
      * @param string $password
-     * @return UserSessionModel|null
+     * @return AdminUserSessionModel|null
      * @throws Exception
      */
-    public function createToken(string $password, bool $long_time): ?UserSessionModel
+    public function createToken(string $password, ?int $expires_in = null): ?AdminUserSessionModel
     {
         if ($this->checkPassword($password)) {
             $jwtManager = Application::get()->getJwtManager();
 
-            $expires_in = $long_time ? $jwtManager->getExpiresIn() : 2678400 /* 31 days */;
+            $expires_in = $expires_in == null ? $jwtManager->getExpiresIn() : $expires_in;
 
             $now = new DateTime();
             $now = $now->add(new DateInterval('PT' . $expires_in . 'S'));
 
-            $token = $jwtManager->createToken(['user_id' => $this->getId()]);
+            $token = $jwtManager->createToken(['user_id' => $this->getId()], $expires_in);
 
-            $userSession = new UserSessionModel($this->getId(), $token, $now->format('Y-m-d H:i:s'));
+            $userSession = new AdminUserSessionModel($this->getId(), $token, $now->format('Y-m-d H:i:s'));
             $userSession->create();
 
             $this->tokens[] = $token;
@@ -217,14 +217,14 @@ class UserModel extends Model
 
     public static function emailAvailable(string $email): bool
     {
-        $users = UserModel::findAll("*", ["email" => $email]);
+        $users = AdminUserModel::findAll("*", ["email" => $email]);
         return empty($users);
     }
 
     public static function findAll(string $columns = '*', array $conditions = [], $orderBy = ''): ?array
     {
-        return (new UserModel())->getAll($columns, $conditions, $orderBy);
+        return (new AdminUserModel())->getAll($columns, $conditions, $orderBy);
     }
 }
 
-Table::registerModel(UserModel::TABLE_NAME, UserModel::class);
+Table::registerModel(AdminUserModel::TABLE_NAME, AdminUserModel::class);

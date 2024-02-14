@@ -33,7 +33,7 @@ abstract class Model extends CMSObjectHydration
      * Method called when the data of the model is fetched from the database,
      * and in this method you can add more data to the model
      *
-     * @return UserModel|null
+     * @return AdminUserModel|null
      * @throws Exception
      */
     public function fetch(): ?Model
