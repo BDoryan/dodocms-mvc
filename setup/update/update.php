@@ -28,11 +28,11 @@ $filteredMigrations = array_filter($migrations, function($file) {
 
 foreach ($filteredMigrations as $file) {
     try {
-        Application::get()->getLogger()->debug('Try to execute migration ' . $file . ' executed');
+        Application::get()->getLogger()->info('Try to execute migration ' . $file . ' executed');
         $migration = new Migration($migration_dir . $file);
         $migration->load();
         $migration->execute();
-        Application::get()->getLogger()->debug('Migration ' . $file . ' executed');
+        Application::get()->getLogger()->info('Migration ' . $file . ' executed');
         Application::get()->redirect(DefaultRoutes::route(DefaultRoutes::ADMIN_PANEL));
         exit;
     } catch (Exception $e) {
@@ -43,7 +43,7 @@ foreach ($filteredMigrations as $file) {
 exit;
 
 Tools::deleteDirectory($local_core);
-Application::get()->getLogger()->debug('Local core deleted');
+Application::get()->getLogger()->info('Local core deleted');
 
 Tools::copyDirectory($core_dir, $local_core);
-Application::get()->getLogger()->debug('Core copied');
+Application::get()->getLogger()->info('Core copied');
