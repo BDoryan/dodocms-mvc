@@ -1,5 +1,3 @@
-
-
 create table Blocks
 (
     id        int auto_increment

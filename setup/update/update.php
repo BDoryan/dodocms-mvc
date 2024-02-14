@@ -6,19 +6,27 @@
 
 $dir = __DIR__ . '/../../';
 $document_root = $_SERVER['DOCUMENT_ROOT'];
-
 $local_core = $document_root . '/core/';
-Tools::deleteDirectory($local_core);
-Application::get()->getLogger()->debug('Local core deleted');
-
 $core_dir = $dir . 'core/';
-Tools::copyDirectory($core_dir, $local_core);
-Application::get()->getLogger()->debug('Core copied');
 
 // fetch all migrations
 $migration_dir = __DIR__ . '/../' . 'migrations/';
 $migrations = Tools::getFiles($migration_dir, true);
-foreach ($migrations as $file) {
+
+// Sort migrations by timestamp in filename
+usort($migrations, function($a, $b) {
+    $timestampA = (int)pathinfo($a, PATHINFO_FILENAME);
+    $timestampB = (int)pathinfo($b, PATHINFO_FILENAME);
+    return $timestampA - $timestampB;
+});
+
+// Filter migrations based on DodoCMS::VERSION_TIMESTAMP
+$filteredMigrations = array_filter($migrations, function($file) {
+    $migrationTimestamp = (int)pathinfo($file, PATHINFO_FILENAME);
+    return $migrationTimestamp > DodoCMS::VERSION_TIMESTAMP;
+});
+
+foreach ($filteredMigrations as $file) {
     try {
         Application::get()->getLogger()->debug('Try to execute migration ' . $file . ' executed');
         $migration = new Migration($migration_dir . $file);
@@ -32,3 +40,9 @@ foreach ($migrations as $file) {
         continue;
     }
 }
+
+Tools::deleteDirectory($local_core);
+Application::get()->getLogger()->debug('Local core deleted');
+
+Tools::copyDirectory($core_dir, $local_core);
+Application::get()->getLogger()->debug('Core copied');

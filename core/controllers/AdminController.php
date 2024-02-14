@@ -80,7 +80,7 @@ abstract class AdminController extends DOMController
 
     public function logout()
     {
-        Session::removeAdminSession();
+        Session::removeAdminAccess();
         $this->redirect(DefaultRoutes::ADMIN_LOGIN);
     }
 
