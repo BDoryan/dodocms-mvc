@@ -32,7 +32,7 @@ foreach ($filteredMigrations as $file) {
         Application::get()->getLogger()->info('Try to execute migration ' . $file . ' executed');
         $migration = new Migration($migration_dir . $file);
         $migration->load();
-        Application::get()->getLogger()->debug('SQL -> '.$migration->getSql());
+        Application::get()->getLogger()->info('SQL -> '.$migration->getSql());
         $migration->execute();
         Application::get()->getLogger()->info('Migration ' . $file . ' executed');
     } catch (Exception $e) {
