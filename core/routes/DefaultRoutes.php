@@ -101,7 +101,10 @@ class DefaultRoutes
     public static function getRoute(string $route, array $replaces = []): string
     {
         foreach ($replaces as $key => $value) {
-            $route = str_replace("{" . $key . "}", $value, $route);
+            if($key != null && $value != null)
+                $route = str_replace("{" . $key . "}", $value, $route);
+            else
+                Application::get()->getLogger()->error("The key or value is null : ".print_r($replaces, true));
         }
         return $route;
     }
