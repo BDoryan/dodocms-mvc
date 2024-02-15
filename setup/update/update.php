@@ -38,6 +38,7 @@ foreach ($filteredMigrations as $file) {
     } catch (Exception $e) {
         Application::get()->getLogger()->error('Error on migration ' . $file . ' ' . $e->getMessage());
         echo 'Error on migration ' . $file . ' ' . $e->getMessage();
+        if(!isset($_GET['force']))
         die;
     }
 }
