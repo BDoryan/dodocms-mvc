@@ -1,6 +1,8 @@
-<?=
-    fetch(Application::get()->toRoot('/core/ui/views/admin/head'), [
-        'title' => 'DodoCMS - '.($title ?? 'untitled')
+<?php
+    $resourceManager = new ResourceManager(Application::get()->toUrl('/'));
+    view(Application::get()->toRoot('/core/ui/views/admin/head'), [
+        'title' => 'DodoCMS - '.($title ?? 'untitled'),
+        'resourceManager' => $resourceManager
     ]);
 ?>
 <script>
