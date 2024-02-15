@@ -4,7 +4,7 @@
  * Here write the process to update the system
  */
 
-Application::get()->getLogger()->info('Start update');
+Application::get()->getLogger()->info('Start update.');
 $dir = __DIR__ . '/../../';
 $document_root = $_SERVER['DOCUMENT_ROOT'];
 $local_core = $document_root . '/core/';
