@@ -37,6 +37,9 @@ class ResourceModel extends Model implements JsonSerializable
 
     public function getMimeType(): string
     {
+        if (!file_exists($this->getPath()))
+            return "application/octet-stream";
+
         $finfo = finfo_open(FILEINFO_MIME_TYPE);
         $mime_type = finfo_file($finfo, $this->getPath());
         finfo_close($finfo);
