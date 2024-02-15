@@ -50,3 +50,6 @@ Application::get()->getLogger()->info('Local core deleted');
 Application::get()->getLogger()->info('Copy new core directory');
 Tools::copyDirectory($core_dir, $local_core);
 Application::get()->getLogger()->info('Core copied');
+
+Application::get()->getLogger()->info('Replace changelog.md');
+rename($core_dir . 'changelog.md', $document_root . '/changelog.md');
