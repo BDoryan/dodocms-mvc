@@ -15,10 +15,18 @@ abstract class DOMController extends Controller
     protected string $footer = '';
     protected string $scripts = '';
 
+    protected ResourceManager $resourceManager;
+
     public function __construct(string $name, string $root, string $asset = '/', $head_path = '', $layout = '')
     {
         parent::__construct($name, $root, $asset, $layout);
         $this->head_path = $head_path;
+        $this->resourceManager = new ResourceManager();
+    }
+
+    public function getResourceManager(): ResourceManager
+    {
+        return $this->resourceManager;
     }
 
     public abstract function index();
@@ -30,7 +38,8 @@ abstract class DOMController extends Controller
             "description" => $this->description,
             "keywords" => $this->keywords,
             "author" => $this->author,
-            'favicon' => $this->favicon ?? null
+            'favicon' => $this->favicon ?? null,
+            'resourceManager' => $this->resourceManager
         ]);
         $data['header'] = $this->header;
         $data['footer'] = $this->footer;

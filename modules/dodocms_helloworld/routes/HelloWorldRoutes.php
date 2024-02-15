@@ -11,7 +11,7 @@ class HelloWorldRoutes extends ModuleSection
     public function routes(Router $router): void
     {
         $router->middleware([$this->getController(), 'authorization'],
-            $router->get(DefaultRoutes::ADMIN_PANEL."/test", [$this->getController(), 'index'])
+            $router->get(NativeRoutes::ADMIN_PANEL."/test", [$this->getController(), 'index'])
         );
     }
 }

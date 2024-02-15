@@ -8,12 +8,16 @@ class Theme
     private string $name;
     private string $root;
     private string $url;
+    private ResourceManager $resourceManager;
 
     public function __construct(string $name)
     {
         $this->name = $name;
+
         $root = Application::get()->toRoot("/themes/" . $name);
         $url = Application::get()->toURL("/themes/" . $name);
+
+        $this->resourceManager = new ResourceManager($url);
 
         if(Tools::endsWith($root, "/"))
             $root = substr($root, 0, strlen($root) - 1);
@@ -23,6 +27,11 @@ class Theme
 
         $this->root = $root;
         $this->url = $url;
+    }
+
+    public function getResourceManager(): ResourceManager
+    {
+        return $this->resourceManager;
     }
 
     public function getUrl(): string

@@ -46,8 +46,8 @@ class UsersController extends SectionController
                 ->addClass("tw-text-sm tw-whitespace-nowrap")
                 ->red()
                 ->href(
-                    DefaultRoutes::route(
-                        DefaultRoutes::ADMIN_TABLE_DELETE_ENTRY, [
+                    NativeRoutes::route(
+                        NativeRoutes::ADMIN_TABLE_DELETE_ENTRY, [
                             "table" => PageModel::TABLE_NAME,
                             "id" => $entry->getId()
                         ]

@@ -8,7 +8,7 @@ Header::create()
         ButtonHypertext::create()
             ->green()
             ->text('<i class="tw-me-1 fa-solid fa-plus-circle"></i> ' . __('admin.panel.dashboard.button.new_table'))
-            ->href(DefaultRoutes::route(DefaultRoutes::ADMIN_TABLES_NEW))
+            ->href(NativeRoutes::route(NativeRoutes::ADMIN_TABLES_NEW))
             ->html()
     )
     ->render();
@@ -45,14 +45,14 @@ if (empty($tables)) {
                     <?php
                     ButtonHypertext::create()
                         ->text('<i class="tw-me-1 fa-solid fa-pen-to-square"></i> '. __('admin.panel.tables.table.manage'))
-                        ->href(DefaultRoutes::route(DefaultRoutes::ADMIN_TABLES_EDIT, ['table' => $table->getName()]))
+                        ->href(NativeRoutes::route(NativeRoutes::ADMIN_TABLES_EDIT, ['table' => $table->getName()]))
                         ->green()
                         ->render()
                     ?>
                     <?php
                     ButtonHypertext::create()
                         ->text('<i class="tw-me-1 fa-solid fa-eye"></i>'. __("admin.panel.tables.table.view_content"))
-                        ->href( DefaultRoutes::route(DefaultRoutes::ADMIN_TABLES_TABLE_ENTRIES, ['table' => $table->getName()]) )
+                        ->href( NativeRoutes::route(NativeRoutes::ADMIN_TABLES_TABLE_ENTRIES, ['table' => $table->getName()]) )
                         ->blue()
                         ->render()
                     ?>

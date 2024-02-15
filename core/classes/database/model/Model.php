@@ -331,7 +331,7 @@ abstract class Model extends CMSObjectHydration
     public function viewForm()
     {
         self::renderForm($this, [
-            'action' => ($this->hasId() ? DefaultRoutes::route(DefaultRoutes::ADMIN_TABLE_EDIT_ENTRY, ['id' => $this->getId(), 'table' => $this->getTableName()]) : DefaultRoutes::route(DefaultRoutes::ADMIN_TABLE_NEW_ENTRY, ['table' => $this->getTableName()])) . '?redirection=' . Tools::getEncodedCurrentURI(),
+            'action' => ($this->hasId() ? NativeRoutes::route(NativeRoutes::ADMIN_TABLE_EDIT_ENTRY, ['id' => $this->getId(), 'table' => $this->getTableName()]) : NativeRoutes::route(NativeRoutes::ADMIN_TABLE_NEW_ENTRY, ['table' => $this->getTableName()])) . '?redirection=' . Tools::getEncodedCurrentURI(),
             'buttons' => ($this->hasId() ? fetch(Application::get()->toRoot('/core/ui/views/admin/panel/sections/table/entry/set_form_button_back')) : '')
                 . fetch(Application::get()->toRoot('/core/ui/views/admin/panel/sections/table/entry/set_form_button_submit'), [
                     'entry_id' => $this->hasId() ? $this->getId() : null

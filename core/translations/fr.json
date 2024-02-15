@@ -189,7 +189,7 @@
   "live-editor.structure.update.toast.error": "La structure du bloc n'a pas été mise à jour",
   "live-editor.structure.update.toast.structure_edit_success": "L'opération s'est terminée avec succès",
   "live-editor.structure.update.toast.structure_edit_failed": "Une erreur s'est produite lors de la mise à jour de la structure du bloc",
-  "live-editor.page.structure.blocks.modal.title": "Sélectionnez un bloc",
+  "live-editor.page.structure.blocks.modal.title": "Sélectionner un bloc",
   "live-editor.page.structure.blocks.finish": "Confirmez la sélection",
   "live-editor.page.structure.blocks.modal.close": "Fermer",
   "live-editor.entries.edit.title": "Modifier une entrée",
@@ -208,7 +208,7 @@
   "live-editor.block.update.toast.structure_edit_success": "L'opération s'est terminée avec succès",
   "admin.panel.users.title": "Utilisateurs",
   "admin.panel.tables.table.migrations.title": "Liste des migrations",
-    "admin.panel.tables.table.migrations.description": "Ses migrations vont vous permettre de maintenir votre base de données à jour avec les dernières modifications de vos tables.",
+  "admin.panel.tables.table.migrations.description": "Ses migrations vont vous permettre de maintenir votre base de données à jour avec les dernières modifications de vos tables.",
   "admin.panel.tables.table.any_migrations_found": "Aucune migration (modification) à été trouvée sur cette table.",
   "admin.panel.users.username": "Nom d'utilisateur",
   "admin.panel.users.email": "E-mail",
@@ -233,5 +233,8 @@
   "live-editor.entries.new.toast.entry_set_error": "Une erreur s'est produite lors de la création de l'entrée",
   "admin.panel.configuration.new": "Nouvelle variable de configuration",
   "live-editor.entries.new.toast.success": "L'entrée a été créée",
-  "live-editor.entries.new.toast.entry_set_success": "L'opération s'est terminée avec succès"
+  "live-editor.entries.new.toast.entry_set_success": "L'opération s'est terminée avec succès",
+  "live-editor.entries.set.cancel": "Annuler",
+  "live-editor.entries.new": "Créer une nouvelle entrée",
+  "live-editor.entries.edit": "Modifier cette entrée"
 }

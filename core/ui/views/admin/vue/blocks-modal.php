@@ -25,7 +25,7 @@
                 ?>
                     <button v-on:click="$root.addBlock(<?= $block->getId() ?>)" class="w-4/12 tw-p-3 tw-flex tw-flex-col tw-justify-center tw-rounded-lg tw-bg-white tw-border-1 tw-text-gray-700 tw-border-gray-400 hover:tw-bg-blue-600 hover:tw-text-white">
                         <span class="tw-text-2xl"><?= $block->getName() ?></span>
-                        <span class="text-gray-200 tw-text-opacity-25 tw-italic"><?= $block->getPath() ?></span>
+                        <span class="text-gray-700 tw-text-opacity-25 tw-italic"><?= $block->getPath() ?></span>
                     </button>
                 <?php } ?>
             </div>

@@ -51,7 +51,7 @@ if (!isset($sidebar)) {
         ?>
         <div class="tw-px-3 tw-text-center italic tw-py-2 tw-text-md tw-font-semibold tw-bg-white tw-bg-opacity-50 tw-shadow-sm tw-text-gray-700 tw-flex tw-flex-col">
             <p><?= DodoCMS::VERSION ?></p>
-            <?php if (Application::get()->hasUpdate()) { ?><a href="<?= DefaultRoutes::ADMIN_PANEL ?>" class="tw-my-2 tw-text-red-500 tw-font-bold tw-text-sm tw-italic tw-underline">Nouvelle version disponible</a><?php } ?>
+            <?php if (Application::get()->hasUpdate()) { ?><a href="<?= NativeRoutes::ADMIN_PANEL ?>" class="tw-my-2 tw-text-red-500 tw-font-bold tw-text-sm tw-italic tw-underline">Nouvelle version disponible</a><?php } ?>
         </div>
     </div>
 </div>

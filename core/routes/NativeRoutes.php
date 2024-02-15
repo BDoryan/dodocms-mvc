@@ -13,8 +13,12 @@ Autoloader::require("core/controllers/page/PageController.php");
 Autoloader::require("core/classes/Application.php");
 Autoloader::require("core/classes/Router.php");
 
-class DefaultRoutes
+class NativeRoutes
 {
+
+    /* Resources routes */
+    const ADMIN_RESOURCES_APPLICATION = "/core/assets/js/Application.js";
+    const ADMIN_RESOURCES_VUE_COMPONENTS = "/core/assets/js/vue/Components.js";
 
     const ADMIN_LOGIN = "/admin/login";
     const ADMIN_LOGOUT = "/admin/logout";
@@ -75,21 +79,38 @@ class DefaultRoutes
         $adminController = new PanelController();
         $pageController = new PageBuilderController();
 
-        // Panels routes
+        /* Resources routes */
+        $router->get(self::ADMIN_RESOURCES_APPLICATION, function () use ($application) {
+            $content = fetch('core/ui/views/system/application_script.php');
+            $pattern = '/<script.*?>(.*?)<\/script>/s';
+            preg_match_all($pattern, $content, $matches);
+
+            if (!empty($matches[1])) {
+                $content = $matches[1][0];
+            }
+
+            header('Content-Type: application/javascript');
+            echo $content;
+        });
+
+        /* Panels routes */
         $router->get(self::ADMIN_LOGIN, [$adminController, 'login']);
         $router->get(self::ADMIN_LOGOUT, [$adminController, 'logout']);
         $router->post(self::ADMIN_LOGIN, [$adminController, 'authentication']);
 
+        /* Sections routes */
         $routes = Application::get()->getSections();
         foreach ($routes as $route) {
             $route->routes($router);
         }
 
+        /* Routes */
         $router->middleware([$adminController, 'authorization'],
             $router->get(self::ADMIN_PANEL, [$adminController, 'index']),
             $router->get(self::ADMIN_UPDATE, [$adminController, 'update'])
         );
 
+        /* Pages routes */
         $pages = PageModel::findAll("*");
         foreach ($pages as $page) {
             $router->get($page->getSlug(), function () use ($adminController, $page, $pageController) {

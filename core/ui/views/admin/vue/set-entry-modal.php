@@ -99,17 +99,16 @@
         </template>
         <template v-slot:body>
             <div class="form-content"></div>
-            <!--            <div v-html="form"></div>-->
         </template>
         <template v-slot:footer>
             <button type="button"
                     v-on:click="close"
                     class="close-upload-modal tw-me-auto tw-text-gray-500 tw-bg-white hover:tw-bg-gray-100 focus:ring-4 focus:tw-outline-none focus:ring-blue-300 tw-rounded-lg tw-border tw-border-gray-200 tw-text-sm tw-font-medium tw-px-5 tw-py-2.5 hover:tw-text-gray-900 focus:tw-z-10 dark:tw-bg-gray-700 dark:tw-text-gray-300 dark:tw-border-gray-500 dark:hover:tw-text-white dark:hover:tw-bg-gray-600 dark:focus:ring-gray-600">
-                Cancel
+                {{ $root.translate('live-editor.entries.set.cancel') }}
             </button>
             <button v-on:click="submit()"
                     class="tw-text-white tw-bg-blue-700 hover:tw-bg-blue-800 focus:ring-4 focus:tw-outline-none focus:ring-blue-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-5 tw-py-2.5 tw-text-center dark:tw-bg-blue-600 dark:hover:tw-bg-blue-700 dark:focus:ring-blue-800">
-                {{ entry_id != null ? 'Edit this entry' : 'Create new entry' }}
+                {{ entry_id != null ? $root.translate('live-editor.entries.edit') : $root.translate('live-editor.entries.new') }}
             </button>
         </template>
     </modal>

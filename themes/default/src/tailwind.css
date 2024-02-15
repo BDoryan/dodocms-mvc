@@ -24,7 +24,7 @@
   @apply bg-dark dark:bg-white;
 }
 
-.sticky #navbarCollapse li > a, .sticky .navbar-logo span {
+.sticky #navbarCollapse li > a {
   @apply text-dark dark:text-white hover:text-primary dark:hover:text-primary hover:opacity-100;
 }
 #navbarCollapse li .ud-menu-scroll.active {

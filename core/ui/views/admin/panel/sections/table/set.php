@@ -90,7 +90,7 @@ if (!empty($sql)) {
         </div>
         <div class="tw-border-[1px] tw-border-gray-700 tw-border-opacity-25 tw-drop-shadow-md tw-text-gray-600 tw-bg-white tw-bg-opacity-70 tw-rounded-lg tw-flex tw-flex-row tw-flex-wrap tw-py-5 tw-px-3 tw-p-2 <?= empty($table_name) ? "tw-hidden" : "" ?>">
             <form class="tw-flex tw-flex-col tw-w-full tw-gap-y-2 tw-text-center"
-                  action="<?= DefaultRoutes::route(DefaultRoutes::ADMIN_TABLES_DELETE, ["table" => $table_name ?? '']) ?>"
+                  action="<?= NativeRoutes::route(NativeRoutes::ADMIN_TABLES_DELETE, ["table" => $table_name ?? '']) ?>"
                   id="table-form-delete" method="POST">
                 <h3 class="tw-text-4xl tw-text-red-600 tw-font-semibold tw-mb-2"><i
                             class="tw-me-2 fa-solid fa-warning"></i><?= __('admin.panel.tables.table.delete.warning.title') ?>

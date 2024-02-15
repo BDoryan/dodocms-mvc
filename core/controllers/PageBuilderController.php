@@ -8,11 +8,11 @@ class PageBuilderController extends DOMController
     public function __construct()
     {
         parent::__construct('page', Application::get()->getTheme()->getViews(), 'assets/', 'partials/head', '/template');
+        $this->resourceManager = new ResourceManager(Application::get()->toUrl('/'));
     }
 
     public function index()
     {
-        // Not Found ?
     }
 
     /**
@@ -20,8 +20,11 @@ class PageBuilderController extends DOMController
      */
     public function viewPage(AdminController $adminController, PageModel $page)
     {
+        /* Start */
         $start = microtime(true);
         $editorMode = $adminController->authenticated() && isset($_GET['editor']) && $_GET['editor'] === 'true';
+
+        /* Start the building of the page */
         $structures = $page->getPageStructures();
         $utf8 = "<?xml encoding='utf-8' ?>";
 
@@ -172,7 +175,9 @@ class PageBuilderController extends DOMController
 
         $this->header = $this->fetch("partials/header");
         $this->footer = $this->fetch("partials/footer");
-        $this->scripts = $this->fetch("partials/scripts");
+        $this->scripts = $this->fetch("partials/scripts", [
+            'resourceManager' => $this->getResourceManager()
+        ]);
 
         $this->title = $page->getSeoTitle();
         $this->description = $page->getSeoDescription();

@@ -94,7 +94,7 @@ class Application
 
     private function loadAdminPanel()
     {
-        DefaultRoutes::loadRoutes($this, $this->router);
+        NativeRoutes::loadRoutes($this, $this->router);
         $this->logger->info("Routes initialized !");
     }
 
@@ -352,9 +352,7 @@ class Application
     {
         $url = $this->url . "/" . (trim($path, "/"));
         $url = preg_replace('#/{2,}#', '/', $url);
-        $url = rtrim($url, '/');
-
-        return $url;
+        return rtrim($url, '/');
     }
 
     /**

@@ -11,8 +11,8 @@ class ConfigurationsRoutes extends Section
     public function routes(Router $router): void
     {
         $router->middleware([$this->getController(), 'authorization'],
-            $router->get(DefaultRoutes::ADMIN_CONFIGURATION, [$this->getController(), 'index']),
-            $router->post(DefaultRoutes::ADMIN_CONFIGURATION, [$this->getController(), 'index']),
+            $router->get(NativeRoutes::ADMIN_CONFIGURATION, [$this->getController(), 'index']),
+            $router->post(NativeRoutes::ADMIN_CONFIGURATION, [$this->getController(), 'index']),
         );
     }
 }

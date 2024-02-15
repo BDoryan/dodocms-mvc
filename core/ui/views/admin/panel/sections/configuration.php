@@ -16,7 +16,7 @@ TableComponent::create()
         <h2 class="tw-text-lg tw-font-semibold tw-border-b-[1px] tw-border-b-gray-300 tw-mb-2 tw-pb-2"><?= __($model->hasId() ? 'admin.panel.pages.page.edit' : 'admin.panel.pages.page.create') ?></h2>
         <?php
         Model::renderForm($model ?? null, [
-            'action' => DefaultRoutes::route(DefaultRoutes::ADMIN_TABLE_NEW_ENTRY, ['table' => $model->getTableName()]) . '?redirection=' . Tools::getEncodedCurrentURI(),
+            'action' => NativeRoutes::route(NativeRoutes::ADMIN_TABLE_NEW_ENTRY, ['table' => $model->getTableName()]) . '?redirection=' . Tools::getEncodedCurrentURI(),
             'buttons' => ($model->hasId() ? fetch(Application::get()->toRoot('/core/ui/views/admin/panel/sections/table/entry/set_form_button_back')) : '')
                 . fetch(Application::get()->toRoot('/core/ui/views/admin/panel/sections/table/entry/set_form_button_submit'), [
                     'entry_id' => $model->hasId() ? $model->getId() : null

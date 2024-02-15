@@ -26,7 +26,7 @@ class TablesController extends SectionController
         $table = Table::getTable($table_name);
         if (!isset($table)) {
             $this->addToast(new Toast(__("admin.panel.toast.error"), __("admin.panel.tables.table.not_found", ["table" => $table_name]), Toast::TYPE_ERROR));
-            header("Location: " . DefaultRoutes::route(DefaultRoutes::ADMIN_TABLES));
+            header("Location: " . NativeRoutes::route(NativeRoutes::ADMIN_TABLES));
             exit;
         }
         return $table;
@@ -37,7 +37,7 @@ class TablesController extends SectionController
         $model = Model::getModel($table);
         if (!isset($model)) {
             $this->addToast(new Toast(__("admin.panel.toast.error"), __("admin.panel.tables.table.model_not_found", ["model" => $table->getName()]), Toast::TYPE_ERROR));
-            header('Location: ' . DefaultRoutes::route(DefaultRoutes::ADMIN_TABLES_TABLE_ENTRIES, ["table" => $table->getName()]));
+            header('Location: ' . NativeRoutes::route(NativeRoutes::ADMIN_TABLES_TABLE_ENTRIES, ["table" => $table->getName()]));
             exit;
         }
         return $model;
@@ -80,11 +80,11 @@ class TablesController extends SectionController
         if (!empty($table)) {
             $table->destroy();
             $this->addToast(new Toast(__("admin.panel.toast.success"), __("admin.panel.tables.table.delete.success", ["table" => $table_name]), Toast::TYPE_SUCCESS));
-            Application::get()->getRouter()->redirect(DefaultRoutes::ADMIN_TABLES);
+            Application::get()->getRouter()->redirect(NativeRoutes::ADMIN_TABLES);
             exit;
         }
         $this->addToast(new Toast(__("admin.panel.toast.error"), __("admin.panel.tables.table.not_found", ["table" => $table_name]), Toast::TYPE_ERROR));
-        header("Location: " . DefaultRoutes::route(DefaultRoutes::ADMIN_TABLES));
+        header("Location: " . NativeRoutes::route(NativeRoutes::ADMIN_TABLES));
         exit;
     }
 
@@ -93,7 +93,7 @@ class TablesController extends SectionController
         $table = Table::getTable($table_name);
         if (empty($table)) {
             $this->addToast(new Toast(__("admin.panel.toast.error"), __("admin.panel.tables.table.not_found", ["table" => $table_name]), Toast::TYPE_ERROR));
-            header("Location: " . DefaultRoutes::route(DefaultRoutes::ADMIN_TABLES));
+            header("Location: " . NativeRoutes::route(NativeRoutes::ADMIN_TABLES));
             exit;
         }
 
@@ -116,7 +116,7 @@ class TablesController extends SectionController
 
             $edit = ButtonHypertext::create()
                 ->text('<i class="tw-me-1 fa-solid fa-pen-to-square"></i> ' . __("admin.panel.tables.table.entries.actions.edit"))
-                ->href(DefaultRoutes::route(DefaultRoutes::ADMIN_TABLE_EDIT_ENTRY, ["table" => $table_name, "id" => $entry['id']]))
+                ->href(NativeRoutes::route(NativeRoutes::ADMIN_TABLE_EDIT_ENTRY, ["table" => $table_name, "id" => $entry['id']]))
                 ->addClass("tw-text-sm tw-whitespace-nowrap")
                 ->blue()
                 ->html();
@@ -125,7 +125,7 @@ class TablesController extends SectionController
                 ->text('<i class="tw-me-1 fa-solid fa-trash"></i> ' . __("admin.panel.tables.table.entries.actions.delete"))
                 ->addClass("tw-text-sm tw-whitespace-nowrap")
                 ->red()
-                ->href(DefaultRoutes::route(DefaultRoutes::ADMIN_TABLE_DELETE_ENTRY, ["table" => $table_name, "id" => $entry['id']]))
+                ->href(NativeRoutes::route(NativeRoutes::ADMIN_TABLE_DELETE_ENTRY, ["table" => $table_name, "id" => $entry['id']]))
                 ->html();
 
             $row['admin.panel.tables.table.entries.actions'] = '<div class="tw-flex tw-flex-row tw-justify-center align-center tw-gap-3">' . "$edit $delete" . '</div>';
@@ -177,7 +177,7 @@ class TablesController extends SectionController
             Application::get()->getLogger()->printException($e);
             $this->addAlert(new Alert(__("admin.panel.toast.error"), __("admin.panel.tables.table.entries.delete_entry.error"), Toast::TYPE_ERROR));
         }
-        Application::get()->redirect(DefaultRoutes::route(DefaultRoutes::ADMIN_TABLES_TABLE_ENTRIES, ["table" => $table_name]));
+        Application::get()->redirect(NativeRoutes::route(NativeRoutes::ADMIN_TABLES_TABLE_ENTRIES, ["table" => $table_name]));
     }
 
     public function newEntry(array $params): void
@@ -204,7 +204,7 @@ class TablesController extends SectionController
             if (isset($entry_id)) {
                 if ($model->id($entry_id)->fetch() == null) {
                     $this->addToast(new Toast(__("admin.panel.toast.error"), __("admin.panel.tables.table.entries.entry_not_found", ["table" => $table_name, "entry_id" => $entry_id]), Toast::TYPE_ERROR));
-                    header('Location: ' . DefaultRoutes::route(DefaultRoutes::ADMIN_TABLES_TABLE_ENTRIES, ["table" => $table_name]));
+                    header('Location: ' . NativeRoutes::route(NativeRoutes::ADMIN_TABLES_TABLE_ENTRIES, ["table" => $table_name]));
                     exit;
                 }
             }
@@ -222,8 +222,8 @@ class TablesController extends SectionController
                     if(empty($redirection)) {
                         $redirection =
                             isset($entry_id)
-                                ? DefaultRoutes::getRoute(DefaultRoutes::ADMIN_TABLE_EDIT_ENTRY, ["table" => $table_name, "id" => $entry_id])
-                                : DefaultRoutes::getRoute(DefaultRoutes::ADMIN_TABLES_TABLE_ENTRIES, ["table" => $table_name]);
+                                ? NativeRoutes::getRoute(NativeRoutes::ADMIN_TABLE_EDIT_ENTRY, ["table" => $table_name, "id" => $entry_id])
+                                : NativeRoutes::getRoute(NativeRoutes::ADMIN_TABLES_TABLE_ENTRIES, ["table" => $table_name]);
                     } else {
                         $redirection = urldecode($redirection);
                     }

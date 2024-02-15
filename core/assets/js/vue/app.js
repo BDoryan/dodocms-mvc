@@ -128,7 +128,9 @@ const loadApplication = () => {
     });
 }
 
-loadApplication();
+$(document).ready(() => {
+    loadApplication();
+})
 
 window.reloadPage = async (callback) => {
     $(document.body).load(location.href + " #app", () => {

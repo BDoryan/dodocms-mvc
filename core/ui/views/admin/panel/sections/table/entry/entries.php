@@ -8,7 +8,7 @@ Header::create()
         ButtonHypertext::create()
             ->green()
             ->text('<i class="tw-me-1 fa-solid fa-plus-circle"></i> ' . __('admin.panel.tables.table.entries.button.new_entry'))
-            ->href(DefaultRoutes::route(DefaultRoutes::ADMIN_TABLE_NEW_ENTRY, ['table' => $table_name ?? 'empty_table_name']))
+            ->href(NativeRoutes::route(NativeRoutes::ADMIN_TABLE_NEW_ENTRY, ['table' => $table_name ?? 'empty_table_name']))
             ->html()
     )
     ->render();
