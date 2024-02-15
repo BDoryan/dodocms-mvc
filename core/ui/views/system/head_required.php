@@ -17,7 +17,7 @@ $resourceManager->addJavaScript(NativeRoutes::ADMIN_RESOURCES_APPLICATION);
 $resourceManager->addJavaScript('/core/assets/js/classes/Toast.js');
 $resourceManager->addJavaScript('/core/assets/js/classes/FormUtils.js');
 $resourceManager->addJavaScript('/core/assets/js/vue/app.js');
-if(!Application::get()->needSetup() && Session::authenticated() && isset($_GET['editor']) && $_GET['editor']) {
+if(!Application::get()->needSetup() && Session::authenticated()) {
     $resourceManager->addScript(fetch(Application::get()->toRoot('/core/ui/views/system/vue_components_scripts')));
 }
 $resourceManager->addCSS('/core/assets/css/live-editor.css');
