@@ -10,5 +10,6 @@
         <div id="app">
             <?= $content ?? '' ?>
         </div>
+        <?= $scripts ?? '' ?>
     </body>
 </html>

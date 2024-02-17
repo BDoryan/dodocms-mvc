@@ -67,6 +67,10 @@ class PanelController extends AdminController
         $this->section(["section" => "dashboard"]);
     }
 
+    public function test() {
+        $this->viewSection('test');
+    }
+
     public function viewSection($section, $data = [])
     {
         Application::get()->getLogger()->debug("PanelController->initSidebar()");

@@ -8,6 +8,7 @@ class AdminUserModel extends Model
     protected string $username;
     protected string $email;
     protected string $password;
+
     private array $tokens;
 
     /**
@@ -187,12 +188,14 @@ class AdminUserModel extends Model
                 ->name("username")
                 ->label(__('admin.panel.users.username'))
                 ->value($this->getUsername() ?? "")
+                ->validator()
                 ->required(),
         ];
         $fields["email"] = [
             "size" => "tw-w-7/12",
             "field" => Text::create()
                 ->type('email')
+                ->validator()
                 ->name("email")
                 ->label(__('admin.panel.users.email'))
                 ->value($this->getEmail() ?? "")
@@ -203,7 +206,10 @@ class AdminUserModel extends Model
             "field" => Text::create()
                 ->type('password')
                 ->name("password")
-                ->placeholder(__('admin.panel.users.password.placeholder'))
+                ->pattern(Application::get()->getConfiguration()['password_policy'], 'Password must contain at least 8 characters, 1 uppercase, 1 lowercase, 1 number and 1 special character')
+                ->validator()
+                ->required(!$this->hasId())
+                ->placeholder($this->hasId() ? __('admin.panel.users.password.placeholder') : '')
                 ->label(__('admin.panel.users.password'))
                 ->value(""),
         ];

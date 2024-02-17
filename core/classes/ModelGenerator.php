@@ -25,7 +25,7 @@ class ModelGenerator
 
             $classContent .= "    public function __construct(";
             foreach ($attributes as $index => $value) {
-                $classContent .= '$' . $value;
+                $classContent .= '$' . $value .' = null';
                 if ($index !== count($attributes) - 1) {
                     $classContent .= ', ';
                 }
@@ -50,18 +50,21 @@ class ModelGenerator
                 $classContent .= "    public function $getterName()\n";
                 $classContent .= "    {\n";
                 $classContent .= "        return \$this->$value;\n";
-                $classContent .= "    }\n\n";
+                $classContent .= "    }\n";
             }
-            $classContent .= "    public static function findAll(string ".'$columns'.", array ".' $conditions'." = [], ".'$orderBy'." = ''): ?array \n{\n
+            $classContent .= "
+    public static function findAll(string ".'$columns'.", array ".' $conditions'." = [], ".'$orderBy'." = ''): ?array
+    {\n
         return (new ".$className."())->getAll(".'$columns'.", ".'$conditions'.", ".'$orderBy'.");\n
-        }\n\n";
+    }\n\n";
 
-            $classContent .= "/** Warning: if you want create or edit entries you need to create the form with a override of getFields(); */\n\n";
+            $classContent .= "      /** Warning: if you want create or edit entries you need to create the form with a override of getFields(); */\n\n";
 
             $classContent .= "}\n\n";
             $classContent .= 'Table::registerModel(' . $className . '::TABLE_NAME,  ' . $className . '::class, Model::MODEL_TYPE_CUSTOM);';
 
             file_put_contents($fileName, $classContent);
+            chmod($fileName, 0664);
         }
     }
 }

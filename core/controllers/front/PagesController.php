@@ -44,7 +44,7 @@ class PagesController extends SectionController
                 ->html();
 
             $view = ButtonHypertext::create()
-                ->text('<i class="tw-me-1 fa-solid fa-eye"></i> ' . __("admin.panel.pages.view"))
+                ->text('<i class="tw-me-1 fa-solid fa-eye"></i> ' . __("admin.panel.pages.live_editor"))
                 ->addClass("tw-text-sm tw-whitespace-nowrap")
                 ->green()
                 ->href(

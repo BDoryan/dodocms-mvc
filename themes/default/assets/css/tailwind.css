@@ -897,6 +897,10 @@ body {
   margin-right: 1.5rem;
 }
 
+.ms-4{
+  margin-inline-start: 1rem;
+}
+
 .mt-0{
   margin-top: 0px;
 }
@@ -931,34 +935,6 @@ body {
 
 .mt-\[6px\]{
   margin-top: 6px;
-}
-
-.ms-3{
-  margin-inline-start: 0.75rem;
-}
-
-.ms-2{
-  margin-inline-start: 0.5rem;
-}
-
-.ms-4{
-  margin-inline-start: 1rem;
-}
-
-.ms-auto{
-  margin-inline-start: auto;
-}
-
-.-ms-3{
-  margin-inline-start: -0.75rem;
-}
-
-.-ms-2{
-  margin-inline-start: -0.5rem;
-}
-
-.-ms-\[2px\]{
-  margin-inline-start: -2px;
 }
 
 .block{
@@ -1753,6 +1729,10 @@ body {
 
 .text-center{
   text-align: center;
+}
+
+.text-justify{
+  text-align: justify;
 }
 
 .text-2xl{

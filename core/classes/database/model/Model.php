@@ -265,10 +265,6 @@ abstract class Model extends CMSObjectHydration
     }
 
     /**
-     * TODO: Il faut savoir qu'il est important de pouvoir mettre en place des vues dédiées à la création du formulaire d'ajout ou de modification
-     */
-
-    /**
      * Return if the model has a language attribute (column) in the database
      *
      * @return bool
@@ -280,7 +276,7 @@ abstract class Model extends CMSObjectHydration
 
     /**
      * Return the fields of the model for create a form (with the template of the field)
-     * If you want edit the form of this model you can override this method
+     * If you want to edit the form of this model, you can override this method
      *
      * @return array
      */
@@ -290,12 +286,20 @@ abstract class Model extends CMSObjectHydration
         if ($this->hasLanguageAttribute()) {
             $fields["language"] = [
                 "size" => "tw-w-6/12 tw-order-1",
-                "field" => Text::create()->name("language")->label(__('admin.panel.model.language'))->value($this->language ?? "en")
+                "field" =>
+                    Text::create()
+                        ->name("language")
+                        ->label(__('admin.panel.model.language'))
+                        ->value($this->language ?? Session::getLanguage())
             ];
         }
         $fields['active'] = [
             "size" => "tw-w-6/12 tw-order-1",
-            "field" => Checkbox::create()->name("active")->placeholder(__('admin.panel.model.active.placeholder'))->label(__('admin.panel.model.active.label'))->value($this->active ?? false)
+            "field" => Checkbox::create()
+                ->name("active")
+                ->placeholder(__('admin.panel.model.active.placeholder'))
+                ->label(__('admin.panel.model.active.label'))
+                ->value($this->active ?? false)
         ];
         return $fields;
     }
@@ -315,20 +319,24 @@ abstract class Model extends CMSObjectHydration
         $table = Table::getTable($this->table_name);
         if (isset($table)) {
             $entries = $table->findAll($columns, $conditions, $orderBy, $operators, $limit);
-            return array_map(function ($entry) {
-                $model = new $this();
-                $model->hydrate($entry);
-                $model->fetch();
+            return array_map(
+            /**
+             * @throws Exception
+             */
+                function ($entry) {
+                    $model = new $this();
+                    $model->hydrate($entry);
+                    $model->fetch();
 
-                return $model;
-            }, $entries);
+                    return $model;
+                }, $entries);
         }
         return null;
     }
 
     public static abstract function findAll(string $columns, array $conditions = [], $orderBy = ''): ?array;
 
-    public function viewForm()
+    public function viewForm(): void
     {
         self::renderForm($this, [
             'action' => ($this->hasId() ? NativeRoutes::route(NativeRoutes::ADMIN_TABLE_EDIT_ENTRY, ['id' => $this->getId(), 'table' => $this->getTableName()]) : NativeRoutes::route(NativeRoutes::ADMIN_TABLE_NEW_ENTRY, ['table' => $this->getTableName()])) . '?redirection=' . Tools::getEncodedCurrentURI(),

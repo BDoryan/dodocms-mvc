@@ -30,7 +30,7 @@
                         <h4 editable-model="title" class="mb-3 text-xl font-bold text-dark dark:text-white">
                             <?= $feature->getTitle() ?>
                         </h4>
-                        <p editable-model="description" class="mb-8 text-body-color dark:text-dark-6 lg:mb-9">
+                        <p editable-model="description" class="mb-8 text-body-color dark:text-dark-6 lg:mb-9    ">
                             <?= $feature->getDescription() ?>
                         </p>
                         <a

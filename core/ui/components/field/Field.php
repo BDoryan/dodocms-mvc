@@ -15,6 +15,9 @@ abstract class Field extends Component
     protected string $type;
     protected bool $readonly = false;
 
+    protected string $title = '';
+    protected string $pattern = '';
+
     public function __construct($id = "")
     {
         parent::__construct('core/ui/views/components/field', $id);
@@ -25,6 +28,18 @@ abstract class Field extends Component
     {
         $this->disabled = $disabled;
         return $this;
+    }
+
+    public function title(string $title): Field
+    {
+        $this->title = $title;
+        return $this;
+    }
+
+    public function pattern(string $pattern, string $title): Field
+    {
+        $this->pattern = $pattern;
+        return $this->title($title);
     }
 
     public function label(string $label): Field

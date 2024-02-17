@@ -25,6 +25,6 @@ class Validator
 
     public static function validatePassword($password): bool
     {
-        return (bool)preg_match(Application::get()->getConfiguration()["password_policy"], $password);
+        return (bool)preg_match('/'.Application::get()->getConfiguration()["password_policy"].'/', $password);
     }
 }

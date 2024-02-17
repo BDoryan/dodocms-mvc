@@ -14,6 +14,7 @@ abstract class ButtonComponent extends Component
     protected string $text;
     protected string $class;
     protected string $customClass = '';
+    protected ?array $needConfirmation = null;
 
     public function __construct(string $text = '')
     {
@@ -78,6 +79,25 @@ abstract class ButtonComponent extends Component
     {
         $this->text = $text;
         return $this;
+    }
+
+    public function needConfirmation(string $message): ButtonComponent {
+        $this->needConfirmation = [
+            'message' => $message,
+        ];
+        return $this;
+    }
+
+    /**
+     * Return attributes required to render in button.
+     *
+     * @return void
+     */
+    public function confirmationAttributes(): string {
+        if(empty($this->needConfirmation))
+            return '';
+        return "data-need-confirmation=\"true\" 
+         data-confirmation-message=\"".$this->needConfirmation['message']."\"";
     }
 
     public function setClass(string $class): ButtonComponent

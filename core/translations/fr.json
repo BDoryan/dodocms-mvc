@@ -59,7 +59,7 @@
   "admin.panel.modules": "Modules",
   "admin.panel.category_empty": "Aucune section trouvée.",
   "admin.panel.developer_center": "Centre de développement",
-  "admin.panel.pages.view": "Voir",
+  "admin.panel.pages.live_editor": "Modifier le contenu",
   "admin.panel.dashboard": "Tableau de bord",
   "admin.panel.title": "Panneau d'administration",
   "admin.panel.dashboard.description": "Bienvenue dans le panneau d'administration de DodoCMS.",

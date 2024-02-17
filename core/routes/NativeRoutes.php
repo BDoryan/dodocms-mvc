@@ -24,6 +24,9 @@ class NativeRoutes
     const ADMIN_LOGOUT = "/admin/logout";
     const ADMIN_PANEL = "/admin";
 
+    /* Test */
+    const ADMIN_TEST = "/admin/test";
+
     /* Tables routes */
     const ADMIN_TABLES = "/admin/tables";
     const ADMIN_TABLES_NEW = "/admin/tables/new";
@@ -76,7 +79,7 @@ class NativeRoutes
 
     public static function loadRoutes(Application $application, Router $router)
     {
-        $adminController = new PanelController();
+        $panelController = new PanelController();
         $pageController = new PageBuilderController();
 
         /* Resources routes */
@@ -94,9 +97,12 @@ class NativeRoutes
         });
 
         /* Panels routes */
-        $router->get(self::ADMIN_LOGIN, [$adminController, 'login']);
-        $router->get(self::ADMIN_LOGOUT, [$adminController, 'logout']);
-        $router->post(self::ADMIN_LOGIN, [$adminController, 'authentication']);
+        $router->get(self::ADMIN_LOGIN, [$panelController, 'login']);
+        $router->get(self::ADMIN_LOGOUT, [$panelController, 'logout']);
+        $router->post(self::ADMIN_LOGIN, [$panelController, 'authentication']);
+
+        /* Tests */
+        $router->get(self::ADMIN_TEST, [$panelController, 'test']);
 
         /* Sections routes */
         $routes = Application::get()->getSections();
@@ -105,16 +111,16 @@ class NativeRoutes
         }
 
         /* Routes */
-        $router->middleware([$adminController, 'authorization'],
-            $router->get(self::ADMIN_PANEL, [$adminController, 'index']),
-            $router->get(self::ADMIN_UPDATE, [$adminController, 'update'])
+        $router->middleware([$panelController, 'authorization'],
+            $router->get(self::ADMIN_PANEL, [$panelController, 'index']),
+            $router->get(self::ADMIN_UPDATE, [$panelController, 'update'])
         );
 
         /* Pages routes */
         $pages = PageModel::findAll("*");
         foreach ($pages as $page) {
-            $router->get($page->getSlug(), function () use ($adminController, $page, $pageController) {
-                $pageController->viewPage($adminController, $page);
+            $router->get($page->getSlug(), function () use ($panelController, $page, $pageController) {
+                $pageController->viewPage($panelController, $page);
             });
         }
     }

@@ -268,10 +268,11 @@ class Table extends CMSObject
                 return $attribute->getName();
             }, $this->attributes);
 
-            new ModelGenerator($this->name, $attributes);
 
             $requests = explode("\n", $sql);
             Application::get()->getDatabase()->execute($sql);
+
+            new ModelGenerator($this->name, $attributes);
 
             $migration = Migration::create(Application::get()->toRoot("/migrations/".$this->getName()), $sql);
             $migration->save();

@@ -36,7 +36,7 @@ Lors de la réflexion de ce projet, je me suis demandé quelles technologies uti
 
 ### Utilisation de TailwindCSS dans le CMS
 
-L'intégration de ce framework au sein du CMS n'est pas indispensable. J'ai expressément évité de l'imposer pour ne pas perturber les développeurs. Pour cette raison, j'ai instauré un préfixe spécifique au CMS (`dodocms-`) permettant une utilisation exclusive de TailwindCSS dans mon contexte d'utilisation.
+L'intégration de ce framework au sein du CMS n'est pas indispensable. J'ai expressément évité de l'imposer pour ne pas perturber les développeurs. Pour cette raison, j'ai instauré un préfixe spécifique au CMS (`tw-`) permettant une utilisation exclusive de TailwindCSS dans mon contexte d'utilisation.
 
 ### Utilisation du framework Vue.js
 

@@ -22,6 +22,7 @@ class UsersController extends SectionController
         $columns = [...$attributes, 'admin.panel.tables.table.entries.actions'];
         $rows = [];
 
+        $model = new AdminUserModel();
         foreach ($pages as $entry) {
             $row = $entry->toArray();
             $row = array_map(function ($value) {
@@ -48,7 +49,7 @@ class UsersController extends SectionController
                 ->href(
                     NativeRoutes::route(
                         NativeRoutes::ADMIN_TABLE_DELETE_ENTRY, [
-                            "table" => PageModel::TABLE_NAME,
+                            "table" => $model->getTableName(),
                             "id" => $entry->getId()
                         ]
                     ) . '?redirection=' . Tools::getEncodedCurrentURI()
@@ -59,7 +60,6 @@ class UsersController extends SectionController
             $rows[] = $row;
         }
 
-        $model = new AdminUserModel();
         $entry_id = $_GET['entry_id'] ?? null;
         if ($entry_id != null) {
             $model->id(intval($entry_id));

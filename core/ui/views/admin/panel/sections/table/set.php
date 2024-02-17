@@ -66,6 +66,22 @@ if (!empty($sql)) {
             </form>
         </div>
         <div class="tw-border-[1px] tw-border-gray-700 tw-border-opacity-25 tw-drop-shadow-md tw-text-gray-600 tw-bg-white tw-bg-opacity-70 tw-rounded-lg tw-flex tw-flex-row tw-flex-wrap tw-py-5 tw-px-3 tw-p-2 <?= empty($table_name) ? "tw-hidden" : "" ?>">
+            <form class="tw-flex tw-flex-col tw-w-full tw-gap-y-2 tw-text-center"
+                  action="<?= NativeRoutes::route(NativeRoutes::ADMIN_TABLES_DELETE, ["table" => $table_name ?? '']) ?>"
+                  id="table-form-delete" method="POST">
+                <h3 class="tw-text-4xl tw-text-red-600 tw-font-semibold tw-mb-2"><i
+                            class="tw-me-2 fa-solid fa-warning"></i><?= __('admin.panel.tables.table.delete.warning.title') ?>
+                    <i
+                            class="ms-2 fa-solid fa-warning"></i></h3>
+                <p class="tw-text-md"><?= __('admin.panel.tables.table.delete.warning.message') ?></p>
+                <button type="submit"
+                        class="tw-mt-5 tw-w-full tw-bg-red-700 hover:tw-bg-red-800 tw-text-white tw-font-semibold tw-py-2 tw-px-4 tw-rounded-md tw-shadow-lg">
+                    <i class="fa-solid fa-trash tw-me-1"></i>
+                    <?= __('admin.panel.tables.table.delete.submit') ?>
+                </button>
+            </form>
+        </div>
+        <div class="tw-border-[1px] tw-border-gray-700 tw-border-opacity-25 tw-drop-shadow-md tw-text-gray-600 tw-bg-white tw-bg-opacity-70 tw-rounded-lg tw-flex tw-flex-row tw-flex-wrap tw-py-5 tw-px-3 tw-p-2 <?= empty($table_name) ? "tw-hidden" : "" ?>">
             <h3 class="tw-text-2xl tw-text-gray-700 tw-font-semibold tw-mb-2"><?= __('admin.panel.tables.table.migrations.title') ?></h3>
             <p class="tw-leading-1"><?= __('admin.panel.tables.table.migrations.description') ?></p>
             <div class="tw-w-full tw-border-b tw-border-b-gray-300 tw-my-3"></div>
@@ -87,22 +103,6 @@ if (!empty($sql)) {
                 }
                 ?>
             </ul>
-        </div>
-        <div class="tw-border-[1px] tw-border-gray-700 tw-border-opacity-25 tw-drop-shadow-md tw-text-gray-600 tw-bg-white tw-bg-opacity-70 tw-rounded-lg tw-flex tw-flex-row tw-flex-wrap tw-py-5 tw-px-3 tw-p-2 <?= empty($table_name) ? "tw-hidden" : "" ?>">
-            <form class="tw-flex tw-flex-col tw-w-full tw-gap-y-2 tw-text-center"
-                  action="<?= NativeRoutes::route(NativeRoutes::ADMIN_TABLES_DELETE, ["table" => $table_name ?? '']) ?>"
-                  id="table-form-delete" method="POST">
-                <h3 class="tw-text-4xl tw-text-red-600 tw-font-semibold tw-mb-2"><i
-                            class="tw-me-2 fa-solid fa-warning"></i><?= __('admin.panel.tables.table.delete.warning.title') ?>
-                    <i
-                            class="ms-2 fa-solid fa-warning"></i></h3>
-                <p class="tw-text-md"><?= __('admin.panel.tables.table.delete.warning.message') ?></p>
-                <button type="submit"
-                        class="tw-mt-5 tw-w-full tw-bg-red-700 hover:tw-bg-red-800 tw-text-white tw-font-semibold tw-py-2 tw-px-4 tw-rounded-md tw-shadow-lg">
-                    <i class="fa-solid fa-trash tw-me-1"></i>
-                    <?= __('admin.panel.tables.table.delete.submit') ?>
-                </button>
-            </form>
         </div>
         <form id="confirm"
               class="tw-border-[1px] tw-border-gray-700 tw-border-opacity-25 tw-drop-shadow-md tw-text-gray-600 tw-bg-white tw-bg-opacity-70 tw-shadow-lg tw-rounded-lg tw-flex-col tw-flex-wrap tw-p-5 tw-gap-2 tw-hidden"

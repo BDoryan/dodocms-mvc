@@ -213,6 +213,7 @@ button[liveeditor-action="save"] {
 div[liveeditor-bar] {
     /* add effect background blur */
     backdrop-filter: blur(5px);
+    z-index: 500;
 
     background: rgba(255,255,255,0.2);
     position: fixed;
