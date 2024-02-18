@@ -1,3 +1,40 @@
+window.contentChanged = [];
+
+window.hasContentChanged = function () {
+    return contentChanged.length > 0;
+}
+
+window.addContentChanged = function (structure_id, element) {
+    const editable_value = $(element).attr('editable');
+    const path = structure_id + '_' + editable_value;
+
+    if (window.contentChanged.includes(path)) return;
+
+    window.contentChanged.push(path);
+}
+
+window.removeContentChanged = function (structure_id, element) {
+    const editable_value = $(element).attr('editable');
+    const path = structure_id + '_' + editable_value;
+
+    if (!window.contentChanged.includes(path)) return;
+
+    window.contentChanged = contentChanged.filter(item => item !== path);
+}
+
+$(document).on("input", "[editable],[editable-model]", function () {
+    // fetch block
+    const block = $(this).closest('[block-name]')
+    const structure_id = $(block).attr('page-structure-id');
+
+    window.addContentChanged(structure_id, $(this))
+});
+
+$(window).on('beforeunload', function () {
+    if (window.hasContentChanged())
+        return window.translate('live-editor.confirm.leave');
+});
+
 $(document).on("click", "[liveeditor-action]", function () {
     // save all blocks
     const blocks = $("[block-name]");
@@ -29,6 +66,9 @@ const save = (content, block, page_block_structure_id) => {
             method: "POST",
             data,
             success: function (response) {
+                elements.each((index, element) => {
+                    window.removeContentChanged(page_block_structure_id, element)
+                });
                 window.showToast(new Toast(window.translate(`live-editor.block.update.toast.${response.status}`), window.translate(`live-editor.block.update.toast.${response.message}`), response.status, 2000))
             },
             error: function (response) {
@@ -86,6 +126,20 @@ const loadLiveEditor = () => {
         CKEDITOR.inline(element);
     });
 
+    const resources = $('[resource-id]');
+    resources.each((index, resource) => {
+        const structure_id = $(resource).closest('[page-structure-id]').attr('page-structure-id')
+
+        var observer = new MutationObserver(function(mutations) {
+            window.addContentChanged(structure_id, resource)
+        });
+        observer.observe(resource, {
+                attributes: true,
+                attributeFilter: ['resource-id']
+            }
+        );
+    });
+
     // remove the br tag added by firefox
     $('br[type=_moz]').remove();
 
@@ -136,7 +190,7 @@ $(document).on("click", "img[editable]", function () {
 
     openModalWithArguments('ref_set_resource_modal', (resource) => {
         // set resource id
-        if(resource == null) {
+        if (resource == null) {
             el.attr("src", "");
             el.attr("resource-id", "");
             return;

@@ -35,6 +35,8 @@ const loadApplication = () => {
                     page_id
                 }
 
+
+
                 $.ajax({
                     url: window.toApi("/pages/add/"),
                     method: "POST",

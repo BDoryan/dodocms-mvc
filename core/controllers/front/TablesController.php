@@ -216,6 +216,10 @@ class TablesController extends SectionController
                 if (isset($entry_id))
                     $model->id($entry_id);
 
+                $post_data = array_map(function ($value) {
+                    return $value == 'off' ? 0 : ($value == 'on' ? 1 : $value);
+                }, $post_data);
+
                 $model->hydrate($post_data);
                 if (isset($entry_id) ? $model->update() : $model->create()) {
                     $this->addToast(new Toast(__("admin.panel.toast.success"), isset($entry_id) ? __("admin.panel.tables.table.entries.edit_entry.success") : __("admin.panel.tables.table.entries.create_entry.success"), Toast::TYPE_SUCCESS));

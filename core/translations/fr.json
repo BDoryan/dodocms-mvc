@@ -194,7 +194,7 @@
   "live-editor.page.structure.blocks.modal.close": "Fermer",
   "live-editor.entries.edit.title": "Modifier une entrée",
   "live-editor.entries.new.title": "Créer une nouvelle entrée",
-  "live-editor.entries.delete.confirm": "Etes-vous sûr de vouloir supprimer cette entrée ?",
+  "live-editor.entries.delete.confirm": "Êtes-vous sûr de vouloir supprimer cette entrée ?",
   "live-editor.entries.delete.toast.entry_delete_success": "L'entrée a été supprimée",
   "live-editor.entries.delete.toast.entry_delete_failed": "L'entrée n'a pas été supprimée suite à un problème technique.",
   "admin.login.form.remember_me": "Voulez-vous que votre navigateur se souvienne de vous ?",
@@ -204,6 +204,7 @@
   "live-editor.structure.delete.toast.structure_move_success": "L'opération s'est terminée avec succès",
   "live-editor.block.move.toast.structure_move_success": "L'opération s'est terminée avec succès",
   "live-editor.block.move.toast.structure_move_failed": "Impossible de déplacer le bloc",
+  "live-editor.block.move.toast.structure_delete_success": "La structure a été supprimée",
   "live-editor.block.update.toast.success": "Le bloc a été mis à jour",
   "live-editor.block.update.toast.structure_edit_success": "L'opération s'est terminée avec succès",
   "admin.panel.users.title": "Utilisateurs",
@@ -236,5 +237,5 @@
   "live-editor.entries.new.toast.entry_set_success": "L'opération s'est terminée avec succès",
   "live-editor.entries.set.cancel": "Annuler",
   "live-editor.entries.new": "Créer une nouvelle entrée",
-  "live-editor.entries.edit": "Modifier cette entrée"
+  "live-editor.confirm.leave": "Vous êtes sur le point de perdre vos modifications non sauvegardé."
 }
