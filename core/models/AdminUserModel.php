@@ -47,11 +47,6 @@ class AdminUserModel extends Model
             throw new Exception("Email already used");
         }
 
-        // check if password is valid
-        if (!AdminUserModel::checkValidationOfPassword($this->getPassword())) {
-            throw new Exception("Password is not valid");
-        }
-
         return parent::create();
     }
 
@@ -110,7 +105,12 @@ class AdminUserModel extends Model
     public function setPassword(string $password): void
     {
         if (empty($password)) return;
-        $this->password = password_get_info($password)['algo'] ? $password : password_hash($password, PASSWORD_BCRYPT);
+
+        $hashed = password_get_info($password)['algo'];
+        if (!$hashed && !AdminUserModel::checkValidationOfPassword($password))
+            throw new Exception("Password don't match the policy");
+
+        $this->password = $hashed ? $password : password_hash($password, PASSWORD_BCRYPT);
     }
 
     /**
