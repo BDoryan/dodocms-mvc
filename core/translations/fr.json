@@ -24,6 +24,7 @@
   "setup.user.root.email_already_used": "L'email de l'utilisateur root est déjà utilisé",
   "setup.finish.title": "L'installation est terminée : vous pouvez maintenant vous connecter au panneau d'administration.",
   "setup.finish.message": "Toutes nos félicitations! L'installation de DodoCMS est terminée. Vous pouvez désormais explorer et personnaliser votre site Web selon vos besoins. Commencez à configurer, à ajouter du contenu et profitez d'une gestion facile avec DodoCMS. Vous êtes prêt à faire passer votre présence en ligne au niveau supérieur !",
+  "setup.finish.message.delete_install": "Pour des raisons de sécurité, veuillez supprimer le dossier d'installation.",
   "setup.previous": "Précédent",
   "setup.next": "Suivant",
   "setup.finish": "Terminé",
