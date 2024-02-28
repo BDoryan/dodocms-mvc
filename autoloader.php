@@ -16,7 +16,7 @@ if (version_compare($php_version, '7.4.0') < 0) {
 /**
  * Libs
  */
-//require_once 'vendor/autoload.php';
+require_once 'vendor/autoload.php';
 
 /**
  * Load all the classes, controllers, routes and components.

@@ -190,6 +190,7 @@
   "live-editor.structure.update.toast.error": "La structure du bloc n'a pas été mise à jour",
   "live-editor.structure.update.toast.structure_edit_success": "L'opération s'est terminée avec succès",
   "live-editor.structure.update.toast.structure_edit_failed": "Une erreur s'est produite lors de la mise à jour de la structure du bloc",
+  "live-editor.structure.add.toast.block_add_success": "La structure a été ajoutée",
   "live-editor.page.structure.blocks.modal.title": "Sélectionner un bloc",
   "live-editor.page.structure.blocks.finish": "Confirmez la sélection",
   "live-editor.page.structure.blocks.modal.close": "Fermer",

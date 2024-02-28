@@ -24,9 +24,6 @@ class NativeRoutes
     const ADMIN_LOGOUT = "/admin/logout";
     const ADMIN_PANEL = "/admin";
 
-    /* Test */
-    const ADMIN_TEST = "/admin/test";
-
     /* Tables routes */
     const ADMIN_TABLES = "/admin/tables";
     const ADMIN_TABLES_NEW = "/admin/tables/new";
@@ -100,9 +97,6 @@ class NativeRoutes
         $router->get(self::ADMIN_LOGIN, [$panelController, 'login']);
         $router->get(self::ADMIN_LOGOUT, [$panelController, 'logout']);
         $router->post(self::ADMIN_LOGIN, [$panelController, 'authentication']);
-
-        /* Tests */
-        $router->get(self::ADMIN_TEST, [$panelController, 'test']);
 
         /* Sections routes */
         $routes = Application::get()->getSections();

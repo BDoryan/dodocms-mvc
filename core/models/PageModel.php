@@ -87,7 +87,7 @@ class PageModel extends ModelAssociated
      */
     public function getSeoKeywordsList(): ?array
     {
-        return explode(",", $this->seo_keywords);
+        return explode(" ", str_replace(',', '', $this->seo_keywords));
     }
 
     /**

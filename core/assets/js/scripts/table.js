@@ -84,7 +84,11 @@ $(document).on("submit", "#table-form", function (event) {
 
     if (!isValid) return
 
-    if (data.find(element => element.name === "use_i18n")?.value === "on" || false) {
+
+    const use_i18ns = data.filter(element => element.name === "use_i18n");
+    const use_i18n = use_i18ns.pop();
+
+    if (use_i18n?.value === "on") {
         attributes.push({
             name: "language",
             type: "varchar",
@@ -101,8 +105,11 @@ $(document).on("submit", "#table-form", function (event) {
         nullable: false
     });
 
-    if (data.find(element => element.name === "use_default_attributes")?.value === "on" || false) {
 
+    const use_default_attributes = data.filter(element => element.name === "use_default_attributes");
+    const use_default_attribute = use_default_attributes.pop();
+
+    if (use_default_attribute?.value === "on") {
         attributes.push({
             name: "createdAt",
             type: "datetime",

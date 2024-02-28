@@ -2,11 +2,11 @@
     RewriteEngine On
     RewriteBase /
 
-    # Empêcher l'accès direct aux répertoires
-    # RewriteCond %{REQUEST_FILENAME} -d
-    # RewriteRule ^ - [F]
+    # Block direct access to PHP files
+    RewriteCond %{REQUEST_FILENAME} \.php$
+    RewriteRule ^ index.php [QSA,L]
 
-    # Si la demande n'est pas pour un fichier existant
+    # Si la demande n'est pas pour un fichier existant ou sinon qui ne soit pas un fichier avec l'extension .php
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [QSA,L]
 </IfModule>
