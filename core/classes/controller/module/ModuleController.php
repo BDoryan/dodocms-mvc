@@ -24,10 +24,8 @@ abstract class ModuleController extends PanelController
         $alerts =  $this->getAlerts();
         Application::get()->getLogger()->debug("AdminController->getAlerts() : " . (var_export($alerts, true)));
 
-        $section = fetch($this->module->toRoot('views/'.$view.".php"), [
-            'alerts' => $alerts,
-            'section_data' => $data,
-        ]);
+        $data['alerts'] = $alerts;
+        $section = fetch($this->module->toRoot('views/'.$view.".php"), $data);
 
         parent::view('panel/layout', [
                 'sidebar' => $this->sidebar,

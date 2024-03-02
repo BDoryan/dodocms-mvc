@@ -120,8 +120,13 @@ class Application
         $this->internationalization = new Internationalization(Session::getLanguage());
         $this->logger->info("Application initialized !");
 
+        ini_set('display_errors', '1');
+        ini_set('display_startup_errors', '1');
+
         set_error_handler([$this, "errorHandler"]);
         set_exception_handler([$this, "exceptionHandler"]);
+        error_reporting(E_ERROR | E_PARSE);
+
         $this->logger->info("Error and exception handler has been initialized !");
     }
 
@@ -331,19 +336,12 @@ class Application
         $this->view('/core/ui/views/page/layout.php', ['head' => $head, 'content' => $content]);
     }
 
-    public function showErrors(): void
-    {
-        ini_set('display_errors', 1);
-        ini_set('display_startup_errors', 1);
-        error_reporting(E_ALL);
-    }
-
     public function getInternationalization(): ?Internationalization
     {
         return $this->internationalization;
     }
 
-    public function redirect($to = '/')
+    public function redirect($to = '/'): void
     {
         header("Location: " . $this->toURL($to));
     }

@@ -69,6 +69,7 @@ class PageBuilderController extends DOMController
             }
 
             Application::get()->getLogger()->debug("Data for block " . $block->getId() . " : " . print_r($data, true));
+            echo "<!-- Block " . $block->getId() . " -->\n";
 
             try {
                 if($view == null) {
@@ -83,7 +84,7 @@ class PageBuilderController extends DOMController
                 // Because DOMDocument broke the encoding
                 $document->loadHTML($utf8.$block_content, LIBXML_NOERROR | LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
 
-                // apply custom data to the block
+                // Apply custom data to the block
                 $custom_data = $page_structure->getCustom();
                 if (!empty($custom_data)) {
                     foreach ($custom_data as $key => $value) {
@@ -135,6 +136,10 @@ class PageBuilderController extends DOMController
                         }
                     }
                 }
+
+                // PageOptimizer
+                $optimizer = new DOMDocumentOptimizer($document);
+                $document = $optimizer->optimize();
 
                 $html = $document->saveHTML();
 
@@ -191,6 +196,7 @@ class PageBuilderController extends DOMController
             'content' => $content,
             'page_id' => $page->getId(),
             'live_editor' => $editorMode,
-            'toasts' => $adminController->getToasts()]);
+            'toasts' => $adminController->getToasts()]
+        );
     }
 }

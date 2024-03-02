@@ -49,4 +49,8 @@ class Configuration
         }
     }
 
+    public function toArray(): array
+    {
+        return $this->configurations;
+    }
 }

@@ -14,11 +14,19 @@
                 $row = $this->rows[$line];
                 ?>
                 <tr class="odd:tw-bg-gray-900 odd:tw-bg-opacity-5 tw-text-start tw-py-5">
-                    <?php foreach ($this->columns as $col => $column) {
+                    <?php
+                    $col = 0;
+                    foreach ($this->columns as $column => $plain_text) {
+                        if(is_int($column))
+                            $column = $plain_text;
+
                         $data = $row[$column] ?? '';
                         ?>
-                        <td class="tw-whitespace-nowrap tw-py-2 tw-px-4 tw-border-gray-500 tw-border-opacity-25 <?= $line > 0 ? "tw-border-t" : "" ?> <?= $col < (count($this->columns) - 1) ? "tw-border-e" : "" ?>"><?php echo $data; ?></td>
-                    <?php } ?>
+                        <td class="tw-whitespace-nowrap tw-py-2 tw-px-4 tw-border-gray-500 tw-border-opacity-25 <?= $line > 0 ? "tw-border-t" : "" ?> <?= $col < (count($this->columns) - 1) ? "tw-border-e" : "" ?>"><?= $data; ?></td>
+                        <?php
+                        $col++;
+                    }
+                    ?>
                 </tr>
                 <?php
             }

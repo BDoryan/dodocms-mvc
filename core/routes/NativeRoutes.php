@@ -119,6 +119,13 @@ class NativeRoutes
         }
     }
 
+    /**
+     * You can use this method to get the uri of a route
+     *
+     * @param string $route
+     * @param array $replaces
+     * @return string
+     */
     public static function getRoute(string $route, array $replaces = []): string
     {
         foreach ($replaces as $key => $value) {
@@ -130,6 +137,13 @@ class NativeRoutes
         return $route;
     }
 
+    /**
+     * You can use this method to get the url of a route
+     *
+     * @param string $route
+     * @param array $replaces
+     * @return string
+     */
     public static function route(string $route, array $replaces = []): string
     {
         $route = self::getRoute($route, $replaces);

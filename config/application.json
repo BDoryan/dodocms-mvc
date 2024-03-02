@@ -4,6 +4,7 @@
         "secret": "",
         "expiresIn": 14400
     },
+    "admin_path": "admin",
     "mysql": {
         "hostname": "localhost",
         "username": "root",

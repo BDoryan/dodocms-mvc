@@ -8,8 +8,8 @@ $php_version = phpversion();
 /**
  * Check if the PHP version is 7.4.0 or higher.
  */
-if (version_compare($php_version, '7.4.0') < 0) {
-    echo "Your PHP version is $php_version. Please upgrade to 7.4.0 or higher.";
+if (version_compare($php_version, '8.0') < 0) {
+    echo "Your PHP version is $php_version. Please upgrade to 8.0 or higher.";
     exit;
 }
 
