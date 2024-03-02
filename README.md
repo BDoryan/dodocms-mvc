@@ -66,6 +66,7 @@ Si vous voulez suivre l'avancée du projet il vous suffit d'aller [ici](https://
 ## Prérequis
 
 Avant de pouvoir installer ce CMS, vous devez vous assurer que votre serveur web est configuré pour supporter les technologies suivantes :
+- Composer & npm
 - PHP 7.4 ou supérieur avec (`json`, `pdo`, `pdo_mysql`, `curl`, `zip`, `xml`)
 - MariaDB
 - Serveur web (Apache2 uniquement pour le moment)
@@ -91,21 +92,7 @@ Je suis ouvert à toute proposition et je serais ravi de travailler avec vous po
 - [Licence](#licence)
 - [Crédits](#crédits)
 
-## Système de modèles, vues et contrôleurs
-
-### Modèles
-### Vues
-### Contrôleurs
-
-## Système de gestion de contenu
-
-### Création de page
-#### Composition des pages
-        
-### Création de blocs
-#### Rendre éditable un bloc
-
-## Démonstrations
+## Tutoriels
 
 ## Contact
 - [www.doryanbessiere.fr](https://www.doryanbessiere.fr)
