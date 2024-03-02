@@ -6,12 +6,19 @@ class Router
     private array $routes = [];
     private string $base;
 
+    private $notFoundHandler;
+
     /**
      * @param string $base
      */
     public function __construct(string $base = "")
     {
         $this->base = $base;
+    }
+
+    public function setNotFoundHandler($handler): void
+    {
+        $this->notFoundHandler = $handler;
     }
 
     public function addRoute(string $route, $handler, string $method = "GET"): Route
@@ -112,6 +119,10 @@ class Router
                 return true;
             }
         }
+
+        if ($this->notFoundHandler !== null)
+            call_user_func_array($this->notFoundHandler, []);
+
         return false;
     }
 

@@ -243,7 +243,7 @@ class Application
 
             if($this->getConfiguration()['modules']['enabled'] ?? false) {
                 $this->logger->debug("Application->loadModules();");
-                ModulesManager::loadModules();   
+                ModulesManager::loadModules();
             } else {
                 $this->logger->debug("(disabled) Application->loadModules();");
             }
@@ -262,7 +262,7 @@ class Application
             if ($this->router->dispatch()) {
                 $this->logger->debug($this->router->getRequestURI() . " has been dispatched !");
             } else {
-                echo "404 Not Found !";
+                $this->logger->debug($this->router->getRequestURI() . " has not been dispatched !");
             }
             $this->database->closeConnection();
         } catch (Exception $e) {

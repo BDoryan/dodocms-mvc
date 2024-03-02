@@ -17,7 +17,7 @@ abstract class Routes implements Routable
     /**
      * Return the API controller of the section
      *
-     * @return ApiController
+     * @return ApiController|null
      */
     public function getApiController(): ?ApiController
     {
@@ -27,7 +27,7 @@ abstract class Routes implements Routable
     /**
      * Return the controller of the section
      *
-     * @return Controller
+     * @return Controller|null
      */
     public function getController(): ?Controller
     {

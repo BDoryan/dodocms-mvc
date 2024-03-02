@@ -15,6 +15,26 @@ class PageBuilderController extends DOMController
     {
     }
 
+    public function notFound(AdminController $adminController)
+    {
+        $content = fetch(Application::theme()->toRoot('/blocks/not-found.php'));
+
+        $this->header = $this->fetch("partials/header");
+        $this->footer = $this->fetch("partials/footer");
+        $this->scripts = $this->fetch("partials/scripts", [
+            'resourceManager' => $this->getResourceManager()
+        ]);
+
+        $this->title = __('dodocms.page.not_found');
+
+        $this->view('partials/layout', [
+                'content' => $content,
+                'page_id' => 'null',
+                'live_editor' => 'false',
+                'toasts' => $adminController->getToasts()]
+        );
+    }
+
     /**
      * @throws Exception
      */
@@ -193,10 +213,10 @@ class PageBuilderController extends DOMController
         $time = $now - $start;
         echo "<!-- Page generated in " . $time . " seconds -->\n";
         $this->view('partials/layout', [
-            'content' => $content,
-            'page_id' => $page->getId(),
-            'live_editor' => $editorMode,
-            'toasts' => $adminController->getToasts()]
+                'content' => $content,
+                'page_id' => $page->getId(),
+                'live_editor' => $editorMode,
+                'toasts' => $adminController->getToasts()]
         );
     }
 }
