@@ -20,7 +20,7 @@
                 ButtonHypertext::create()
                     ->text('Mettre à jour')
                     ->green()
-                    ->href(NativeRoutes::ADMIN_UPDATE)
+                    ->href(NativeRoutes::getRoute(NativeRoutes::ADMIN_UPDATE))
                     ->render();
             }
             ?>
