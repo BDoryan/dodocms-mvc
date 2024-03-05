@@ -95,7 +95,7 @@ class Logger
 
         $exist = file_exists($this->file);
         file_put_contents($this->file, $message, FILE_APPEND);
-        if(!$exist)
+        if (!$exist)
             chmod($this->file, 0660);
     }
 
