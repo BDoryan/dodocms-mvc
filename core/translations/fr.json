@@ -180,7 +180,7 @@
   "panel.admin.resource.item.edit.save": "Sauvegarder les modifications",
   "panel.admin.resource.item.edit.cancel": "Annuler",
   "panel.admin.resource.item.edit.alternativeText": "Texte alternatif",
-  "live-editor.block.save": "Sauvegarder les modifications",
+  "live-editor.block.save": "Sauvegarder l'édition",
   "live-editor.block.delete": "Supprimer",
   "live-editor.block.delete.confirm": "Etes-vous sûr de vouloir supprimer ce bloc ?",
   "live-editor.entries.add": "Créer un élément",
@@ -239,5 +239,7 @@
   "live-editor.entries.new.toast.entry_set_success": "L'opération s'est terminée avec succès",
   "live-editor.entries.set.cancel": "Annuler",
   "live-editor.entries.new": "Créer une nouvelle entrée",
-  "live-editor.confirm.leave": "Vous êtes sur le point de perdre vos modifications non sauvegardé."
+  "live-editor.confirm.leave": "Vous êtes sur le point de perdre vos modifications non sauvegardé.",
+  "live-editor.toggle_on_editor": "Activer l'édition",
+    "live-editor.toggle_off_editor": "Désactiver édition"
 }

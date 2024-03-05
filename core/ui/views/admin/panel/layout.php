@@ -8,7 +8,7 @@
             <header class="tw-text-white tw-px-3 tw-pb-3">
                 <div class="tw-flex tw-items-center tw-justify-between tw-backdrop-filter tw-backdrop-blur-lg tw-bg-opacity-50 tw-border tw-border-black tw-border-opacity-20 tw-bg-white tw-rounded-2xl tw-overflow-hidden tw-shadow-sm">
                     <span class="tw-text-gray-700 tw-ps-4 tw-text-lg tw-font-semibold"><?= __("admin.panel.welcome", ["username" => Session::getAdminUser()->getUsername()]) ?></span>
-                    <a href="<?= Application::get()->toURL("/admin/logout") ?>"
+                    <a href="<?= NativeRoutes::getRoute(NativeRoutes::ADMIN_LOGOUT) ?>"
                        class="focus:tw-outline-none tw-bg-red-600 hover:tw-bg-red-700 tw-text-white tw-font-semibold tw-uppercase tw-p-4">
                         <i class="tw-me-1 fa-solid fa-sign-out"></i> <?= __("admin.logout") ?>
                     </a>

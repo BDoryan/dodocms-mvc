@@ -5,6 +5,7 @@ class Router
 
     private array $routes = [];
     private string $base;
+    private array $replacer = [];
 
     private $notFoundHandler;
 
@@ -16,6 +17,14 @@ class Router
         $this->base = $base;
     }
 
+    /**
+     * @param array $replacer
+     */
+    public function setReplacer(array $replacer): void
+    {
+        $this->replacer = $replacer;
+    }
+
     public function setNotFoundHandler($handler): void
     {
         $this->notFoundHandler = $handler;
@@ -25,6 +34,8 @@ class Router
     {
         if (substr($route, -1) == '/')
             $route = substr($route, 0, -1);
+
+        $route = str_replace(array_keys($this->replacer), array_values($this->replacer), $route);
 
         $route_ = new Route($this, $route, $method, $handler);
         $this->routes[$method][$route] = $route_;
@@ -62,6 +73,7 @@ class Router
 
     public function removeRoute(string $route, string $method = "GET"): void
     {
+        $route = str_replace(array_keys($this->replacer), array_values($this->replacer), $route);
         unset($this->routes[$method][$route]);
     }
 
@@ -72,6 +84,7 @@ class Router
 
     public function toURL($url): string
     {
+        $url = str_replace(array_keys($this->replacer), array_values($this->replacer), $url);
         return $this->base . "/" . (trim($url, "/"));
     }
 
@@ -129,5 +142,13 @@ class Router
     public function redirect($url): void
     {
         header("Location: " . $this->toURL($url));
+    }
+
+    /**
+     * @return array
+     */
+    public function getReplacer(): array
+    {
+        return $this->replacer;
     }
 }

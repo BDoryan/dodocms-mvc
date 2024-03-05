@@ -5,7 +5,7 @@
         "expiresIn": 14400
     },
     "image_quality": 80,
-    "admin_path": "admin",
+    "admin_path": "admin123",
     "mysql": {
         "hostname": "localhost",
         "username": "root",

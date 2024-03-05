@@ -15,17 +15,17 @@ class Migration {
         $this->sql = $sql;
     }
 
-    public function load() {
+    public function load(): void {
         $this->sql = file_get_contents($this->destination);
     }
 
-    public function save() {
+    public function save(): void {
         if (!file_exists(dirname($this->destination)))
-            mkdir(dirname($this->destination), 0777, true);
+            mkdir(dirname($this->destination), 0660, true);
         file_put_contents($this->destination, $this->sql);
     }
 
-    public function execute() {
+    public function execute(): void {
         Application::get()->getDatabase()->execute($this->sql);
     }
 

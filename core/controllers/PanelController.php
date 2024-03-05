@@ -33,14 +33,14 @@ class PanelController extends AdminController
 
         $this->sidebar = new Sidebar([
             new SidebarCategory(__("admin.panel.content_manager"), [
-                new SidebarSection("tw-me-1 fa-solid fa-images", __('admin.panel.resources.title'), NativeRoutes::ADMIN_RESOURCES_MANAGER),
+                new SidebarSection("tw-me-1 fa-solid fa-images", __('admin.panel.resources.title'), NativeRoutes::getRoute(NativeRoutes::ADMIN_RESOURCES_MANAGER)),
                 new SidebarSection("tw-me-1 fa-solid fa-file-lines", __('admin.panel.pages.title'), NativeRoutes::getRoute(NativeRoutes::ADMIN_PAGES_MANAGER, ['table' => 'Page'])),
             ]),
             new SidebarCategory(__("admin.panel.admin_center"), $adminCenterSection),
             new SidebarCategory(__("admin.panel.modules"), $modulesSection),
             new SidebarCategory(__("admin.panel.developer_center"), [
-                new SidebarSection("tw-me-1 fa-solid fa-cube", __('admin.panel.block_manager'), NativeRoutes::ADMIN_BLOCKS_MANAGER),
-                new SidebarSection("tw-me-1 fa-solid fa-database", __('admin.panel.table_management'), NativeRoutes::ADMIN_TABLES),
+                new SidebarSection("tw-me-1 fa-solid fa-cube", __('admin.panel.block_manager'), NativeRoutes::getRoute(NativeRoutes::ADMIN_BLOCKS_MANAGER)),
+                new SidebarSection("tw-me-1 fa-solid fa-database", __('admin.panel.table_management'), NativeRoutes::getRoute(NativeRoutes::ADMIN_TABLES)),
             ]),
             new SidebarCategory(__("admin.panel.models"),
                 $tablesSection

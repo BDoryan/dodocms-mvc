@@ -22,7 +22,7 @@ button[page-structure-action="add"]:before {
     color: white;
     font-weight: bold;
     font-size: 2em;
-    line-height: 1em;
+    line-height: 1em;  margin-top: -3px;
 }
 
 button[page-structure-action="add"] {

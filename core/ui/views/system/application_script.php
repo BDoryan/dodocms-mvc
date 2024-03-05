@@ -3,15 +3,23 @@
     const translations = JSON.parse(translations_json);
 
     const root = '<?= Application::get()->toURL("/") ?>';
-    const api = '<?= Application::get()->toURL("/admin/api/") ?>';
 
     window.toRoot = (path) => {
         return root + path;
     }
 
+    <?php if(Session::authenticated() ?? false) { ?>
+    const admin_path = '<?= Application::get()->toURL("/" . Application::get()->getConfigurationInstance()->get('admin_path') . "/") ?>';
+    const api = '<?= Application::get()->toURL("/" . Application::get()->getConfigurationInstance()->get('admin_path') . "/api/") ?>';
+
     window.toApi = (path) => {
         return api + path;
     }
+
+    window.toAdminPath = (path) => {
+        return admin_path + path;
+    }
+    <?php } ?>
 
     window.getTranslate = (key) => {
         if (translations[key]) {

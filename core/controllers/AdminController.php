@@ -72,7 +72,7 @@ abstract class AdminController extends DOMController
     {
         if (!$this->authenticated()) {
             Application::get()->getLogger()->info("Unauthenticated user tried to access the admin panel");
-            $this->redirect(NativeRoutes::ADMIN_LOGIN);
+            $this->redirect(NativeRoutes::getRoute(NativeRoutes::ADMIN_LOGIN));
             return false;
         }
         return true;
@@ -81,14 +81,14 @@ abstract class AdminController extends DOMController
     public function logout()
     {
         Session::removeAdminAccess();
-        $this->redirect(NativeRoutes::ADMIN_LOGIN);
+        $this->redirect(NativeRoutes::getRoute(NativeRoutes::ADMIN_LOGIN));
     }
 
     public function authentication()
     {
         // Check if the user is already authenticated
         if ($this->authenticated()) {
-            $this->redirect(NativeRoutes::ADMIN_PANEL);
+            $this->redirect(NativeRoutes::getRoute(NativeRoutes::ADMIN_PANEL));
             return;
         }
 
@@ -100,7 +100,7 @@ abstract class AdminController extends DOMController
         if ($email === null || $password === null) {
             sleep(3);
             $this->addToast(new Toast(__('admin.login.form.error.empty.title'), __('admin.login.form.error.empty.message'), Toast::TYPE_ERROR));
-            $this->redirect(NativeRoutes::ADMIN_LOGIN);
+            $this->redirect(NativeRoutes::getRoute(NativeRoutes::ADMIN_LOGIN));
             return;
         }
 
@@ -109,7 +109,7 @@ abstract class AdminController extends DOMController
         if (empty($users)) {
             sleep(3);
             $this->addToast(new Toast(__('admin.login.form.error.invalid.title'), __('admin.login.form.error.invalid.message'), Toast::TYPE_ERROR));
-            $this->redirect(NativeRoutes::ADMIN_LOGIN);
+            $this->redirect(NativeRoutes::getRoute(NativeRoutes::ADMIN_LOGIN));
             return;
         }
 
@@ -121,7 +121,7 @@ abstract class AdminController extends DOMController
         $userSession = $user->createToken($password, $expires_in);
         if ($userSession === null) {
             $this->addToast(new Toast(__('admin.login.form.error.invalid.title'), __('admin.login.form.error.invalid.message'), Toast::TYPE_ERROR));
-            $this->redirect(NativeRoutes::ADMIN_LOGIN);
+            $this->redirect(NativeRoutes::getRoute(NativeRoutes::ADMIN_LOGIN));
             return;
         }
 
@@ -132,13 +132,13 @@ abstract class AdminController extends DOMController
         Session::setAdminToken($userSession->getToken(), $expires_in);
 
         // Redirect to the admin panel
-        $this->redirect(NativeRoutes::ADMIN_PANEL);
+        $this->redirect(NativeRoutes::getRoute(NativeRoutes::ADMIN_PANEL));
     }
 
     public function login()
     {
         if ($this->authenticated()) {
-            $this->redirect(NativeRoutes::ADMIN_PANEL);
+            $this->redirect(NativeRoutes::getRoute(NativeRoutes::ADMIN_PANEL));
             return;
         }
 

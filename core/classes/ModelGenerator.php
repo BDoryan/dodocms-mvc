@@ -63,8 +63,12 @@ class ModelGenerator
             $classContent .= "}\n\n";
             $classContent .= 'Table::registerModel(' . $className . '::TABLE_NAME,  ' . $className . '::class, Model::MODEL_TYPE_CUSTOM);';
 
+            $dir = dirname($fileName);
+            if (!file_exists($dir))
+                mkdir($dir, 0770, true);
+
             file_put_contents($fileName, $classContent);
-            chmod($fileName, 0664);
+            chmod($fileName, 0660);
         }
     }
 }

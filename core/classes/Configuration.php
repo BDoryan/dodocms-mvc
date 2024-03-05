@@ -46,6 +46,8 @@ class Configuration
     {
         if (file_exists($this->path)) {
             file_put_contents($this->path, json_encode($this->configurations, JSON_PRETTY_PRINT));
+        } else {
+            throw new Exception("File not found : " . $this->path . " !");
         }
     }
 

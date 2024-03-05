@@ -233,6 +233,8 @@ class Application
                 return;
             }
 
+            $this->router->setReplacer(['{{admin}}' => $this->getConfigurationInstance()->get('admin_path') ?? 'admin']);
+
             $this->theme = new Theme($this->getConfiguration()['theme'] ?? 'default');
 
             $this->logger->debug("Application->loadJWTManager()");

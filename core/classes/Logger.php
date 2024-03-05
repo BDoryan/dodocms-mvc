@@ -15,7 +15,7 @@ class Logger
 
         $dir = dirname($file);
         if (!file_exists($dir))
-            mkdir($dir, 0777, true);
+            mkdir($dir, 0775, true);
     }
 
     public function setDebug(bool $debug = true): void
@@ -92,7 +92,11 @@ class Logger
         $message = htmlspecialchars($message);
 
         $this->logs[] = $message;
+
+        $exist = file_exists($this->file);
         file_put_contents($this->file, $message, FILE_APPEND);
+        if(!$exist)
+            chmod($this->file, 0660);
     }
 
     public function clear(): void

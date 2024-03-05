@@ -5,7 +5,7 @@ $(document).on("click", "#add-attribute", function (event) {
 
     console.log(form);
 
-    const url = toRoot("/admin/tables/attribute");
+    const url = toAdminPath("/tables/attribute");
     fetch(url)
         .then(response => response.text())
         .then(clonedForm => {
