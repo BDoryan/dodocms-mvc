@@ -65,10 +65,10 @@ class ModelGenerator
 
             $dir = dirname($fileName);
             if (!file_exists($dir))
-                mkdir($dir, 0770, true);
+                mkdir($dir, 0775, true);
 
             file_put_contents($fileName, $classContent);
-            chmod($fileName, 0660);
+            chmod($fileName, 0665);
         }
     }
 }

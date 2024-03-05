@@ -232,7 +232,7 @@ class ImageOptimizer
 
         // Create directory if not exists
         if (!file_exists(dirname($this->image_out)))
-            mkdir(dirname($this->image_out), 0777, true);
+            mkdir(dirname($this->image_out), 0775, true);
 
         if (empty($this->image_out))
             $this->image_out = $this->image_src;
@@ -376,7 +376,7 @@ class ImageOptimizer
 
         // Create directory if not exists
         if (!file_exists(dirname($this->image_out)))
-            mkdir(dirname($this->image_out), 0777, true);
+            mkdir(dirname($this->image_out), 0775, true);
 
         $this->step = self::STEP_RESIZE;
         return true;

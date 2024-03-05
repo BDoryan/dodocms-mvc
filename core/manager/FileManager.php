@@ -38,7 +38,7 @@ class FileManager
         $destination = rtrim($destination, "/") . "/";
 
         if (!file_exists($destination)) {
-            mkdir($destination, 0777, true);
+            mkdir($destination, 0775, true);
         }
 
         $destination .= Tools::slugify($pathinfo["filename"]) . "_" . date("Y-m-d_H-m-s") . "." . $pathinfo["extension"];

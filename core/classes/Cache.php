@@ -85,10 +85,10 @@ class Cache {
         $dir = dirname($file);
 
         if (!file_exists($dir))
-            mkdir($dir, 0770, true);
+            mkdir($dir, 0775, true);
 
         file_put_contents($file, $content);
-        chmod($file, 0660);
+        chmod($file, 0665);
         return $file;
     }
 }
