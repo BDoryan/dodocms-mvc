@@ -190,7 +190,11 @@ class Tools
         $files = array_diff(scandir($dir), array('.', '..'));
 
         foreach ($files as $file) {
-            $path = $dir . '/' . $file;
+            if (substr($dir, -1) === '/') {
+                $path = $dir . $file;
+            } else {
+                $path = $dir . '/' . $file;
+            }
 
             if (is_dir($path)) {
                 self::deleteDirectory($path);
