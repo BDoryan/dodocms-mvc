@@ -59,6 +59,29 @@ class Tools
         return $path;
     }
 
+    /**
+     * Resize image with ImageOptimizer
+     *
+     * @param string $source
+     * @param int $width
+     * @param int $height
+     * @param string $mode
+     * @return string
+     */
+    public static function resizeImage(string $source, int $width, int $height, string $mode = "exact"): string
+    {
+        try {
+            $optimizer = new ImageOptimizer($source, (isset($_GET['ignore_cache']) ?? false) && Session::authenticated());
+            $optimizer->load();
+            $optimizer->resize($width, $height, $mode);
+
+            return str_replace(Application::get()->toRoot(''), '', $optimizer->output());
+        } catch (Exception $e) {
+            Application::get()->getLogger()->error($e->getMessage());
+        }
+        return $source;
+    }
+
     public static function removeFirstSlash(string $path): string
     {
         if (substr($path, 0, 1) === '/')
