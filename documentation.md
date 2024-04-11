@@ -201,6 +201,8 @@ Le but étant de rendre l'expérience administrateur la plus agréable possible.
 
 ### Création de page
 ### Composition de page
+
+> Note : La composition de page ce fait à partir de blocs. Un bloc est une partie de la page qui peut être réutilisé et personnalisé. Les blocs doivent être créés par un développeur.
 ### Gestion des utilisateurs
 ### Gestion des modules (*en cours de développement...*)
 
@@ -216,4 +218,4 @@ Le but étant de rendre l'expérience administrateur la plus agréable possible.
 
 ### Contrôleur
 
-## 
+## Création de bloc 
