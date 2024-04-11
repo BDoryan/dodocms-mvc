@@ -74,14 +74,14 @@ technologies modernes pour répondre à la demande de l’agence web.
 - MariaDB : Base de données relationnelle
 
 <br>
-<img style="padding-left: 10px; width: 60px; height: 60px; object-fit: contain; object-position: center;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/1200px-HTML5_logo_and_wordmark.svg.png">
-<img style="padding-left: 10px; width: 60px; height: 60px; object-fit: contain; object-position: center;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/CSS3_logo.svg/800px-CSS3_logo.svg.png">
-<img style="padding-left: 10px; width: 60px; height: 60px; object-fit: contain; object-position: center;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/1200px-Unofficial_JavaScript_logo_2.svg.png">
-<img style="padding-left: 10px; width: 60px; height: 60px; object-fit: contain; object-position: center;" src="https://jf-blog.fr/wp-content/uploads/2015/09/jquery.gif">
-<img style="padding-left: 10px; width: 60px; height: 60px; object-fit: contain; object-position: center;" src="https://asset.brandfetch.io/idDdcAzL5L/ido5lPeazF.png">
-<img style="padding-left: 10px; width: 60px; height: 60px; object-fit: contain; object-position: center;" src="https://www.coqpit.fr/wp-content/uploads/2019/05/vuejs-wide.png">
-<img style="padding-left: 10px; width: 60px; height: 60px; object-fit: contain; object-position: center; filter: invert(100%)" src="https://cdn.iconscout.com/icon/free/png-256/free-tailwind-css-5285308-4406745.png?f=webp">
-<img style="width: 60px; height: 60px; object-fit: contain; object-position: center; filter: invert(100%)" src="https://d1.awsstatic.com/logos/partners/MariaDB_Logo.d8a208f0a889a8f0f0551b8391a065ea79c54f3a.png">
+<img style="padding-left: 10px; width: 70px; height: 60px;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/1200px-HTML5_logo_and_wordmark.svg.png">
+<img style="padding-left: 10px; width: 70px; height: 60px;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/CSS3_logo.svg/800px-CSS3_logo.svg.png">
+<img style="padding-left: 10px; width: 60px; height: 60px;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/1200px-Unofficial_JavaScript_logo_2.svg.png">
+<img style="padding-left: 10px; width: 60px; height: 60px;" src="https://jf-blog.fr/wp-content/uploads/2015/09/jquery.gif">
+<img style="padding-left: 10px; width: 60px; height: 60px;" src="https://asset.brandfetch.io/idDdcAzL5L/ido5lPeazF.png">
+<img style="padding-left: 10px; width: 120px; height: 40px;" src="https://www.coqpit.fr/wp-content/uploads/2019/05/vuejs-wide.png">
+<img style="padding-left: 10px; width: 70px; height: 70px; filter: invert(100%)" src="https://cdn.iconscout.com/icon/free/png-256/free-tailwind-css-5285308-4406745.png?f=webp">
+<img style="width: 70px; height: 70px; object-fit: contain; object-position: center; filter: invert(100%)" src="https://d1.awsstatic.com/logos/partners/MariaDB_Logo.d8a208f0a889a8f0f0551b8391a065ea79c54f3a.png">
 </div>
 
 ## Mettre en place le système
