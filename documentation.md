@@ -24,11 +24,18 @@
 
 1. [Introduction](#introduction)
 2. [Technologies](#technologies)
-3. [Fonctionnalités](#fonctionnalités)
-4. [Contribuer](#contribuer)
-5. [Licence](#licence)
-6. [Contact](#contact)
-7. [Remerciements](#remerciements)
+3. [Mettre en place le système](#mettre-en-place-le-système)
+    1. [Prérequis](#prérequis)
+    2. [Installation](#installation)
+    3. [Installation avec l'interface graphique](#installation-avec-l'interface-graphique)
+    4. [Configuration approfondie](#configuration-approfondie)
+    5. [Maintenir le système à jour](#maintenir-le-système-à-jour)
+    6. [Fonctionnalités](#fonctionnalités)
+4. [Fonctionnalités de développeur](#fonctionnalités-de-développeur)
+    1. [Routage](#routage)
+    2. [Modèle](#modèle)
+    3. [Vue](#vue)
+    4. [Contrôleur](#contrôleur)
 
 ## Introduction
 
@@ -80,7 +87,7 @@ technologies modernes pour répondre à la demande de l’agence web.
 <img style="padding-left: 10px; width: 60px; height: 60px;" src="https://jf-blog.fr/wp-content/uploads/2015/09/jquery.gif">
 <img style="padding-left: 10px; width: 60px; height: 60px;" src="https://asset.brandfetch.io/idDdcAzL5L/ido5lPeazF.png">
 <img style="padding-left: 10px; width: 120px; height: 40px;" src="https://www.coqpit.fr/wp-content/uploads/2019/05/vuejs-wide.png">
-<img style="padding-left: 10px; width: 70px; height: 70px; filter: invert(100%)" src="https://cdn.iconscout.com/icon/free/png-256/free-tailwind-css-5285308-4406745.png?f=webp">
+<img style="padding-left: 10px; width: 70px; height: 70px; filter: invert(100%);" src="https://cdn.iconscout.com/icon/free/png-256/free-tailwind-css-5285308-4406745.png?f=webp">
 <img style="width: 70px; height: 70px; object-fit: contain; object-position: center; filter: invert(100%)" src="https://d1.awsstatic.com/logos/partners/MariaDB_Logo.d8a208f0a889a8f0f0551b8391a065ea79c54f3a.png">
 </div>
 
@@ -136,4 +143,77 @@ dossier `install` à la racine de votre site internet.
 
 ### Configuration approfondie
 
-### Maintenir le système à jour
+Si vous souhaitez configurer plus en détail le CMS, vous pouvez modifier le fichier `config/application.json` en partant
+de la racine du site. Ce fichier contient toutes les informations de configuration du CMS.
+
+Vous pouvez modifier les informations suivantes :
+
+- `password_policy` : Expression régulière pour la politique de mot de passe (par défaut : 8 caractères minimum, 1
+  lettre, 1 chiffre et 1 caractère spécial)
+- `jwt` : Configuration du JWT (Json Web Token) pour l'authentification (clé secrète et expiration)
+- `image_quality` : Qualité des images lors de leur optimisation (par défaut : 80)
+- `admin_path` : Chemin d'accès à l'interface d'administration (par défaut : `admin123`)
+- `mysql` : Configuration de la base de donnée MySQL (hôte, utilisateur, base de donnée, mot de passe)
+- `modules` : Configuration des modules (actuellement désactivé par défaut)
+- `theme` : Thème utilisé par le CMS (fait référence au dossier dans `/themes/default/`)
+
+```json
+{
+  "password_policy": "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$",
+  "jwt": {
+    "secret": "",
+    "expiresIn": 14400
+  },
+  "image_quality": 80,
+  "admin_path": "admin123",
+  "mysql": {
+    "hostname": "localhost",
+    "username": "root",
+    "database": "dodocms_installation_test",
+    "password": "p@$$w0rd"
+  },
+  "modules": {
+    "enabled": false
+  },
+  "theme": "default"
+}
+```
+
+## Maintenir le système à jour
+
+Le système de mise à jour n'est pas encore abouti, mais vous avez tout de même la possibilité de mettre à jour le CMS.
+
+> ⚠ Attention, vous devez savoir que lors de la mise à jour la totalité des fichiers dans le dossier `/core` seront
+> supprimé et remplacer par la nouvelle version du système. <strong>Cela signifie que si vous avez apporté des
+> modifications dans
+> ce dossier, elles seront perdues.</strong>
+
+> Conseil, avant de mettre à jour le CMS, assurez-vous d'avoir une sauvegarde de vos fichiers et de votre base de donnée
+> afin d'éviter les mauvaises surprises.
+
+Bien entendu, je travaille activement sur la mise en place d'un système de mise à jour plus sécurisé et plus simple afin
+d'éviter toutes ces manipulations.
+Le but étant de rendre l'expérience administrateur la plus agréable possible.
+
+<img src="https://dl.dropboxusercontent.com/scl/fi/dus2225kx7no31td3oboe/Screenshot-at-00-55-30.png?rlkey=wmm2e21oezpq68j7k0zscjdtr" />
+
+## Fonctionnalités en tant qu'administrateur
+
+### Création de page
+### Composition de page
+### Gestion des utilisateurs
+### Gestion des modules (*en cours de développement...*)
+
+## Fonctionnalités en tant que développeur
+
+### Routage
+
+### Modèle
+
+### Gestionnaire de base de données
+
+### Vue
+
+### Contrôleur
+
+## 
