@@ -200,11 +200,62 @@ Le but étant de rendre l'expérience administrateur la plus agréable possible.
 ## Fonctionnalités en tant qu'administrateur
 
 ### Création de page
-### Composition de page
 
-> Note : La composition de page ce fait à partir de blocs. Un bloc est une partie de la page qui peut être réutilisé et personnalisé. Les blocs doivent être créés par un développeur.
+La création de page est une fonctionnalité essentielle pour un CMS. Elle permet de composer une page à partir de blocs
+prédéfinis. Ces blocs sont des visuels développés par un développeur et qui peuvent être personnalisés par
+l'administrateur.
+
+Pour créer une page, il vous suffit de vous rendre dans l'interface d'administration dans la section "Pages" et vous
+aurez
+un formulaire vous permettant de créer une nouvelle page. La création de cette page se fait en plusieurs étapes :
+
+- Nom de la page
+- Titre SEO (balise title de la page)
+- Description SEO (balise meta description de la page)
+- Mots-clés SEO (balise meta keywords de la page)
+- Icône de la page (favicon)
+- Route de la page (chemin après le nom de domaine)
+
+Une fois que vous avez renseigné ces informations, vous aurez une page vierge prête à être composée avec des blocs grâce
+au live-edit.
+
+<img src="https://dl.dropboxusercontent.com/scl/fi/x238usmd9e7upsvzlqphj/Screenshot-at-19-10-13.png?rlkey=vrmqv1lnqxsk7hd3vku15gkv9" />
+
+### Composer une page
+
+La composition des pages ce fait à partir de blocs que vous pouvez ajouter, modifier et supprimer. Ces blocs sont des
+éléments visuels qui peuvent être personnalisés uniquement si le développeur l'a prévu.
+
+Lorsque vous êtes sur une page, vous avez la possibilité de cliquer sur le bouton "+" pour ajouter un bloc
+à la page. Vous aurez alors une liste de blocs disponibles que vous pourrez ajouter à la page.
+Quand vous aurez ajouté un bloc, vous pourrez le personnaliser les textes et médias à l'intérieur de celui-ci.
+
+> 💾 Note : Vous devez savoir que vous, modifications de contenu ne sont pas sauvegardées automatiquement. Vous devez
+> cliquer sur le bouton "Enregistrer" pour sauvegarder vos modifications. **Sauf pour les déplacements de bloc**, les
+> modifications sont instantanément enregistré.
+
+> ⚠ Attention, si vous supprimez un bloc, vous perdrez toutes les modifications que vous avez apportées à l'intérieur de
+> celui-ci. Il est donc important de faire attention avant de supprimer un bloc.
+
+*Exemple du live-edit*
+<img src="https://dl.dropboxusercontent.com/scl/fi/g9sebyrjayw2bvj138c6x/Screenshot-at-19-11-48.png?rlkey=zobgn65r4avzgkl8frcisvn8j">
+
+*Exemple de l'édition d'un texte contenu dans un blocs*
+<img src="https://github.com/BDoryan/dodocms-mvc/blob/master/docs/live-edit-example.gif?raw=true">
+
+Vous êtes curieux de savoir comment créer un bloc ? Rendez-vous à la section [Création d'un bloc](#create-a-block).
+
 ### Gestion des utilisateurs
-### Gestion des modules (*en cours de développement...*)
+
+Si vous travaillez à plusieurs sur le site internet ou si vous souhaitez donner des accès à des personnes extérieures,
+vous pouvez gérer les utilisateurs dans l'interface d'admin istration. Vous avez la possibilité de créer des comptes
+utilisateurs.
+
+> Important : la création d'un compte donne plein accès à l'interface d'administration. Il est donc important de ne
+> donner des accès qu'aux personnes de confiance. Bien évidemment, je travaille activement sur la mise en place d'un
+> système de gestion des permissions pour limiter l'accès à certaines fonctionnalités.
+
+<img src="https://dl.dropboxusercontent.com/scl/fi/m4eyakcmyqk02v30dliv1/Screenshot-at-19-47-25.png?rlkey=4nhzgu32jtje19lxfofw2wj88" />
 
 ## Fonctionnalités en tant que développeur
 
