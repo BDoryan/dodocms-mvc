@@ -453,6 +453,12 @@ class UserController extends SectionController
 }
 ```
 
-#### Création d'un bloc 
+#### Création d'un bloc
 
-####  
+Un bloc est un élément visuel qui peut être ajouté à une page. Il est composé de plusieurs éléments (textes, images,
+vidéos, etc.) qui peuvent être personnalisés par l'administrateur. Les blocs sont créés par les développeurs et peuvent
+être ajoutés à une page.
+
+
+
+#### 
