@@ -318,6 +318,10 @@ Application::get()->getRouter()->get("/helloworld/{dodo}", function (array $para
 
 ### Gestionnaire de base de données
 
+#### MLD (Modèle Logique de Données)
+
+<img src="https://dl.dropboxusercontent.com/scl/fi/a76c961y9lwd09mgvvphq/Screenshot-at-23-57-43.png?rlkey=4i9etgbzkpalqvx56weoknork" />
+
 #### Modèle
 
 Les modèles sont des classes qui permettent de gérer les données de votre site internet. Ils sont utilisés pour
