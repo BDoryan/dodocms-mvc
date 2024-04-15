@@ -25,17 +25,23 @@
 1. [Introduction](#introduction)
 2. [Technologies](#technologies)
 3. [Mettre en place le système](#mettre-en-place-le-système)
-    1. [Prérequis](#prérequis)
-    2. [Installation](#installation)
-    3. [Installation avec l'interface graphique](#installation-avec-l'interface-graphique)
-    4. [Configuration approfondie](#configuration-approfondie)
-    5. [Maintenir le système à jour](#maintenir-le-système-à-jour)
-    6. [Fonctionnalités](#fonctionnalités)
-4. [Fonctionnalités de développeur](#fonctionnalités-de-développeur)
+   1. [Prérequis](#prérequis)
+   2. [Installation](#installation)
+   3. [Installation avec l'interface graphique](#installation-avec-l'interface-graphique)
+   4. [Configuration approfondie](#configuration-approfondie)
+   5. [Maintenir le système à jour](#maintenir-le-système-à-jour)
+4. [Fonctionnalités en tant qu'administrateur](#fonctionnalités-de-développeur)
+    1. [Création de page](#create-a-block)
+    2. [Composer une page](#créer-une-page)
+    3. [Gestion des utilisateurs](#gestion-des-utilisateurs)
+    4. [Gestion des blocs](#gestion-des-blocs)
+5. [Gestion des pages](#gestion-des-pages)
+6. [Fonctionnalités en tant que développeur](#fonctionnalités-de-développeur)
     1. [Routage](#routage)
     2. [Modèle](#modèle)
     3. [Vue](#vue)
     4. [Contrôleur](#contrôleur)
+    5. [Création d'un bloc](#création-d'un-bloc)
 
 ## Introduction
 
@@ -93,6 +99,7 @@ technologies modernes pour répondre à la demande de l’agence web.
 
 ## Mettre en place le système
 
+<span id="prérequis"></span>
 ### Prérequis
 
 - Serveur web sous <strong>Apache</strong>
@@ -102,6 +109,7 @@ technologies modernes pour répondre à la demande de l’agence web.
 - <strong>Composer</strong>
 - <strong>npm</strong> (Si vous souhaitez faire des modifications avec TailwindCSS)
 
+<span id="installation"></span>
 ### Installation
 
 1. Télécharger le projet sur GitHub
@@ -117,6 +125,7 @@ technologies modernes pour répondre à la demande de l’agence web.
 
 > Note : Si vous avez des problèmes lors de l'installation, n'hésitez pas à ouvrir une issue sur le projet GitHub.
 
+<span id="installation-avec-l'interface-graphique"></span>
 ### Installation avec l'interface graphique
 
 #### 1. Création de la base de donnée
@@ -141,6 +150,7 @@ Une fois que vous avez renseigné toutes les informations, vous devriez voir un 
 que l'installation est terminée. Mais avant de pouvoir accéder à l'interface d'administration, vous devrez supprimer le
 dossier `install` à la racine de votre site internet.
 
+<span id="configuration-approfondie"></span>
 ### Configuration approfondie
 
 Si vous souhaitez configurer plus en détail le CMS, vous pouvez modifier le fichier `config/application.json` en partant
@@ -179,6 +189,7 @@ Vous pouvez modifier les informations suivantes :
 }
 ```
 
+<span id="mettre-en-place-le-système"></span>
 ## Maintenir le système à jour
 
 Le système de mise à jour n'est pas encore abouti, mais vous avez tout de même la possibilité de mettre à jour le CMS.
@@ -197,8 +208,10 @@ Le but étant de rendre l'expérience administrateur la plus agréable possible.
 
 <img src="https://dl.dropboxusercontent.com/scl/fi/dus2225kx7no31td3oboe/Screenshot-at-00-55-30.png?rlkey=wmm2e21oezpq68j7k0zscjdtr" />
 
+<span id="fonctionnalités-de-développeur"></span>
 ## Fonctionnalités en tant qu'administrateur
 
+<span id="create-a-block"></span>
 ### Création de page
 
 La création de page est une fonctionnalité essentielle pour un CMS. Elle permet de composer une page à partir de blocs
@@ -221,6 +234,7 @@ au live-edit.
 
 <img src="https://dl.dropboxusercontent.com/scl/fi/x238usmd9e7upsvzlqphj/Screenshot-at-19-10-13.png?rlkey=vrmqv1lnqxsk7hd3vku15gkv9" />
 
+<span id="créer-une-page"></span>
 ### Composer une page
 
 La composition des pages ce fait à partir de blocs que vous pouvez ajouter, modifier et supprimer. Ces blocs sont des
@@ -245,6 +259,7 @@ Quand vous aurez ajouté un bloc, vous pourrez le personnaliser les textes et m�
 
 Vous êtes curieux de savoir comment créer un bloc ? Rendez-vous à la section [Création d'un bloc](#create-a-block).
 
+<span id="gestion-des-utilisateurs"></span>
 ### Gestion des utilisateurs
 
 Si vous travaillez à plusieurs sur le site internet ou si vous souhaitez donner des accès à des personnes extérieures,
@@ -257,8 +272,10 @@ utilisateurs.
 
 <img src="https://dl.dropboxusercontent.com/scl/fi/m4eyakcmyqk02v30dliv1/Screenshot-at-19-47-25.png?rlkey=4nhzgu32jtje19lxfofw2wj88" />
 
+<span id="gestion-des-blocs"></span>
 ## Fonctionnalités en tant que développeur
 
+<span id="routage"></span>
 ### Routage
 
 Le routage est une fonctionnalité qui permettre de gérer les différentes routes de votre site internet. Cela permet de
@@ -286,6 +303,7 @@ Application::get()->getRouter()->get("/helloworld/{dodo}", function (array $para
 
 <img src="https://dl.dropboxusercontent.com/scl/fi/x7egzz5u14hy1h33wifum/Screenshot-at-20-11-26.png?rlkey=j8f8hyn5uxzvjwg539jwinzag">
 
+<span id="modèle"></span>
 ### Gestionnaire de base de données
 
 #### Modèle
@@ -304,7 +322,7 @@ attributs de la table (nom, type, taille, clé primaire, auto-incrément, etc.).
 
 <img src="https://dl.dropboxusercontent.com/scl/fi/spkqyr4gms3mbmrk1ywt9/Screenshot-at-19-45-24.png?rlkey=hzqxerzu6gebatzwuyidgsr78" />
 
-#### Exemple d'un modèle
+##### Exemple d'un modèle
 
 *UserModel.php*
 
@@ -391,6 +409,7 @@ class UserModel extends Model
 }
 ```
 
+<span id="vue"></span>
 ### Vue
 
 Les vues permettent de gérer l'affichage du DOM de votre site internet. Elles sont utilisées pour afficher les
@@ -430,6 +449,7 @@ $router->get('/ma-route', function () {
 });
 ```
 
+<span id="contrôleur"></span>
 ### Contrôleur
 
 Les contrôleurs sont des classes qui permettent de gérer la logique métier de votre site internet. Ils sont utilisés pour
@@ -453,6 +473,7 @@ class UserController extends SectionController
 }
 ```
 
+<span id="création-d-un-bloc"></span>
 #### Création d'un bloc
 
 Un bloc est un élément visuel qui peut être ajouté à une page. Il est composé de plusieurs éléments (textes, images,
