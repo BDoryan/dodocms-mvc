@@ -32,4 +32,14 @@
             </div>
         </div>
     </div>
+<!--    <div class="tw-w-1/2 tx-mx-auto tw-mt-4 tw-shadow-sm tw-bg-white tw-rounded-lg tw-border-[1px] tw-border-gray-300 tw-flex tw-flex-col tw-gap-4 tw-justify-between tw-p-4">-->
+<!--        <h2 class="tw-text-lg tw-font-bold">Documentation</h2>-->
+<!--        --><?php
+//        $markdown = file_get_contents(Application::get()->toRoot('docs/documentation.md'));
+////        echo MarkdownConverter::toHtml($markdown);
+//        $parser = new \cebe\markdown\Markdown();
+//        $parser->html5 = true;
+//        echo $parser->parse($markdown);
+//        ?>
+<!--    </div>-->
 </div>

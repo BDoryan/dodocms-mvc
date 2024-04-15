@@ -1,7 +1,9 @@
 /cache/*
 /controllers/*
 /migrations/*
+/config/*
 /models/*
-package-lock.json
-
 /vendor/
+
+package-lock.json
+composer.lock

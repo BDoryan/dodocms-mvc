@@ -2,8 +2,8 @@
 
 Header::create()
     ->template('/core/ui/views/admin/components')
-    ->title(__('admin.panel.pages.title'))
-    ->description(__('admin.panel.pages.description'))
+    ->title(__('admin.panel.blocks.title'))
+    ->description(__('admin.panel.blocks.description'))
     ->render();
 
 TableComponent::create()

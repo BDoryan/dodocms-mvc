@@ -18,8 +18,8 @@
                     </span>
                 </a>
             </div>
-            <div class="flex w-full items-center justify-between px-4">
-                <div>
+            <div class="flex w-full items-center justify-between px-4" >
+                <div style="width:100%;">
                     <button
                             id="navbarToggler"
                             class="absolute right-4 top-1/2 block -translate-y-1/2 rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden"
@@ -38,13 +38,13 @@
                             id="navbarCollapse"
                             class="absolute right-4 top-full hidden w-full max-w-[250px] rounded-lg bg-white py-5 shadow-lg dark:bg-dark-2 lg:static lg:block lg:w-full lg:max-w-full lg:bg-transparent lg:px-4 lg:py-0 lg:shadow-none dark:lg:bg-transparent xl:px-6"
                     >
-                        <ul class="blcok lg:flex 2xl:ml-20">
+                        <ul class="flex justify-center block lg:flex">
                             <li class="group relative">
                                 <a
                                         href="#home"
                                         class="ud-menu-scroll mx-8 flex py-2 text-base font-medium text-dark group-hover:text-primary dark:text-white lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70"
                                 >
-                                    Home
+                                    Accueil
                                 </a>
                             </li>
                             <li class="group relative">
@@ -52,7 +52,7 @@
                                         href="#about"
                                         class="ud-menu-scroll mx-8 flex py-2 text-base font-medium text-dark group-hover:text-primary dark:text-white lg:ml-7 lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70 xl:ml-10"
                                 >
-                                    About
+                                    Vidéo tutoriel
                                 </a>
                             </li>
                             <li class="group relative">
@@ -60,15 +60,7 @@
                                         href="#pricing"
                                         class="ud-menu-scroll mx-8 flex py-2 text-base font-medium text-dark group-hover:text-primary dark:text-white lg:ml-7 lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70 xl:ml-10"
                                 >
-                                    Pricing
-                                </a>
-                            </li>
-                            <li class="group relative">
-                                <a
-                                        href="#team"
-                                        class="ud-menu-scroll mx-8 flex py-2 text-base font-medium text-dark group-hover:text-primary dark:text-white lg:ml-7 lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70 xl:ml-10"
-                                >
-                                    Team
+                                    Blog
                                 </a>
                             </li>
                             <li class="group relative">

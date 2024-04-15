@@ -20,9 +20,16 @@ $application = new Application(__DIR__, "/");
 /**
  * Here you override the default routes
  */
-//Application::get()->getRouter()->get("/admin", function () {
-//    return new Response("Hello world");
-//});
+
+// Simple route sans paramètre dans celle-ci
+Application::get()->getRouter()->get("/helloworld/", function () {
+    echo "Hello world";
+});
+
+// Route avec paramètre dans celle-ci
+Application::get()->getRouter()->get("/helloworld/{dodo}", function (array $parameters) {
+    echo "Hello world " . $parameters['dodo'];
+});
 
 /**
  * Run the application

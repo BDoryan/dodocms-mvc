@@ -11,7 +11,7 @@
     RewriteRule ^ index.php [QSA,L]
 
     # Ajouter la condition pour les extensions autorisées (png, svg, webp, etc.)
-    RewriteCond %{REQUEST_FILENAME} !\.(png|jpg|jpeg|webv|svg|webp)$
+    RewriteCond %{REQUEST_FILENAME} !\.(css|js|png|jpg|jpeg|webv|svg|webp)$
 
     # Rediriger vers index.php si l'extension n'est pas autorisée
     RewriteRule ^ index.php [QSA,L]

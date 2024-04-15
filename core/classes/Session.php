@@ -50,6 +50,7 @@ class Session
         $jwtManager = Application::get()->getJwtManager();
         if ($jwtManager->verifyToken($token) === null) return null;
 
+        // TODO: It's not a good idea to query the database every time we need the session
         $sessions = AdminUserSessionModel::findAll('*', ['token' => $token]);
         if (empty($sessions)) return null;
 

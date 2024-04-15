@@ -220,6 +220,8 @@
   "admin.panel.users.user.create": "Créer un nouvel utilisateur",
   "admin.panel.users.user.edit": "Modifier cet utilisateur",
   "admin.panel.pages.title": "Pages",
+  "admin.panel.blocks.title": "Blocs",
+    "admin.panel.blocks.description": "Explorez la création, la lecture, la mise à jour et la suppression qui seront intégrées à vos pages. Gérer sans effort vos blocs en fonction de vos besoins.",
   "admin.panel.users.description": "Explorez la création, la lecture, la mise à jour et la suppression des utilisateurs du back-office. Gérez sans effort vos utilisateurs en fonction de vos besoins.",
   "admin.panel.users.new": "Créer un nouvel utilisateur",
   "admin.panel.users.edit": "Modifier cet utilisateur",

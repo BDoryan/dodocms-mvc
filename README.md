@@ -4,7 +4,7 @@
     <img src="https://i.ibb.co/tzw8HHt/Microsoft-Fluentui-Emoji-3d-Dodo-3d-1024-2.png" alt="Logo" width="80" height="80">
   </a>
 
-<h3 align="center"><strong>DodoCMS</strong> - BETA</h3>
+<h3 align="center"><strong>DodoCMS</strong></h3>
 
   <p align="center">
     La facilité de développer des solutions avec une gestion de contenu simplifié.

@@ -3,6 +3,8 @@
     "phpmailer/phpmailer": "^6.9",
     "ext-gd": "*",
     "ext-dom": "*",
-    "ext-fileinfo": "*"
+    "ext-fileinfo": "*",
+    "ext-json": "*",
+    "cebe/markdown": "~1.2.0"
   }
 }

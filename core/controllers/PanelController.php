@@ -28,7 +28,7 @@ class PanelController extends AdminController
 
         $adminCenterSection = [
             new SidebarSection("tw-me-1 fa-solid fa-users", __('admin.panel.users.title'), NativeRoutes::getRoute(NativeRoutes::ADMIN_USERS, ['table' => 'Page'])),
-            new SidebarSection("tw-me-1 fa-solid fa-gear", __('admin.panel.configuration.title'), NativeRoutes::getRoute(NativeRoutes::ADMIN_CONFIGURATION, ['table' => 'Page']))
+//            new SidebarSection("tw-me-1 fa-solid fa-gear", __('admin.panel.configuration.title'), NativeRoutes::getRoute(NativeRoutes::ADMIN_CONFIGURATION, ['table' => 'Page']))
         ];
 
         $this->sidebar = new Sidebar([

@@ -1,5 +1,5 @@
 [editable-model]:hover, [editable]:hover {
-    /*border: 2px solid forestgreen;*/
+    border: 2px solid rgb(25, 122, 25);
 }
 
 [editable-model], [editable] {

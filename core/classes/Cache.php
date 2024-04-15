@@ -69,6 +69,11 @@ class Cache {
             $file = $file . $extension;
 
         $dir = Application::get()->toRoot('/cache/tmp');
+
+        $file_dirname = $dir .'/'. dirname($file);
+        if(!file_exists($file_dirname))
+            mkdir($file_dirname, 0775, true);
+
         return $dir . '/' . $file;
     }
 

@@ -5,7 +5,7 @@ class Setup
 
     /**
      * All steps for installation
-     * - Connection to mysql and create database and all tables
+     * - Connection to mysql and create a database and all tables
      * - Create admin user
      */
 
@@ -199,6 +199,14 @@ class Setup
             }
             return $array;
         }
+
+        // generate JWT
+        $jwt_token = self::generateSalt();
+
+        $jwtConfig = $configuration->get('jwt');
+        $jwtConfig['secret'] = $jwt_token;
+        $configuration->set('jwt', $jwtConfig);
+        $configuration->save();
 
         if ($step == 3) {
             $array = [

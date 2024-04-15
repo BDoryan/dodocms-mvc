@@ -94,3 +94,14 @@ function view(string $path, array $data = []){
         throw new Exception("View not found : $path");
     include $path;
 }
+
+/**
+ * Debugging function
+ */
+function dd($var)
+{
+    echo '<pre>';
+    var_dump($var);
+    echo '</pre>';
+    die();
+}

@@ -74,6 +74,27 @@ class NativeRoutes
     /* Default api route */
     const ADMIN_API = "/{{admin}}/api.*";
 
+    public static function example()
+    {
+        $router = Application::get()->getRouter();
+
+        // Création de votre route avec méthod GET site.fr/ma-route
+        $router->get('/ma-route', function () {
+            // Si la route est appelé ce code sera éxécuté
+
+            // Chemin de ma vue à partir de la racine du projet (site)
+            $vue = Application::get()->toRoot('/mon-dossier-avec-mes-vues/ma-vue.php');
+
+            // Vous avez aussi la possibilité de récupérer le contenu de la vue
+            $vue_html = fetch($vue, [
+                'example' => 'My example'
+            ]);
+
+            // Vous pouvez aussi la rendre en fessant un simple echo
+            echo $vue_html;
+        });
+    }
+
     public static function loadRoutes(Application $application, Router $router)
     {
         $panelController = new PanelController();
@@ -126,10 +147,10 @@ class NativeRoutes
     public static function getRoute(string $route, array $replaces = []): string
     {
         foreach ($replaces as $key => $value) {
-            if($key != null && $value != null)
+            if ($key != null && $value != null)
                 $route = str_replace("{" . $key . "}", $value, $route);
             else
-                Application::get()->getLogger()->error("The key or value is null : ".print_r($replaces, true));
+                Application::get()->getLogger()->error("The key or value is null : " . print_r($replaces, true));
         }
 
         $router = Application::get()->getRouter();
