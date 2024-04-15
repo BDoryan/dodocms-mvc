@@ -25,11 +25,11 @@
 1. [Introduction](#introduction)
 2. [Technologies](#technologies)
 3. [Mettre en place le système](#mettre-en-place-le-système)
-   1. [Prérequis](#prérequis)
-   2. [Installation](#installation)
-   3. [Installation avec l'interface graphique](#installation-avec-l'interface-graphique)
-   4. [Configuration approfondie](#configuration-approfondie)
-   5. [Maintenir le système à jour](#maintenir-le-système-à-jour)
+    1. [Prérequis](#prérequis)
+    2. [Installation](#installation)
+    3. [Installation avec l'interface graphique](#installation-avec-l'interface-graphique)
+    4. [Configuration approfondie](#configuration-approfondie)
+    5. [Maintenir le système à jour](#maintenir-le-système-à-jour)
 4. [Fonctionnalités en tant qu'administrateur](#fonctionnalités-de-développeur)
     1. [Création de page](#create-a-block)
     2. [Composer une page](#créer-une-page)
@@ -100,6 +100,7 @@ technologies modernes pour répondre à la demande de l’agence web.
 ## Mettre en place le système
 
 <span id="prérequis"></span>
+
 ### Prérequis
 
 - Serveur web sous <strong>Apache</strong>
@@ -110,6 +111,7 @@ technologies modernes pour répondre à la demande de l’agence web.
 - <strong>npm</strong> (Si vous souhaitez faire des modifications avec TailwindCSS)
 
 <span id="installation"></span>
+
 ### Installation
 
 1. Télécharger le projet sur GitHub
@@ -126,6 +128,7 @@ technologies modernes pour répondre à la demande de l’agence web.
 > Note : Si vous avez des problèmes lors de l'installation, n'hésitez pas à ouvrir une issue sur le projet GitHub.
 
 <span id="installation-avec-l'interface-graphique"></span>
+
 ### Installation avec l'interface graphique
 
 #### 1. Création de la base de donnée
@@ -151,6 +154,7 @@ que l'installation est terminée. Mais avant de pouvoir accéder à l'interface 
 dossier `install` à la racine de votre site internet.
 
 <span id="configuration-approfondie"></span>
+
 ### Configuration approfondie
 
 Si vous souhaitez configurer plus en détail le CMS, vous pouvez modifier le fichier `config/application.json` en partant
@@ -190,6 +194,7 @@ Vous pouvez modifier les informations suivantes :
 ```
 
 <span id="mettre-en-place-le-système"></span>
+
 ## Maintenir le système à jour
 
 Le système de mise à jour n'est pas encore abouti, mais vous avez tout de même la possibilité de mettre à jour le CMS.
@@ -209,9 +214,11 @@ Le but étant de rendre l'expérience administrateur la plus agréable possible.
 <img src="https://dl.dropboxusercontent.com/scl/fi/dus2225kx7no31td3oboe/Screenshot-at-00-55-30.png?rlkey=wmm2e21oezpq68j7k0zscjdtr" />
 
 <span id="fonctionnalités-de-développeur"></span>
+
 ## Fonctionnalités en tant qu'administrateur
 
 <span id="create-a-block"></span>
+
 ### Création de page
 
 La création de page est une fonctionnalité essentielle pour un CMS. Elle permet de composer une page à partir de blocs
@@ -235,6 +242,7 @@ au live-edit.
 <img src="https://dl.dropboxusercontent.com/scl/fi/x238usmd9e7upsvzlqphj/Screenshot-at-19-10-13.png?rlkey=vrmqv1lnqxsk7hd3vku15gkv9" />
 
 <span id="créer-une-page"></span>
+
 ### Composer une page
 
 La composition des pages ce fait à partir de blocs que vous pouvez ajouter, modifier et supprimer. Ces blocs sont des
@@ -260,6 +268,7 @@ Quand vous aurez ajouté un bloc, vous pourrez le personnaliser les textes et m�
 Vous êtes curieux de savoir comment créer un bloc ? Rendez-vous à la section [Création d'un bloc](#create-a-block).
 
 <span id="gestion-des-utilisateurs"></span>
+
 ### Gestion des utilisateurs
 
 Si vous travaillez à plusieurs sur le site internet ou si vous souhaitez donner des accès à des personnes extérieures,
@@ -273,9 +282,11 @@ utilisateurs.
 <img src="https://dl.dropboxusercontent.com/scl/fi/m4eyakcmyqk02v30dliv1/Screenshot-at-19-47-25.png?rlkey=4nhzgu32jtje19lxfofw2wj88" />
 
 <span id="gestion-des-blocs"></span>
+
 ## Fonctionnalités en tant que développeur
 
 <span id="routage"></span>
+
 ### Routage
 
 Le routage est une fonctionnalité qui permettre de gérer les différentes routes de votre site internet. Cela permet de
@@ -304,6 +315,7 @@ Application::get()->getRouter()->get("/helloworld/{dodo}", function (array $para
 <img src="https://dl.dropboxusercontent.com/scl/fi/x7egzz5u14hy1h33wifum/Screenshot-at-20-11-26.png?rlkey=j8f8hyn5uxzvjwg539jwinzag">
 
 <span id="modèle"></span>
+
 ### Gestionnaire de base de données
 
 #### Modèle
@@ -410,6 +422,7 @@ class UserModel extends Model
 ```
 
 <span id="vue"></span>
+
 ### Vue
 
 Les vues permettent de gérer l'affichage du DOM de votre site internet. Elles sont utilisées pour afficher les
@@ -425,10 +438,11 @@ pour faciliter la réutilisation du code.
 
 Pour créer une vue, vous devez créer un fichier `.php` dans le dossier de votre choix (par exemple `views/`).
 
-Pour appeler une vue, vous pouvez utiliser la fonction `fetch` qui permet de récupérer le contenu de la vue ou 
+Pour appeler une vue, vous pouvez utiliser la fonction `fetch` qui permet de récupérer le contenu de la vue ou
 sinon vous pouvez simplement faire appel à la fonction `view` qui permet de rendre la vue (fait un echo).
 
 *Exemple d'une vue*
+
 ```php
 $router = Application::get()->getRouter();
 
@@ -450,9 +464,11 @@ $router->get('/ma-route', function () {
 ```
 
 <span id="contrôleur"></span>
+
 ### Contrôleur
 
-Les contrôleurs sont des classes qui permettent de gérer la logique métier de votre site internet. Ils sont utilisés pour
+Les contrôleurs sont des classes qui permettent de gérer la logique métier de votre site internet. Ils sont utilisés
+pour
 gérer les actions de l'utilisateur et interagir avec les modèles. Les contrôleurs sont appelés par les routes.
 
 > Note : Les contrôleurs sont des classes qui doivent hériter de la classe `Controller` pour pouvoir être utilisés.
@@ -463,6 +479,7 @@ Pour créer un contrôleur, vous devez créer une classe qui hérite de la class
 qui correspondent aux actions de la classe.
 
 *Exemple d'un contrôleur*
+
 ```php
 class UserController extends SectionController
 {
@@ -474,19 +491,22 @@ class UserController extends SectionController
 ```
 
 <span id="création-d-un-bloc"></span>
+
 #### Création d'un bloc
 
 Un bloc est un élément visuel qui peut être ajouté à une page. Il est composé de plusieurs éléments (textes, images,
 vidéos, etc.) qui peuvent être personnalisés par l'administrateur. Les blocs sont créés par les développeurs et peuvent
 être ajoutés à une page.
 
-Pour créer un bloc, vous devez créer un fichier `.php` dans le dossier `blocks/` de votre thème. Ce fichier doit contenir
+Pour créer un bloc, vous devez créer un fichier `.php` dans le dossier `blocks/` de votre thème. Ce fichier doit
+contenir
 du code HTML et PHP qui permet d'afficher le bloc. Une fois que vous avez créé le fichier,
-vous devez créer le bloc depuis l'interface d'administration dans la section "Blocs". 
+vous devez créer le bloc depuis l'interface d'administration dans la section "Blocs".
 
 <img src="https://dl.dropboxusercontent.com/scl/fi/6xzs8i8nx5nhvo2lhytcl/Screenshot-at-20-40-33.png?rlkey=wlzlw2xs11upjkyyo4y4o9msc" />
 
 *Exemple d'un bloc*
+
 ```php
 <div class="d-flex flex-column text-center">
     <div>
@@ -501,6 +521,7 @@ vous devez créer le bloc depuis l'interface d'administration dans la section "B
 > l'administrateur de personnaliser le contenu du bloc.
 
 *Exemple d'un bloc avec des éléments éditables*
+
 ```php 
 <div class="col-12 col-lg-5">
     <div class="row gy-2">
@@ -527,7 +548,41 @@ vous devez créer le bloc depuis l'interface d'administration dans la section "B
 </div>
 ```
 
-> Lorsque vous rédigez un bloc avec des éléments éditables, vous pouvez ajouter des attributs `editable-model` 
+> Lorsque vous rédigez un bloc avec des éléments éditables, vous pouvez ajouter des attributs `editable-model`
 > avec le nom de l'attribut du modèle associé à l'élément HTML. En suite, vous pouvez ajouter un attribut `entity-id`
 > pour permettre au CMS de savoir quel élément est modifié.
+
+#### Passer des données à un bloc
+
+La mise en place de contrôleurs va vous permettre de gérer le traitement de vos données et l’affichage de vos vues.
+Prenez en compte que lorsque vous allez créer un bloc, vous avez la possibilité de lui attribuer ses contrôleurs soit en
+vous basant sur de l'identifiant du bloc, l’identifiant du bloc affiche dans la page (la structure) et enfin par
+l’identifiant de la page.
+
+Les classes des contrôleurs : `BlockController`, `StructureController` et `PageController`.
+
+*Exemple d’un contrôleur pour un bloc spécifique*
+
+```php
+<?php
+class FeaturesController extends BlockController
+{
+    public function __construct()
+    {
+        parent::__construct(14); // Identifiant du bloc
+    }
+
+
+    public function data(): array
+    {
+        return [
+            'features' => FeaturesModel::findAll('*', ['active' => 1])
+        ];
+    }
+}
+
+ControllerManager::registerController(new FeaturesController());
+```
+
+> ⚠ Faites attention à bien enregistrer votre contrôleur dans le `ControllerManager` pour qu’il soit pris en compte.
 
