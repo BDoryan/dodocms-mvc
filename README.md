@@ -1,7 +1,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
+  <a href="https://github.com/BDoryan/dodocms-mvc">
     <img src="https://i.ibb.co/tzw8HHt/Microsoft-Fluentui-Emoji-3d-Dodo-3d-1024-2.png" alt="Logo" width="80" height="80">
   </a>
 
@@ -10,11 +10,11 @@
   <p align="center">
     La facilité de développer des solutions avec une gestion de contenu simplifié.
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template">Visiter le projet</a>
+    <a href="https://github.com/BDoryan/dodocms-mvc">Visiter le projet</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Je rencontre un problème</a>
+    <a href="https://github.com/BDoryan/dodocms-mvc/issues">Je rencontre un problème</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Laisser une proposition</a>
+    <a href="https://github.com/BDoryan/dodocms-mvc/issues">Laisser une proposition</a>
   </p>
 </div>
 
