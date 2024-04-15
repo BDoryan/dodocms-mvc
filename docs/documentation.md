@@ -459,6 +459,54 @@ Un bloc est un élément visuel qui peut être ajouté à une page. Il est compo
 vidéos, etc.) qui peuvent être personnalisés par l'administrateur. Les blocs sont créés par les développeurs et peuvent
 être ajoutés à une page.
 
+Pour créer un bloc, vous devez créer un fichier `.php` dans le dossier `blocks/` de votre thème. Ce fichier doit contenir
+du code HTML et PHP qui permet d'afficher le bloc. Une fois que vous avez créé le fichier,
+vous devez créer le bloc depuis l'interface d'administration dans la section "Blocs". 
 
+<img src="https://dl.dropboxusercontent.com/scl/fi/6xzs8i8nx5nhvo2lhytcl/Screenshot-at-20-40-33.png?rlkey=wlzlw2xs11upjkyyo4y4o9msc" />
 
-#### 
+*Exemple d'un bloc*
+```php
+<div class="d-flex flex-column text-center">
+    <div>
+        <h2 editable="title">À propos</h2>
+        <p editable="subtitle" class="text-center text-light">Apprenez-en un peu plus sur moi.</p>
+    </div>
+    <div class="separator"></div>
+</div>
+```
+
+> Lorsque vous rédigez un bloc, vous pouvez ajouter des attributs `editable` aux éléments HTML pour permettre à
+> l'administrateur de personnaliser le contenu du bloc.
+
+*Exemple d'un bloc avec des éléments éditables*
+```php 
+<div class="col-12 col-lg-5">
+    <div class="row gy-2">
+        <?php
+        /** @var SkillModel $skill */
+        foreach ($skills ?? [] as $skill) {
+            ?>
+            <div entity-id="<?= $skill->getId() ?>"
+                 class="col-12 mb-3">
+                <h4 class="lh-1 text-start mb-2 d-flex gap-2 roboto-regular" style="text-transform: none">
+                    <i class="<?= $skill->getIcon() ?>"></i>
+                    <span editable-model="name"><?= $skill->getName() ?></span>
+                </h4>
+                <div class="bg-white progress" role="progressbar"
+                     aria-valuenow="<?= $skill->getProgression() ?>"
+                     aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar" style="width: <?= $skill->getProgression() ?>%;"></div>
+                </div>
+            </div>
+            <?php
+        }
+        ?>
+    </div>
+</div>
+```
+
+> Lorsque vous rédigez un bloc avec des éléments éditables, vous pouvez ajouter des attributs `editable-model` 
+> avec le nom de l'attribut du modèle associé à l'élément HTML. En suite, vous pouvez ajouter un attribut `entity-id`
+> pour permettre au CMS de savoir quel élément est modifié.
+
