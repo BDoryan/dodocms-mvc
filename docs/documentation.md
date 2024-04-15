@@ -261,12 +261,198 @@ utilisateurs.
 
 ### Routage
 
-### Modèle
+Le routage est une fonctionnalité qui permettre de gérer les différentes routes de votre site internet. Cela permet de
+rediriger les utilisateurs vers la bonne page en fonction de l'URL demandée.
+
+> Note : Le routage pour les pages est nativement géré par le CMS. Vous n'avez pas besoin de vous en occuper. Cependant,
+> si vous souhaitez ajouter des routes personnalisées, vous pouvez le faire en intégrant du code dans le fichier
+> `index.php` à la racine du site.
+
+```php
+// Simple route sans paramètre dans l'URL
+Application::get()->getRouter()->get("/helloworld/", function () {
+    echo "Hello world";
+});
+```
+
+<img src="https://dl.dropboxusercontent.com/scl/fi/3t5uy4641dbbbgpobu7b2/Screenshot-at-20-11-58.png?rlkey=fzq1k8r4man224o6s1zy3mu64">
+
+```php
+// Route avec paramètre dans l'URL
+Application::get()->getRouter()->get("/helloworld/{dodo}", function (array $parameters) {
+    echo "Hello world " . $parameters['dodo'];
+});
+```
+
+<img src="https://dl.dropboxusercontent.com/scl/fi/x7egzz5u14hy1h33wifum/Screenshot-at-20-11-26.png?rlkey=j8f8hyn5uxzvjwg539jwinzag">
 
 ### Gestionnaire de base de données
 
+#### Modèle
+
+Les modèles sont des classes qui permettent de gérer les données de votre site internet. Ils sont utilisés pour
+interagir avec la base de donnée et récupérer des informations.
+
+> Note : Les modèles sont des classes qui doivent hériter de la classe `Model` pour pouvoir être utilisés.
+
+#### Création d'un modèle
+
+Pour créer un modèle, vous devez aller dans la section `Gestion des tables` de l'interface d'administration et cliquer
+sur le bouton
+"Créer une table". Vous aurez alors un formulaire vous permettant de créer une table. Vous devrez renseigner les
+attributs de la table (nom, type, taille, clé primaire, auto-incrément, etc.).
+
+<img src="https://dl.dropboxusercontent.com/scl/fi/spkqyr4gms3mbmrk1ywt9/Screenshot-at-19-45-24.png?rlkey=hzqxerzu6gebatzwuyidgsr78" />
+
+#### Exemple d'un modèle
+
+*UserModel.php*
+
+```php
+class UserModel extends Model
+{
+    
+    const TABLE_NAME = "users";
+    
+    private string $username;
+    private string $email;
+
+    public function __construct(string $username, string $email) {
+        $this->username = $username;
+        $this->email = $email;
+    }
+    
+    /**
+     * @return string
+     */
+     public  function getUsername(): string
+    {
+        return $this->username;
+    }
+    
+    /**
+     * @param string $username
+     */
+     public  function setUsername(string $username):void 
+    {
+        $this->username = $username;
+    }
+    
+    /**
+     * @return string
+     */
+     public  function getEmail(): string
+    {
+        return $this->email;
+    }
+    
+    /**
+     * @param string $email
+     */
+     public  function setEmail(string $email):void 
+    {
+        $this->email = $email;
+    }
+    
+    /**
+     * Return all fields of the model
+     *
+     * @return array
+     */
+    public function getFields(): array
+    {
+        $fields = parent::getFields();
+        $fields["username"] = [
+            "size" => "tw-w-5/12",
+            "field" => Text::create()
+                ->name("username")
+                ->label(__('admin.panel.users.username'))
+                ->value($this->getUsername() ?? "")
+                ->validator()
+                ->required(),
+        ];
+        $fields["email"] = [
+            "size" => "tw-w-7/12",
+            "field" => Text::create()
+                ->type('email')
+                ->validator()
+                ->name("email")
+                ->label(__('admin.panel.users.email'))
+                ->value($this->getEmail() ?? "")
+                ->required(),
+        ];
+        return $fields;
+    }
+    
+    public static function findAll(string $columns = '*', array $conditions = [], $orderBy = ''): ?array
+    {
+        return (new UserModel())->getAll($columns, $conditions, $orderBy);
+    }
+}
+```
+
 ### Vue
+
+Les vues permettent de gérer l'affichage du DOM de votre site internet. Elles sont utilisées pour afficher les
+informations récupérées par les modèles.
+
+Les vues sont des fichiers `.php` qui contiennent du code HTML et PHP. Elles peuvent être incluses dans d'autres vues
+pour faciliter la réutilisation du code.
+
+> ⚠ Attention, il est important de ne pas mettre de logique métier dans les vues. Les vues doivent uniquement servir à
+> l'affichage des données.
+
+#### Création d'une vue
+
+Pour créer une vue, vous devez créer un fichier `.php` dans le dossier de votre choix (par exemple `views/`).
+
+Pour appeler une vue, vous pouvez utiliser la fonction `fetch` qui permet de récupérer le contenu de la vue ou 
+sinon vous pouvez simplement faire appel à la fonction `view` qui permet de rendre la vue (fait un echo).
+
+*Exemple d'une vue*
+```php
+$router = Application::get()->getRouter();
+
+// Création de votre route avec méthod GET site.fr/ma-route
+$router->get('/ma-route', function () {
+    // Si la route est appelé ce code sera éxécuté
+
+    // Chemin de ma vue à partir de la racine du projet (site)
+    $vue = Application::get()->toRoot('/mon-dossier-avec-mes-vues/ma-vue.php');
+
+    // Vous avez aussi la possibilité de récupérer le contenu de la vue
+    $vue_html = fetch($vue, [
+        'example' => 'My example'
+    ]);
+
+    // Vous pouvez aussi la rendre en fessant un simple echo
+    echo $vue_html;
+});
+```
 
 ### Contrôleur
 
-## Création de bloc 
+Les contrôleurs sont des classes qui permettent de gérer la logique métier de votre site internet. Ils sont utilisés pour
+gérer les actions de l'utilisateur et interagir avec les modèles. Les contrôleurs sont appelés par les routes.
+
+> Note : Les contrôleurs sont des classes qui doivent hériter de la classe `Controller` pour pouvoir être utilisés.
+
+#### Création d'un contrôleur
+
+Pour créer un contrôleur, vous devez créer une classe qui hérite de la classe `Controller` et qui contient des méthodes
+qui correspondent aux actions de la classe.
+
+*Exemple d'un contrôleur*
+```php
+class UserController extends SectionController
+{
+    public function index()
+    {
+        // Code pour afficher la liste des utilisateurs
+    }
+}
+```
+
+#### Création d'un bloc 
+
+####  
