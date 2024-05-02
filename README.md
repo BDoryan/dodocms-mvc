@@ -8,7 +8,7 @@
 <h3 align="center"><strong>DodoCMS</strong></h3>
 
   <p align="center">
-    La facilité de développer des solutions avec une gestion de contenu simplifié.
+    La facilité de développer des solutions avec une gestion de contenu simplifiée.
     <br />
     <a href="https://github.com/BDoryan/dodocms-mvc">Visiter le projet</a>
     ·
