@@ -67,6 +67,7 @@ function chownUserGroup($dir, $own_user, $own_group) {
             } else {
                 chown($path, $own_user);
                 chgrp($path, $own_group);
+
             }
         }
     }
