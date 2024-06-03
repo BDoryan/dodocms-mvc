@@ -4,6 +4,7 @@
 /config/*
 /models/*
 /vendor/
+/logs
 
 package-lock.json
 composer.lock

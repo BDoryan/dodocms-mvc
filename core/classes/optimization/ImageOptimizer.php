@@ -304,6 +304,9 @@ class ImageOptimizer
                     $resizedHeight = $width / $aspectRatio;
                 }
 
+                $resizedWidth = intval($resizedWidth);
+                $resizedHeight = intval($resizedHeight);
+
                 // Create a true-color image with an alpha channel
                 $resizedImage = imagecreatetruecolor($resizedWidth, $resizedHeight);
                 imagesavealpha($resizedImage, true);

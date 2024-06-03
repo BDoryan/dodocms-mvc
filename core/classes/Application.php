@@ -41,7 +41,7 @@ class Application
         $this->router = new Router($url);
 
         $this->setRoot($root);
-        $this->logger = new Logger($this->toRoot("/cache/logs/" . "log-" . date("Y-m-d") . ".log"), $this->isDebugMode());
+        $this->logger = new Logger($this->toRoot("/logs/" . "log-" . date("Y-m-d") . ".log"), $this->isDebugMode());
 
         self::$application = $this;
     }
