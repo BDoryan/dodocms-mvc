@@ -11,8 +11,8 @@ $local_core = $document_root . '/core/';
 $core_dir = $dir . 'core/';
 
 // Get the owner (user:group) of the core directory
-$own_user = fileowner($local_core);
-$own_group =  filegroup($local_core);
+//$own_user = fileowner($local_core);
+//$own_group =  filegroup($local_core);
 
 // fetch all migrations
 $migration_dir = __DIR__ . '/../' . 'migrations/';
@@ -55,28 +55,28 @@ Application::get()->getLogger()->info('Copy new core directory');
 Tools::copyDirectory($core_dir, $local_core);
 Application::get()->getLogger()->info('Core copied');
 
-function chownUserGroup($dir, $own_user, $own_group) {
-    chown($dir, $own_user);
-    chgrp($dir, $own_group);
-    $dh = opendir($dir);
-    while (($file = readdir($dh)) !== false) {
-        if ($file != '.' && $file != '..') {
-            $path = $dir . '/' . $file;
-            if (is_dir($path)) {
-                chownUserGroup($path, $own_user, $own_group);
-            } else {
-                chown($path, $own_user);
-                chgrp($path, $own_group);
-
-            }
-        }
-    }
-    closedir($dh);
-}
-
-Application::get()->getLogger()->info('Change owner of core directory');
-chownUserGroup($local_core, $own_user, $own_group);
-Application::get()->getLogger()->info('Owner changed');
+//function chownUserGroup($dir, $own_user, $own_group) {
+//    chown($dir, $own_user);
+//    chgrp($dir, $own_group);
+//    $dh = opendir($dir);
+//    while (($file = readdir($dh)) !== false) {
+//        if ($file != '.' && $file != '..') {
+//            $path = $dir . '/' . $file;
+//            if (is_dir($path)) {
+//                chownUserGroup($path, $own_user, $own_group);
+//            } else {
+//                chown($path, $own_user);
+//                chgrp($path, $own_group);
+//
+//            }
+//        }
+//    }
+//    closedir($dh);
+//}
+//
+//Application::get()->getLogger()->info('Change owner of core directory');
+//chownUserGroup($local_core, $own_user, $own_group);
+//Application::get()->getLogger()->info('Owner changed');
 
 Application::get()->getLogger()->info('Replace changelog.md');
 rename($dir . 'changelog.md', $document_root . '/changelog.md');
