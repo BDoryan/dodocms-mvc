@@ -38,6 +38,7 @@ class NativeRoutes
     const ADMIN_TABLE_DELETE_ENTRY = "/{{admin}}/tables/{table}/entries/delete/{id}";
 
     /* Pages panel routes */
+    const ADMIN_DASHBOARD = "/{{admin}}/dashboard";
     const ADMIN_BLOCKS_MANAGER = "/{{admin}}/blocks";
     const ADMIN_CONFIGURATION = "/{{admin}}/configuration";
     const ADMIN_USERS_MANAGER_NEW = "/{{admin}}/users/new";
