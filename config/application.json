@@ -10,7 +10,7 @@
         "hostname": "localhost",
         "username": "root",
         "database": "dodocms_installation_test",
-        "password": "N!6JsMnki!NG"
+        "password": ""
     },
     "modules": {
         "enabled": false
