@@ -423,9 +423,13 @@ class ImageOptimizer
 
             $this->step = self::STEP_COMPRESS;
             return true;
-        } catch (Exception|Error $e) {
+        } catch (Throwable $e) {
             Application::get()->getLogger()->error('Failed to compress image ' . $this->image_src);
-            Application::get()->getLogger()->printException($e);
+            if ($e instanceof Error) {
+                Application::get()->getLogger()->printError($e);
+            } else {
+                Application::get()->getLogger()->printException($e);
+            }
             return false;
         }
     }

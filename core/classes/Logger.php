@@ -65,7 +65,7 @@ class Logger
         }
     }
 
-    public function printException(Exception $e): void
+    public function printException(Throwable $e): void
     {
         $this->log("[EXCEPTION] " . $e->getMessage());
         $this->log("[EXCEPTION] " . Tools::removeFirstSlash($e->getFile()) . ":" . $e->getLine());

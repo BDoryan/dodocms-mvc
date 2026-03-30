@@ -60,7 +60,7 @@ class DOMDocumentOptimizer
                 } else {
                     throw new Exception('Image optimization failed');
                 }
-            } catch (Exception $e) {
+            } catch (Throwable $e) {
                 Application::get()->getLogger()->error('Failed to optimize image ' . $src);
                 Application::get()->getLogger()->printException($e);
             }

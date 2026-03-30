@@ -25,7 +25,6 @@ class JsonWebTokenManager
 
         $header = base64_encode(json_encode(['alg' => 'HS256', 'typ' => 'JWT']));
 
-        var_dump($expiresIn);
         $claims['exp'] = time() + $expiresIn;
 
         $headerClaims = base64_encode(json_encode($claims));

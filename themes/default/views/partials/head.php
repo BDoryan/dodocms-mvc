@@ -12,20 +12,17 @@ if (($favicon ?? null) != null) {
 }
 ?>
 
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
 <!-- DodoCMS(<?= Application::theme()->getName() ?>) : ResourceManager  -->
 <?php
 /** @var $themeResourceManager ResourceManager */
 
 $theme = Application::theme();
 $themeResourceManager = $theme->getResourceManager();
-
-$themeResourceManager->addCSS('assets/css/swiper-bundle.min.css');
-$themeResourceManager->addCSS('assets/css/animate.css');
-$themeResourceManager->addCSS('assets/css/tailwind.css');
-$themeResourceManager->addJavaScript('assets/js/wow.min.js');
-$themeResourceManager->addScript('new WOW().init();');
-
-$themeResourceManager->scripts();
+$themeResourceManager->addCSS('assets/css/theme.css');
+$themeResourceManager->addJavaScript('assets/js/theme.js');
 $themeResourceManager->css();
 ?>
 

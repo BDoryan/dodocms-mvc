@@ -1,0 +1,49 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "${APP_PORT:-8100}:80"
+    environment:
+      APP_URL: "${APP_URL:-http://localhost:8100}"
+      DB_HOST: "${DB_HOST:-db}"
+      DB_PORT: "${DB_PORT:-3306}"
+      DB_DATABASE: "${DB_DATABASE:-dodocms}"
+      DB_USERNAME: "${DB_USERNAME:-dodocms}"
+      DB_PASSWORD: "${DB_PASSWORD:-dodocms}"
+      ADMIN_PATH: "${ADMIN_PATH:-admin123}"
+      APP_THEME: "${APP_THEME:-default}"
+      JWT_EXPIRES_IN: "${JWT_EXPIRES_IN:-14400}"
+      IMAGE_QUALITY: "${IMAGE_QUALITY:-80}"
+      MODULES_ENABLED: "${MODULES_ENABLED:-false}"
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - dodocms_config:/var/www/html/config
+      - dodocms_logs:/var/www/html/logs
+      - dodocms_uploads:/var/www/html/uploads
+
+  db:
+    image: mariadb:10.11
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: "${DB_DATABASE:-dodocms}"
+      MARIADB_USER: "${DB_USERNAME:-dodocms}"
+      MARIADB_PASSWORD: "${DB_PASSWORD:-dodocms}"
+      MARIADB_ROOT_PASSWORD: "${DB_ROOT_PASSWORD:-root}"
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+    volumes:
+      - dodocms_db:/var/lib/mysql
+
+volumes:
+  dodocms_config:
+  dodocms_logs:
+  dodocms_uploads:
+  dodocms_db:

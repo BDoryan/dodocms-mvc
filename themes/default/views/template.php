@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <?= $head ?? '' ?>
 </head>
-<body data-bs-theme="dark">
+<body data-bs-theme="light">
 <div id="app" page-id="<?= $page_id ?? '' ?>">
     <?= $content ?? '' ?>
 
@@ -26,7 +26,8 @@
     ?>
 
     <div ref="toastContainer"
-         class="tw-max-w-[30vw] tw-fixed tw-right-2 tw-bottom-2 tw-flex tw-flex-col tw-gap-3">
+         class="position-fixed bottom-0 end-0 p-3 d-flex flex-column gap-3"
+         style="z-index: 1080; max-width: 30rem;">
         <?php array_map(function ($toast) {
             $toast->render();
         }, $toasts ?? []); ?>

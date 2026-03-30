@@ -1,0 +1,8 @@
+.git
+.idea
+node_modules
+vendor
+logs
+uploads
+config/application.json
+docker-data

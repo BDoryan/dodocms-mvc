@@ -2,6 +2,16 @@
 
 class Setup
 {
+    private const DEFAULT_DEMO_BLOCKS = [
+        ['name' => 'Page Demo - Hero', 'path' => 'demo-hero'],
+        ['name' => 'Page Demo - Capacites', 'path' => 'demo-capabilities'],
+        ['name' => 'Page Demo - Types de contenus', 'path' => 'demo-content-types'],
+        ['name' => 'Page Demo - Workflow', 'path' => 'demo-workflow'],
+        ['name' => 'Page Demo - FAQ CTA', 'path' => 'demo-faq-cta'],
+    ];
+
+    private const DEFAULT_PAGE_SLUG = '/';
+
 
     /**
      * All steps for installation
@@ -89,6 +99,74 @@ class Setup
 
         Database::stopConnection($connection);
         Application::get()->redirect('?step=2');
+    }
+
+    private static function findBlockByPath(string $path): ?BlockModel
+    {
+        $blocks = BlockModel::findAll('*', ['path' => $path]);
+        return empty($blocks) ? null : $blocks[0];
+    }
+
+    private static function ensureDefaultBlocks(): array
+    {
+        $blocks = [];
+
+        foreach (self::DEFAULT_DEMO_BLOCKS as $definition) {
+            $block = self::findBlockByPath($definition['path']);
+
+            if ($block === null) {
+                $block = new BlockModel($definition['name'], $definition['path']);
+                $block->setActive(true);
+                $block->create();
+            }
+
+            if (!$block->isActive()) {
+                $block->setActive(true);
+                $block->update();
+            }
+
+            $blocks[] = $block;
+        }
+
+        return $blocks;
+    }
+
+    private static function ensureDefaultPage(array $blocks): void
+    {
+        $pages = PageModel::findAll('*', ['slug' => self::DEFAULT_PAGE_SLUG]);
+        $page = empty($pages) ? null : $pages[0];
+
+        if ($page === null) {
+            $page = new PageModel(
+                'Accueil',
+                'DodoCMS - Page de demonstration',
+                'Page de demonstration par defaut creee lors du setup de DodoCMS.',
+                'dodocms, cms, demo, page, blocs',
+                self::DEFAULT_PAGE_SLUG
+            );
+            $page->setActive(true);
+            $page->create();
+        } elseif (!$page->isActive()) {
+            $page->setActive(true);
+            $page->update();
+        }
+
+        $existingStructures = $page->getPageStructures() ?? [];
+        if (!empty($existingStructures)) {
+            return;
+        }
+
+        foreach ($blocks as $index => $block) {
+            $structure = new PageStructureModel($index, '', $page->getId(), $block->getId());
+            $structure->setActive(true);
+            $structure->create();
+        }
+    }
+
+    private static function seedDefaultContent(): void
+    {
+        $blocks = self::ensureDefaultBlocks();
+        self::ensureDefaultPage($blocks);
     }
 
     /**
@@ -186,6 +264,7 @@ class Setup
                         $user->setEmail($email);
                         $user->setActive(true);
                         if ($user->create()) {
+                            self::seedDefaultContent();
                             Application::get()->redirect('?step=3');
                             exit;
                         }
